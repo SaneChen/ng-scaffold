@@ -1,0 +1,64 @@
+// Palette color utilities: `bg-<palette>-<tone>` and `text-<palette>-<tone>` (`bg-red-50`,
+// `text-azure-95`), plus `bg|text-white|black|light|dark`.
+
+// How this file was built:
+//   1. Created by hand (Angular CLI has no generator for global Sass partials) and loaded from
+//      src/styles.scss with `@use 'styles/colors';`.
+//   2. The colors are read from the 12 Material 3 palettes that `@angular/material` exports
+//      (`mat.$red-palette` … `mat.$rose-palette`), so they always match the installed version;
+//      nothing is copied by hand.
+//   3. Only what the application uses is emitted: background and text colors (menu labels and
+//      badges, the colors demo) for the primary tones 10–99. The sub-palettes (secondary, neutral,
+//      …), tones 0/100 (`black`/`white` exist) and ng-matero's `border-<palette>-<tone>` classes
+//      have no consumer and are left out; `$properties` and `$tones` add them back if needed.
+//   4. ng-matero's deprecated M2 palette file is not ported.
+
+// Why: menu labels and badges name their color in public/data/menu.json (`"color": "red-50"`)
+// and the sidemenu renders it as `bg-<color>`.
+
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../helpers/variables' as helpers;
+
+$palettes: (
+  'red': mat.$red-palette,
+  'green': mat.$green-palette,
+  'blue': mat.$blue-palette,
+  'yellow': mat.$yellow-palette,
+  'cyan': mat.$cyan-palette,
+  'magenta': mat.$magenta-palette,
+  'orange': mat.$orange-palette,
+  'chartreuse': mat.$chartreuse-palette,
+  'spring-green': mat.$spring-green-palette,
+  'azure': mat.$azure-palette,
+  'violet': mat.$violet-palette,
+  'rose': mat.$rose-palette,
+) !default;
+$tones: 10 20 25 30 35 40 50 60 70 80 90 95 98 99 !default;
+$properties: (
+  bg: background-color,
+  text: color,
+) !default;
+$fixed-colors: (
+  'white': #fff,
+  'black': #000,
+  'light': rgb(255 255 255 / 87%),
+  'dark': rgb(0 0 0 / 87%),
+) !default;
+$-important: if(sass(helpers.$important): !important; else: null);
+
+@each $prefix, $property in $properties {
+  @each $name, $palette in $palettes {
+    @each $tone in $tones {
+      .#{$prefix}-#{$name}-#{$tone} {
+        #{$property}: map.get($palette, $tone) $-important;
+      }
+    }
+  }
+
+  @each $name, $color in $fixed-colors {
+    .#{$prefix}-#{$name} {
+      #{$property}: $color $-important;
+    }
+  }
+}

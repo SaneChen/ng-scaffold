@@ -1,0 +1,7 @@
+<a class="panel" routerLink="/profile/overview">
+  <img class="avatar" [ngSrc]="avatar()" width="48" height="48" alt="" />
+  <span class="info">
+    <span class="name">{{ user()?.name }}</span>
+    <span class="email">{{ user()?.email }}</span>
+  </span>
+</a>

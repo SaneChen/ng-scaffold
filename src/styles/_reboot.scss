@@ -12,11 +12,13 @@
 //      chosen by `SettingsStore` (see _themes.scss) without a second set of rules.
 //   4. Added `mat.strong-focus-indicators()` (official mixin) for Material components and one
 //      outline for every other focusable element, plus a `prefers-reduced-motion` rule.
+//   5. Added CDK's `.cdk-visually-hidden` class (official mixin) with the layout components.
 
 // Why: WCAG 2.2 AA asks for a visible focus indicator (2.4.7) and lets users turn off motion
 // (2.3.3 is AAA, but the OS setting is a clear user preference). Material components only show a
 // faint state layer on keyboard focus; the strong indicators draw a ring on them instead.
 
+@use '@angular/cdk';
 @use '@angular/material' as mat;
 
 :root {
@@ -29,6 +31,9 @@
 ::after {
   box-sizing: border-box;
 }
+
+// `.cdk-visually-hidden`: text for screen readers only (e.g. "opens in a new tab").
+@include cdk.a11y-visually-hidden();
 
 // Visible focus ring (3px, `secondary` color) on every Material component.
 @include mat.strong-focus-indicators();

@@ -14,3 +14,6 @@ export * from './widgets/notification-button/notification-button';
 export * from './widgets/translate-button/translate-button';
 export * from './widgets/user-button/user-button';
 export * from './header/header';
+export * from './sidemenu/sidemenu';
+export * from './user-panel/user-panel';
+export * from './sidebar/sidebar';

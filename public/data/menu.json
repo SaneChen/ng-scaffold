@@ -6,7 +6,7 @@
       "type": "link",
       "icon": "dashboard",
       "badge": {
-        "color": "red-50",
+        "color": "red-40",
         "value": "5"
       }
     },
@@ -16,7 +16,7 @@
       "type": "sub",
       "icon": "color_lens",
       "label": {
-        "color": "azure-50",
+        "color": "azure-40",
         "value": "New"
       },
       "children": [

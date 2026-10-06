@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebar-header {
+  @include mat.toolbar-overrides(
+    (
+      container-background-color: transparent,
+    )
+  );
+
+  flex: none;
+  // Full menu width even in the collapsed rail, whose overflow then hides the switch.
+  width: var(--sidenav-width, 15rem);
+  padding-inline: 0.5rem;
+  overflow: hidden;
+}
+
+.sidebar-main {
+  flex: 1;
+  padding: 0 0.5rem 0.5rem;
+  overflow: auto;
+  scrollbar-width: thin;
+}

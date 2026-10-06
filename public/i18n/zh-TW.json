@@ -119,5 +119,11 @@
     },
     "toggle_menu": "導覽選單",
     "notices": "公告面板"
+  },
+  "sidebar": {
+    "collapse": "將選單收合為圖示",
+    "close": "關閉選單",
+    "navigation": "主導覽",
+    "new_tab": "（在新分頁中開啟）"
   }
 }

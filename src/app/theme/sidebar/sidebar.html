@@ -1,0 +1,32 @@
+@if (showHeader()) {
+  <mat-toolbar class="sidebar-header">
+    <app-branding [showName]="!compact()" />
+    <span class="flex-fill"></span>
+    @if (showToggle()) {
+      <mat-slide-toggle
+        hideIcon
+        [checked]="collapsed()"
+        [aria-label]="'sidebar.collapse' | translate"
+        (change)="toggleCollapsed.emit()"
+      />
+    } @else {
+      <button
+        matIconButton
+        type="button"
+        [attr.aria-label]="'sidebar.close' | translate"
+        (click)="closeNav.emit()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </mat-toolbar>
+}
+
+<div class="sidebar-main">
+  @if (showUser()) {
+    <app-user-panel [compact]="compact()" />
+  }
+  <nav [attr.aria-label]="'sidebar.navigation' | translate">
+    <app-sidemenu [compact]="compact()" />
+  </nav>
+</div>

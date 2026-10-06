@@ -7,6 +7,7 @@
  *      badge, permissions, children) as one recursive `MenuItem` plus `Menu` for the top level,
  *      which always has an icon. ng-matero's `active` signal is view state and is not part of
  *      the data.
+ *   3. Added `menuTagClass()` (with the side menu): tag background plus a readable text color.
  *
  * Why: public/data/menu.json and a real backend deliver this JSON; keeping ng-matero's field
  * names lets existing menus be reused unchanged.
@@ -15,10 +16,20 @@
 /** `link`: router link; `sub`: expandable group; `extLink`/`extTabLink`: external URL. */
 export type MenuItemType = 'link' | 'sub' | 'extLink' | 'extTabLink';
 
-/** A small colored tag next to an item; `color` is a palette utility, e.g. `red-50`. */
+/** A small colored tag next to an item; `color` is a palette utility, e.g. `red-40`. */
 export interface MenuTag {
   color: string;
   value: string;
+}
+
+/**
+ * Classes of a tag: its background (`bg-red-40`) and a text color that keeps the WCAG AA contrast
+ * of 4.5:1 for its small text - white on the dark tones (below 50), black on the lighter ones.
+ * (White text is under 4.5:1 on tone 50 of the red and azure palettes.)
+ */
+export function menuTagClass({ color }: MenuTag): string {
+  const tone = Number(/-(\d+)$/.exec(color)?.[1] ?? 0);
+  return `bg-${color} ${tone < 50 ? 'text-white' : 'text-black'}`;
 }
 
 /** Roles or permissions that may (`only`) or may not (`except`) see an item. */

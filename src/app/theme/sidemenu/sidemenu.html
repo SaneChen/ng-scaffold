@@ -1,0 +1,92 @@
+<ng-container
+  [ngTemplateOutlet]="list"
+  [ngTemplateOutletContext]="{ items: menu(), parents: [], level: 0, id: null }"
+/>
+
+<ng-template #list let-items="items" let-parents="parents" let-level="level" let-id="id">
+  <ul class="menu level-{{ level }}" [attr.id]="id">
+    @for (item of items; track item.name) {
+      <li
+        class="menu-item"
+        [class.in-trail]="trail().has(item.name)"
+        [class.expanded]="expanded().has(item.name)"
+      >
+        @switch (item.type) {
+          @case ('link') {
+            <a
+              class="menu-heading"
+              matRipple
+              [routerLink]="route(parents, item)"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+            >
+              <ng-container
+                [ngTemplateOutlet]="heading"
+                [ngTemplateOutletContext]="{ item, level }"
+              />
+            </a>
+          }
+          @case ('sub') {
+            <button
+              class="menu-heading"
+              type="button"
+              matRipple
+              [attr.aria-expanded]="expanded().has(item.name)"
+              [attr.aria-controls]="listId(item)"
+              (click)="toggle(item)"
+            >
+              <ng-container
+                [ngTemplateOutlet]="heading"
+                [ngTemplateOutletContext]="{ item, level }"
+              />
+              <mat-icon class="menu-caret" aria-hidden="true">expand_more</mat-icon>
+            </button>
+            <ng-container
+              [ngTemplateOutlet]="list"
+              [ngTemplateOutletContext]="{
+                items: item.children,
+                parents: parents.concat(item.route),
+                level: level + 1,
+                id: listId(item),
+              }"
+            />
+          }
+          @default {
+            <a
+              class="menu-heading"
+              matRipple
+              [href]="item.route"
+              [attr.target]="item.type === 'extTabLink' ? '_blank' : null"
+              [attr.rel]="item.type === 'extTabLink' ? 'noopener' : null"
+            >
+              <ng-container
+                [ngTemplateOutlet]="heading"
+                [ngTemplateOutletContext]="{ item, level }"
+              />
+              @if (item.type === 'extTabLink') {
+                <span class="cdk-visually-hidden">{{ 'sidebar.new_tab' | translate }}</span>
+                <mat-icon class="menu-caret" aria-hidden="true">open_in_new</mat-icon>
+              }
+            </a>
+          }
+        }
+      </li>
+    }
+  </ul>
+</ng-template>
+
+<ng-template #heading let-item="item" let-level="level">
+  @let name = item.name | translate;
+  @if (item.icon) {
+    <mat-icon class="menu-icon" aria-hidden="true">{{ item.icon }}</mat-icon>
+  } @else {
+    <span class="menu-icon letter" aria-hidden="true">{{ name.charAt(0) }}</span>
+  }
+  <span class="menu-name">{{ name }}</span>
+  @if (item.label) {
+    <span class="menu-tag" [class]="tagClass(item.label)">{{ item.label.value }}</span>
+  }
+  @if (item.badge) {
+    <span class="menu-tag badge" [class]="tagClass(item.badge)">{{ item.badge.value }}</span>
+  }
+</ng-template>

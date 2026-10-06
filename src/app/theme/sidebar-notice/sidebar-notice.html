@@ -1,0 +1,24 @@
+<div class="title">
+  <h2 [id]="titleId">{{ 'notice.title' | translate }}</h2>
+  <button matIconButton type="button" mat-dialog-close [aria-label]="'close' | translate">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-tab-group mat-stretch-tabs>
+  @for (tab of tabs; track tab.label) {
+    <mat-tab [label]="tab.label | translate">
+      <ul>
+        @for (notice of tab.notices; track notice.key) {
+          <li class="d-flex align-items-center gap-16 p-16 m-b-16 b-1 r-12">
+            <span class="icon r-12 {{ notice.color }}" aria-hidden="true">{{ notice.icon }}</span>
+            <span class="flex-grow-1">
+              <strong class="d-block">{{ notice.key + '.title' | translate }}</strong>
+              <span class="f-s-14">{{ notice.key + '.content' | translate }}</span>
+            </span>
+          </li>
+        }
+      </ul>
+    </mat-tab>
+  }
+</mat-tab-group>

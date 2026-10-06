@@ -125,5 +125,47 @@
     "close": "Close the menu",
     "navigation": "Main navigation",
     "new_tab": "(opens in a new tab)"
+  },
+  "notice": {
+    "title": "Notices",
+    "today": "Today",
+    "notifications": "Notifications",
+    "meeting": {
+      "title": "General meeting for the update",
+      "content": "You can use the dashboard to explore how many new users download reports daily and monthly."
+    },
+    "widgets": {
+      "title": "Widgets update",
+      "content": "We have made some updates to the widgets that we think you are going to love."
+    },
+    "features": {
+      "title": "New features coming soon",
+      "content": "More new features are on their way, stay tuned!"
+    },
+    "reports": {
+      "title": "Weekly reports are available",
+      "content": "Go to the notification center to check your reports."
+    }
+  },
+  "customizer": {
+    "open": "Layout settings",
+    "title": "Settings",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "auto": "System",
+    "header": "Header",
+    "visible": "Visible",
+    "position": "Position",
+    "above": "Above",
+    "fixed": "Fixed",
+    "static": "Static",
+    "navigation": "Navigation",
+    "show_user_panel": "Show user panel",
+    "side": "Side",
+    "top": "Top",
+    "direction": "Direction",
+    "ltr": "Left to right",
+    "rtl": "Right to left"
   }
 }

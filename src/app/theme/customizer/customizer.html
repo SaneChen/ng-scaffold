@@ -1,0 +1,88 @@
+<button
+  matFab
+  type="button"
+  class="handle"
+  aria-haspopup="dialog"
+  [attr.aria-label]="'customizer.open' | translate"
+  (click)="open(panel)"
+>
+  <mat-icon>settings</mat-icon>
+</button>
+
+<ng-template #panel>
+  <div class="panel">
+    <div class="title">
+      <h2 [id]="titleId">{{ 'customizer.title' | translate }}</h2>
+      <button matIconButton type="button" mat-dialog-close [aria-label]="'close' | translate">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <h3 id="customizer-theme">{{ 'customizer.theme' | translate }}</h3>
+    <mat-radio-group
+      aria-labelledby="customizer-theme"
+      [value]="options().theme"
+      (change)="update({ theme: $event.value })"
+    >
+      <mat-radio-button value="light">{{ 'customizer.light' | translate }}</mat-radio-button>
+      <mat-radio-button value="dark">{{ 'customizer.dark' | translate }}</mat-radio-button>
+      <mat-radio-button value="auto">{{ 'customizer.auto' | translate }}</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-divider />
+
+    <h3 id="customizer-header">{{ 'customizer.header' | translate }}</h3>
+    <mat-slide-toggle
+      [checked]="options().showHeader"
+      [disabled]="headerLocked()"
+      (change)="update({ showHeader: $event.checked })"
+    >
+      {{ 'customizer.visible' | translate }}
+    </mat-slide-toggle>
+    <h4 id="customizer-header-position">{{ 'customizer.position' | translate }}</h4>
+    <mat-radio-group
+      aria-labelledby="customizer-header customizer-header-position"
+      [value]="options().headerPos"
+      (change)="update({ headerPos: $event.value })"
+    >
+      <mat-radio-button value="above" [disabled]="aboveDisabled()">
+        {{ 'customizer.above' | translate }}
+      </mat-radio-button>
+      <mat-radio-button value="fixed">{{ 'customizer.fixed' | translate }}</mat-radio-button>
+      <mat-radio-button value="static">{{ 'customizer.static' | translate }}</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-divider />
+
+    <h3 id="customizer-navigation">{{ 'customizer.navigation' | translate }}</h3>
+    <mat-slide-toggle
+      [checked]="options().showUserPanel"
+      (change)="update({ showUserPanel: $event.checked })"
+    >
+      {{ 'customizer.show_user_panel' | translate }}
+    </mat-slide-toggle>
+    <h4 id="customizer-navigation-position">{{ 'customizer.position' | translate }}</h4>
+    <mat-radio-group
+      aria-labelledby="customizer-navigation customizer-navigation-position"
+      [value]="options().navPos"
+      (change)="update({ navPos: $event.value })"
+    >
+      <mat-radio-button value="side">{{ 'customizer.side' | translate }}</mat-radio-button>
+      <mat-radio-button value="top" [disabled]="topDisabled()">
+        {{ 'customizer.top' | translate }}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <mat-divider />
+
+    <h3 id="customizer-direction">{{ 'customizer.direction' | translate }}</h3>
+    <mat-radio-group
+      aria-labelledby="customizer-direction"
+      [value]="options().dir"
+      (change)="update({ dir: $event.value })"
+    >
+      <mat-radio-button value="ltr">{{ 'customizer.ltr' | translate }}</mat-radio-button>
+      <mat-radio-button value="rtl">{{ 'customizer.rtl' | translate }}</mat-radio-button>
+    </mat-radio-group>
+  </div>
+</ng-template>

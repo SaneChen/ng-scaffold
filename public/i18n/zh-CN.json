@@ -125,5 +125,47 @@
     "close": "关闭菜单",
     "navigation": "主导航",
     "new_tab": "（在新标签页中打开）"
+  },
+  "notice": {
+    "title": "公告",
+    "today": "今天",
+    "notifications": "通知",
+    "meeting": {
+      "title": "版本更新全体会议",
+      "content": "你可以在仪表盘中查看每天和每月有多少新用户下载报告。"
+    },
+    "widgets": {
+      "title": "小部件更新",
+      "content": "我们对小部件做了一些更新，相信你会喜欢。"
+    },
+    "features": {
+      "title": "新功能即将上线",
+      "content": "更多新功能正在路上，敬请期待！"
+    },
+    "reports": {
+      "title": "周报已生成",
+      "content": "请前往通知中心查看你的报告。"
+    }
+  },
+  "customizer": {
+    "open": "布局设置",
+    "title": "设置",
+    "theme": "主题",
+    "light": "浅色",
+    "dark": "深色",
+    "auto": "跟随系统",
+    "header": "顶栏",
+    "visible": "显示",
+    "position": "位置",
+    "above": "最上方",
+    "fixed": "固定",
+    "static": "随页面滚动",
+    "navigation": "导航",
+    "show_user_panel": "显示用户面板",
+    "side": "侧边",
+    "top": "顶部",
+    "direction": "文字方向",
+    "ltr": "从左到右",
+    "rtl": "从右到左"
   }
 }

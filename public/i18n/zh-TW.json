@@ -125,5 +125,47 @@
     "close": "關閉選單",
     "navigation": "主導覽",
     "new_tab": "（在新分頁中開啟）"
+  },
+  "notice": {
+    "title": "公告",
+    "today": "今天",
+    "notifications": "通知",
+    "meeting": {
+      "title": "版本更新全體會議",
+      "content": "你可以在儀表板中查看每天和每月有多少新使用者下載報告。"
+    },
+    "widgets": {
+      "title": "小工具更新",
+      "content": "我們對小工具做了一些更新，相信你會喜歡。"
+    },
+    "features": {
+      "title": "新功能即將推出",
+      "content": "更多新功能正在路上，敬請期待！"
+    },
+    "reports": {
+      "title": "週報已產生",
+      "content": "請前往通知中心查看你的報告。"
+    }
+  },
+  "customizer": {
+    "open": "版面設定",
+    "title": "設定",
+    "theme": "主題",
+    "light": "淺色",
+    "dark": "深色",
+    "auto": "跟隨系統",
+    "header": "頁首",
+    "visible": "顯示",
+    "position": "位置",
+    "above": "最上方",
+    "fixed": "固定",
+    "static": "隨頁面捲動",
+    "navigation": "導覽",
+    "show_user_panel": "顯示使用者面板",
+    "side": "側邊",
+    "top": "頂部",
+    "direction": "文字方向",
+    "ltr": "由左至右",
+    "rtl": "由右至左"
   }
 }

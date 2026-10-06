@@ -1,0 +1,41 @@
+.handle {
+  position: fixed;
+  inset-block-end: 2rem;
+  inset-inline-end: 2rem;
+  z-index: 3;
+}
+
+.panel {
+  padding: 0.5rem 1rem 1.5rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 {
+    margin: 0;
+    font: var(--mat-sys-title-large);
+  }
+}
+
+h3 {
+  margin: 1.25rem 0 0.5rem;
+  font: var(--mat-sys-title-small);
+}
+
+h4 {
+  margin: 1rem 0 0.25rem;
+  font: var(--mat-sys-label-large);
+  color: var(--mat-sys-on-surface-variant);
+}
+
+mat-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+mat-divider {
+  margin-block-start: 1.25rem;
+}

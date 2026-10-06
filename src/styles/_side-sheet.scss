@@ -1,0 +1,20 @@
+// Side sheets: dialogs opened by `SideSheet` (src/app/theme/side-sheet) as full-height panels.
+
+// How this file was built: created by hand and loaded from src/styles.scss. The dialog overlay is
+// rendered outside the components that open it, so its look is set globally, scoped to the
+// `matero-side-sheet` panel class, with the official `mat.dialog-overrides()` mixin.
+
+// Why: a side sheet is square, as wide as asked (Material caps dialogs at 560px and at 80vw on
+// small screens) and keeps the dialog's surface color and elevation.
+
+@use '@angular/material' as mat;
+
+.matero-side-sheet {
+  @include mat.dialog-overrides(
+    (
+      container-shape: 0,
+      container-max-width: 100vw,
+      container-small-max-width: 100vw,
+    )
+  );
+}

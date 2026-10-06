@@ -20,6 +20,8 @@
 @use 'styles/colors';
 // [ng-scaffold] Step 7: third-party skins on M3 tokens (toasts of @ngxpert/hot-toast).
 @use 'styles/plugins';
+// [ng-scaffold] Step 8: full-height dialogs for the notice panel and the customizer.
+@use 'styles/side-sheet';
 
 html {
   height: 100%;

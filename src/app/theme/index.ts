@@ -19,3 +19,6 @@ export * from './user-panel/user-panel';
 export * from './sidebar/sidebar';
 export * from './topmenu-panel/topmenu-panel';
 export * from './topmenu/topmenu';
+export * from './side-sheet/side-sheet';
+export * from './sidebar-notice/sidebar-notice';
+export * from './customizer/customizer';

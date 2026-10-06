@@ -14,6 +14,8 @@
 @use 'styles/reboot';
 // [ng-scaffold] Step 4: utility classes with ng-matero's names (`m-16`, `d-flex`, `text-center`).
 @use 'styles/helpers';
+// [ng-scaffold] Step 5: 12-column CSS grid with ng-matero's names (`row`, `col-md-4`, `offset-2`).
+@use 'styles/grid';
 
 html {
   height: 100%;

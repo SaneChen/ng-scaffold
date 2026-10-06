@@ -1,0 +1,90 @@
+// 12-column layout grid with ng-matero's class names (`row`, `col`, `col-6`, `col-md-4`,
+// `offset-sm-2`, `no-gutters`), built on CSS grid.
+
+// How this file was built:
+//   1. Created by hand (Angular CLI has no generator for global Sass partials) and loaded from
+//      src/styles.scss with `@use 'styles/grid';`.
+//   2. `.row` is a 12-track grid separated by `--gutter` (from _reboot.scss). Every child is
+//      auto-placed and spans `--col-span` tracks (default 12, i.e. stacked); the `col-*` and
+//      `offset-*` classes only set `--col-span` / `--col-offset`, so a responsive class such as
+//      `col-md-4` overrides `col-6` at its breakpoint without repeating `grid-column`.
+//   3. Offsets keep ng-matero's (Bootstrap's) meaning, "leave n columns free before this one":
+//      the column spans offset + span tracks and its inline-start margin covers the first
+//      `offset` of them (n / (n + span) of the area width plus the gaps in between).
+//   4. `.col` / `.col-<bp>` (equal-width columns of unknown count) switch their row to a single
+//      line of equal tracks through `:has()`; a `col-<wider bp>-<n>` in the same row switches it
+//      back to 12 tracks from that breakpoint on (`col col-md-6` wraps into halves on md+).
+//   5. Breakpoints and infixes come from ../breakpoints (`sm`, `md`, `lg`, `xl`), as in
+//      ng-matero.
+
+// Why: ng-matero emulated a flexbox grid with paddings and negative row margins. CSS grid needs
+// neither: `gap` separates the columns, rows never overflow their container, and the column order
+// mirrors under dir="rtl" by itself.
+// Limitation: in a row of `.col` columns (same breakpoint), a `.col-<n>` takes n equal tracks
+// instead of n twelfths, and a child without a column class takes 12 of them.
+
+@use '../breakpoints';
+
+$columns: 12;
+
+@mixin -columns($infix: '') {
+  @if $infix != '' {
+    // A sized column of this breakpoint ends a narrower breakpoint's single line of `.col`s.
+    .row:has(> [class*='col#{$infix}-']) {
+      grid-template-columns: repeat($columns, minmax(0, 1fr));
+      grid-auto-flow: row;
+    }
+  }
+
+  .col#{$infix} {
+    --col-span: 1;
+  }
+
+  .row:has(> .col#{$infix}) {
+    grid-template-columns: none;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+  }
+
+  @for $i from 1 through $columns {
+    .col#{$infix}-#{$i} {
+      --col-span: #{$i};
+    }
+  }
+
+  @for $i from 0 through $columns - 1 {
+    .offset#{$infix}-#{$i} {
+      --col-offset: #{$i};
+    }
+  }
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat($columns, minmax(0, 1fr));
+  column-gap: var(--gutter);
+
+  > * {
+    // Reset what a column inherits from an outer grid, then place it.
+    --col-span: #{$columns};
+    --col-offset: 0;
+
+    grid-column: auto / span min(#{$columns}, var(--col-offset) + var(--col-span));
+    min-width: 0;
+    margin-inline-start: calc(
+      var(--col-offset) * (100% + var(--gutter)) / (var(--col-offset) + var(--col-span))
+    );
+  }
+}
+
+.no-gutters {
+  --gutter: 0;
+}
+
+@include -columns;
+
+@each $infix, $width in breakpoints.$breakpoints {
+  @include breakpoints.up($infix) {
+    @include -columns('-#{$infix}');
+  }
+}

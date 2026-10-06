@@ -57,3 +57,9 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Use the `providedIn: 'root'` option for singleton services
 - Prefer the `@Service` decorator over `@Injectable({providedIn: 'root'})` for new singleton services (Angular v22+)
 - Use the `inject()` function instead of constructor injection
+
+## Continuing the `ng-matero` branch
+
+Before changing anything on this branch, read `docs/HANDOFF.md` (status, environment, pitfalls and
+ready-to-run task specs), then `docs/CONVENTIONS.md`, `docs/ARCHITECTURE.md` and `docs/ROADMAP.md`.
+Run `tools/verify.sh` before every commit.

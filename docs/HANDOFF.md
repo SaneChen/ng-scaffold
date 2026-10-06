@@ -8,11 +8,12 @@
 ## 1. 当前状态
 
 - 基线：`0d99dd2`（未改动的 `ng new ng-scaffold`，Angular CLI 22.2.1）。
-- 已完成：ROADMAP 中阶段 0、阶段 1、阶段 2（含 §4 B 全局样式）以及阶段 3 的「应用外壳 / 设置 / 加载器 /
-  页面标题 / i18n」，具体提交见 ROADMAP 中 `[x]` 条目后的哈希。
-- 质量状态（HEAD）：`tools/verify.sh` 通过——lint、stylelint、10 个测试文件 / 61 个用例、生产构建
-  （initial 约 323 kB，其中 styles.css 约 76 kB；无 budget 警告）。
-- 下一步：§4 的 **C · 认证、HTTP、Mock API、菜单、权限、启动**，然后依次 D → E → F → G → H。
+- 已完成：ROADMAP 中阶段 0、阶段 1、阶段 2（含 §4 B 全局样式）以及阶段 3 全部（含 §4 C 认证、HTTP、
+  Mock API、菜单、权限、启动），具体提交见 ROADMAP 中 `[x]` 条目后的哈希。
+- 质量状态（HEAD）：`tools/verify.sh` 通过——lint、stylelint、31 个测试文件 / 171 个用例、生产构建
+  （initial 约 409 kB / 传输约 99 kB，其中 styles.css 约 96 kB；hot-toast 为按需加载的独立 chunk；
+  无 budget 警告）。
+- 下一步：§4 的 **D · 布局外壳**，然后依次 E → F → G → H。
 
 ## 2. 环境与工作方式
 
@@ -55,15 +56,22 @@ ng-matero 参考代码在 <https://github.com/ng-matero/ng-matero>（main，v22.
 
 ## 3. 已有的 core API（后续阶段直接使用）
 
-| 位置                      | 内容                                                                                                                                                                                                                                                |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/app/core/storage/`   | `LocalStorage`：`get<T>(key, fallback)`、`set`、`remove`，存储不可用时不抛错                                                                                                                                                                        |
-| `src/app/core/settings/`  | `AppSettings` 接口、`defaultAppSettings`、`APP_SETTINGS` token、`provideAppSettings(overrides)`；`SettingsStore`（`options`、`update`、`reset`、`themeColor`，effect 同步 `<html>` 的 dir 与 `theme-dark`/`theme-auto` class）；`AppDirectionality` |
-| `src/app/core/i18n/`      | `LANGUAGES`、`provideI18n()`、`LanguageStore`（同步 `TranslateService.use` 与 `<html lang>`）、`PaginatorIntl`                                                                                                                                      |
-| `src/app/core/preloader/` | `Preloader`：首屏渲染后移除 `index.html` 中的 `#globalLoader`                                                                                                                                                                                       |
-| `src/app/core/title/`     | `PageTitleStrategy`：`<翻译后的路由 title> · <应用名>`，应用名来自 `App` 中保留的 `title` signal                                                                                                                                                    |
-| `src/styles/_themes.scss` | `html.theme-dark body { color-scheme: dark }` 等                                                                                                                                                                                                    |
-| `public/i18n/*.json`      | en-US / zh-CN / zh-TW，新功能需同时补三种语言                                                                                                                                                                                                       |
+| 位置                        | 内容                                                                                                                                                                                                                                                                                                                                             |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `src/app/core/storage/`     | `WebStorage` 基类 + `LocalStorage` / `SessionStorage`：`get<T>(key, fallback)`、`set`、`remove`，存储不可用时不抛错                                                                                                                                                                                                                              |
+| `src/app/core/settings/`    | `AppSettings` 接口、`defaultAppSettings`、`APP_SETTINGS` token、`provideAppSettings(overrides)`；`SettingsStore`（`options`、`update`、`reset`、`themeColor`，effect 同步 `<html>` 的 dir 与 `theme-dark`/`theme-auto` class）；`AppDirectionality`                                                                                              |
+| `src/app/core/i18n/`        | `LANGUAGES`、`provideI18n()`、`LanguageStore`（同步 `TranslateService.use` 与 `<html lang>`）、`PaginatorIntl`                                                                                                                                                                                                                                   |
+| `src/app/core/preloader/`   | `Preloader`：首屏渲染后移除 `index.html` 中的 `#globalLoader`                                                                                                                                                                                                                                                                                    |
+| `src/app/core/title/`       | `PageTitleStrategy`：`<翻译后的路由 title> · <应用名>`，应用名来自 `App` 中保留的 `title` signal                                                                                                                                                                                                                                                 |
+| `src/app/core/auth/`        | `AuthToken`（普通/JWT，`valid()`、`refreshAt`）；`TokenStore`（`token`、`session`、`set(res, remember)` 新会话、`renew(res)` 刷新、`clear()`）；`AuthStore`（`isAuthenticated`、`user`、`login`、`register`、`refresh`、`logout`；登出/401/过期时自动跳转 `/auth/login?returnUrl=`）；`LoginApi`；`authGuard`（`canMatch` + `canActivateChild`） |
+| `src/app/core/http/`        | `httpInterceptors`（顺序见 `interceptors.ts`）；`API_BASE_URL`、`isApiUrl()`、`HANDLE_HTTP_ERRORS`（表单自行显示错误时设为 false）、`ApiError`                                                                                                                                                                                                   |
+| `src/app/core/toast/`       | `Toaster.error()` / `success()`：首次使用时才加载 hot-toast；纯文本、可访问                                                                                                                                                                                                                                                                      |
+| `src/app/core/mock/`        | `MockBackend` + `mockApiInterceptor`（`environment.mockApi`；演示账号 `ng-scaffold` / `ng-scaffold`）                                                                                                                                                                                                                                            |
+| `src/app/core/menu/`        | `Menu`/`MenuItem`；`MenuStore`（`menu`、`visibleMenu` 按权限过滤、`trail(url)` 面包屑、`buildRoute()`；登录后自动加载）                                                                                                                                                                                                                          |
+| `src/app/core/permissions/` | `PermissionStore`（`roles`、`permissions`、`has({ only, except })`、`setRoles()` 可覆盖；`ROLE_PERMISSIONS`）；`*appCan`；`permissionGuard`（`data.permissions`）                                                                                                                                                                                |
+| `src/app/core/startup/`     | `Startup.ready()`：已登录时等待用户与菜单（最多 10 s），app initializer 与 `permissionGuard` 使用                                                                                                                                                                                                                                                |
+| `src/styles/_themes.scss`   | `html.theme-dark body { color-scheme: dark }` 等                                                                                                                                                                                                                                                                                                 |
+| `public/i18n/*.json`        | en-US / zh-CN / zh-TW，新功能需同时补三种语言                                                                                                                                                                                                                                                                                                    |
 
 具体以源码与各文件头注释为准（`git log -p 3a11238..HEAD`）。
 
@@ -104,7 +112,8 @@ ng-matero 参考代码在 <https://github.com/ng-matero/ng-matero>（main，v22.
   `token`（Bearer，401 → logout）、`api`（解包 `{ code, msg, data }`）、`error`（toast + 跳转 403/404/500）、
   `logging`（仅开发环境）；导出有序数组，在 app.config 中以插入方式注册
   `provideHttpClient(withInterceptors(...))`。toast 使用 `@ngxpert/hot-toast`（同时安装 `@ngneat/overview`）。
-- C4 `feat(mock): add an in-memory mock API` — `mockApiInterceptor`（`environment.mockApi` 为 true 时排在最前）：
+- C4 `feat(mock): add an in-memory mock API` — `mockApiInterceptor`（`environment.mockApi` 为 true 时排在拦截器链**最后**，
+  以便收到最终 URL 与 `Authorization` 头，其响应也经过其余拦截器；原计划写的「最前」已在实现中修正）：
   用户 `ng-scaffold` / `ng-scaffold`（roles: `['ADMIN']`）；实现 C2 的各端点，令牌为带 `exp` 的伪 JWT；
   `/user/menu` 转发到静态资源 `data/menu.json`；模拟延迟。
 - C5 `feat(menu): add the menu model and menu store` — `Menu`/`MenuItem` 接口（与 ng-matero 相同：route、name、

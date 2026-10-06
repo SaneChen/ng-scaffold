@@ -86,12 +86,12 @@
 - [x] 应用设置：`Settings`（signal 状态 + `effect` 同步 `<html>` 的 dir/class/lang + 本地持久化） — `0ee3e1a`（`LocalStorage`）、`ed743ef`（`SettingsStore`、`AppDirectionality`）、`7c344aa`（`LanguageStore` 同步 lang）
 - [x] 启动加载器：`Preloader`（首次导航完成且页面渲染后，在 `afterNextRender` 中移除 index.html 的加载层；内联脚本提前应用已保存的主题） — `8d5054c`
 - [x] 页面标题：`PageTitleStrategy`（`title` signal 作为应用名，页面标题为「页面 · 应用名」） — `c6b8e0c`
-- [ ] 认证：`Token`/`TokenStore`/`AuthStore`/`LoginApi` + 函数式 `authGuard`
-- [ ] HTTP 拦截器（函数式）：base-url、api、token、error、settings（Accept-Language）、logging、noop
-- [ ] 演示后端：函数式 mock 拦截器（登录、用户、菜单、权限）
-- [ ] 菜单：`MenuStore`（signal）+ `public/data/menu.json`
-- [ ] 权限：`Permissions`（signal）+ `*appCan` 指令 + `permissionGuard`
-- [ ] 启动流程：`provideAppInitializer` 加载语言、用户、菜单、权限
+- [x] 认证：`Token`/`TokenStore`/`AuthStore`/`LoginApi` + 函数式 `authGuard` — `fc5c1fa`（`SessionStorage`）、`b54eab4`（`AuthToken`、`TokenStore`）、`6dc8567`（`LoginApi`、`AuthStore`、`authGuard`）
+- [x] HTTP 拦截器（函数式）：base-url、api、token、error、settings（Accept-Language）、logging（noop 未移植：空实现） — `7b7034b`（另含按需加载 hot-toast 的 `Toaster`）
+- [x] 演示后端：函数式 mock 拦截器（登录、注册、刷新、用户、菜单；排在拦截器链最后） — `eefedda`
+- [x] 菜单：`MenuStore`（signal）+ `public/data/menu.json` — `c827b1a`
+- [x] 权限：`Permissions`（signal）+ `*appCan` 指令 + `permissionGuard` — `3afeb90`
+- [x] 启动流程：`provideAppInitializer` 加载语言、用户、菜单、权限 — `514d9b6`
 
 ### 阶段 4 · 布局（theme）
 

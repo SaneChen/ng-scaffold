@@ -1,0 +1,82 @@
+// Minimal global resets that neither Angular Material nor the browser defaults cover.
+
+// How this file was built:
+//   1. Created by hand (Angular CLI has no generator for global Sass partials) and loaded from
+//      src/styles.scss with `@use 'styles/reboot';`.
+//   2. Kept only what the application relies on, taken from ng-matero's reboot: border-box sizing,
+//      the `--gutter` spacing token (grid columns and page padding), the list margins, link and
+//      inline-code colors.
+//      Fonts, the page background and the body margin already come from `mat.theme()` and the
+//      `body` rule that `ng add @angular/material` wrote into src/styles.scss.
+//   3. Colors are Material 3 system tokens, so links and code follow the light/dark scheme
+//      chosen by `SettingsStore` (see _themes.scss) without a second set of rules.
+//   4. Added `mat.strong-focus-indicators()` (official mixin) for Material components and one
+//      outline for every other focusable element, plus a `prefers-reduced-motion` rule.
+
+// Why: WCAG 2.2 AA asks for a visible focus indicator (2.4.7) and lets users turn off motion
+// (2.3.3 is AAA, but the OS setting is a clear user preference). Material components only show a
+// faint state layer on keyboard focus; the strong indicators draw a ring on them instead.
+
+@use '@angular/material' as mat;
+
+:root {
+  // Horizontal space between grid columns and around page content.
+  --gutter: 1rem;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+// Visible focus ring (3px, `secondary` color) on every Material component.
+@include mat.strong-focus-indicators();
+
+// The same ring for native focusable elements. `:where()` keeps the specificity at zero, so a
+// component that draws its own indicator (Material sets `outline: none` there) always wins.
+:where(:focus-visible) {
+  outline: 3px solid var(--mat-sys-secondary);
+  outline-offset: 2px;
+}
+
+dl,
+ol,
+ul {
+  margin-block: 0 1rem;
+}
+
+a {
+  color: var(--mat-sys-primary);
+  text-underline-offset: 0.15em;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+:not(pre) > code {
+  padding: 0.125rem 0.25rem;
+  font-size: 0.875em;
+  overflow-wrap: break-word;
+  background-color: var(--mat-sys-surface-container-high);
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: var(--mat-sys-corner-extra-small);
+}
+
+// Material reads the same media query: it disables its transitions and only slows down the
+// indeterminate spinner and progress bar, which must keep moving to signal "busy". Therefore only
+// transitions and smooth scrolling are cut here; keyframe animations are left alone, and a
+// component with its own looping animation handles reduced motion itself. `!important` is
+// required to beat component styles of any specificity.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -10,6 +10,8 @@
 // [ng-scaffold] Step 2: self-hosted Roboto and Material Symbols (replaces the Google Fonts links
 // that `ng add @angular/material` put into index.html), so builds and visitors need no CDN access.
 @use 'styles/fonts';
+// [ng-scaffold] Step 3: minimal resets on M3 tokens (box-sizing, links, focus ring, reduced motion).
+@use 'styles/reboot';
 
 html {
   height: 100%;

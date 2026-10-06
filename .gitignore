@@ -8,6 +8,8 @@
 # Node modules and dependency files
 /package-lock.json
 /yarn.lock
+# [ng-scaffold] Yarn is the package manager of this repository, so its lockfile is committed.
+!/yarn.lock
 
 # Environment files
 /.env

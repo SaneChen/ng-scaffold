@@ -37,3 +37,5 @@ export * from './http/token-interceptor';
 export * from './http/interceptors';
 export * from './mock/mock-backend';
 export * from './mock/mock-api-interceptor';
+export * from './menu/menu';
+export * from './menu/menu-store';

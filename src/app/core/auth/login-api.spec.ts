@@ -3,7 +3,7 @@
  *
  * How this file was built:
  *   1. `yarn ng g service core/auth/login-api` generated the "should be created" test.
- *   2. Replaced it with one test per endpoint that pins the HTTP contract (method, path, body) the
+ *   2. Replaced it with one test per endpoint (the menu one added with the menu model) that pins the HTTP contract (method, path, body) the
  *      mock API and a real backend must implement.
  */
 import { provideHttpClient } from '@angular/common/http';
@@ -53,5 +53,14 @@ describe('LoginApi', () => {
 
     http.expectOne({ method: 'POST', url: '/auth/logout' });
     http.expectOne({ method: 'GET', url: '/user' });
+  });
+
+  it('should get the menu from /user/menu and unwrap its `menu` property', () => {
+    let menu: unknown;
+    api.menu().subscribe(value => (menu = value));
+
+    http.expectOne({ method: 'GET', url: '/user/menu' }).flush({ menu: [{ route: 'dashboard' }] });
+
+    expect(menu).toEqual([{ route: 'dashboard' }]);
   });
 });

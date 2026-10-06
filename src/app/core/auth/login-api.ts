@@ -1,5 +1,5 @@
 /**
- * HTTP endpoints of the authentication backend (login, sign-up, refresh, logout, current user).
+ * HTTP endpoints of the authentication backend (login, sign-up, refresh, logout, user, menu).
  *
  * How this file was built:
  *   1. `yarn ng g service core/auth/login-api` generated an empty `@Service()` class and its spec.
@@ -8,6 +8,7 @@
  *   3. Login, sign-up and logout opt out of `errorInterceptor` (`HANDLE_HTTP_ERRORS`): the forms
  *      show their own errors, and logout is best effort. The refresh request is marked with
  *      `IS_TOKEN_REFRESH`, so `tokenInterceptor` does not hold it back waiting for itself.
+ *   4. Added `menu()` (`GET /user/menu`) together with the menu model.
  *
  * Why: the URLs and payloads of the backend live in one class, so connecting a real API means
  * changing this file (or replacing the service) only. Paths are relative to the API base URL
@@ -16,8 +17,9 @@
  */
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { HANDLE_HTTP_ERRORS, IS_TOKEN_REFRESH } from '../http/api-url';
+import { Menu } from '../menu/menu';
 import { TokenResponse } from './auth-token';
 import { User } from './user';
 
@@ -62,5 +64,10 @@ export class LoginApi {
 
   user(): Observable<User> {
     return this.#http.get<User>('/user');
+  }
+
+  /** The navigation menu of the signed-in user (`{ menu: [...] }`, as in ng-matero). */
+  menu(): Observable<Menu[]> {
+    return this.#http.get<{ menu: Menu[] }>('/user/menu').pipe(map(response => response.menu));
   }
 }

@@ -13,3 +13,4 @@ export * from './widgets/github-button/github-button';
 export * from './widgets/notification-button/notification-button';
 export * from './widgets/translate-button/translate-button';
 export * from './widgets/user-button/user-button';
+export * from './header/header';

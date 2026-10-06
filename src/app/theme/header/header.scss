@@ -1,0 +1,20 @@
+// Translucent toolbar over the page content (ng-matero's look), on M3 tokens.
+@use '@angular/material' as mat;
+
+:host {
+  position: relative;
+  z-index: 2;
+  display: block;
+  background-color: color-mix(in srgb, var(--mat-sys-surface-container) 80%, transparent);
+  backdrop-filter: blur(8px);
+
+  @include mat.toolbar-overrides(
+    (
+      container-background-color: transparent,
+    )
+  );
+}
+
+mat-toolbar {
+  gap: 0.25rem;
+}

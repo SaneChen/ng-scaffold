@@ -116,6 +116,8 @@
       "report_1": "Server error report 1",
       "report_2": "Server error report 2",
       "report_3": "Server error report 3"
-    }
+    },
+    "toggle_menu": "Navigation menu",
+    "notices": "Notice panel"
   }
 }

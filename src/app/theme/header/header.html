@@ -1,0 +1,38 @@
+<mat-toolbar>
+  @if (showToggle()) {
+    <button
+      matIconButton
+      type="button"
+      [attr.aria-label]="'header.toggle_menu' | translate"
+      [attr.aria-expanded]="navOpened()"
+      [attr.aria-controls]="navId()"
+      (click)="toggleNav.emit()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+  }
+
+  @if (showBranding()) {
+    <app-branding />
+  }
+
+  <span class="flex-fill"></span>
+
+  <!-- <demo> -->
+  <app-github-button />
+  <!-- </demo> -->
+  <app-translate-button />
+  <app-fullscreen-button class="d-none d-sm-inline-block" />
+  <app-notification-button class="d-none d-sm-inline-block" />
+  <app-user-button />
+  <button
+    matIconButton
+    type="button"
+    class="d-none d-sm-inline-block"
+    [attr.aria-label]="'header.notices' | translate"
+    aria-haspopup="dialog"
+    (click)="openNotices.emit()"
+  >
+    <mat-icon>view_sidebar</mat-icon>
+  </button>
+</mat-toolbar>

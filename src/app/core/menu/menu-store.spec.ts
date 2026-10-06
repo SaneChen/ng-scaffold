@@ -5,7 +5,7 @@
  *   1. `yarn ng g service core/menu/menu-store` generated the "should be created" test.
  *   2. Replaced it with tests for the translation namespace (without mutating the input), the
  *      trail of nested items, groups whose route is `/`, ignored query strings and external
- *      links, and `reset()`.
+ *      links, the permission-filtered `visibleMenu` and `reset()`.
  *   3. Added a check that every item of public/data/menu.json has a valid type, a Material Symbols
  *      icon at the top level and a translation in each shipped language.
  */
@@ -14,6 +14,7 @@ import enUS from '../../../../public/i18n/en-US.json';
 import zhCN from '../../../../public/i18n/zh-CN.json';
 import zhTW from '../../../../public/i18n/zh-TW.json';
 import shipped from '../../../../public/data/menu.json';
+import { PermissionStore } from '../permissions/permission-store';
 import { Menu, MenuItem } from './menu';
 import { buildRoute, MenuStore } from './menu-store';
 
@@ -80,6 +81,26 @@ describe('MenuStore', () => {
     expect(store.trail('/material/unknown')).toEqual([]);
     expect(store.trail('/https:/example.com')).toEqual([]);
     expect(store.trail('/')).toEqual([]);
+  });
+
+  it('should hide items the user may not see, and groups left without children', () => {
+    const permissions = TestBed.inject(PermissionStore);
+    store.set([
+      { route: 'a', name: 'a', type: 'link', icon: 'home', permissions: { only: 'ADMIN' } },
+      {
+        route: 'b',
+        name: 'b',
+        type: 'sub',
+        icon: 'lock',
+        children: [{ route: 'c', name: 'c', type: 'link', permissions: { except: 'GUEST' } }],
+      },
+    ]);
+
+    permissions.setRoles({ GUEST: [] });
+    expect(store.visibleMenu()).toEqual([]);
+
+    permissions.setRoles({ ADMIN: [] });
+    expect(store.visibleMenu().map(item => item.name)).toEqual(['menu.a', 'menu.b']);
   });
 
   it('should empty the menu on reset()', () => {

@@ -39,3 +39,6 @@ export * from './mock/mock-backend';
 export * from './mock/mock-api-interceptor';
 export * from './menu/menu';
 export * from './menu/menu-store';
+export * from './permissions/permission-store';
+export * from './permissions/can';
+export * from './permissions/permission-guard';

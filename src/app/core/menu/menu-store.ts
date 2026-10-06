@@ -10,12 +10,15 @@
  *      ng-matero's `addNamespace()` did, without mutating the input.
  *   3. Added `trail(url)`: the items from the top level down to the item whose joined routes
  *      match the URL path, for breadcrumbs and for expanding the active group of the side menu.
+ *   4. Added `visibleMenu` (with the permissions): the items whose `permissions` rule the user
+ *      passes; a group whose children are all hidden is hidden too.
  *
  * Why: ng-matero kept the menu in a `BehaviorSubject` and found the trail with a JSON-cloning
  * breadth-first search over route arrays. A signal lets breadcrumbs and menus derive their state
  * with `computed()`; the depth-first `trail()` is a pure function of the tree and the URL.
  */
-import { Service, signal } from '@angular/core';
+import { computed, inject, Service, signal } from '@angular/core';
+import { PermissionStore } from '../permissions/permission-store';
 import { Menu, MenuItem } from './menu';
 
 /** Translation namespace of menu names (public/i18n/*.json → `menu`). */
@@ -25,8 +28,15 @@ export const MENU_NAMESPACE = 'menu';
 export class MenuStore {
   readonly #menu = signal<Menu[]>([]);
 
+  readonly #permissions = inject(PermissionStore);
+
   /** The full menu, names already translation keys. */
   readonly menu = this.#menu.asReadonly();
+
+  /** The menu the user may see: what the side and top menus render. */
+  readonly visibleMenu = computed(
+    () => visibleItems(this.#menu(), item => this.#permissions.has(item.permissions)) as Menu[]
+  );
 
   /** Replaces the menu (as delivered by the API). */
   set(menu: Menu[]): void {
@@ -50,6 +60,22 @@ export class MenuStore {
 /** Joins route parts into an absolute router path: `['material', 'button']` → `/material/button`. */
 export function buildRoute(...routes: string[]): string {
   return '/' + routes.flatMap(segments).join('/');
+}
+
+function visibleItems(
+  items: readonly MenuItem[],
+  allowed: (item: MenuItem) => boolean
+): MenuItem[] {
+  return items.flatMap(item => {
+    if (!allowed(item)) {
+      return [];
+    }
+    if (item.type !== 'sub' || !item.children) {
+      return [item];
+    }
+    const children = visibleItems(item.children, allowed);
+    return children.length > 0 ? [{ ...item, children }] : [];
+  });
 }
 
 function withNamespace(items: readonly MenuItem[], namespace: string): MenuItem[] {

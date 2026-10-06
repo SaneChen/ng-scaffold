@@ -1,0 +1,6 @@
+# Files Prettier must not format (in addition to .gitignore entries, which Prettier 3 honours).
+# Lockfiles and generated output are owned by their tools.
+yarn.lock
+/dist
+/coverage
+/.angular

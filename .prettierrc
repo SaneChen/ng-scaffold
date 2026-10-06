@@ -1,4 +1,8 @@
 {
+  "arrowParens": "avoid",
+  "htmlWhitespaceSensitivity": "ignore",
+  "quoteProps": "consistent",
+  "trailingComma": "es5",
   "printWidth": 100,
   "singleQuote": true,
   "overrides": [

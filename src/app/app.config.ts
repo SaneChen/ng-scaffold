@@ -14,6 +14,8 @@ import { PageTitleStrategy } from '@core';
 // [ng-scaffold] Step 4: HTTP client with the API interceptors.
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { httpInterceptors } from '@core';
+// [ng-scaffold] Step 5: wait for the signed-in user's data (user, roles, menu) before the first page.
+import { Startup } from '@core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -33,6 +35,8 @@ export const appConfig: ApplicationConfig = {
     // [ng-scaffold] Step 4: base URL, Accept-Language, bearer token, envelope unwrapping, error
     // toasts/pages and dev logging, in that order (core/http/interceptors.ts).
     provideHttpClient(withInterceptors(httpInterceptors)),
+    // [ng-scaffold] Step 5: a restored session renders its first page with its menu and roles.
+    provideAppInitializer(() => inject(Startup).ready()),
     provideRouter(routes),
   ],
 };

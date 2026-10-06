@@ -8,12 +8,15 @@
  *      route objects have.
  *   3. Reads a `PermissionRule` plus an optional `redirectTo` from the route data (ngx-permissions'
  *      format); users who do not pass are redirected there, or to `/403`.
+ *   4. Waits for `Startup.ready()` first (added with the start-up step), so a navigation right
+ *      after a login is checked against the roles of the user who just signed in.
  *
  * Why: replaces `ngxPermissionsGuard` with a function over `PermissionStore`. As `canMatch` it
  * also keeps the lazy chunk of a forbidden route from being downloaded.
  */
 import { inject } from '@angular/core';
 import { CanActivateFn, CanMatchFn, Data, Router } from '@angular/router';
+import { Startup } from '../startup/startup';
 import { PermissionRule, PermissionStore } from './permission-store';
 
 /** The `data.permissions` entry of a guarded route. */
@@ -22,10 +25,10 @@ export interface RoutePermissions extends PermissionRule {
   redirectTo?: string;
 }
 
-export const permissionGuard: CanMatchFn & CanActivateFn = (route: { data?: Data }) => {
+export const permissionGuard: CanMatchFn & CanActivateFn = async (route: { data?: Data }) => {
+  const permissions = inject(PermissionStore);
+  const router = inject(Router);
+  await inject(Startup).ready();
   const rule = route.data?.['permissions'] as RoutePermissions | undefined;
-  if (inject(PermissionStore).has(rule)) {
-    return true;
-  }
-  return inject(Router).parseUrl(rule?.redirectTo ?? '/403');
+  return permissions.has(rule) || router.parseUrl(rule?.redirectTo ?? '/403');
 };

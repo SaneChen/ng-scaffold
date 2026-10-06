@@ -11,13 +11,18 @@
  *      the check `has(rule)`, with the semantics of ngx-permissions: a name in `only` or `except`
  *      matches a role or a permission; any `except` match denies, then any `only` match allows;
  *      an empty or missing `only` allows.
+ *   4. With the start-up step, both signals became `linkedSignal`s of `AuthStore.user`: the roles
+ *      of the signed-in user with the permissions `ROLE_PERMISSIONS` grants them, and the user's
+ *      own permissions (ng-matero hard-coded ADMIN → canAdd, canDelete, canEdit, canRead in its
+ *      `StartupService`). The intents still override them until the user changes.
  *
  * Why: replaces `ngx-permissions` (NgModule-based, observables, separate role and permission
  * services). `has()` reads signals, so a template, a `computed()` (the filtered menu) or the
  * `*appCan` directive that calls it updates by itself when the roles change, e.g. on the
  * role-switching demo page.
  */
-import { computed, Service, signal } from '@angular/core';
+import { computed, inject, InjectionToken, linkedSignal, Service } from '@angular/core';
+import { AuthStore } from '../auth/auth-store';
 
 /** Names (roles or permissions) that may (`only`) or may not (`except`) pass. */
 export interface PermissionRule {
@@ -25,10 +30,30 @@ export interface PermissionRule {
   except?: string | readonly string[];
 }
 
+/** The permissions each role grants; a role missing here grants none. */
+export const ROLE_PERMISSIONS = new InjectionToken<Readonly<Record<string, readonly string[]>>>(
+  'ROLE_PERMISSIONS',
+  {
+    providedIn: 'root',
+    factory: () => ({
+      ADMIN: ['canAdd', 'canDelete', 'canEdit', 'canRead'],
+      MANAGER: ['canAdd', 'canEdit', 'canRead'],
+      GUEST: ['canRead'],
+    }),
+  }
+);
+
 @Service()
 export class PermissionStore {
-  readonly #roles = signal<Readonly<Record<string, readonly string[]>>>({});
-  readonly #direct = signal<readonly string[]>([]);
+  readonly #auth = inject(AuthStore);
+  readonly #rolePermissions = inject(ROLE_PERMISSIONS);
+
+  readonly #roles = linkedSignal<Readonly<Record<string, readonly string[]>>>(() =>
+    Object.fromEntries(
+      (this.#auth.user()?.roles ?? []).map(role => [role, this.#rolePermissions[role] ?? []])
+    )
+  );
+  readonly #direct = linkedSignal<readonly string[]>(() => this.#auth.user()?.permissions ?? []);
 
   /** The user's roles, e.g. `['ADMIN']`. */
   readonly roles = computed(() => Object.keys(this.#roles()));

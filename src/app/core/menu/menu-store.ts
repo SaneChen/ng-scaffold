@@ -12,12 +12,19 @@
  *      match the URL path, for breadcrumbs and for expanding the active group of the side menu.
  *   4. Added `visibleMenu` (with the permissions): the items whose `permissions` rule the user
  *      passes; a group whose children are all hidden is hidden too.
+ *   5. With the start-up step, the menu became a `linkedSignal` of an `rxResource` keyed on
+ *      `TokenStore.session`: it loads `GET /user/menu` for every sign-in (also another user's
+ *      over an active session) and empties on sign-out; `set()` still
+ *      overrides it. `loading` tells `Startup` when the first load has settled.
  *
  * Why: ng-matero kept the menu in a `BehaviorSubject` and found the trail with a JSON-cloning
  * breadth-first search over route arrays. A signal lets breadcrumbs and menus derive their state
  * with `computed()`; the depth-first `trail()` is a pure function of the tree and the URL.
  */
-import { computed, inject, Service, signal } from '@angular/core';
+import { computed, inject, linkedSignal, Service } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { LoginApi } from '../auth/login-api';
+import { TokenStore } from '../auth/token-store';
 import { PermissionStore } from '../permissions/permission-store';
 import { Menu, MenuItem } from './menu';
 
@@ -26,9 +33,22 @@ export const MENU_NAMESPACE = 'menu';
 
 @Service()
 export class MenuStore {
-  readonly #menu = signal<Menu[]>([]);
+  readonly #tokens = inject(TokenStore);
+  readonly #api = inject(LoginApi);
+
+  readonly #loaded = rxResource<Menu[], number | undefined>({
+    params: () => this.#tokens.session(),
+    stream: () => this.#api.menu(),
+  });
+
+  readonly #menu = linkedSignal<Menu[]>(() =>
+    this.#loaded.hasValue() ? (withNamespace(this.#loaded.value(), MENU_NAMESPACE) as Menu[]) : []
+  );
 
   readonly #permissions = inject(PermissionStore);
+
+  /** Whether `GET /user/menu` is in flight. */
+  readonly loading = this.#loaded.isLoading;
 
   /** The full menu, names already translation keys. */
   readonly menu = this.#menu.asReadonly();

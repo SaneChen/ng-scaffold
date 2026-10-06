@@ -42,3 +42,4 @@ export * from './menu/menu-store';
 export * from './permissions/permission-store';
 export * from './permissions/can';
 export * from './permissions/permission-guard';
+export * from './startup/startup';

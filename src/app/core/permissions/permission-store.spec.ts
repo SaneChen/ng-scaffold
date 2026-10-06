@@ -7,10 +7,14 @@
  *   2. Replaced it with tests for the ngx-permissions semantics (roles and permissions both
  *      match, `except` wins, empty `only` allows), direct permissions, clearing and the
  *      reactivity of `has()` inside a `computed()`.
+ *   3. Added that a signed-in user's roles grant the permissions of `ROLE_PERMISSIONS` (unknown
+ *      roles none) and their own permissions are added.
  */
-import { computed } from '@angular/core';
+import { computed, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { PermissionStore } from './permission-store';
+import { AuthStore } from '../auth/auth-store';
+import { User } from '../auth/user';
+import { PermissionStore, ROLE_PERMISSIONS } from './permission-store';
 
 describe('PermissionStore', () => {
   let store: PermissionStore;
@@ -48,6 +52,30 @@ describe('PermissionStore', () => {
     store.removePermissions('export', 'canRead');
     expect(store.has({ only: 'export' })).toBe(false);
     expect(store.has({ only: 'canRead' })).toBe(true);
+  });
+
+  it('should derive the roles and permissions of the signed-in user', () => {
+    const user = signal<User | null>({
+      id: 1,
+      name: 'Ada',
+      email: 'ada@example.com',
+      roles: ['EDITOR', 'UNKNOWN'],
+      permissions: ['export'],
+    });
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: AuthStore, useValue: { user } },
+        { provide: ROLE_PERMISSIONS, useValue: { EDITOR: ['canEdit'] } },
+      ],
+    });
+    store = TestBed.inject(PermissionStore);
+
+    expect(store.roles()).toEqual(['EDITOR', 'UNKNOWN']);
+    expect(store.permissions()).toEqual(['export', 'canEdit']);
+
+    user.set(null);
+    expect(store.granted().size).toBe(0);
   });
 
   it('should be reactive and forget everything on clear()', () => {

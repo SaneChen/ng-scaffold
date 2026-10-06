@@ -99,5 +99,23 @@
     "permissions.role-switching": "Role Switching",
     "permissions.route-guard": "Route Guard",
     "permissions.test": "Permission Test"
+  },
+  "profile": "Profile",
+  "edit_profile": "Edit profile",
+  "restore_defaults": "Restore defaults",
+  "logout": "Log out",
+  "header": {
+    "github": "Source code on GitHub (opens in a new tab)",
+    "fullscreen": "Enter full screen",
+    "exit_fullscreen": "Exit full screen",
+    "language": "Language",
+    "notifications": "Notifications ({{count}})",
+    "account": "Account menu of {{name}}",
+    "account_anonymous": "Account menu",
+    "messages": {
+      "report_1": "Server error report 1",
+      "report_2": "Server error report 2",
+      "report_3": "Server error report 3"
+    }
   }
 }

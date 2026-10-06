@@ -99,5 +99,23 @@
     "permissions.role-switching": "切換角色",
     "permissions.route-guard": "路由守衛",
     "permissions.test": "權限測試"
+  },
+  "profile": "個人資訊",
+  "edit_profile": "修改資料",
+  "restore_defaults": "還原設定",
+  "logout": "登出",
+  "header": {
+    "github": "GitHub 上的原始碼（在新分頁中開啟）",
+    "fullscreen": "進入全螢幕",
+    "exit_fullscreen": "結束全螢幕",
+    "language": "語言",
+    "notifications": "通知（{{count}}）",
+    "account": "{{name}} 的帳號選單",
+    "account_anonymous": "帳號選單",
+    "messages": {
+      "report_1": "伺服器錯誤報告 1",
+      "report_2": "伺服器錯誤報告 2",
+      "report_3": "伺服器錯誤報告 3"
+    }
   }
 }

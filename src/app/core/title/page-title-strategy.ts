@@ -32,6 +32,8 @@ export class PageTitleStrategy extends TitleStrategy {
   readonly #translate = inject(TranslateService);
 
   readonly #appName = signal('');
+  /** The application name (set by `App`), e.g. for the branding of the layout. */
+  readonly appName = this.#appName.asReadonly();
   /** `title` of the active route: an i18n key or plain text; `undefined` when it has none. */
   readonly #routeTitle = signal<string | undefined>(undefined);
 

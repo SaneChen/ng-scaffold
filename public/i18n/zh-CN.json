@@ -99,5 +99,23 @@
     "permissions.role-switching": "切换角色",
     "permissions.route-guard": "路由守卫",
     "permissions.test": "权限测试"
+  },
+  "profile": "个人信息",
+  "edit_profile": "修改资料",
+  "restore_defaults": "还原配置",
+  "logout": "退出登录",
+  "header": {
+    "github": "GitHub 上的源代码（在新标签页中打开）",
+    "fullscreen": "进入全屏",
+    "exit_fullscreen": "退出全屏",
+    "language": "语言",
+    "notifications": "通知（{{count}}）",
+    "account": "{{name}} 的账户菜单",
+    "account_anonymous": "账户菜单",
+    "messages": {
+      "report_1": "服务器错误报告 1",
+      "report_2": "服务器错误报告 2",
+      "report_3": "服务器错误报告 3"
+    }
   }
 }

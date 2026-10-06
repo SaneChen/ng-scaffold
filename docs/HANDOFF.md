@@ -8,11 +8,11 @@
 ## 1. 当前状态
 
 - 基线：`0d99dd2`（未改动的 `ng new ng-scaffold`，Angular CLI 22.2.1）。
-- 已完成：ROADMAP 中阶段 0、阶段 1、阶段 2（样式除外）以及阶段 3 的「应用外壳 / 设置 / 加载器 /
+- 已完成：ROADMAP 中阶段 0、阶段 1、阶段 2（含 §4 B 全局样式）以及阶段 3 的「应用外壳 / 设置 / 加载器 /
   页面标题 / i18n」，具体提交见 ROADMAP 中 `[x]` 条目后的哈希。
 - 质量状态（HEAD）：`tools/verify.sh` 通过——lint、stylelint、10 个测试文件 / 61 个用例、生产构建
-  （initial 约 254 kB，无 budget 警告）。
-- 下一步：§4 的 **B · 全局样式**，然后依次 C → D → E → F → G → H。
+  （initial 约 323 kB，其中 styles.css 约 76 kB；无 budget 警告）。
+- 下一步：§4 的 **C · 认证、HTTP、Mock API、菜单、权限、启动**，然后依次 D → E → F → G → H。
 
 ## 2. 环境与工作方式
 
@@ -38,6 +38,10 @@
 - `app.config.ts` 中新增的 provider 插在 `provideBrowserGlobalErrorListeners(),` 与 `provideRouter(routes)`
   之间，这样两行生成代码都不必修改。
 - `.gitignore` 忽略 `/yarn.lock`，已追加 `!/yarn.lock` 例外。
+- **工具类带 `!important`**（`src/styles/helpers/_variables.scss` 的 `$important`）：Material 的组件样式在
+  styles.css 之后注入且同为单类选择器，不加会在 Material 元素上失效。`m-l`/`r`、`text-left` 等是**逻辑方向**
+  （RTL 下镜像）；`offset-*` 与 ng-matero 一样相对前一列；`.col` 行与同断点的 `.col-<n>` 混用有限制（见
+  `src/styles/grid/_index.scss` 头注释）。
 - Yarn 1 不会自动安装 peer 依赖：安装新库后留意 `unmet peer dependency` 警告并显式安装。
 
 ### 2.2 推荐的推进方式（与之前一致）

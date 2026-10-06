@@ -78,7 +78,7 @@
 - [x] `chore: generate environments via ng g environments` — `60423b9`
 - [x] `build: add tsconfig path aliases (@core, @shared, @theme, @env)` — `3a11238`
 - [x] `feat(i18n): add ngx-translate with en-US, zh-CN, zh-TW` — `7c344aa`
-- [ ] `feat(styles): add reboot, layout helpers, css grid and color utilities on M3 tokens`
+- [x] `feat(styles): add reboot, layout helpers, css grid and color utilities on M3 tokens` — `699aacd`（reboot）、`9d22ed0`（helpers）、`9d9c5f8`（grid）、`10b5c25`（colors）
 
 ### 阶段 3 · core（全部 signal 化）
 

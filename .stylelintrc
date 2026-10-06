@@ -1,0 +1,14 @@
+{
+  "ignoreFiles": ["dist/**", "coverage/**"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recommended-scss",
+    "stylelint-config-recess-order"
+  ],
+  "rules": {
+    "no-empty-source": null,
+    "selector-class-pattern": null,
+    "selector-type-no-unknown": [true, { "ignore": ["custom-elements"] }],
+    "scss/at-extend-no-missing-placeholder": null
+  }
+}

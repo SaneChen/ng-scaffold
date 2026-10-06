@@ -27,6 +27,9 @@ function stored(area: Storage): unknown {
 
 describe('TokenStore', () => {
   beforeEach(() => {
+    // Start from empty storage whatever ran before in this worker.
+    localStorage.clear();
+    sessionStorage.clear();
     vi.useFakeTimers({ now: NOW });
   });
 

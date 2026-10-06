@@ -42,6 +42,7 @@ describe('tokenInterceptor', () => {
   afterEach(() => {
     backend.verify();
     sessionStorage.clear();
+    localStorage.clear();
   });
 
   function authorization(url: string): string | null {

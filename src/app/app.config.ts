@@ -11,6 +11,9 @@ import { PaginatorIntl, provideI18n } from '@core';
 // [ng-scaffold] Step 3: document titles "<translated page title> · <application name>".
 import { TitleStrategy } from '@angular/router';
 import { PageTitleStrategy } from '@core';
+// [ng-scaffold] Step 4: HTTP client with the API interceptors.
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { httpInterceptors } from '@core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,6 +30,9 @@ export const appConfig: ApplicationConfig = {
     { provide: MatPaginatorIntl, useClass: PaginatorIntl },
     // [ng-scaffold] Step 3: replace the router's default title strategy (route title only).
     { provide: TitleStrategy, useExisting: PageTitleStrategy },
+    // [ng-scaffold] Step 4: base URL, Accept-Language, bearer token, envelope unwrapping, error
+    // toasts/pages and dev logging, in that order (core/http/interceptors.ts).
+    provideHttpClient(withInterceptors(httpInterceptors)),
     provideRouter(routes),
   ],
 };

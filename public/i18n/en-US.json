@@ -14,5 +14,10 @@
   "close": "Close",
   "edit": "Edit",
   "delete": "Delete",
-  "confirm_delete": "Confirm delete?"
+  "confirm_delete": "Confirm delete?",
+  "http": {
+    "error": "Request failed ({{status}})",
+    "network_error": "Cannot reach the server. Check your connection.",
+    "unauthorized": "Your session has ended. Please sign in again."
+  }
 }

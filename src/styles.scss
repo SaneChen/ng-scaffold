@@ -18,6 +18,8 @@
 @use 'styles/grid';
 // [ng-scaffold] Step 6: `bg-<palette>-<tone>` / `text-<palette>-<tone>` from the M3 palettes.
 @use 'styles/colors';
+// [ng-scaffold] Step 7: third-party skins on M3 tokens (toasts of @ngxpert/hot-toast).
+@use 'styles/plugins';
 
 html {
   height: 100%;

@@ -1278,6 +1278,13 @@
     "@napi-rs/nice-win32-ia32-msvc" "1.1.1"
     "@napi-rs/nice-win32-x64-msvc" "1.1.1"
 
+"@ngneat/overview@^8.1.0":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@ngneat/overview/-/overview-8.1.0.tgz#4493772c5dd8af1612ae6a6945d0795f7ddfd491"
+  integrity sha512-AX1Q8g7gH8S571TIYVGQ/qORF6MkbPR0RvlYu9OoRg/awOmJWKUO5s6+w9hKlAHt9CTPwXgoNwh3gRXAJAF+Mg==
+  dependencies:
+    tslib "^2.0.0"
+
 "@ngx-translate/core@^18.0.0":
   version "18.0.0"
   resolved "https://registry.yarnpkg.com/@ngx-translate/core/-/core-18.0.0.tgz#55b0bad702b110d5fcf8c50a6779e6102fdb523c"
@@ -1289,6 +1296,13 @@
   version "18.0.0"
   resolved "https://registry.yarnpkg.com/@ngx-translate/http-loader/-/http-loader-18.0.0.tgz#3ab2c3d6db0ab0a74bba15ff6e568ea02f4ae500"
   integrity sha512-p6QpNcU3rkCYjHbKVIadcYtml/Njpr0aLp8neJ4uJWQ4Xm9f09bIePhOjdjAFHupTptKqKrG1J2gSi3RSwgYeA==
+  dependencies:
+    tslib "^2.3.0"
+
+"@ngxpert/hot-toast@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@ngxpert/hot-toast/-/hot-toast-7.0.0.tgz#21d3f47f8b57abf9214b242e668b8c9de6fb49a3"
+  integrity sha512-ZRcInI8pNl+UWD3Gfu5m3CsDZasWFhP1WwOmD4iPgybVuezsKvvTdbd08PwWXYZCA2vNgaFib4yVFogHwXon6Q==
   dependencies:
     tslib "^2.3.0"
 
@@ -4146,7 +4160,7 @@ ts-api-utils@^2.1.0, ts-api-utils@^2.5.0:
   resolved "https://registry.yarnpkg.com/ts-api-utils/-/ts-api-utils-2.5.0.tgz#4acd4a155e22734990a5ed1fe9e97f113bcb37c1"
   integrity sha512-OJ/ibxhPlqrMM0UiNHJ/0CKQkoKF243/AEmplt3qpRgkW8VG7IfOS41h7V8TjITqdByHzrjcS/2si+y4lIh8NA==
 
-tslib@^2.1.0, tslib@^2.3.0:
+tslib@^2.0.0, tslib@^2.1.0, tslib@^2.3.0:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==

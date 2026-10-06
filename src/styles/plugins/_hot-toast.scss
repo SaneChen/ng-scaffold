@@ -1,0 +1,46 @@
+// Toasts of @ngxpert/hot-toast in the colors of the Material 3 theme.
+
+// How this file was built:
+//   1. Created by hand: `ng add @ngxpert/hot-toast` 7.0.0 fails before changing anything
+//      ("exports is not defined in ES module scope"), so its styles step is done here by hand. Its
+//      other step, `provideHotToastConfig()`, is not needed: the global config is optional, and
+//      `Toaster` (core/toast) loads the library on demand.
+//   2. The default toast theme (`.hot-toast-theme-toast`) takes the colors, shape and elevation of
+//      a Material 3 snackbar from system tokens, with ng-matero's compact spacing. The library's
+//      own "material" theme hard-codes M2 hex colors and has no dark variant.
+
+// Why: system tokens follow the light/dark scheme chosen by SettingsStore (_themes.scss).
+
+@use '@ngxpert/hot-toast/styles';
+
+.hot-toast-theme-toast {
+  --hot-toast-bg: var(--mat-sys-inverse-surface);
+  --hot-toast-color: var(--mat-sys-inverse-on-surface);
+  --hot-toast-border-radius: var(--mat-sys-corner-extra-small);
+  --hot-toast-shadow: var(--mat-sys-level3);
+  --hot-toast-padding: 6px 10px;
+  --hot-toast-line: 1.25;
+  --hot-toast-message-margin: 4px 8px;
+  --hot-toast-icon-padding-top: 4px;
+}
+
+// The library's close button is a black SVG at half opacity, invisible on the inverse surface:
+// draw the same cross with a masked pseudo-element in the toast's text color, with a 24px target
+// (WCAG 2.5.8) and a visible focus ring (the library removes the outline).
+.hot-toast-theme-toast .hot-toast-close-btn {
+  --hot-toast-close-btn-width: 16px;
+  --hot-toast-close-btn-height: 16px;
+  --hot-toast-close-btn-padding: 4px;
+  --hot-toast-close-btn-opacity: 1;
+  --hot-toast-close-btn-box-shadow: none;
+  --hot-toast-close-btn-outline: 2px solid var(--mat-sys-inverse-primary);
+  --hot-toast-close-btn-background-image: none;
+
+  &::before {
+    flex: 1;
+    content: '';
+    background-color: var(--mat-sys-inverse-on-surface);
+    mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e")
+      center / 10px no-repeat;
+  }
+}

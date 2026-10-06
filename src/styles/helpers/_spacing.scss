@@ -1,0 +1,117 @@
+// Margin, padding and gap. `l`/`r` are the inline start/end sides (mirrored under dir="rtl"),
+// `x`/`y` the inline/block axes.
+
+@use 'variables' as v;
+
+$utilities: (
+  'margin': (
+    property: margin,
+    class: m,
+    values: v.$margins,
+  ),
+  'margin-x': (
+    property: margin-inline,
+    class: m-x,
+    values: v.$margins,
+  ),
+  'margin-y': (
+    property: margin-block,
+    class: m-y,
+    values: v.$margins,
+  ),
+  'margin-top': (
+    property: margin-block-start,
+    class: m-t,
+    values: v.$margins,
+  ),
+  'margin-right': (
+    property: margin-inline-end,
+    class: m-r,
+    values: v.$margins,
+  ),
+  'margin-bottom': (
+    property: margin-block-end,
+    class: m-b,
+    values: v.$margins,
+  ),
+  'margin-left': (
+    property: margin-inline-start,
+    class: m-l,
+    values: v.$margins,
+  ),
+  'negative-margin': (
+    property: margin,
+    class: m,
+    values: v.$negative-spacers,
+  ),
+  'negative-margin-x': (
+    property: margin-inline,
+    class: m-x,
+    values: v.$negative-spacers,
+  ),
+  'negative-margin-y': (
+    property: margin-block,
+    class: m-y,
+    values: v.$negative-spacers,
+  ),
+  'negative-margin-top': (
+    property: margin-block-start,
+    class: m-t,
+    values: v.$negative-spacers,
+  ),
+  'negative-margin-right': (
+    property: margin-inline-end,
+    class: m-r,
+    values: v.$negative-spacers,
+  ),
+  'negative-margin-bottom': (
+    property: margin-block-end,
+    class: m-b,
+    values: v.$negative-spacers,
+  ),
+  'negative-margin-left': (
+    property: margin-inline-start,
+    class: m-l,
+    values: v.$negative-spacers,
+  ),
+  'padding': (
+    property: padding,
+    class: p,
+    values: v.$spacers,
+  ),
+  'padding-x': (
+    property: padding-inline,
+    class: p-x,
+    values: v.$spacers,
+  ),
+  'padding-y': (
+    property: padding-block,
+    class: p-y,
+    values: v.$spacers,
+  ),
+  'padding-top': (
+    property: padding-block-start,
+    class: p-t,
+    values: v.$spacers,
+  ),
+  'padding-right': (
+    property: padding-inline-end,
+    class: p-r,
+    values: v.$spacers,
+  ),
+  'padding-bottom': (
+    property: padding-block-end,
+    class: p-b,
+    values: v.$spacers,
+  ),
+  'padding-left': (
+    property: padding-inline-start,
+    class: p-l,
+    values: v.$spacers,
+  ),
+  'gap': (
+    property: gap,
+    class: gap,
+    values: v.$spacers,
+  ),
+);

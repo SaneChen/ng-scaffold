@@ -1,0 +1,68 @@
+// Turns the utility maps into classes: `.<class>-<key> { <property>: <value> }`, then the
+// responsive variants `.<class>-<infix>-<key>` inside `min-width` queries (mobile first, so a
+// wider breakpoint overrides a narrower one by source order).
+
+// How this file was built:
+//   1. Created by hand, modelled on ng-matero's helpers/_api.scss (itself after Bootstrap's
+//      utility API): a utility is a map of property, class prefix and values.
+//   2. Added the `responsive` flag and the breakpoint loop, which ng-matero did not have, and the
+//      `$important` switch of variables.scss.
+
+// Why: the families only declare data, so adding a scale or a class is a one-line change and
+// every class is written the same way.
+
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use '../breakpoints';
+@use 'variables' as v;
+
+// Merges the utility maps of every family into one.
+@function collect($maps...) {
+  $result: ();
+
+  @each $map in $maps {
+    $result: map.merge($result, $map);
+  }
+
+  @return $result;
+}
+
+// A utility is `(property: <one or more properties>, class: <prefix>, values: <list or map>,
+// responsive: <bool, default false>)`; a list of values uses each value as its own key.
+@function -values($utility) {
+  $values: map.get($utility, values);
+
+  @if meta.type-of($values) == 'map' {
+    @return $values;
+  }
+
+  @return list.zip($values, $values);
+}
+
+@mixin -rules($utilities, $infix: '') {
+  @each $name, $utility in $utilities {
+    @if $infix == '' or map.get($utility, responsive) == true {
+      $prefix: map.get($utility, class);
+      $prefix: if(sass($prefix == ''): ''; else: '#{$prefix}-');
+
+      @each $key, $value in -values($utility) {
+        .#{$prefix}#{$infix}#{$key} {
+          @each $property in map.get($utility, property) {
+            #{$property}: $value if(sass(v.$important): !important; else: null);
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin generate($utilities) {
+  @include -rules($utilities);
+
+  @each $infix, $width in breakpoints.$breakpoints {
+    @include breakpoints.up($infix) {
+      @include -rules($utilities, '#{$infix}-');
+    }
+  }
+}

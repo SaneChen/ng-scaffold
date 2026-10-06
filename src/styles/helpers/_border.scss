@@ -1,0 +1,39 @@
+// Borders in the theme's divider color (`b-*`), or only their width / style (`border-*`).
+// `l`/`r` are the inline start/end sides, `x`/`y` the inline/block axes.
+
+@use 'sass:map';
+@use 'variables' as v;
+
+$sides: (
+  '': border,
+  '-t': border-block-start,
+  '-b': border-block-end,
+  '-l': border-inline-start,
+  '-r': border-inline-end,
+  '-y': border-block,
+  '-x': border-inline,
+);
+$utilities: ();
+
+@each $suffix, $property in $sides {
+  $utilities: map.merge(
+    $utilities,
+    (
+      'border#{$suffix}': (
+          property: $property,
+          class: 'b#{$suffix}',
+          values: v.$borders,
+        ),
+      'border#{$suffix}-width': (
+          property: '#{$property}-width',
+          class: 'border#{$suffix}',
+          values: v.$border-widths,
+        ),
+      'border#{$suffix}-style': (
+          property: '#{$property}-style',
+          class: 'border#{$suffix}',
+          values: v.$border-styles,
+        ),
+    )
+  );
+}

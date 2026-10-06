@@ -12,6 +12,8 @@
 @use 'styles/fonts';
 // [ng-scaffold] Step 3: minimal resets on M3 tokens (box-sizing, links, focus ring, reduced motion).
 @use 'styles/reboot';
+// [ng-scaffold] Step 4: utility classes with ng-matero's names (`m-16`, `d-flex`, `text-center`).
+@use 'styles/helpers';
 
 html {
   height: 100%;

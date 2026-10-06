@@ -1,0 +1,26 @@
+// Responsive breakpoints shared by the utility classes (helpers/) and the CSS grid (grid/).
+
+// How this file was built:
+//   1. Created by hand (Angular CLI has no generator for global Sass partials).
+//   2. The widths are ng-matero's (flex-layout's): small 600px, medium 960px, large 1280px,
+//      xlarge 1920px, with the same class infixes (`sm`, `md`, `lg`, `xl`); `up()` is the
+//      mobile-first `min-width` query that the responsive variants are written in.
+
+// Why: one map keeps `.d-md-none` and `.col-md-6` switching at the same width.
+
+@use 'sass:map';
+
+// Class infix → minimum viewport width. Variants without an infix apply from 0px.
+$breakpoints: (
+  sm: 600px,
+  md: 960px,
+  lg: 1280px,
+  xl: 1920px,
+) !default;
+
+// Applies `@content` from the given breakpoint upwards.
+@mixin up($name) {
+  @media (width >= map.get($breakpoints, $name)) {
+    @content;
+  }
+}

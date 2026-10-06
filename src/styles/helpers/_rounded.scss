@@ -1,0 +1,51 @@
+// Border radius. Corners and sides are logical: `l` is the inline start, `r` the inline end.
+
+@use 'variables' as v;
+
+$utilities: (
+  'border-radius': (
+    property: border-radius,
+    class: r,
+    values: v.$radius,
+  ),
+  'border-top-left-radius': (
+    property: border-start-start-radius,
+    class: r-t-l,
+    values: v.$radius,
+  ),
+  'border-top-right-radius': (
+    property: border-start-end-radius,
+    class: r-t-r,
+    values: v.$radius,
+  ),
+  'border-bottom-right-radius': (
+    property: border-end-end-radius,
+    class: r-b-r,
+    values: v.$radius,
+  ),
+  'border-bottom-left-radius': (
+    property: border-end-start-radius,
+    class: r-b-l,
+    values: v.$radius,
+  ),
+  'border-top-radius': (
+    property: border-start-start-radius border-start-end-radius,
+    class: r-t,
+    values: v.$radius,
+  ),
+  'border-bottom-radius': (
+    property: border-end-start-radius border-end-end-radius,
+    class: r-b,
+    values: v.$radius,
+  ),
+  'border-left-radius': (
+    property: border-start-start-radius border-end-start-radius,
+    class: r-l,
+    values: v.$radius,
+  ),
+  'border-right-radius': (
+    property: border-start-end-radius border-end-end-radius,
+    class: r-r,
+    values: v.$radius,
+  ),
+);

@@ -1,0 +1,41 @@
+// Utility classes compatible with ng-matero's names (`m-16`, `p-x-8`, `d-flex`,
+// `justify-content-between`, `text-center`, `w-full`, …).
+
+// How this file was built:
+//   1. Created by hand (Angular CLI has no generator for global Sass partials) and loaded from
+//      src/styles.scss with `@use 'styles/helpers';`.
+//   2. One map per family (spacing, display, flexbox, sizing, border, rounded, text, layout) with
+//      ng-matero's class prefixes and scales (variables.scss); _api.scss emits the classes.
+//   3. Physical sides became logical properties (`m-l-8` → `margin-inline-start`), so the
+//      utilities mirror under dir="rtl" together with the rest of the layout. The exception is
+//      `object-left`/`object-right` (`object-position` has no logical keywords).
+//   4. Display, flex direction/wrap/alignment and text alignment have responsive variants at the
+//      breakpoints of ../breakpoints (`d-none d-md-block`); spacing has none, which keeps the
+//      stylesheet small.
+//   5. Border colors are the theme's `--mat-sys-outline-variant`, so they follow dark mode.
+
+// Why: page templates (and those ported from ng-matero) lay out with these classes instead of
+// one-off component styles.
+
+@use 'api';
+@use 'spacing';
+@use 'display';
+@use 'flexbox';
+@use 'sizing';
+@use 'border';
+@use 'rounded';
+@use 'text';
+@use 'layout';
+
+@include api.generate(
+  api.collect(
+    spacing.$utilities,
+    display.$utilities,
+    flexbox.$utilities,
+    sizing.$utilities,
+    border.$utilities,
+    rounded.$utilities,
+    text.$utilities,
+    layout.$utilities
+  )
+);

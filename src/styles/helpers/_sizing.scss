@@ -1,0 +1,16 @@
+// Width and height in percent of the containing block.
+
+@use 'variables' as v;
+
+$utilities: (
+  'width': (
+    property: width,
+    class: w,
+    values: v.$sizes,
+  ),
+  'height': (
+    property: height,
+    class: h,
+    values: v.$sizes,
+  ),
+);

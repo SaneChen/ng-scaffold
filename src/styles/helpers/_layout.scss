@@ -1,0 +1,64 @@
+// Position, overflow, vertical alignment, object fit/position and interaction.
+
+$utilities: (
+  'position': (
+    property: position,
+    class: '',
+    values: static fixed absolute relative sticky,
+  ),
+  'overflow': (
+    property: overflow,
+    class: overflow,
+    values: auto hidden visible scroll,
+  ),
+  'overflow-x': (
+    property: overflow-x,
+    class: overflow-x,
+    values: auto hidden visible scroll,
+  ),
+  'overflow-y': (
+    property: overflow-y,
+    class: overflow-y,
+    values: auto hidden visible scroll,
+  ),
+  'vertical-align': (
+    property: vertical-align,
+    class: align,
+    values: baseline top middle bottom text-bottom text-top,
+  ),
+  'object-fit': (
+    property: object-fit,
+    class: object,
+    values: contain cover fill none scale-down,
+  ),
+  'object-position': (
+    property: object-position,
+    class: object,
+    values: (
+      top: top,
+      bottom: bottom,
+      center: center,
+      left: left,
+      left-top: left top,
+      left-bottom: left bottom,
+      right: right,
+      right-top: right top,
+      right-bottom: right bottom,
+    ),
+  ),
+  'cursor': (
+    property: cursor,
+    class: cursor,
+    values: default pointer text move copy not-allowed,
+  ),
+  'user-select': (
+    property: user-select,
+    class: select,
+    values: all auto none,
+  ),
+  'pointer-events': (
+    property: pointer-events,
+    class: pointer-events,
+    values: none auto,
+  ),
+);

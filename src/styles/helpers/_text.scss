@@ -1,0 +1,71 @@
+// Typography. `text-left`/`text-right` align to the inline start/end (mirrored under RTL);
+// alignment has responsive variants (`text-center text-md-left`).
+
+@use 'variables' as v;
+
+$utilities: (
+  'font-size': (
+    property: font-size,
+    class: f-s,
+    values: v.$font-sizes,
+  ),
+  'font-weight': (
+    property: font-weight,
+    class: f-w,
+    values: v.$font-weights,
+  ),
+  'font-style': (
+    property: font-style,
+    class: font,
+    values: italic normal,
+  ),
+  'text-align': (
+    property: text-align,
+    class: text,
+    values: (
+      center: center,
+      left: start,
+      right: end,
+      justify: justify,
+    ),
+    responsive: true,
+  ),
+  'text-decoration': (
+    property: text-decoration,
+    class: text,
+    values: none underline line-through,
+  ),
+  'text-transform': (
+    property: text-transform,
+    class: text,
+    values: capitalize uppercase lowercase,
+  ),
+  'white-space': (
+    property: white-space,
+    class: text,
+    values: (
+      wrap: normal,
+      nowrap: nowrap,
+    ),
+  ),
+  'word-wrap': (
+    property: overflow-wrap,
+    class: text,
+    values: (
+      break: anywhere,
+    ),
+  ),
+  'text-overflow': (
+    property: text-overflow,
+    class: text,
+    values: ellipsis,
+  ),
+  'text-color': (
+    property: color,
+    class: text,
+    values: (
+      reset: inherit,
+      current: currentcolor,
+    ),
+  ),
+);

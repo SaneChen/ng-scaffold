@@ -1,0 +1,38 @@
+# Continuous integration: every push and pull request must lint, test and build.
+# Node 24 satisfies the Angular CLI 22.2 engine range (^22.22.3 || ^24.15.0 || >=26.0.0).
+name: CI
+
+on:
+  push:
+    branches: [main, ng-matero]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint TypeScript and templates
+        run: yarn lint
+
+      - name: Lint styles
+        run: yarn lint:scss
+
+      - name: Unit tests
+        run: yarn test --watch=false
+
+      - name: Production build
+        run: yarn build

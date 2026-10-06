@@ -5,8 +5,7 @@ describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   it('should create the app', () => {
@@ -19,6 +18,9 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, ng-scaffold');
+    // [ng-scaffold] Step 1: the `<h1>Hello, ng-scaffold</h1>` asserted here belonged to the deleted
+    // welcome placeholder, so the template is checked for the router outlet instead. A later step
+    // (page titles) turns this test back into a real "title" assertion.
+    expect(compiled.querySelector('router-outlet')).not.toBeNull();
   });
 });

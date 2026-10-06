@@ -16,3 +16,4 @@ export * from './i18n/languages';
 export * from './i18n/language-store';
 export * from './i18n/paginator-intl';
 export * from './i18n/provide-i18n';
+export * from './preloader/preloader';

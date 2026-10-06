@@ -12,6 +12,10 @@
 // all Material components and every style built on system tokens, and no second theme is
 // compiled. `light dark` lets the browser follow the operating system live, without JavaScript.
 
+// Keep in sync: the inline critical <style> of src/index.html repeats these rules, because the
+// production build cannot inline them (Beasties keeps only rules that match the HTML at build
+// time, and no theme-* class exists then).
+
 html.theme-dark {
   // The root element's scheme also styles the viewport scrollbars and the page canvas.
   color-scheme: dark;

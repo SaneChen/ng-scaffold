@@ -16,8 +16,134 @@
       href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined"
       rel="stylesheet"
     />
+    <!--
+      [ng-scaffold] Step 1: apply the stored theme before the first paint. SettingsStore keeps the
+      user's choice in localStorage ("ng-scaffold-settings") and mirrors it onto <html> as the
+      theme-dark / theme-auto class, but only once the application has started. This script sets
+      the same class right away, so the loader below and the first frames of the application use
+      the chosen color scheme instead of flashing the opposite one. Without a valid stored choice
+      it assumes the default theme, 'auto': keep that in sync with provideAppSettings() if an
+      application changes the default. Under a Content-Security-Policy, inline scripts need a hash
+      or nonce; the `security.autoCsp` build option of angular.json adds the hash automatically.
+    -->
+    <script>
+      (function () {
+        let theme = 'auto';
+        try {
+          const stored = JSON.parse(localStorage.getItem('ng-scaffold-settings') ?? '{}');
+          if (['light', 'dark', 'auto'].includes(stored?.theme)) {
+            theme = stored.theme;
+          }
+        } catch {
+          // Storage blocked or unreadable: keep the default theme.
+        }
+        if (theme !== 'light') {
+          document.documentElement.classList.add('theme-' + theme);
+        }
+      })();
+    </script>
+    <!--
+      [ng-scaffold] Step 2: critical styles of the start-up loader (#globalLoader below). They are
+      inline so the loader paints before the stylesheet and scripts download. Colors repeat the
+      light/dark values of --mat-sys-surface, --mat-sys-on-surface, --mat-sys-primary and
+      --mat-sys-outline-variant, which do not exist yet at this point, and are chosen the same way
+      as those tokens: `light-dark()` follows the loader's `color-scheme`, which the theme class of
+      Step 1 sets (light by default, dark for theme-dark, the operating system's for theme-auto).
+    -->
+    <style>
+      .global-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+        justify-content: center;
+        font:
+          400 1rem / 1.5 Roboto,
+          system-ui,
+          sans-serif;
+        color: light-dark(#1a1b1f, #e3e2e6);
+        color-scheme: light;
+        background-color: light-dark(#faf9fd, #121316);
+        opacity: 1;
+        transition: opacity 300ms ease-out;
+      }
+
+      html.theme-dark .global-loader {
+        color-scheme: dark;
+      }
+
+      html.theme-auto .global-loader {
+        color-scheme: light dark;
+      }
+
+      .global-loader-fade-out {
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      .global-loader-spinner {
+        box-sizing: border-box;
+        width: 48px;
+        height: 48px;
+        border: 4px solid light-dark(#c4c6d0, #44474e);
+        border-top-color: light-dark(#005cbb, #abc7ff);
+        border-radius: 50%;
+        animation: global-loader-spin 1s linear infinite;
+      }
+
+      .global-loader-text {
+        margin: 0;
+        letter-spacing: 0.03em;
+      }
+
+      @keyframes global-loader-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .global-loader {
+          transition: none;
+        }
+
+        .global-loader-spinner {
+          animation: none;
+        }
+      }
+
+      /*
+        [ng-scaffold] The color scheme of the page itself, repeated from src/styles/_themes.scss
+        (keep both in sync). The production build inlines the critical rules of styles.css and
+        loads the rest without blocking rendering, but Beasties inlines only rules that match the
+        HTML at build time, and no theme-* class exists before the Step 1 script runs. Without
+        this copy, a dark page would stay light from the moment the loader is removed until the
+        stylesheet arrives. These selectors outrank the inlined `body { color-scheme: light }`.
+      */
+      html.theme-dark,
+      html.theme-dark body {
+        color-scheme: dark;
+      }
+
+      html.theme-auto,
+      html.theme-auto body {
+        color-scheme: light dark;
+      }
+    </style>
   </head>
   <body>
     <app-root></app-root>
+    <!--
+      [ng-scaffold] Step 3: start-up loader shown until the first page has rendered; Preloader
+      (src/app/core/preloader) fades it out and removes it. role="status" announces the visible
+      text to screen readers without moving focus.
+    -->
+    <div id="globalLoader" class="global-loader" role="status" aria-live="polite">
+      <div class="global-loader-spinner" aria-hidden="true"></div>
+      <p class="global-loader-text">Loading…</p>
+    </div>
   </body>
 </html>

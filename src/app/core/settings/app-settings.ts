@@ -44,6 +44,7 @@ export interface AppSettings {
 export const defaultAppSettings: Readonly<AppSettings> = {
   navPos: 'side',
   dir: 'ltr',
+  // The inline theme script of src/index.html assumes this default: keep both in sync.
   theme: 'auto',
   showHeader: true,
   headerPos: 'fixed',

@@ -1,5 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+// [ng-scaffold] Step 1: hide the start-up loader of index.html once the first page has rendered.
+import { inject } from '@angular/core';
+import { Preloader } from '@core';
 
 @Component({
   imports: [RouterOutlet],
@@ -9,4 +12,10 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('ng-scaffold');
+
+  // [ng-scaffold] Step 1: pages are lazy loaded, so App's own first render is an empty shell. The
+  // loader fades out once the router's first navigation has settled and its page has rendered.
+  constructor() {
+    inject(Preloader).hideAfterFirstNavigation();
+  }
 }

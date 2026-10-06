@@ -59,31 +59,33 @@
 
 ### 阶段 0 · 规划
 
-- [ ] `docs: add roadmap and engineering conventions for the ng-matero branch`
+- [x] `docs: add roadmap and engineering conventions for the ng-matero branch` — `49bf2b7`
+- [x] `docs: add architecture reference`（`docs/ARCHITECTURE.md`） — `fb039ca`
 
 ### 阶段 1 · 工具链（对 ng new 的改动最小化）
 
-- [ ] `chore: switch package manager to yarn`（`ng config cli.packageManager yarn`、`yarn.lock`）
-- [ ] `chore(prettier): align formatting options with ng-matero`（`.prettierrc` 只追加键、`.prettierignore`）
-- [ ] `chore(lint): add angular-eslint via ng add`（再增量追加规则）
-- [ ] `chore(stylelint): add stylelint for scss`
-- [ ] `chore(git): add husky, lint-staged and commitlint`
-- [ ] `chore(vscode): recommend workspace extensions`（只展开并追加 `recommendations`）
-- [ ] `ci: add GitHub Actions workflow (lint, test, build)`
+- [x] `chore: switch package manager to yarn`（`ng config cli.packageManager yarn`、`yarn.lock`） — `c913091`
+- [x] `chore(prettier): align formatting options with ng-matero`（`.prettierrc` 只追加键、`.prettierignore`） — `04e7c51`
+- [x] `chore(lint): add angular-eslint via ng add`（再增量追加规则） — `28a46b0`、`4feba0d`
+- [x] `chore(stylelint): add stylelint for scss` — `5df3712`、`0a6b5cf`
+- [x] `chore(git): add husky, lint-staged and commitlint` — `03e6231`
+- [x] `chore(vscode): recommend workspace extensions`（只展开并追加 `recommendations`） — `0909109`
+- [x] `ci: add GitHub Actions workflow (lint, test, build)` — `d22a451`
 
 ### 阶段 2 · 基础设施
 
-- [ ] `feat(material): add Angular Material via ng add`
-- [ ] `chore: generate environments via ng g environments`
-- [ ] `build: add tsconfig path aliases (@core, @shared, @theme, @env)`
-- [ ] `feat(i18n): add ngx-translate with en-US, zh-CN, zh-TW`
+- [x] `feat(material): add Angular Material via ng add` — `f61072c`
+- [x] `chore: generate environments via ng g environments` — `60423b9`
+- [x] `build: add tsconfig path aliases (@core, @shared, @theme, @env)` — `3a11238`
+- [x] `feat(i18n): add ngx-translate with en-US, zh-CN, zh-TW` — `7c344aa`
 - [ ] `feat(styles): add reboot, layout helpers, css grid and color utilities on M3 tokens`
 
 ### 阶段 3 · core（全部 signal 化）
 
-- [ ] 应用设置：`Settings`（signal 状态 + `effect` 同步 `<html>` 的 dir/class/lang + 本地持久化）
-- [ ] 启动加载器：`Preloader`（`afterNextRender` 隐藏 index.html 中的加载层）
-- [ ] 页面标题：`PageTitleStrategy`（`title` signal 作为应用名，页面标题为「页面 · 应用名」）
+- [x] 应用外壳：按 `app.html` 占位注释删除欢迎页，保留 `<router-outlet />` — `c0acee3`
+- [x] 应用设置：`Settings`（signal 状态 + `effect` 同步 `<html>` 的 dir/class/lang + 本地持久化） — `0ee3e1a`（`LocalStorage`）、`ed743ef`（`SettingsStore`、`AppDirectionality`）、`7c344aa`（`LanguageStore` 同步 lang）
+- [x] 启动加载器：`Preloader`（首次导航完成且页面渲染后，在 `afterNextRender` 中移除 index.html 的加载层；内联脚本提前应用已保存的主题） — `8d5054c`
+- [x] 页面标题：`PageTitleStrategy`（`title` signal 作为应用名，页面标题为「页面 · 应用名」） — `c6b8e0c`
 - [ ] 认证：`Token`/`TokenStore`/`AuthStore`/`LoginApi` + 函数式 `authGuard`
 - [ ] HTTP 拦截器（函数式）：base-url、api、token、error、settings（Accept-Language）、logging、noop
 - [ ] 演示后端：函数式 mock 拦截器（登录、用户、菜单、权限）
@@ -121,6 +123,9 @@
 ### 阶段 7 · `ng add ng-scaffold`
 
 - [ ] `schematics/`：`ng-add`（只做插入式修改）、`ng g ng-scaffold:module|page`、`ng-update`
+- [ ] 非默认主题：`ng-add` 插入 `provideAppSettings({ theme })` 时，同步改写 `src/index.html` 内联主题脚本中的
+      `let theme = 'auto'`（该脚本在应用启动前应用主题；`SettingsStore` 只持久化与默认值不同的设置，
+      新默认值不会出现在 `localStorage` 中，脚本只能从这一行得知）；golden 测试覆盖非默认主题的回答
 - [ ] 打包脚本：直接从仓库源码收集文件（演示区域用标记排除），无手工模板
 - [ ] golden 测试：临时目录 `ng new ng-scaffold` → `ng add <本地 tarball>` → 与仓库比对 → `ng build/test/lint`
 - [ ] 多项目工作区测试（`--project`）

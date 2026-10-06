@@ -9,3 +9,6 @@
  * itself and the dependency graph stays acyclic (see docs/ARCHITECTURE.md §1).
  */
 export * from './storage/local-storage';
+export * from './settings/app-settings';
+export * from './settings/settings-store';
+export * from './settings/app-directionality';

@@ -1,0 +1,30 @@
+// Light, dark and system color schemes for the Material 3 theme in src/styles.scss.
+
+// How this file was built:
+//   1. Created by hand (Angular CLI has no generator for global Sass partials) and loaded from
+//      src/styles.scss with `@use 'styles/themes';`.
+//   2. Added one rule per theme class that `SettingsStore` toggles on <html>:
+//      `theme-dark` (theme: 'dark') and `theme-auto` (theme: 'auto'); 'light' needs no class.
+
+// Why: `mat.theme()` defines every `--mat-sys-*` color as `light-dark(<light>, <dark>)`, so the
+// active palette is chosen by the `color-scheme` of the element that uses it. `ng add
+// @angular/material` set `color-scheme: light` on <body>; overriding that one property switches
+// all Material components and every style built on system tokens, and no second theme is
+// compiled. `light dark` lets the browser follow the operating system live, without JavaScript.
+
+html.theme-dark {
+  // The root element's scheme also styles the viewport scrollbars and the page canvas.
+  color-scheme: dark;
+
+  body {
+    color-scheme: dark;
+  }
+}
+
+html.theme-auto {
+  color-scheme: light dark;
+
+  body {
+    color-scheme: light dark;
+  }
+}

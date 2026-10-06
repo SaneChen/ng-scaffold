@@ -4,6 +4,9 @@
 // Learn more about theming and how to use it for your application's
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
+// [ng-scaffold] Step 1: dark and system color schemes driven by SettingsStore (`theme-*` classes
+// on <html>). Sass requires `@use` rules before any other rule, hence their place here.
+@use 'styles/themes';
 
 html {
   height: 100%;

@@ -35,3 +35,5 @@ export * from './http/logging-interceptor';
 export * from './http/settings-interceptor';
 export * from './http/token-interceptor';
 export * from './http/interceptors';
+export * from './mock/mock-backend';
+export * from './mock/mock-api-interceptor';

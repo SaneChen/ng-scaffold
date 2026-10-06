@@ -11,9 +11,14 @@
  *      of every inner step.
  *   3. `apiInterceptor` unwraps envelopes of successful responses; `errorInterceptor`, inside it,
  *      reports HTTP failures first.
- *   4. `loggingInterceptor` last, closest to the network, so it times the request itself.
+ *   4. `loggingInterceptor` closest to the network, so it times the request itself.
+ *   5. `mockApiInterceptor` (only while `environment.mockApi` is true) stands in for the server:
+ *      it must see the final URL and the `Authorization` header, and its answers must pass all
+ *      the interceptors above like real ones.
  */
 import { HttpInterceptorFn } from '@angular/common/http';
+import { environment } from '@env/environment';
+import { mockApiInterceptor } from '../mock/mock-api-interceptor';
 import { apiInterceptor } from './api-interceptor';
 import { baseUrlInterceptor } from './base-url-interceptor';
 import { errorInterceptor } from './error-interceptor';
@@ -28,4 +33,5 @@ export const httpInterceptors: HttpInterceptorFn[] = [
   apiInterceptor,
   errorInterceptor,
   loggingInterceptor,
+  ...(environment.mockApi ? [mockApiInterceptor] : []),
 ];

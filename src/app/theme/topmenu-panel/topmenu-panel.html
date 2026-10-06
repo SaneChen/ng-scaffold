@@ -1,0 +1,48 @@
+<mat-menu>
+  @for (item of items(); track item.name) {
+    @switch (item.type) {
+      @case ('link') {
+        <a
+          mat-menu-item
+          [routerLink]="route(item)"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+        >
+          {{ item.name | translate }}
+        </a>
+      }
+      @case ('sub') {
+        <button
+          mat-menu-item
+          type="button"
+          [class.active]="trail().has(item.name)"
+          [matMenuTriggerFor]="child.menu()"
+        >
+          {{ item.name | translate }}
+        </button>
+        <app-topmenu-panel
+          #child
+          [items]="item.children ?? []"
+          [parents]="parents().concat(item.route)"
+          [trail]="trail()"
+        />
+      }
+      @default {
+        <a
+          mat-menu-item
+          [href]="item.route"
+          [attr.target]="item.type === 'extTabLink' ? '_blank' : null"
+          [attr.rel]="item.type === 'extTabLink' ? 'noopener' : null"
+        >
+          @if (item.type === 'extTabLink') {
+            <mat-icon aria-hidden="true">open_in_new</mat-icon>
+          }
+          <span>{{ item.name | translate }}</span>
+          @if (item.type === 'extTabLink') {
+            <span class="cdk-visually-hidden">{{ 'sidebar.new_tab' | translate }}</span>
+          }
+        </a>
+      }
+    }
+  }
+</mat-menu>

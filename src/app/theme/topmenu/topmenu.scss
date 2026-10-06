@@ -1,0 +1,37 @@
+:host {
+  position: sticky;
+  z-index: 1;
+  display: block;
+  padding: 0.5rem;
+  background-color: color-mix(in srgb, var(--mat-sys-surface-container) 80%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+// One row that scrolls sideways when the menu is wider than the screen.
+nav {
+  display: flex;
+  gap: 0.25rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+a,
+button {
+  flex: none;
+}
+
+.active {
+  background-color: var(--mat-sys-primary-container);
+}
+
+.menu-tag {
+  padding: 0.25rem 0.5rem;
+  margin-inline-start: 0.5rem;
+  font: var(--mat-sys-label-small);
+  font-weight: 700;
+  border-radius: var(--mat-sys-corner-extra-small);
+
+  &.badge {
+    border-radius: var(--mat-sys-corner-full);
+  }
+}

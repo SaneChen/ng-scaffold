@@ -1,0 +1,73 @@
+<nav [attr.aria-label]="'sidebar.navigation' | translate">
+  @for (item of menu(); track item.name) {
+    @switch (item.type) {
+      @case ('link') {
+        <a
+          matButton
+          [routerLink]="buildRoute(item.route)"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+        >
+          <mat-icon aria-hidden="true">{{ item.icon }}</mat-icon>
+          <ng-container
+            [ngTemplateOutlet]="label"
+            [ngTemplateOutletContext]="{ $implicit: item }"
+          />
+        </a>
+      }
+      @case ('sub') {
+        <button
+          matButton
+          type="button"
+          [class.active]="trail().has(item.name)"
+          [matMenuTriggerFor]="panel.menu()"
+        >
+          <mat-icon aria-hidden="true">{{ item.icon }}</mat-icon>
+          <ng-container
+            [ngTemplateOutlet]="label"
+            [ngTemplateOutletContext]="{ $implicit: item }"
+          />
+          <mat-icon iconPositionEnd aria-hidden="true">expand_more</mat-icon>
+        </button>
+        <app-topmenu-panel
+          #panel
+          [items]="item.children ?? []"
+          [parents]="[item.route]"
+          [trail]="trail()"
+        />
+      }
+      @default {
+        <a
+          matButton
+          [href]="item.route"
+          [attr.target]="item.type === 'extTabLink' ? '_blank' : null"
+          [attr.rel]="item.type === 'extTabLink' ? 'noopener' : null"
+        >
+          <mat-icon aria-hidden="true">{{ item.icon }}</mat-icon>
+          <ng-container
+            [ngTemplateOutlet]="label"
+            [ngTemplateOutletContext]="{ $implicit: item }"
+          />
+          @if (item.type === 'extTabLink') {
+            <span class="cdk-visually-hidden">{{ 'sidebar.new_tab' | translate }}</span>
+          }
+          <!-- A separate @if: content projection needs the icon as the block's only node. -->
+          @if (item.type === 'extTabLink') {
+            <mat-icon iconPositionEnd aria-hidden="true">open_in_new</mat-icon>
+          }
+        </a>
+      }
+    }
+  }
+</nav>
+
+<!-- Name and tags; the icons stay direct children of the buttons, in Material's icon slots. -->
+<ng-template #label let-item>
+  <span>{{ item.name | translate }}</span>
+  @if (item.label) {
+    <span class="menu-tag" [class]="tagClass(item.label)">{{ item.label.value }}</span>
+  }
+  @if (item.badge) {
+    <span class="menu-tag badge" [class]="tagClass(item.badge)">{{ item.badge.value }}</span>
+  }
+</ng-template>

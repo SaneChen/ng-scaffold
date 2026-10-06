@@ -17,3 +17,5 @@ export * from './header/header';
 export * from './sidemenu/sidemenu';
 export * from './user-panel/user-panel';
 export * from './sidebar/sidebar';
+export * from './topmenu-panel/topmenu-panel';
+export * from './topmenu/topmenu';

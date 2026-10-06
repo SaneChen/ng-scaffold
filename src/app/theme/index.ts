@@ -22,3 +22,5 @@ export * from './topmenu/topmenu';
 export * from './side-sheet/side-sheet';
 export * from './sidebar-notice/sidebar-notice';
 export * from './customizer/customizer';
+export * from './admin-layout/admin-layout';
+export * from './auth-layout/auth-layout';

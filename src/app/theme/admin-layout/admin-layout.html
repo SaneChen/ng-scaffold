@@ -1,0 +1,66 @@
+<button type="button" class="skip-link" (click)="skipToContent()">
+  {{ 'layout.skip_to_content' | translate }}
+</button>
+
+@if (navigating()) {
+  <mat-progress-bar
+    class="progress"
+    mode="indeterminate"
+    [aria-label]="'layout.loading' | translate"
+  />
+}
+
+@if (headerAbove()) {
+  <app-header
+    [showToggle]="sideNav()"
+    [showBranding]="true"
+    [navOpened]="menuExpanded()"
+    [navId]="navId"
+    (toggleNav)="toggleNav()"
+    (openNotices)="openNotices()"
+  />
+}
+
+<mat-sidenav-container class="container" [hasBackdrop]="mobile()">
+  <mat-sidenav
+    class="sidenav"
+    [id]="navId"
+    [mode]="navMode()"
+    [opened]="navOpened()"
+    [disableClose]="!mobile()"
+    [autoFocus]="mobile() ? 'first-tabbable' : false"
+    (closedStart)="onClosedStart()"
+  >
+    <app-sidebar
+      [showHeader]="!headerAbove()"
+      [showToggle]="!mobile()"
+      [showUser]="options().showUserPanel"
+      [collapsed]="collapsed()"
+      (toggleCollapsed)="toggleCollapsed()"
+      (closeNav)="drawerOpened.set(false)"
+    />
+  </mat-sidenav>
+
+  <mat-sidenav-content class="content">
+    @if (headerVisible() && !headerAbove()) {
+      <app-header
+        [showToggle]="sideNav()"
+        [showBranding]="!sideNav()"
+        [navOpened]="menuExpanded()"
+        [navId]="navId"
+        (toggleNav)="toggleNav()"
+        (openNotices)="openNotices()"
+      />
+    }
+
+    @if (!sideNav()) {
+      <app-topmenu />
+    }
+
+    <main #main class="page" tabindex="-1">
+      <router-outlet />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<app-customizer />

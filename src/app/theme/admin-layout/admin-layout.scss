@@ -1,0 +1,104 @@
+// Layout states (host classes): nav-side / nav-top, header-above / header-fixed, collapsed.
+@use '@angular/material' as mat;
+
+:host {
+  --sidenav-width: 15rem;
+  --sidenav-collapsed-width: 4rem;
+  --header-height: 64px;
+
+  @include mat.sidenav-overrides(
+    (
+      container-width: var(--sidenav-width),
+      content-background-color: transparent,
+    )
+  );
+
+  display: block;
+  height: 100%;
+
+  @media (width < 600px) {
+    --header-height: 56px;
+  }
+}
+
+.container {
+  height: 100%;
+}
+
+:host(.header-above) .container {
+  height: calc(100% - var(--header-height));
+}
+
+.sidenav {
+  overflow-x: hidden;
+}
+
+// Collapsed rail: narrow until hovered or focused, then wide over the content.
+:host(.collapsed) {
+  .sidenav {
+    width: var(--sidenav-collapsed-width);
+    transition: width 225ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Keyboard focus only: a mouse click also focuses the clicked item.
+    &:hover,
+    &:has(:focus-visible) {
+      width: var(--sidenav-width);
+    }
+  }
+
+  .content {
+    margin-inline-start: var(--sidenav-collapsed-width);
+  }
+}
+
+:host(.header-fixed) app-header {
+  position: sticky;
+  top: 0;
+}
+
+app-topmenu {
+  top: 0;
+}
+
+:host(.header-fixed) app-topmenu {
+  top: var(--header-height);
+}
+
+.page {
+  position: relative;
+  padding: var(--gutter);
+}
+
+.progress {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 10;
+  // Only navigations that take a while show the bar; quick ones would just flicker.
+  animation: progress-appear 0s 200ms both;
+}
+
+@keyframes progress-appear {
+  from {
+    visibility: hidden;
+  }
+}
+
+// Visible only while focused, as the first stop of the tab order.
+.skip-link {
+  position: fixed;
+  inset-block-start: 0.5rem;
+  inset-inline-start: 0.5rem;
+  z-index: 11;
+  padding: 0.5rem 1rem;
+  font: var(--mat-sys-label-large);
+  color: var(--mat-sys-on-primary);
+  background-color: var(--mat-sys-primary);
+  border: 0;
+  border-radius: var(--mat-sys-corner-small);
+  transform: translateY(-200%);
+
+  &:focus {
+    transform: none;
+  }
+}

@@ -167,5 +167,9 @@
     "direction": "文字方向",
     "ltr": "由左至右",
     "rtl": "由右至左"
+  },
+  "layout": {
+    "skip_to_content": "跳至主要內容",
+    "loading": "正在載入頁面"
   }
 }

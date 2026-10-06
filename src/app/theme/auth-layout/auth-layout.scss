@@ -1,0 +1,26 @@
+:host {
+  position: relative;
+  display: block;
+  min-height: 100%;
+  background-image:
+    radial-gradient(at 97% 21%, hsl(125deg 98% 72% / 30%) 0, transparent 50%),
+    radial-gradient(at 52% 99%, hsl(354deg 98% 61% / 30%) 0, transparent 50%),
+    radial-gradient(at 10% 29%, hsl(256deg 96% 67% / 30%) 0, transparent 50%),
+    radial-gradient(at 97% 96%, hsl(38deg 60% 74% / 30%) 0, transparent 50%),
+    radial-gradient(at 33% 50%, hsl(222deg 67% 73% / 30%) 0, transparent 50%),
+    radial-gradient(at 79% 53%, hsl(343deg 68% 79% / 30%) 0, transparent 50%);
+}
+
+.language {
+  position: absolute;
+  inset-block-start: 0.5rem;
+  inset-inline-end: 0.5rem;
+}
+
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: var(--gutter);
+}

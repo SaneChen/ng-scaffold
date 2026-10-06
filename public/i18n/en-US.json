@@ -167,5 +167,9 @@
     "direction": "Direction",
     "ltr": "Left to right",
     "rtl": "Right to left"
+  },
+  "layout": {
+    "skip_to_content": "Skip to main content",
+    "loading": "Loading the page"
   }
 }

@@ -3,6 +3,9 @@ import { App } from './app';
 // [ng-scaffold] Step 2: App hides the start-up loader after the router's first navigation.
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+// [ng-scaffold] Step 3: App sets the document title through PageTitleStrategy, which translates.
+import { Title } from '@angular/platform-browser';
+import { provideTranslateService } from '@ngx-translate/core';
 
 // [ng-scaffold] Step 2: a lazily loaded page, like every routed page of the application.
 @Component({ template: '<h1>Home</h1>' })
@@ -10,8 +13,13 @@ class HomePage {}
 
 describe('App', () => {
   beforeEach(async () => {
+    // [ng-scaffold] Step 3: start every test with an empty document title, so a title assertion
+    // checks what this test's App did, not what an earlier test left behind.
+    document.title = '';
     await TestBed.configureTestingModule({
       imports: [App],
+      // [ng-scaffold] Step 3: PageTitleStrategy needs a TranslateService (translations not needed).
+      providers: [provideTranslateService()],
     }).compileComponents();
   });
 
@@ -26,9 +34,10 @@ describe('App', () => {
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     // [ng-scaffold] Step 1: the `<h1>Hello, ng-scaffold</h1>` asserted here belonged to the deleted
-    // welcome placeholder, so the template is checked for the router outlet instead. A later step
-    // (page titles) turns this test back into a real "title" assertion.
+    // welcome placeholder, so the template is checked for the router outlet instead.
     expect(compiled.querySelector('router-outlet')).not.toBeNull();
+    // [ng-scaffold] Step 3: App's `title` signal is the application name in the document title.
+    expect(TestBed.inject(Title).getTitle()).toBe('ng-scaffold');
   });
 
   // [ng-scaffold] Step 2: the start-up loader of index.html fades out once the first page has

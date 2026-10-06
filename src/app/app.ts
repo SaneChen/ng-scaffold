@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 // [ng-scaffold] Step 1: hide the start-up loader of index.html once the first page has rendered.
 import { inject } from '@angular/core';
 import { Preloader } from '@core';
+// [ng-scaffold] Step 2: the `title` signal below names the application in the document title.
+import { PageTitleStrategy } from '@core';
 
 @Component({
   imports: [RouterOutlet],
@@ -17,5 +19,8 @@ export class App {
   // loader fades out once the router's first navigation has settled and its page has rendered.
   constructor() {
     inject(Preloader).hideAfterFirstNavigation();
+
+    // [ng-scaffold] Step 2: page titles end with the application name ("Dashboard · ng-scaffold").
+    inject(PageTitleStrategy).setAppName(this.title());
   }
 }

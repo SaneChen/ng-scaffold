@@ -1,0 +1,16 @@
+{
+  // Workspace settings shared by the team (ng-matero ships the same file).
+  "editor.rulers": [100],
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "eslint.validate": ["typescript", "html"],
+  "stylelint.validate": ["scss"],
+  // The `npm` tasks in tasks.json run through Yarn, the package manager of this repository.
+  "npm.packageManager": "yarn",
+  "ngx-translate.lookup.resourcesType": "json",
+  "ngx-translate.lookup.resourcesPath": "public/i18n/en-US.json"
+}

@@ -5,9 +5,8 @@ import { routes } from './app.routes';
 import { Directionality } from '@angular/cdk/bidi';
 import { inject, provideAppInitializer } from '@angular/core';
 import { AppDirectionality, SettingsStore } from '@core';
-// [ng-scaffold] Step 2: runtime translations (ngx-translate) and translated paginator labels.
-import { MatPaginatorIntl } from '@angular/material/paginator';
-import { PaginatorIntl, provideI18n } from '@core';
+// [ng-scaffold] Step 2: runtime translations (ngx-translate).
+import { provideI18n } from '@core';
 // [ng-scaffold] Step 3: document titles "<translated page title> · <application name>".
 import { TitleStrategy } from '@angular/router';
 import { PageTitleStrategy } from '@core';
@@ -27,9 +26,9 @@ export const appConfig: ApplicationConfig = {
     }),
     { provide: Directionality, useExisting: AppDirectionality },
     // [ng-scaffold] Step 2: load public/i18n/<language>.json before the first render and keep the
-    // translation, <html lang> and the MatPaginator labels in sync with the `language` setting.
+    // translation and <html lang> in sync with the `language` setting (paginator labels: see
+    // AdminLayout, which provides them without pulling Material's paginator into this bundle).
     provideI18n(),
-    { provide: MatPaginatorIntl, useClass: PaginatorIntl },
     // [ng-scaffold] Step 3: replace the router's default title strategy (route title only).
     { provide: TitleStrategy, useExisting: PageTitleStrategy },
     // [ng-scaffold] Step 4: base URL, Accept-Language, bearer token, envelope unwrapping, error

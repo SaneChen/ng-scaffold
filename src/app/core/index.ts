@@ -16,7 +16,6 @@ export * from './settings/settings-store';
 export * from './settings/app-directionality';
 export * from './i18n/languages';
 export * from './i18n/language-store';
-export * from './i18n/paginator-intl';
 export * from './i18n/provide-i18n';
 export * from './preloader/preloader';
 export * from './title/page-title-strategy';

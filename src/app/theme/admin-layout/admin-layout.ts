@@ -20,6 +20,9 @@
  *      set (a lazy page loading).
  *   4. A skip link moves focus to `<main>` (WCAG 2.4.1); the content scrolls back to the top after
  *      each navigation. The progress bar appears only for navigations longer than 200 ms.
+ *   5. Provides the translated `MatPaginatorIntl` (`PaginatorIntl`) for every page: providing it
+ *      in app.config.ts made the main bundle reach `@angular/material/paginator` and absorb the
+ *      Material modules it shares with the lazy layout.
  *
  * Why: ng-matero mutated `options` in place, saved them after a 400 ms timeout, kept `isOver` in
  * a plain field (stale under default OnPush), needed `ngx-progressbar` and overrode Material's
@@ -29,10 +32,12 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, computed, ElementRef, inject, linkedSignal, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavContent, MatSidenavModule } from '@angular/material/sidenav';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { SettingsStore } from '@core';
+import { PaginatorIntl } from '@core/i18n/paginator-intl';
 import { TranslatePipe } from '@ngx-translate/core';
 import { filter, map } from 'rxjs';
 import { Customizer } from '../customizer/customizer';
@@ -62,6 +67,7 @@ export const NAV_ID = 'main-navigation';
   selector: 'app-admin-layout',
   styleUrl: './admin-layout.scss',
   templateUrl: './admin-layout.html',
+  providers: [{ provide: MatPaginatorIntl, useClass: PaginatorIntl }],
   host: {
     '[class.nav-side]': "options().navPos === 'side'",
     '[class.nav-top]': "options().navPos === 'top'",

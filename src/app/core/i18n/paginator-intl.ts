@@ -6,9 +6,14 @@
  *      spec.
  *   2. Made it extend `MatPaginatorIntl` and decorated it with `@Service({ autoProvided: false })`:
  *      it is only meant to replace Material's default, through
- *      `{ provide: MatPaginatorIntl, useClass: PaginatorIntl }` in app.config.ts.
+ *      `{ provide: MatPaginatorIntl, useClass: PaginatorIntl }` in the `providers` of
+ *      `AdminLayout` (src/app/theme), the parent of every page with a paginator.
  *   3. Added an `effect()` that copies the `paginator.*` translations onto the label fields and
  *      emits `changes`, and overrode `getRangeLabel` with a translated version.
+ *   4. Moved that provider out of app.config.ts and this file out of the `@core` barrel (import it
+ *      from `@core/i18n/paginator-intl`): anything the main bundle reaches statically, here all of
+ *      `@angular/material/paginator`, also hoists into it the modules it shares with lazy chunks
+ *      (buttons, select, overlay, about 180 kB).
  *
  * Why: `TranslateService.instant()` reads ngx-translate's language and translation signals, so the
  * effect re-runs after every language switch (or translation update) and `changes.next()` tells

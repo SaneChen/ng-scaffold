@@ -5,17 +5,20 @@
  *   1. `yarn ng g component theme/admin-layout` generated the "should create" test.
  *   2. Replaced it with tests of the layout states with a fake `MediaMatcher` (desktop or
  *      mobile): side menu open/closed, the collapsed rail, the mobile drawer closing after
- *      navigation, top navigation, header above, the skip link and the notice side sheet; then
- *      (review) the menu button with a collapsed rail and with the header above, "above" with top
- *      navigation, the header kept on mobile, a drawer closed by Escape and the scroll to the top.
+ *      navigation, top navigation, header above, the skip link, the notice side sheet and the
+ *      translated paginator labels it provides; then (review) the menu button with a collapsed
+ *      rail and with the header above, "above" with top navigation, the header kept on mobile, a
+ *      drawer closed by Escape and the scroll to the top.
  */
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSidenav } from '@angular/material/sidenav';
 import { By } from '@angular/platform-browser';
 import { provideRouter, Router } from '@angular/router';
 import { SettingsStore } from '@core';
+import { PaginatorIntl } from '@core/i18n/paginator-intl';
 import { provideTranslateService } from '@ngx-translate/core';
 import { SideSheet } from '../side-sheet/side-sheet';
 import { NOTICE_TITLE_ID, SidebarNotice } from '../sidebar-notice/sidebar-notice';
@@ -199,5 +202,11 @@ describe('AdminLayout', () => {
     fixture.nativeElement.querySelector('[aria-label="header.notices"]').click();
 
     expect(open).toHaveBeenCalledWith(SidebarNotice, { ariaLabelledBy: NOTICE_TITLE_ID });
+  });
+
+  it('should give the pages translated paginator labels', async () => {
+    await create();
+
+    expect(fixture.debugElement.injector.get(MatPaginatorIntl)).toBeInstanceOf(PaginatorIntl);
   });
 });

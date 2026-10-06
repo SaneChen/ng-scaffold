@@ -5,6 +5,9 @@ import { routes } from './app.routes';
 import { Directionality } from '@angular/cdk/bidi';
 import { inject, provideAppInitializer } from '@angular/core';
 import { AppDirectionality, SettingsStore } from '@core';
+// [ng-scaffold] Step 2: runtime translations (ngx-translate) and translated paginator labels.
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { PaginatorIntl, provideI18n } from '@core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +18,10 @@ export const appConfig: ApplicationConfig = {
       inject(SettingsStore);
     }),
     { provide: Directionality, useExisting: AppDirectionality },
+    // [ng-scaffold] Step 2: load public/i18n/<language>.json before the first render and keep the
+    // translation, <html lang> and the MatPaginator labels in sync with the `language` setting.
+    provideI18n(),
+    { provide: MatPaginatorIntl, useClass: PaginatorIntl },
     provideRouter(routes),
   ],
 };

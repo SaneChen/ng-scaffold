@@ -1,0 +1,18 @@
+{
+  "paginator": {
+    "items_per_page_label": "每頁共：",
+    "next_page_label": "下一頁",
+    "previous_page_label": "前一頁",
+    "first_page_label": "首頁",
+    "last_page_label": "尾頁",
+    "range_page_label_1": "無資料",
+    "range_page_label_2": "第 {{startIndex}} - {{endIndex}} 行，共 {{length}} 行"
+  },
+  "system": "跟隨系統",
+  "ok": "確定",
+  "cancel": "取消",
+  "close": "關閉",
+  "edit": "編輯",
+  "delete": "刪除",
+  "confirm_delete": "確認刪除？"
+}

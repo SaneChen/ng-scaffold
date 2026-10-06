@@ -32,26 +32,26 @@
 
 ## 2. 关键设计决策（对照 ng-matero 审计问题）
 
-| ng-matero 的问题（审计结论）                                         | ng-scaffold 的做法                                                                        |
-| -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `ng add` 后 `ng build` 超出 1 MB budget 直接失败；路由全部 eager     | 所有页面 `loadComponent`/`loadChildren` 懒加载；`ng add` 后跑通 `ng build` 作为 CI 验收   |
-| `"build:prod": "ng build --prod"` 在 v22 报错                        | 不添加该脚本；`ng build` 默认即 production                                                |
-| 发布的 spec 依赖未安装的 `angular-in-memory-web-api`，`ng test` 失败 | 演示后端用函数式 mock 拦截器；所有 spec 只依赖已安装的包                                  |
-| 默认 OnPush 下回调里改普通字段导致界面不刷新                         | 模板读取的状态一律是 signal（`signal`/`computed`/`linkedSignal`/`toSignal`）              |
-| `BehaviorSubject` 充当全局状态、手动 subscribe                       | Store 类服务用 signal 暴露只读状态；异步流用 `toSignal`/`rxResource`/`httpResource`       |
-| `SettingsService` 命令式 `setTheme()`，`auto` 主题不跟随系统         | `effect()` 把 dir/theme/lang 同步到 `<html>`；监听 `prefers-color-scheme`                 |
-| environments 采用 v15 前约定                                         | 使用 `ng g environments`（`environment.ts` 为生产，`environment.development.ts` 替换）    |
-| Roboto 未加载、Material Icons 加载两次                               | 交给 `ng add @angular/material`（Roboto + Material Symbols）                              |
-| 覆盖 `.prettierrc`、`.vscode/*`，删除 `app.spec.ts`                  | 只增量追加；不删除 ng new 的 spec                                                         |
-| `ng-matero` 被装进 `dependencies`                                    | `schematics/package.json` 声明 `"ng-add": { "save": "devDependencies" }`                  |
-| 手工复制 eslint 配置                                                 | `ng add angular-eslint` 生成，再增量追加规则；不使用已废弃的 ESLint 格式化规则            |
-| `.vscode/tasks.json` 被旧版覆盖                                      | 不修改                                                                                    |
-| 多项目工作区路径写死 `src/`、`@core` 别名跨项目串用                  | schematic 全部基于 `project.root/sourceRoot`；别名写入各项目 tsconfig                     |
-| 手工维护的模板与源码漂移（NG8113 等）                                | schematic 直接打包仓库源码；CI 中做「golden」比对：`ng new` + `ng add` 结果必须与仓库一致 |
-| 图标按钮缺可访问名称、`outline:none`、`href="#"` 等                  | ESLint 模板无障碍规则 + Playwright + axe 检查                                             |
-| `color="primary"` 等 M2 写法、覆盖 mdc 内部类、私有 Sass API         | 只用 `--mat-sys-*` token 与 `mat.*-overrides()` mixin                                     |
-| 自研权限依赖 `ngx-permissions`（NgModule、无 standalone）            | 自实现 signal 权限服务、结构型指令与 `canMatch` 守卫                                      |
-| CI 使用 Node 16/18/20 与不存在的分支                                 | GitHub Actions：Node 24 + yarn，lint/test/build/golden/e2e                                |
+| ng-matero 的问题（审计结论）                                         | ng-scaffold 的做法                                                                                                   |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `ng add` 后 `ng build` 超出 1 MB budget 直接失败；路由全部 eager     | 所有页面 `loadComponent`/`loadChildren` 懒加载；`ng add` 后跑通 `ng build` 作为 CI 验收                              |
+| `"build:prod": "ng build --prod"` 在 v22 报错                        | 不添加该脚本；`ng build` 默认即 production                                                                           |
+| 发布的 spec 依赖未安装的 `angular-in-memory-web-api`，`ng test` 失败 | 演示后端用函数式 mock 拦截器；所有 spec 只依赖已安装的包                                                             |
+| 默认 OnPush 下回调里改普通字段导致界面不刷新                         | 模板读取的状态一律是 signal（`signal`/`computed`/`linkedSignal`/`toSignal`）                                         |
+| `BehaviorSubject` 充当全局状态、手动 subscribe                       | Store 类服务用 signal 暴露只读状态；异步流用 `toSignal`/`rxResource`/`httpResource`                                  |
+| `SettingsService` 命令式 `setTheme()`，`auto` 主题不跟随系统         | `effect()` 把 dir/theme/lang 同步到 `<html>`；监听 `prefers-color-scheme`                                            |
+| environments 采用 v15 前约定                                         | 使用 `ng g environments`（`environment.ts` 为生产，`environment.development.ts` 替换）                               |
+| Roboto 未加载、Material Icons 加载两次                               | `ng add @angular/material` 选定字体（Roboto + Material Symbols），再改为 npm 包自托管，构建与访问均不依赖 Google CDN |
+| 覆盖 `.prettierrc`、`.vscode/*`，删除 `app.spec.ts`                  | 只增量追加；不删除 ng new 的 spec                                                                                    |
+| `ng-matero` 被装进 `dependencies`                                    | `schematics/package.json` 声明 `"ng-add": { "save": "devDependencies" }`                                             |
+| 手工复制 eslint 配置                                                 | `ng add angular-eslint` 生成，再增量追加规则；不使用已废弃的 ESLint 格式化规则                                       |
+| `.vscode/tasks.json` 被旧版覆盖                                      | 不修改                                                                                                               |
+| 多项目工作区路径写死 `src/`、`@core` 别名跨项目串用                  | schematic 全部基于 `project.root/sourceRoot`；别名写入各项目 tsconfig                                                |
+| 手工维护的模板与源码漂移（NG8113 等）                                | schematic 直接打包仓库源码；CI 中做「golden」比对：`ng new` + `ng add` 结果必须与仓库一致                            |
+| 图标按钮缺可访问名称、`outline:none`、`href="#"` 等                  | ESLint 模板无障碍规则 + Playwright + axe 检查                                                                        |
+| `color="primary"` 等 M2 写法、覆盖 mdc 内部类、私有 Sass API         | 只用 `--mat-sys-*` token 与 `mat.*-overrides()` mixin                                                                |
+| 自研权限依赖 `ngx-permissions`（NgModule、无 standalone）            | 自实现 signal 权限服务、结构型指令与 `canMatch` 守卫                                                                 |
+| CI 使用 Node 16/18/20 与不存在的分支                                 | GitHub Actions：Node 24 + yarn，lint/test/build/golden/e2e                                                           |
 
 ## 3. 阶段与提交计划
 

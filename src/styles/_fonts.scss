@@ -1,0 +1,41 @@
+// Self-hosted fonts: Roboto (Material typography) and Material Symbols Outlined (icons).
+
+// How this file was built:
+//   1. `yarn add @fontsource/roboto @fontsource/material-symbols-outlined` installed the font files
+//      and their `@font-face` stylesheets.
+//   2. The `@use` rules below load the weights the M3 theme uses (Roboto 300/400/500) and the
+//      regular icon weight; each gets a namespace because a Sass namespace cannot start with a
+//      digit. Each stylesheet splits the font by unicode-range, so browsers only
+//      download the subsets a page needs; the Angular builder copies the referenced font files
+//      into the build output (media/).
+//   3. `.material-symbols-outlined` reproduces the ligature class that Google's icon stylesheet
+//      used to provide. `MatIcon` detects the "Material Symbols Outlined" font family and applies
+//      this class (together with `mat-ligature-font`) to every `<mat-icon>`.
+
+// Why: `ng add @angular/material` linked both fonts from fonts.googleapis.com. That makes every
+// production build download them (font inlining) and every visitor depend on Google's CDN, which
+// fails on networks where it is unreachable. Bundled fonts work offline and need no third-party
+// requests.
+
+@use '@fontsource/roboto/300' as roboto-light;
+@use '@fontsource/roboto/400' as roboto-regular;
+@use '@fontsource/roboto/500' as roboto-medium;
+@use '@fontsource/material-symbols-outlined/400' as material-symbols;
+
+.material-symbols-outlined {
+  display: inline-block;
+  // Icon ligature font: a generic fallback family would render the ligature names as text.
+  // stylelint-disable-next-line font-family-no-missing-generic-family-keyword
+  font-family: 'Material Symbols Outlined';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: normal;
+  font-feature-settings: 'liga';
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  overflow-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}

@@ -27,6 +27,9 @@
 
 ### 2.1 踩过的坑
 
+- **字体已自托管**：`ng add @angular/material` 写入的 Google Fonts 链接会让生产构建在线下载字体（font inlining），在无法访问
+  fonts.googleapis.com 的网络下 `ng build` 直接失败，访客同样加载不到图标。现在 Roboto 与 Material Symbols 由
+  `@fontsource/*` 包提供（`src/styles/_fonts.scss`），构建与运行都不需要外网；不要再往 `index.html` 加 CDN 字体链接。
 - **lint-staged 的 `stylelint --fix` 会重排 schematic 生成的 CSS**：`src/styles.scss` 已加入
   `.stylelintrc` 的 `ignoreFiles`；项目样式写在 `src/styles/` 的 partial 里。
 - **Angular CLI 会对 schematic 写入的每个文件执行 `prettier --write`**（`ng add`、`ng g` 都会），

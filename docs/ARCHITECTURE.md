@@ -106,6 +106,9 @@ export class SettingsStore {
   `color-scheme` of `<body>` (`.theme-dark` → `dark`, `.theme-auto` → `light dark`), so every
   `light-dark()` system token follows automatically. `src/index.html` repeats these two rules as
   critical CSS, so the chosen scheme applies before the deferred stylesheet arrives.
+- Fonts are self-hosted (`src/styles/_fonts.scss`): Roboto 300/400/500 and Material Symbols
+  Outlined come from `@fontsource/*` packages, so neither the build (font inlining) nor visitors
+  depend on fonts.googleapis.com.
 - Components style themselves with `--mat-sys-*` tokens and `mat.*-overrides()` mixins; no
   internal `.mat-mdc-*` selectors, no `::ng-deep`, no `ViewEncapsulation.None`.
 - Global partials in `src/styles/`: `_reboot` (minimal resets Material does not cover),
@@ -116,14 +119,15 @@ export class SettingsStore {
 
 ## 7. Third-party libraries
 
-| Purpose                                                                               | Library                                             | Reason                                         |
-| ------------------------------------------------------------------------------------- | --------------------------------------------------- | ---------------------------------------------- |
-| Translations                                                                          | `@ngx-translate/core`, `@ngx-translate/http-loader` | runtime language switching (same as ng-matero) |
-| Extra Material components (grid, select, datetimepicker, colorpicker, photoviewer, …) | `@ng-matero/extensions` (+ date-fns adapter)        | ng-matero feature parity                       |
-| Dynamic forms demo                                                                    | `@ngx-formly/core`, `@ngx-formly/material`          | ng-matero feature parity (demo only)           |
-| Toasts                                                                                | `@ngxpert/hot-toast`                                | same notifications as ng-matero                |
-| Dates                                                                                 | `date-fns`, `@angular/material-date-fns-adapter`    | date adapters                                  |
-| Charts                                                                                | `apexcharts`                                        | dashboard charts, loaded lazily                |
+| Purpose                                                                               | Library                                                       | Reason                                         |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ---------------------------------------------- |
+| Translations                                                                          | `@ngx-translate/core`, `@ngx-translate/http-loader`           | runtime language switching (same as ng-matero) |
+| Extra Material components (grid, select, datetimepicker, colorpicker, photoviewer, …) | `@ng-matero/extensions` (+ date-fns adapter)                  | ng-matero feature parity                       |
+| Dynamic forms demo                                                                    | `@ngx-formly/core`, `@ngx-formly/material`                    | ng-matero feature parity (demo only)           |
+| Toasts                                                                                | `@ngxpert/hot-toast`                                          | same notifications as ng-matero                |
+| Fonts                                                                                 | `@fontsource/roboto`, `@fontsource/material-symbols-outlined` | self-hosted, offline builds                    |
+| Dates                                                                                 | `date-fns`, `@angular/material-date-fns-adapter`              | date adapters                                  |
+| Charts                                                                                | `apexcharts`                                                  | dashboard charts, loaded lazily                |
 
 Dropped compared with ng-matero: `ngx-permissions` (own signal implementation),
 `ngx-progressbar` (`MatProgressBar`), `screenfull` (native API), `base64-js` (native `atob`),

@@ -838,6 +838,16 @@
   resolved "https://registry.yarnpkg.com/@exodus/bytes/-/bytes-1.16.0.tgz#954c9d9dd7eec15b966b2e8f2d883c04295b720c"
   integrity sha512-IcpW84uEn3N7ETtNZMlxKhfl6Pec8rUNGOTBtWbK1FKhJxIFAptZyVrvVRVBimAJxJCgc3PxepxkdWWG4DVzfA==
 
+"@fontsource/material-symbols-outlined@^5.3.8":
+  version "5.3.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/material-symbols-outlined/-/material-symbols-outlined-5.3.8.tgz#129a3f4a62c465e1eb102979aebb5012086bd81c"
+  integrity sha512-HpYZX5B3zfy70PX4xYYaGI9CCDRCjJcMumcshJDZbG3vtQBQPrBi7QIqaduCjDryo9Z8jNQFjj4378MMAWCkWw==
+
+"@fontsource/roboto@^5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-5.3.0.tgz#fd0dcdaa0c6ef3a1621253ea702db933ca1b573a"
+  integrity sha512-BapRJOWYP+LZ21zp+wBQjfpPYKRoxc4LspJ/RLuI+HSMBD5u/X4O+ESDrSvEqDSy0rAl7GwBJ+09mdc16cVQ1Q==
+
 "@harperfast/extended-iterable@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@harperfast/extended-iterable/-/extended-iterable-1.0.3.tgz#471489c5058331017e821bf6c33de70fc2c073ee"

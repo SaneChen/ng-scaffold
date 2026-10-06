@@ -7,6 +7,9 @@
 // [ng-scaffold] Step 1: dark and system color schemes driven by SettingsStore (`theme-*` classes
 // on <html>). Sass requires `@use` rules before any other rule, hence their place here.
 @use 'styles/themes';
+// [ng-scaffold] Step 2: self-hosted Roboto and Material Symbols (replaces the Google Fonts links
+// that `ng add @angular/material` put into index.html), so builds and visitors need no CDN access.
+@use 'styles/fonts';
 
 html {
   height: 100%;

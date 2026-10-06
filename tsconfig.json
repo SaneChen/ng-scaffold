@@ -3,6 +3,17 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    // [ng-scaffold] Path aliases for the top-level folders (see docs/ARCHITECTURE.md §1).
+    // Targets are relative to this file (TypeScript 6 resolves `paths` without `baseUrl`).
+    "paths": {
+      "@core": ["./src/app/core"],
+      "@core/*": ["./src/app/core/*"],
+      "@shared": ["./src/app/shared"],
+      "@shared/*": ["./src/app/shared/*"],
+      "@theme": ["./src/app/theme"],
+      "@theme/*": ["./src/app/theme/*"],
+      "@env/*": ["./src/environments/*"]
+    },
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,

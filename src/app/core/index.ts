@@ -22,3 +22,7 @@ export * from './preloader/preloader';
 export * from './title/page-title-strategy';
 export * from './auth/auth-token';
 export * from './auth/token-store';
+export * from './auth/user';
+export * from './auth/login-api';
+export * from './auth/auth-store';
+export * from './auth/auth-guard';

@@ -8,7 +8,9 @@
  * while files inside `core/` import their siblings with relative paths so the barrel never imports
  * itself and the dependency graph stays acyclic (see docs/ARCHITECTURE.md §1).
  */
+export * from './storage/web-storage';
 export * from './storage/local-storage';
+export * from './storage/session-storage';
 export * from './settings/app-settings';
 export * from './settings/settings-store';
 export * from './settings/app-directionality';

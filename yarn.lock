@@ -136,6 +136,14 @@
   optionalDependencies:
     lmdb "3.5.6"
 
+"@angular/cdk@^22.2.1":
+  version "22.2.1"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-22.2.1.tgz#f5379167f3dfbd050edb0bb2f86dc6a029d5fe8e"
+  integrity sha512-0vjlqYBbLif1EwHhKz2r4thTDvtRI2CKi2js9TzPRD0n4VlFUnAXaaW47s5TCCObIoYun6Bo1zZ0uPgwb+qEMw==
+  dependencies:
+    parse5 "^8.0.0"
+    tslib "^2.3.0"
+
 "@angular/cli@^22.2.1":
   version "22.2.1"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-22.2.1.tgz#ab9a9dc7fd0e0e08830d3757b71d39fcc30b0f7d"
@@ -199,6 +207,13 @@
     "@standard-schema/spec" "^1.0.0"
     tslib "^2.3.0"
     zod "^4.0.10"
+
+"@angular/material@^22.2.1":
+  version "22.2.1"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-22.2.1.tgz#76d999431f59fa9ff0481915d77e405c6329e253"
+  integrity sha512-qw+/aJBV4lqqoJgv1VBWbMBVnE7431SX0Mew1j7PO+s1UcTushbG7CIAEo1hwmRq3kyo4Qqch8+uzFq4R631HQ==
+  dependencies:
+    tslib "^2.3.0"
 
 "@angular/platform-browser@^22.2.0":
   version "22.2.1"

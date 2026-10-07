@@ -30,9 +30,16 @@ describe('routes', () => {
     harness = await RouterTestingHarness.create();
   });
 
-  it('should show the auth layout to signed-out users', async () => {
+  it('should show the login page to signed-out users', async () => {
     await harness.navigateByUrl('/auth');
 
-    expect(TestBed.inject(Router).url).toBe('/auth');
+    expect(TestBed.inject(Router).url).toBe('/auth/login');
+    expect(harness.routeNativeElement?.querySelector('app-login')).not.toBeNull();
+  });
+
+  it('should send signed-out users from the admin area to the login page', async () => {
+    await harness.navigateByUrl('/403');
+
+    expect(TestBed.inject(Router).url).toBe('/auth/login?returnUrl=%2F403');
   });
 });

@@ -200,5 +200,15 @@
     "invalid_email": "Enter a valid email address",
     "pattern": "The format is not valid",
     "invalid": "This value is not valid"
+  },
+  "login": "Log in",
+  "login_title": "Welcome back",
+  "have_no_account": "Don't have an account?",
+  "username": "Username",
+  "password": "Password",
+  "remember_me": "Remember me",
+  "signup": "Sign up",
+  "sessions": {
+    "failed": "Something went wrong. Please try again."
   }
 }

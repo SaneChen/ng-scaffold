@@ -10,7 +10,15 @@ export const routes: Routes = [
   {
     path: 'auth',
     loadComponent: () => import('@theme/auth-layout/auth-layout').then(m => m.AuthLayout),
-    children: [],
+    children: [
+      // [ng-scaffold] Step 3: sign-in pages.
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      {
+        path: 'login',
+        title: 'login',
+        loadComponent: () => import('./routes/sessions/login/login').then(m => m.Login),
+      },
+    ],
   },
   {
     path: '',

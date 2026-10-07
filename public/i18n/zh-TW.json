@@ -200,5 +200,15 @@
     "invalid_email": "請輸入有效的電子郵件地址",
     "pattern": "格式不正確",
     "invalid": "此值無效"
+  },
+  "login": "登入",
+  "login_title": "歡迎回來",
+  "have_no_account": "沒有帳號？",
+  "username": "使用者名稱",
+  "password": "密碼",
+  "remember_me": "記住我",
+  "signup": "註冊",
+  "sessions": {
+    "failed": "發生錯誤，請重試。"
   }
 }

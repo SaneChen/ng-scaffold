@@ -200,5 +200,15 @@
     "invalid_email": "请输入有效的邮箱地址",
     "pattern": "格式不正确",
     "invalid": "该值无效"
+  },
+  "login": "登录",
+  "login_title": "欢迎回来",
+  "have_no_account": "没有账号？",
+  "username": "用户名",
+  "password": "密码",
+  "remember_me": "记住我",
+  "signup": "注册",
+  "sessions": {
+    "failed": "出错了，请重试。"
   }
 }

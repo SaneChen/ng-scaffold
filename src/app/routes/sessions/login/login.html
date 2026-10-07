@@ -1,0 +1,61 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h1 mat-card-title>
+      <span aria-hidden="true">👋</span>
+      {{ 'login_title' | translate }}
+    </h1>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formRoot]="form">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'username' | translate }}</mat-label>
+        <input matInput [formField]="form.username" autocomplete="username" />
+        @if (form.username().errors()[0]; as error) {
+          <mat-error>
+            @let message = error | validationMessage;
+            {{ message.key | translate: message.params }}
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'password' | translate }}</mat-label>
+        <input
+          matInput
+          type="password"
+          [formField]="form.password"
+          autocomplete="current-password"
+        />
+        @if (form.password().errors()[0]; as error) {
+          <mat-error>
+            @let message = error | validationMessage;
+            {{ message.key | translate: message.params }}
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-checkbox [formField]="form.rememberMe">{{ 'remember_me' | translate }}</mat-checkbox>
+
+      <div class="form-errors" role="alert">
+        @for (failure of failures(); track $index) {
+          <p>{{ failure | translate }}</p>
+        }
+      </div>
+
+      <button
+        matButton="filled"
+        type="submit"
+        [disabled]="form().submitting()"
+        [disabledInteractive]="true"
+      >
+        {{ 'login' | translate }}
+      </button>
+
+      <p>
+        {{ 'have_no_account' | translate }}
+        <a routerLink="/auth/signup">{{ 'signup' | translate }}</a>
+      </p>
+    </form>
+  </mat-card-content>
+</mat-card>

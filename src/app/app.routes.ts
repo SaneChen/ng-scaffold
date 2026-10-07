@@ -31,6 +31,8 @@ export const routes: Routes = [
     canMatch: [authGuard],
     canActivateChild: [authGuard],
     children: [
+      // [ng-scaffold] Step 6: the home page.
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       // [ng-scaffold] Step 4: the dashboard.
       {
         path: 'dashboard',
@@ -54,6 +56,13 @@ export const routes: Routes = [
         path: '500',
         title: 'error.500.title',
         loadComponent: () => import('./routes/sessions/error-500').then(m => m.Error500),
+      },
+      // [ng-scaffold] Step 6: unknown URLs show the 404 page and keep their address (signed-out
+      // users sign in first, then see it).
+      {
+        path: '**',
+        title: 'error.404.title',
+        loadComponent: () => import('./routes/sessions/error-404').then(m => m.Error404),
       },
     ],
   },

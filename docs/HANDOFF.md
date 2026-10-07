@@ -8,14 +8,15 @@
 ## 1. 当前状态
 
 - 基线：`0d99dd2`（未改动的 `ng new ng-scaffold`，Angular CLI 22.2.1）。
-- 已完成：ROADMAP 中阶段 0–4（含 §4 B 全局样式、C 认证/HTTP/Mock/菜单/权限/启动、D 布局外壳），
-  具体提交见 ROADMAP 中 `[x]` 条目后的哈希。
-- 质量状态（HEAD）：`tools/verify.sh` 通过——lint、stylelint、48 个测试文件 / 222 个用例、生产构建
-  （initial 约 439 kB / 传输约 104 kB，其中 styles.css 约 98 kB；两个布局、共享的 Material 代码与
-  hot-toast 都是懒加载 chunk；无 budget 警告）。
-- 下一步：§4 的 **E · 共享组件与基础页面**，然后依次 F → G → H。
-- 布局现状：`''` → `AdminLayout`、`auth` → `AuthLayout` 已注册，但还没有子页面（`/dashboard`、`/auth/login`
-  等由 E 添加）；mock 登录可在浏览器中把 `ng-scaffold-token` 写入 sessionStorage 后访问 `/`。
+- 已完成：ROADMAP 中阶段 0–5（含 §4 B 全局样式、C 认证/HTTP/Mock/菜单/权限/启动、D 布局外壳、
+  E 共享组件与基础页面），具体提交见 ROADMAP 中 `[x]` 条目后的哈希。
+- 质量状态（HEAD）：`tools/verify.sh` 通过——lint、stylelint、63 个测试文件 / 272 个用例、生产构建
+  （initial 约 457 kB / 传输约 109 kB，距 500 kB 警告 budget 约 43 kB；布局、页面、Chart.js 与
+  hot-toast 都是懒加载 chunk）。
+- 下一步：§4 的 **F · 演示功能区**，然后依次 G → H。
+- 页面现状：`/auth/login`、`/auth/signup`（mock 演示账号 `ng-scaffold` / `ng-scaffold`，开启
+  `environment.mockApi` 时自动填入）、`/dashboard`（`/` 默认跳转）、`/profile/overview|settings`、
+  `/403|404|500`；未知 URL 在原地址显示 404 页。菜单中的演示区（design、material…）由 F 添加。
 
 ## 2. 环境与工作方式
 
@@ -52,6 +53,23 @@
 - 侧边面板（通知、设置）用 `SideSheet`（`MatDialog`）打开，不再用第二个 `mat-sidenav`；关闭按钮的名称要用
   `MatDialogClose` 的 `[aria-label]` 输入，`[attr.aria-label]` 会被指令覆盖。
 - Yarn 1 不会自动安装 peer 依赖：安装新库后留意 `unmet peer dependency` 警告并显式安装。
+- **顶层路由的顺序**：`AdminLayout` 的空路径会匹配任何 URL，其 `canMatch` 守卫会把未登录用户送去登录页；
+  因此 `auth` 必须排在它前面（`authGuard` 也拒绝为登录页本身重定向，避免死循环）。新增的公开页面同样要放在
+  `''` 之前。
+- **main bundle 会随懒加载页面增长**：esbuild 把懒加载 chunk 用到的 `@angular/core`、`rxjs` 导出留在 main
+  （这些包本来就在 main 中），E 阶段因此 +17 kB raw / +5 kB 传输。F 的大量演示页可能逼近 500 kB 警告线，
+  每个提交都要看 verify 输出的 initial total。
+- **Signal Forms**：服务器返回的提交错误会一直保留到该字段的值改变，期间 `submit()` 只会走 `onInvalid`；
+  与字段无关的失败（网络错误、5xx、错误的凭据）放在组件自己的 `failures` signal 中，每次提交前清空
+  （见登录、注册、个人设置页）。`mat-checkbox` 按 ControlValueAccessor 绑定，`focusBoundControl()` 无法
+  聚焦它，需要 `MatCheckbox.focus()`。
+- **组件输入不要叫 `title`**：静态的 `title="key"` 属性也会写到宿主元素上，悬停时显示翻译键（`PageHeader`、
+  `ErrorCode` 用 `heading`）。
+- `@angular-eslint/reactive-context-must-read-signal` 遇到解构参数的 `validate()` 回调会崩溃
+  （"config.args is not iterable"），回调参数不要解构。
+- jsdom 没有 canvas、`matchMedia`、`Element.scrollTo`：图表通过 `CHARTS_LOADER` 注入假实现，媒体查询用
+  CDK `MediaMatcher`，`scrollTo` 在 spec 中补上。
+- 开发服务器的文件监听偶尔会停止（日志里不再出现 "Changes detected"），重启 `ng serve` 即可。
 
 ### 2.2 推荐的推进方式（与之前一致）
 
@@ -64,22 +82,23 @@ ng-matero 参考代码在 <https://github.com/ng-matero/ng-matero>（main，v22.
 
 ## 3. 已有的 core API（后续阶段直接使用）
 
-| 位置                        | 内容                                                                                                                                                                                                                                                                                                                                             |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `src/app/core/storage/`     | `WebStorage` 基类 + `LocalStorage` / `SessionStorage`：`get<T>(key, fallback)`、`set`、`remove`，存储不可用时不抛错                                                                                                                                                                                                                              |
-| `src/app/core/settings/`    | `AppSettings` 接口、`defaultAppSettings`、`APP_SETTINGS` token、`provideAppSettings(overrides)`；`SettingsStore`（`options`、`update`、`reset`、`themeColor`，effect 同步 `<html>` 的 dir 与 `theme-dark`/`theme-auto` class）；`AppDirectionality`                                                                                              |
-| `src/app/core/i18n/`        | `LANGUAGES`、`provideI18n()`、`LanguageStore`（同步 `TranslateService.use` 与 `<html lang>`）、`PaginatorIntl`                                                                                                                                                                                                                                   |
-| `src/app/core/preloader/`   | `Preloader`：首屏渲染后移除 `index.html` 中的 `#globalLoader`                                                                                                                                                                                                                                                                                    |
-| `src/app/core/title/`       | `PageTitleStrategy`：`<翻译后的路由 title> · <应用名>`，应用名来自 `App` 中保留的 `title` signal                                                                                                                                                                                                                                                 |
-| `src/app/core/auth/`        | `AuthToken`（普通/JWT，`valid()`、`refreshAt`）；`TokenStore`（`token`、`session`、`set(res, remember)` 新会话、`renew(res)` 刷新、`clear()`）；`AuthStore`（`isAuthenticated`、`user`、`login`、`register`、`refresh`、`logout`；登出/401/过期时自动跳转 `/auth/login?returnUrl=`）；`LoginApi`；`authGuard`（`canMatch` + `canActivateChild`） |
-| `src/app/core/http/`        | `httpInterceptors`（顺序见 `interceptors.ts`）；`API_BASE_URL`、`isApiUrl()`、`HANDLE_HTTP_ERRORS`（表单自行显示错误时设为 false）、`ApiError`                                                                                                                                                                                                   |
-| `src/app/core/toast/`       | `Toaster.error()` / `success()`：首次使用时才加载 hot-toast；纯文本、可访问                                                                                                                                                                                                                                                                      |
-| `src/app/core/mock/`        | `MockBackend` + `mockApiInterceptor`（`environment.mockApi`；演示账号 `ng-scaffold` / `ng-scaffold`）                                                                                                                                                                                                                                            |
-| `src/app/core/menu/`        | `Menu`/`MenuItem`；`MenuStore`（`menu`、`visibleMenu` 按权限过滤、`trail(url)` 面包屑、`buildRoute()`；登录后自动加载）                                                                                                                                                                                                                          |
-| `src/app/core/permissions/` | `PermissionStore`（`roles`、`permissions`、`has({ only, except })`、`setRoles()` 可覆盖；`ROLE_PERMISSIONS`）；`*appCan`；`permissionGuard`（`data.permissions`）                                                                                                                                                                                |
-| `src/app/core/startup/`     | `Startup.ready()`：已登录时等待用户与菜单（最多 10 s），app initializer 与 `permissionGuard` 使用                                                                                                                                                                                                                                                |
-| `src/styles/_themes.scss`   | `html.theme-dark body { color-scheme: dark }` 等                                                                                                                                                                                                                                                                                                 |
-| `public/i18n/*.json`        | en-US / zh-CN / zh-TW，新功能需同时补三种语言                                                                                                                                                                                                                                                                                                    |
+| 位置                        | 内容                                                                                                                                                                                                                                                                                                                                                              |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/app/core/storage/`     | `WebStorage` 基类 + `LocalStorage` / `SessionStorage`：`get<T>(key, fallback)`、`set`、`remove`，存储不可用时不抛错                                                                                                                                                                                                                                               |
+| `src/app/core/settings/`    | `AppSettings` 接口、`defaultAppSettings`、`APP_SETTINGS` token、`provideAppSettings(overrides)`；`SettingsStore`（`options`、`update`、`reset`、`themeColor`，effect 同步 `<html>` 的 dir 与 `theme-dark`/`theme-auto` class）；`AppDirectionality`                                                                                                               |
+| `src/app/core/i18n/`        | `LANGUAGES`、`provideI18n()`、`LanguageStore`（同步 `TranslateService.use` 与 `<html lang>`）、`PaginatorIntl`                                                                                                                                                                                                                                                    |
+| `src/app/core/preloader/`   | `Preloader`：首屏渲染后移除 `index.html` 中的 `#globalLoader`                                                                                                                                                                                                                                                                                                     |
+| `src/app/core/title/`       | `PageTitleStrategy`：`<翻译后的路由 title> · <应用名>`，应用名来自 `App` 中保留的 `title` signal                                                                                                                                                                                                                                                                  |
+| `src/app/core/auth/`        | `AuthToken`（普通/JWT，`valid()`、`refreshAt`）；`TokenStore`（`token`、`session`、`set(res, remember)` 新会话、`renew(res)` 刷新、`clear()`）；`AuthStore`（`isAuthenticated`、`user`、`login`、`register`、`refresh`、`logout`、`updateProfile`；登出/401/过期时自动跳转 `/auth/login?returnUrl=`）；`LoginApi`；`authGuard`（`canMatch` + `canActivateChild`） |
+| `src/app/core/http/`        | `httpInterceptors`（顺序见 `interceptors.ts`）；`API_BASE_URL`、`isApiUrl()`、`HANDLE_HTTP_ERRORS`（表单自行显示错误时设为 false）、`ApiError`                                                                                                                                                                                                                    |
+| `src/app/core/toast/`       | `Toaster.error()` / `success()`：首次使用时才加载 hot-toast；纯文本、可访问                                                                                                                                                                                                                                                                                       |
+| `src/app/core/mock/`        | `MockBackend` + `mockApiInterceptor`（`environment.mockApi`；演示账号 `ng-scaffold` / `ng-scaffold`）                                                                                                                                                                                                                                                             |
+| `src/app/core/menu/`        | `Menu`/`MenuItem`；`MenuStore`（`menu`、`visibleMenu` 按权限过滤、`trail(url)` 面包屑、`buildRoute()`；登录后自动加载）                                                                                                                                                                                                                                           |
+| `src/app/core/permissions/` | `PermissionStore`（`roles`、`permissions`、`has({ only, except })`、`setRoles()` 可覆盖；`ROLE_PERMISSIONS`）；`*appCan`；`permissionGuard`（`data.permissions`）                                                                                                                                                                                                 |
+| `src/app/core/startup/`     | `Startup.ready()`：已登录时等待用户与菜单（最多 10 s），app initializer 与 `permissionGuard` 使用                                                                                                                                                                                                                                                                 |
+| `src/app/shared/`           | `PageHeader`（`heading`、`subtitle`、`nav`、`hideBreadcrumb`）、`Breadcrumb`、`injectMenuTrail()`、`ErrorCode`（`code`、`heading`、`message`）、`ValidationMessagePipe`（Signal Forms 错误 → 翻译键与参数）、`serverErrors()`（被拒的请求 → 字段错误 / 表单级消息）                                                                                               |
+| `src/styles/_themes.scss`   | `html.theme-dark body { color-scheme: dark }` 等                                                                                                                                                                                                                                                                                                                  |
+| `public/i18n/*.json`        | en-US / zh-CN / zh-TW，新功能需同时补三种语言                                                                                                                                                                                                                                                                                                                     |
 
 具体以源码与各文件头注释为准（`git log -p 3a11238..HEAD`）。
 
@@ -159,7 +178,8 @@ ng-matero 参考代码在 <https://github.com/ng-matero/ng-matero>（main，v22.
 - E2 `routes/sessions`：`error-403/404/500`（路由 title 用 i18n 键）。
 - E3 `routes/sessions/login`、`signup`：Signal Forms（`form()`、`[formField]`、`required`、`email`、`submit`），
   `autocomplete`，翻译后的错误信息，登录后按 `returnUrl` 跳转。
-- E4 `routes/dashboard`：移植 ng-matero 仪表盘的卡片、图表（`apexcharts` 通过动态 `import()` 按需加载）、表格与消息区。
+- E4 `routes/dashboard`：移植 ng-matero 仪表盘的卡片、图表（Chart.js 通过动态 `import()` 按需加载；
+  原定的 apexcharts 因许可证改为 Chart.js）、表格与消息区。
 - E5 `routes/profile`：layout、overview、settings（修复 ng-matero 用户菜单指向未发布页面的问题）。
 - E6 `app.routes.ts` 默认重定向与 `**` 通配；检查 budget；补齐 i18n。
 

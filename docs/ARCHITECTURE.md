@@ -94,13 +94,13 @@ export class SettingsStore {
 
 ## 5. Pages
 
-| Route                                                                                              | Starter | Notes                                                                           |
-| -------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------- |
-| `/dashboard`                                                                                       | yes     | statistics cards, charts loaded on demand (`apexcharts` via dynamic `import()`) |
-| `/auth/login`, `/auth/signup`                                                                      | yes     | Signal Forms, `autocomplete`, translated validation messages                    |
-| `/403`, `/404`, `/500`                                                                             | yes     | `ErrorCode` component                                                           |
-| `/profile/overview`, `/profile/settings`                                                           | yes     | fixes ng-matero's user menu links to unshipped pages                            |
-| `/design`, `/material`, `/forms`, `/tables`, `/media`, `/permissions`, `/utilities`, `/menu-level` | demo    | same menu tree as ng-matero                                                     |
+| Route                                                                                              | Starter | Notes                                                                       |
+| -------------------------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------------- |
+| `/dashboard`                                                                                       | yes     | statistics cards, charts loaded on demand (Chart.js via dynamic `import()`) |
+| `/auth/login`, `/auth/signup`                                                                      | yes     | Signal Forms, `autocomplete`, translated validation messages                |
+| `/403`, `/404`, `/500`                                                                             | yes     | `ErrorCode` component                                                       |
+| `/profile/overview`, `/profile/settings`                                                           | yes     | fixes ng-matero's user menu links to unshipped pages                        |
+| `/design`, `/material`, `/forms`, `/tables`, `/media`, `/permissions`, `/utilities`, `/menu-level` | demo    | same menu tree as ng-matero                                                 |
 
 ## 6. Styling
 
@@ -129,9 +129,11 @@ export class SettingsStore {
 | Toasts                                                                                | `@ngxpert/hot-toast`                                          | same notifications as ng-matero                |
 | Fonts                                                                                 | `@fontsource/roboto`, `@fontsource/material-symbols-outlined` | self-hosted, offline builds                    |
 | Dates                                                                                 | `date-fns`, `@angular/material-date-fns-adapter`              | date adapters                                  |
-| Charts                                                                                | `apexcharts`                                                  | dashboard charts, loaded lazily                |
+| Charts                                                                                | `chart.js`                                                    | dashboard charts, loaded lazily; MIT           |
 
-Dropped compared with ng-matero: `ngx-permissions` (own signal implementation),
+Dropped compared with ng-matero: `apexcharts` (5+ is dual licensed — free only below US$2M
+revenue and not for redistribution in toolkits — which a scaffold installed with `ng add` cannot
+impose on its users; replaced by Chart.js), `ngx-permissions` (own signal implementation),
 `ngx-progressbar` (`MatProgressBar`), `screenfull` (native API), `base64-js` (native `atob`),
 `angular-in-memory-web-api` (functional mock interceptor), `photoviewer` direct dependency
 (provided through `@ng-matero/extensions`).

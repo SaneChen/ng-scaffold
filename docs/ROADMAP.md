@@ -103,10 +103,13 @@
 
 ### 阶段 5 · 共享组件与基础页面
 
-- [ ] `PageHeader`、`Breadcrumb`（computed 自路由与菜单）、`ErrorCode`
-- [ ] 登录 / 注册（Signal Forms，autocomplete、错误提示、i18n）
-- [ ] 403 / 404 / 500
-- [ ] Dashboard（图表按需加载）
+- [x] `PageHeader`、`Breadcrumb`（computed 自路由与菜单）、`ErrorCode` — `463fb73`
+- [x] 登录 / 注册（Signal Forms，autocomplete、错误提示、i18n） — `5dbf045`（校验信息翻译）、`38f524e`、`ade6f64`、`8ad03b6`（`serverErrors()` 移入 shared）、`d06ba9e`（mock 错误信息改为翻译键）
+- [x] 403 / 404 / 500 — `b932e41`
+- [x] Dashboard（图表按需加载；Chart.js 取代 apexcharts，见 ARCHITECTURE §7） — `a37a417`
+- [x] 个人资料：overview、settings（保存到 `PATCH /user`） — `fe397fb`、`faf4991`
+- [x] 默认路由与 `**` 404 页 — `9c8b583`
+- [x] 阶段 4 遗留修复：未登录时的重定向死循环 — `b837106`；登录页垂直居中 — `991a39e`；侧边栏横向滚动条 — `d194728`
 
 ### 阶段 6 · 演示功能区（与 ng-matero 菜单一一对应，均懒加载，不随 ng add 发布）
 

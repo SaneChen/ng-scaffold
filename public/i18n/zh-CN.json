@@ -218,5 +218,26 @@
   "signup_welcome": "欢迎",
   "signup_title": "创建账号只需几秒钟",
   "read_and_agree": "我已阅读并同意服务条款",
-  "have_an_account": "已经有账号了？"
+  "have_an_account": "已经有账号了？",
+  "position": "序号",
+  "name": "名称",
+  "weight": "重量",
+  "symbol": "符号",
+  "dashboard": {
+    "total_sales": "总销售额",
+    "revenue": "收入",
+    "traffic": "流量",
+    "new_users": "新用户",
+    "monthly": "本月",
+    "monthly_target": "{{title}}：月度目标完成进度",
+    "views": "浏览量",
+    "downloads": "下载量",
+    "weekly_revenue": "每周收入",
+    "traffic_chart": "面积图：七个小时内的浏览量与下载量",
+    "revenue_chart": "雷达图：一周中每天的收入",
+    "messages": "消息",
+    "revenue_table": "收入表",
+    "time": "时间",
+    "day": "日期"
+  }
 }

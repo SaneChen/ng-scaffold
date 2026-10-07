@@ -218,5 +218,26 @@
   "signup_welcome": "歡迎",
   "signup_title": "建立帳號只需幾秒鐘",
   "read_and_agree": "我已閱讀並同意服務條款",
-  "have_an_account": "已經有帳號了？"
+  "have_an_account": "已經有帳號了？",
+  "position": "序號",
+  "name": "名稱",
+  "weight": "重量",
+  "symbol": "符號",
+  "dashboard": {
+    "total_sales": "總銷售額",
+    "revenue": "收入",
+    "traffic": "流量",
+    "new_users": "新使用者",
+    "monthly": "本月",
+    "monthly_target": "{{title}}：月度目標完成進度",
+    "views": "瀏覽量",
+    "downloads": "下載量",
+    "weekly_revenue": "每週收入",
+    "traffic_chart": "面積圖：七個小時內的瀏覽量與下載量",
+    "revenue_chart": "雷達圖：一週中每天的收入",
+    "messages": "訊息",
+    "revenue_table": "收入表",
+    "time": "時間",
+    "day": "日期"
+  }
 }

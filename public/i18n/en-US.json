@@ -218,5 +218,26 @@
   "signup_welcome": "Welcome",
   "signup_title": "It only takes a few seconds to create your account",
   "read_and_agree": "I have read and agree to the terms of service",
-  "have_an_account": "Already have an account?"
+  "have_an_account": "Already have an account?",
+  "position": "Position",
+  "name": "Name",
+  "weight": "Weight",
+  "symbol": "Symbol",
+  "dashboard": {
+    "total_sales": "Total sales",
+    "revenue": "Revenue",
+    "traffic": "Traffic",
+    "new_users": "New users",
+    "monthly": "Monthly",
+    "monthly_target": "{{title}}: progress towards the monthly target",
+    "views": "Page views",
+    "downloads": "Downloads",
+    "weekly_revenue": "Weekly revenue",
+    "traffic_chart": "Area chart of page views and downloads over seven hours",
+    "revenue_chart": "Radar chart of the revenue of each day of the week",
+    "messages": "Messages",
+    "revenue_table": "Revenue table",
+    "time": "Time",
+    "day": "Day"
+  }
 }

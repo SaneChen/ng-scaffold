@@ -31,6 +31,12 @@ export const routes: Routes = [
     canMatch: [authGuard],
     canActivateChild: [authGuard],
     children: [
+      // [ng-scaffold] Step 4: the dashboard.
+      {
+        path: 'dashboard',
+        title: 'menu.dashboard',
+        loadComponent: () => import('./routes/dashboard/dashboard').then(m => m.Dashboard),
+      },
       // [ng-scaffold] Step 2: error pages (also shown by `permissionGuard` and failed GETs).
       {
         path: '403',

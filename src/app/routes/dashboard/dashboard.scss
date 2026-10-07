@@ -1,0 +1,62 @@
+@use '@angular/material' as mat;
+
+.row {
+  align-items: start;
+}
+
+.stat {
+  // White indicator on a darkened track, readable on every tone-40 background.
+  @include mat.progress-bar-overrides(
+    (
+      active-indicator-color: currentColor,
+      track-color: rgb(0 0 0 / 30%),
+    )
+  );
+  @include mat.card-overrides(
+    (
+      subtitle-text-color: currentColor,
+    )
+  );
+
+  h2 {
+    margin: 0;
+  }
+
+  .amount {
+    margin: 0 0 0.5rem;
+    font: var(--mat-sys-headline-medium);
+  }
+
+  small {
+    display: block;
+    margin-block-start: 0.25rem;
+  }
+}
+
+h2[mat-card-title] {
+  margin: 0;
+}
+
+.chart {
+  position: relative;
+  block-size: 350px;
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--mat-sys-title-medium);
+}
+
+.table {
+  overflow-x: auto;
+}
+
+table {
+  inline-size: 100%;
+}
+
+.probe {
+  display: none;
+}

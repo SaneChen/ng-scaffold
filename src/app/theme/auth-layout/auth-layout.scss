@@ -1,6 +1,7 @@
 :host {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
   min-height: 100%;
   background-image:
     radial-gradient(at 97% 21%, hsl(125deg 98% 72% / 30%) 0, transparent 50%),
@@ -19,8 +20,8 @@
 
 .page {
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
-  min-height: 100%;
   padding: var(--gutter);
 }

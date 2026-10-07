@@ -84,9 +84,14 @@
   }
   <span class="menu-name">{{ name }}</span>
   @if (item.label) {
-    <span class="menu-tag" [class]="tagClass(item.label)">{{ item.label.value }}</span>
+    <span class="menu-tag" [class]="tagClass(item.label)">{{ item.label.value | translate }}</span>
   }
   @if (item.badge) {
-    <span class="menu-tag badge" [class]="tagClass(item.badge)">{{ item.badge.value }}</span>
+    <span class="menu-tag badge" [class]="tagClass(item.badge)">
+      {{ item.badge.value | translate }}
+    </span>
+    @if (isCount(item.badge)) {
+      <span class="cdk-visually-hidden">{{ 'sidebar.badge_new' | translate }}</span>
+    }
   }
 </ng-template>

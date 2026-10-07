@@ -10,6 +10,9 @@
  *   3. The icons are direct children of the buttons, so they land in Material's icon slots; only
  *      the name and the tags come from a shared template. The layout makes the `app-topmenu`
  *      element sticky below the header.
+ *   4. Tags as in the side menu: translated values, a hidden "new" after numeric badges; the tags
+ *      are inline blocks, so no stray spaces inside the pills and the accessible name keeps a
+ *      space between the name and a tag ("Design New", not "DesignNew").
  *
  * Why: ng-matero used `mat-tab-nav-bar`, which announced menu buttons as tabs of a tab panel, and
  * mutated `active` signals inside the menu data from several router subscriptions.
@@ -21,7 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { buildRoute, MenuStore, menuTagClass } from '@core';
+import { buildRoute, isMenuCount, MenuStore, menuTagClass } from '@core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { filter, map } from 'rxjs';
 import { TopmenuPanel } from '../topmenu-panel/topmenu-panel';
@@ -48,6 +51,7 @@ export class Topmenu {
   protected readonly menu = this.#store.visibleMenu;
   protected readonly buildRoute = buildRoute;
   protected readonly tagClass = menuTagClass;
+  protected readonly isCount = isMenuCount;
 
   readonly #url = toSignal(
     this.#router.events.pipe(

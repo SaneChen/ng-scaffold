@@ -125,7 +125,9 @@
     "collapse": "将菜单折叠为图标",
     "close": "关闭菜单",
     "navigation": "主导航",
-    "new_tab": "（在新标签页中打开）"
+    "new_tab": "（在新标签页中打开）",
+    "new": "新",
+    "badge_new": "条新内容"
   },
   "notice": {
     "title": "公告",

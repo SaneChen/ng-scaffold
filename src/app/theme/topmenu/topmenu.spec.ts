@@ -5,22 +5,29 @@
  *   1. `yarn ng g component theme/topmenu` generated the "should create" test (the panel spec is
  *      covered here, through the menu that uses it).
  *   2. Replaced it with tests against a real router and `MenuStore`: the named landmark, the
- *      current page link, the group containing the current page highlighted, and nested
- *      dropdowns with their router links.
+ *      current page link, the group containing the current page highlighted, nested dropdowns
+ *      with their router links, and tags (translated, a hidden "new" after a numeric badge).
  */
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { Menu, MenuStore } from '@core';
-import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { Topmenu } from './topmenu';
 
 @Component({ template: '' })
 class Page {}
 
 const MENU: Menu[] = [
-  { route: 'dashboard', name: 'dashboard', type: 'link', icon: 'dashboard' },
+  {
+    route: 'dashboard',
+    name: 'dashboard',
+    type: 'link',
+    icon: 'dashboard',
+    label: { color: 'azure-40', value: 'sidebar.new' },
+    badge: { color: 'red-40', value: '5' },
+  },
   {
     route: 'material',
     name: 'material',
@@ -77,5 +84,19 @@ describe('Topmenu', () => {
     await fixture.whenStable();
     const current = document.querySelector<HTMLAnchorElement>('a[aria-current="page"]');
     expect(current?.getAttribute('href')).toBe('/material/buttons/button');
+  });
+
+  it('should translate tags and say "new" after counts, for screen readers only', async () => {
+    const translate = TestBed.inject(TranslateService);
+    translate.setTranslation('en', { sidebar: { new: 'New', badge_new: 'new' } });
+    translate.use('en');
+    await fixture.whenStable();
+    const link: HTMLElement = fixture.nativeElement.querySelector('a[href="/dashboard"]');
+    const badge = link.querySelector('.menu-tag.badge');
+
+    expect(link.querySelector('.menu-tag:not(.badge)')?.textContent?.trim()).toBe('New');
+    expect(badge?.textContent?.trim()).toBe('5');
+    expect(badge?.nextElementSibling?.className).toBe('cdk-visually-hidden');
+    expect(badge?.nextElementSibling?.textContent).toBe('new');
   });
 });

@@ -125,7 +125,9 @@
     "collapse": "將選單收合為圖示",
     "close": "關閉選單",
     "navigation": "主導覽",
-    "new_tab": "（在新分頁中開啟）"
+    "new_tab": "（在新分頁中開啟）",
+    "new": "新",
+    "badge_new": "則新內容"
   },
   "notice": {
     "title": "公告",

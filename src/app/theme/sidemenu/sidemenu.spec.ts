@@ -6,14 +6,15 @@
  *   2. Replaced it with tests against a real router and `MenuStore`: the active link
  *      (`aria-current`), groups of the current page opened on navigation, the accordion with
  *      `aria-expanded` / `aria-controls`, external links, permission filtering and compact mode;
- *      then the nested accordion, letter icons and tag text colors.
+ *      then the nested accordion, letter icons and tag text colors; translated tags and the
+ *      hidden "new" after numeric badges only.
  */
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { Menu, MenuStore } from '@core';
-import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { Sidemenu } from './sidemenu';
 
 @Component({ template: '' })
@@ -36,7 +37,7 @@ const MENU: Menu[] = [
     name: 'forms',
     type: 'sub',
     icon: 'description',
-    label: { color: 'azure-40', value: 'New' },
+    label: { color: 'azure-40', value: 'sidebar.new' },
     badge: { color: 'red-90', value: '2' },
     children: [
       {
@@ -148,5 +149,28 @@ describe('Sidemenu', () => {
     expect(letters.map(letter => letter.textContent?.trim())).toContain('m');
     expect(forms.querySelector('.menu-tag:not(.badge)')?.className).toContain('text-white');
     expect(forms.querySelector('.menu-tag.badge')?.className).toContain('text-black');
+  });
+
+  it('should translate tags and say "new" after counts, for screen readers only', async () => {
+    const translate = TestBed.inject(TranslateService);
+    translate.setTranslation('en', { sidebar: { new: 'New', badge_new: 'new' } });
+    translate.use('en');
+    await fixture.whenStable();
+    const forms = group('forms');
+    const badge = forms.querySelector('.menu-tag.badge');
+
+    expect(forms.querySelector('.menu-tag:not(.badge)')?.textContent?.trim()).toBe('New');
+    expect(badge?.textContent?.trim()).toBe('2');
+    expect(badge?.hasAttribute('aria-hidden')).toBe(false);
+    expect(badge?.nextElementSibling?.className).toBe('cdk-visually-hidden');
+    expect(badge?.nextElementSibling?.textContent).toBe('new');
+
+    TestBed.inject(MenuStore).set([
+      { ...MENU[0], badge: { color: 'red-90', value: 'Hot' } },
+    ] as Menu[]);
+    await fixture.whenStable();
+    const hot = fixture.nativeElement.querySelector('.menu-tag.badge');
+    expect(hot?.textContent?.trim()).toBe('Hot');
+    expect(hot?.nextElementSibling).toBeNull();
   });
 });

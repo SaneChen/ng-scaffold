@@ -125,7 +125,9 @@
     "collapse": "Collapse the menu to icons",
     "close": "Close the menu",
     "navigation": "Main navigation",
-    "new_tab": "(opens in a new tab)"
+    "new_tab": "(opens in a new tab)",
+    "new": "New",
+    "badge_new": "new"
   },
   "notice": {
     "title": "Notices",

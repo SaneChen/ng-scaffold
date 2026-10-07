@@ -17,7 +17,7 @@
       "icon": "color_lens",
       "label": {
         "color": "azure-40",
-        "value": "New"
+        "value": "sidebar.new"
       },
       "children": [
         {

@@ -171,5 +171,12 @@
   "layout": {
     "skip_to_content": "Skip to main content",
     "loading": "Loading the page"
+  },
+  "breadcrumb": {
+    "label": "Breadcrumb",
+    "home": "Home"
+  },
+  "error": {
+    "back_home": "Back to home"
   }
 }

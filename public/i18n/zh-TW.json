@@ -171,5 +171,12 @@
   "layout": {
     "skip_to_content": "跳至主要內容",
     "loading": "正在載入頁面"
+  },
+  "breadcrumb": {
+    "label": "導覽路徑",
+    "home": "首頁"
+  },
+  "error": {
+    "back_home": "返回首頁"
   }
 }

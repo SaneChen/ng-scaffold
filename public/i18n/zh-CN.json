@@ -171,5 +171,12 @@
   "layout": {
     "skip_to_content": "跳到主要内容",
     "loading": "正在加载页面"
+  },
+  "breadcrumb": {
+    "label": "面包屑导航",
+    "home": "首页"
+  },
+  "error": {
+    "back_home": "返回首页"
   }
 }

@@ -95,11 +95,11 @@
 
 ### 阶段 4 · 布局（theme）
 
-- [ ] `AdminLayout`（侧边/顶部导航、固定/静态头部、折叠、移动端抽屉、RTL）
-- [ ] `AuthLayout`
-- [ ] `Header`、`Sidebar`、`UserPanel`、`Sidemenu`（手风琴 + 无障碍 aria-expanded）、`Topmenu`
-- [ ] `Customizer`（主题/方向/布局实时设置）、`SidebarNotice`
-- [ ] 小部件：品牌、通知、语言切换、用户菜单、全屏（原生 Fullscreen API）、GitHub 链接
+- [x] `AdminLayout`（侧边/顶部导航、固定/静态头部、折叠、移动端抽屉、RTL） — `697f7e1`、`81977cc`（分页器文案改由布局提供）、`e5edd05`（路由注册）
+- [x] `AuthLayout` — `697f7e1`
+- [x] `Header`、`Sidebar`、`UserPanel`、`Sidemenu`（手风琴 + 无障碍 aria-expanded）、`Topmenu` — `c65ec8f`、`0791ccb`、`8d238d4`
+- [x] `Customizer`（主题/方向/布局实时设置）、`SidebarNotice`（均为对话框侧边面板） — `781dac9`
+- [x] 小部件：品牌、通知、语言切换、用户菜单、全屏（原生 Fullscreen API）、GitHub 链接 — `9577250`
 
 ### 阶段 5 · 共享组件与基础页面
 

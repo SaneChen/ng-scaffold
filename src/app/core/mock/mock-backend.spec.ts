@@ -7,10 +7,12 @@
  *      and explicit times: login (username or email, wrong password), sign-up (new account,
  *      taken name), refresh (refresh token only, expiry), the current user and unknown routes.
  *   3. Added the profile update (`PATCH /user`).
+ *   4. Error messages are translation keys that exist in public/i18n.
  */
 import { HttpHeaders, HttpRequest } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { AuthToken, TokenResponse } from '../auth/auth-token';
+import enUS from '../../../../public/i18n/en-US.json';
 import { MOCK_ACCESS_TOKEN_TTL, MockBackend } from './mock-backend';
 
 const NOW = Date.UTC(2026, 0, 1);
@@ -106,5 +108,22 @@ describe('MockBackend', () => {
       expect.objectContaining({ name: 'Ada', email: 'ada@example.com' })
     );
     expect(getUser(token)?.body).toEqual(expect.objectContaining({ name: 'Ada' }));
+  });
+
+  it('should answer with error messages that are translation keys', () => {
+    const keys = [
+      post('/auth/login', { username: 'ng-scaffold', password: 'nope' }),
+      post('/auth/register', { username: '', password: '' }),
+      post('/auth/register', { username: 'ng-scaffold', password: 'x' }),
+    ].flatMap(response => {
+      const { message, errors } = response?.body as { message: string; errors: object };
+      return [message, ...Object.values(errors).flat()];
+    });
+    const validation: Record<string, string> = enUS.validation;
+
+    expect(keys.length).toBeGreaterThan(0);
+    for (const key of keys) {
+      expect(validation[key.replace('validation.', '')]).toEqual(expect.any(String));
+    }
   });
 });

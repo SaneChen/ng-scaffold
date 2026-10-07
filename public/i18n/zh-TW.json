@@ -202,7 +202,10 @@
     "pattern": "格式不正確",
     "invalid": "此值無效",
     "password_mismatch": "兩次輸入的密碼不一致",
-    "agree_terms": "請先同意服務條款"
+    "agree_terms": "請先同意服務條款",
+    "credentials_incorrect": "使用者名稱或密碼不正確。",
+    "credentials_required": "請輸入使用者名稱和密碼。",
+    "username_taken": "此使用者名稱已被使用。"
   },
   "login": "登入",
   "login_title": "歡迎回來",

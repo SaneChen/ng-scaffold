@@ -11,6 +11,8 @@
  *      `exp`, so the client exercises its real JWT, expiry and refresh code paths.
  *   4. Added `PATCH /user` (name and email of the signed-in account, validated like a server
  *      would) for the profile settings page.
+ *   5. Error messages are translation keys of public/i18n: a real API localizes its messages
+ *      from the `Accept-Language` header; the mock lets the forms' translate pipe do it.
  *
  * Why: the scaffold runs and can be demonstrated without a server. ng-matero used
  * `angular-in-memory-web-api`, whose module its published specs imported without installing it;
@@ -90,8 +92,8 @@ export class MockBackend {
     const { username, password } = fields(body, 'username', 'password');
     const account = this.#accounts.find(a => a.username === username || a.email === username);
     if (!account || account.password !== password) {
-      return invalid('The username or password is incorrect.', {
-        password: ['The username or password is incorrect.'],
+      return invalid('validation.credentials_incorrect', {
+        password: ['validation.credentials_incorrect'],
       });
     }
     return { status: HttpStatusCode.Ok, body: this.#issue(account, now) };
@@ -100,11 +102,11 @@ export class MockBackend {
   #register(body: unknown, now: number): MockResponse {
     const { username, password, email } = fields(body, 'username', 'password', 'email');
     if (!username || !password) {
-      return invalid('The username and password are required.', {});
+      return invalid('validation.credentials_required', {});
     }
     if (this.#accounts.some(a => a.username === username)) {
-      return invalid('The username has already been taken.', {
-        username: ['The username has already been taken.'],
+      return invalid('validation.username_taken', {
+        username: ['validation.username_taken'],
       });
     }
     const account: Account = {
@@ -123,13 +125,13 @@ export class MockBackend {
     const { name, email } = fields(body, 'name', 'email');
     const errors: Record<string, string[]> = {};
     if (!name.trim()) {
-      errors['name'] = ['The name is required.'];
+      errors['name'] = ['validation.required'];
     }
     if (!/^[^\s@]+@[^\s@]+$/.test(email)) {
-      errors['email'] = ['The email must be a valid email address.'];
+      errors['email'] = ['validation.invalid_email'];
     }
     if (Object.keys(errors).length > 0) {
-      return invalid('The given data was invalid.', errors);
+      return invalid('validation.invalid', errors);
     }
     account.name = name.trim();
     account.email = email;

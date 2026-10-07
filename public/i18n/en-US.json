@@ -202,7 +202,10 @@
     "pattern": "The format is not valid",
     "invalid": "This value is not valid",
     "password_mismatch": "The passwords do not match",
-    "agree_terms": "Accept the terms of service to continue"
+    "agree_terms": "Accept the terms of service to continue",
+    "credentials_incorrect": "The username or password is incorrect.",
+    "credentials_required": "Enter a username and a password.",
+    "username_taken": "This username is already taken."
   },
   "login": "Log in",
   "login_title": "Welcome back",

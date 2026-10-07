@@ -126,9 +126,11 @@
 ### 阶段 7 · `ng add ng-scaffold`
 
 - [ ] `schematics/`：`ng-add`（只做插入式修改）、`ng g ng-scaffold:module|page`、`ng-update`
-- [ ] 非默认主题：`ng-add` 插入 `provideAppSettings({ theme })` 时，同步改写 `src/index.html` 内联主题脚本中的
-      `let theme = 'auto'`（该脚本在应用启动前应用主题；`SettingsStore` 只持久化与默认值不同的设置，
-      新默认值不会出现在 `localStorage` 中，脚本只能从这一行得知）；golden 测试覆盖非默认主题的回答
+- [ ] 非默认主题、方向、语言：`ng-add` 插入 `provideAppSettings({ theme, dir, language })` 时，同步改写
+      `src/index.html` 内联启动脚本中的 `const defaults = { theme: 'auto', dir: 'ltr', language: 'auto' }`
+      （该脚本在应用启动前应用主题、方向与语言；`SettingsStore` 只持久化与默认值不同的设置，新默认值不会出现在
+      `localStorage` 中，脚本只能从这一行得知）；golden 测试覆盖非默认回答（`src/index.spec.ts` 只比对
+      `defaultAppSettings`，被 `provideAppSettings` 覆盖的默认值要由 schematic 保证）
 - [ ] 打包脚本：直接从仓库源码收集文件（演示区域用标记排除），无手工模板
 - [ ] golden 测试：临时目录 `ng new ng-scaffold` → `ng add <本地 tarball>` → 与仓库比对 → `ng build/test/lint`
 - [ ] 多项目工作区测试（`--project`）

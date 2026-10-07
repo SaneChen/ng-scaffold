@@ -173,7 +173,8 @@
   },
   "layout": {
     "skip_to_content": "跳至主要內容",
-    "loading": "正在載入頁面"
+    "loading": "正在載入頁面",
+    "starting": "載入中…"
   },
   "breadcrumb": {
     "label": "導覽路徑",

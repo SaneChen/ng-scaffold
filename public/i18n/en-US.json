@@ -173,7 +173,8 @@
   },
   "layout": {
     "skip_to_content": "Skip to main content",
-    "loading": "Loading the page"
+    "loading": "Loading the page",
+    "starting": "Loading…"
   },
   "breadcrumb": {
     "label": "Breadcrumb",

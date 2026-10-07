@@ -69,6 +69,8 @@
   （"config.args is not iterable"），回调参数不要解构。
 - jsdom 没有 canvas、`matchMedia`、`Element.scrollTo`：图表通过 `CHARTS_LOADER` 注入假实现，媒体查询用
   CDK `MediaMatcher`，`scrollTo` 在 spec 中补上。
+- **`src/index.html` 的内联启动脚本复制了应用代码**：存储键、默认设置、语言列表与匹配规则、加载文字
+  （`layout.starting`）。新增语言或修改默认值时一起改，`src/index.spec.ts` 会在不一致时失败。
 - 开发服务器的文件监听偶尔会停止（日志里不再出现 "Changes detected"），重启 `ng serve` 即可。
 
 ### 2.2 推荐的推进方式（与之前一致）
@@ -199,7 +201,8 @@ tables（kitchen-sink、remote-data，`@ng-matero/extensions` grid）、utilitie
 `collection.json`、`ng-add`、`ng-generate/module|page`、`migration.json`）；打包脚本从仓库源码收集 starter 文件并去掉
 `<demo>` 围栏、过滤 `menu.json` 中的演示条目；ng-add 对 `ng new` 文件**只做插入**（新 import 行、provider、
 路由、JSON 键、`tsconfig` 别名写入目标项目），提示项（导航位置、主题、方向、语言）非默认时插入
-`provideAppSettings({...})`；所有路径基于目标项目的 `root`/`sourceRoot`。
+`provideAppSettings({...})`，并同步改写 `src/index.html` 启动脚本中的 `const defaults = {...}` 一行；
+所有路径基于目标项目的 `root`/`sourceRoot`。
 golden 测试脚本与 CI 任务：临时目录 `ng new ng-scaffold` → `ng add <本地 tarball>` → 与仓库 starter 文件比对 →
 `ng lint`、`ng test`、`ng build`；另测 `--project` 多项目工作区。
 

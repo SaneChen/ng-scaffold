@@ -7,6 +7,9 @@
  *      languages as ng-matero's translate button).
  *   3. `resolveLanguage()` turns the `language` setting (`auto` or a code) and the browser's
  *      preferred languages into one supported code.
+ *   4. src/index.html repeats the list, `DEFAULT_LANGUAGE` and the matching in its inline
+ *      start-up script (it runs before the application, to set `<html lang>` and the loader
+ *      text); src/index.spec.ts fails when they differ.
  *
  * Why: labels are endonyms ("简体中文", not "Simplified Chinese") so people can find their own
  * language whatever the current one is. Matching goes through `Intl.Locale#maximize()`, so tags

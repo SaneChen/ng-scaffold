@@ -7,28 +7,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <!--
-      [ng-scaffold] Step 1: apply the stored theme before the first paint. SettingsStore keeps the
-      user's choice in localStorage ("ng-scaffold-settings") and mirrors it onto <html> as the
-      theme-dark / theme-auto class, but only once the application has started. This script sets
-      the same class right away, so the loader below and the first frames of the application use
-      the chosen color scheme instead of flashing the opposite one. Without a valid stored choice
-      it assumes the default theme, 'auto': keep that in sync with provideAppSettings() if an
-      application changes the default. Under a Content-Security-Policy, inline scripts need a hash
-      or nonce; the `security.autoCsp` build option of angular.json adds the hash automatically.
+      [ng-scaffold] Step 1: apply the stored theme, direction and language before the first paint.
+      SettingsStore keeps the user's choice in localStorage ("ng-scaffold-settings") and mirrors it
+      onto <html> (theme-dark / theme-auto class, dir) and LanguageStore sets <html lang>, but only
+      once the application has started. This script does the same right away, so the loader below
+      and the first frames of the application use the chosen color scheme, direction and language
+      instead of flashing the defaults. Without a valid stored choice it uses `defaults`, which
+      must match the application's (defaultAppSettings, or provideAppSettings() when an
+      application changes them). The language is matched like resolveLanguage() in
+      src/app/core/i18n/languages.ts, against the same LANGUAGES and DEFAULT_LANGUAGE.
+      src/index.spec.ts runs this script and fails when any of these copies drifts.
+      Under a Content-Security-Policy, inline scripts need a hash or nonce; the `security.autoCsp`
+      build option of angular.json adds the hashes automatically.
     -->
     <script>
       (function () {
-        let theme = 'auto';
+        const defaults = { theme: 'auto', dir: 'ltr', language: 'auto' };
+        let stored = {};
         try {
-          const stored = JSON.parse(localStorage.getItem('ng-scaffold-settings') ?? '{}');
-          if (['light', 'dark', 'auto'].includes(stored?.theme)) {
-            theme = stored.theme;
-          }
+          stored = JSON.parse(localStorage.getItem('ng-scaffold-settings') ?? '{}') ?? {};
         } catch {
-          // Storage blocked or unreadable: keep the default theme.
+          // Storage blocked or unreadable: keep the defaults.
         }
+        const root = document.documentElement;
+        const theme = ['light', 'dark', 'auto'].includes(stored.theme)
+          ? stored.theme
+          : defaults.theme;
         if (theme !== 'light') {
-          document.documentElement.classList.add('theme-' + theme);
+          root.classList.add('theme-' + theme);
+        }
+        root.dir = ['ltr', 'rtl'].includes(stored.dir) ? stored.dir : defaults.dir;
+
+        const languages = ['en-US', 'zh-CN', 'zh-TW'];
+        const browser = navigator.languages ?? [];
+        const setting = typeof stored.language === 'string' ? stored.language : defaults.language;
+        const wanted = setting === 'auto' ? browser : [setting, ...browser];
+        root.lang = 'en-US';
+        for (const tag of wanted) {
+          try {
+            const locale = new Intl.Locale(tag).maximize();
+            const same = languages
+              .map(code => ({ code, locale: new Intl.Locale(code).maximize() }))
+              .filter(option => option.locale.language === locale.language);
+            const match =
+              same.find(option => option.locale.baseName === locale.baseName) ??
+              same.find(option => option.locale.script === locale.script) ??
+              same[0];
+            if (match) {
+              root.lang = match.code;
+              break;
+            }
+          } catch {
+            // Not a well-formed language tag: try the next one.
+          }
         }
       })();
     </script>
@@ -128,12 +159,34 @@
     <app-root></app-root>
     <!--
       [ng-scaffold] Step 3: start-up loader shown until the first page has rendered; Preloader
-      (src/app/core/preloader) fades it out and removes it. role="status" announces the visible
-      text to screen readers without moving focus.
+      (src/app/core/preloader) fades it out and removes it. role="status" marks the text as the
+      page's status for assistive technologies (text present from the start is usually not
+      announced on its own). dir="auto" keeps the ellipsis after the word when the page is
+      right-to-left; `lang` names the language of the text, even if the application later falls
+      back to another one.
     -->
     <div id="globalLoader" class="global-loader" role="status" aria-live="polite">
       <div class="global-loader-spinner" aria-hidden="true"></div>
-      <p class="global-loader-text">Loading…</p>
+      <p class="global-loader-text" dir="auto" lang="en-US">Loading…</p>
     </div>
+    <!--
+      [ng-scaffold] Step 4: the loader text in the language chosen by Step 1 (the translation files
+      load only with the application). These are copies of `layout.starting` in public/i18n: add
+      a line for every language added to LANGUAGES (src/index.spec.ts checks both).
+    -->
+    <script>
+      (function () {
+        const lang = document.documentElement.lang;
+        const text = {
+          'zh-CN': '加载中…',
+          'zh-TW': '載入中…',
+        }[lang];
+        if (text) {
+          const element = document.querySelector('#globalLoader .global-loader-text');
+          element.textContent = text;
+          element.lang = lang;
+        }
+      })();
+    </script>
   </body>
 </html>

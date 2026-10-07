@@ -43,8 +43,9 @@ export interface AppSettings {
 
 export const defaultAppSettings: Readonly<AppSettings> = {
   navPos: 'side',
+  // The inline start-up script of src/index.html repeats the defaults of `dir`, `theme` and
+  // `language` (applied before the first paint); src/index.spec.ts checks that they match.
   dir: 'ltr',
-  // The inline theme script of src/index.html assumes this default: keep both in sync.
   theme: 'auto',
   showHeader: true,
   headerPos: 'fixed',

@@ -27,8 +27,8 @@ import { LocalStorage } from '../storage/local-storage';
 import { APP_SETTINGS, AppSettings, appSettingsChoices } from './app-settings';
 
 /**
- * `localStorage` key that holds the settings the user changed. The inline theme script of
- * src/index.html reads it before the application starts: keep both in sync.
+ * `localStorage` key that holds the settings the user changed. The inline start-up script of
+ * src/index.html reads it before the application starts (src/index.spec.ts checks the key).
  */
 export const SETTINGS_STORAGE_KEY = 'ng-scaffold-settings';
 

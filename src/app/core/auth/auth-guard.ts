@@ -8,6 +8,9 @@
  *      function serves `canMatch` (lazy routes are not even downloaded) and `canActivateChild`
  *      (re-checked on every child navigation, e.g. after the token expired).
  *   3. Signed-out users are redirected to `/auth/login?returnUrl=<requested URL>`.
+ *   4. A request for the login page itself is refused instead of redirected (the router then
+ *      tries the next routes): an empty-path route guarded by `authGuard` matches the login URL
+ *      too, and redirecting it would loop with an ever longer `returnUrl`.
  *
  * Why: ng-matero's guard redirected to the login page without remembering the requested page.
  */
@@ -22,6 +25,9 @@ export const authGuard: CanMatchFn & CanActivateChildFn = () => {
   const router = inject(Router);
   const target = router.currentNavigation()?.extractedUrl;
   const returnUrl = target ? router.serializeUrl(target) : '/';
+  if (returnUrl.split(/[?#]/)[0] === LOGIN_URL) {
+    return false;
+  }
   return router.createUrlTree([LOGIN_URL], {
     queryParams: returnUrl === '/' ? {} : { returnUrl },
   });

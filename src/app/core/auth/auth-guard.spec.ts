@@ -7,6 +7,7 @@
  *   2. Replaced it with navigations through a real router (the guard reads the URL of the current
  *      navigation): signed in, signed out with a deep link (`returnUrl`), signed out at the root,
  *      and the `canActivateChild` re-check after the token was dropped.
+ *   3. Added the login page itself behind a guarded empty-path route (no redirect loop).
  */
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
@@ -76,5 +77,17 @@ describe('authGuard', () => {
     await harness.navigateByUrl('/reports/1');
 
     expect(TestBed.inject(Router).url).toBe('/auth/login?returnUrl=%2Freports%2F1');
+  });
+
+  it('should let the router try other routes for the login page itself', async () => {
+    const router = TestBed.inject(Router);
+    router.resetConfig([
+      { path: '', canMatch: [authGuard], children: [{ path: '**', component: Page }] },
+      { path: 'auth/login', component: Page },
+    ]);
+
+    await harness.navigateByUrl('/auth/login?returnUrl=%2Freports');
+
+    expect(router.url).toBe('/auth/login?returnUrl=%2Freports');
   });
 });

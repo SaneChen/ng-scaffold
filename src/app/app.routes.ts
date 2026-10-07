@@ -4,7 +4,14 @@ import { authGuard } from '@core';
 
 export const routes: Routes = [
   // [ng-scaffold] Step 1: both layouts are lazy loaded; `authGuard` keeps signed-out users (and
-  // the layout's code) away from the admin area and re-checks every child navigation.
+  // the layout's code) away from the admin area and re-checks every child navigation. The auth
+  // layout comes first: the empty path of the admin layout matches every URL, so its guard would
+  // otherwise send `/auth/login` back to `/auth/login` forever.
+  {
+    path: 'auth',
+    loadComponent: () => import('@theme/auth-layout/auth-layout').then(m => m.AuthLayout),
+    children: [],
+  },
   {
     path: '',
     loadComponent: () => import('@theme/admin-layout/admin-layout').then(m => m.AdminLayout),
@@ -28,10 +35,5 @@ export const routes: Routes = [
         loadComponent: () => import('./routes/sessions/error-500').then(m => m.Error500),
       },
     ],
-  },
-  {
-    path: 'auth',
-    loadComponent: () => import('@theme/auth-layout/auth-layout').then(m => m.AuthLayout),
-    children: [],
   },
 ];

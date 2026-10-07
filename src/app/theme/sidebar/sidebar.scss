@@ -4,6 +4,9 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  // Clip the full-width header here: the drawer's own scroll container would otherwise show a
+  // horizontal scrollbar (the drawer's 1px border leaves less than --sidenav-width inside).
+  overflow: hidden;
 }
 
 .sidebar-header {

@@ -12,3 +12,4 @@ export * from './breadcrumb/breadcrumb';
 export * from './breadcrumb/menu-trail';
 export * from './page-header/page-header';
 export * from './error-code/error-code';
+export * from './pipes/validation-message-pipe';

@@ -190,5 +190,15 @@
       "title": "伺服器錯誤",
       "message": "伺服器發生了內部問題，請嘗試重新整理頁面。"
     }
+  },
+  "validation": {
+    "required": "此欄位為必填",
+    "min_length": "至少輸入 {{number}} 個字元",
+    "max_length": "最多輸入 {{number}} 個字元",
+    "min": "值不能小於 {{number}}",
+    "max": "值不能大於 {{number}}",
+    "invalid_email": "請輸入有效的電子郵件地址",
+    "pattern": "格式不正確",
+    "invalid": "此值無效"
   }
 }

@@ -190,5 +190,15 @@
       "title": "服务器错误",
       "message": "服务器出现了内部问题，请尝试刷新页面。"
     }
+  },
+  "validation": {
+    "required": "该字段必填",
+    "min_length": "至少输入 {{number}} 个字符",
+    "max_length": "最多输入 {{number}} 个字符",
+    "min": "值不能小于 {{number}}",
+    "max": "值不能大于 {{number}}",
+    "invalid_email": "请输入有效的邮箱地址",
+    "pattern": "格式不正确",
+    "invalid": "该值无效"
   }
 }

@@ -190,5 +190,15 @@
       "title": "Server error",
       "message": "Looks like we have an internal issue. Please try refreshing."
     }
+  },
+  "validation": {
+    "required": "This field is required",
+    "min_length": "Enter at least {{number}} characters",
+    "max_length": "Enter at most {{number}} characters",
+    "min": "Enter a value of at least {{number}}",
+    "max": "Enter a value of at most {{number}}",
+    "invalid_email": "Enter a valid email address",
+    "pattern": "The format is not valid",
+    "invalid": "This value is not valid"
   }
 }

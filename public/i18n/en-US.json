@@ -237,5 +237,13 @@
     "revenue_table": "Revenue table",
     "time": "Time",
     "day": "Day"
+  },
+  "save": "Save",
+  "profile_page": {
+    "account": "Account",
+    "roles": "Roles",
+    "permissions": "Permissions",
+    "saved": "Your profile has been saved.",
+    "name": "Name"
   }
 }

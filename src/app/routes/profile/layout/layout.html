@@ -1,0 +1,48 @@
+<app-page-header heading="profile" />
+
+<div class="row">
+  <mat-card class="col-sm-4 col-lg-3" appearance="outlined">
+    <mat-card-content class="user">
+      <img [ngSrc]="avatar()" width="80" height="80" alt="" />
+      <h2>{{ user()?.name }}</h2>
+      <p>{{ user()?.email }}</p>
+    </mat-card-content>
+
+    <mat-divider />
+
+    <mat-nav-list [attr.aria-label]="'profile' | translate">
+      <a
+        mat-list-item
+        routerLink="overview"
+        routerLinkActive
+        #overview="routerLinkActive"
+        [activated]="overview.isActive"
+        ariaCurrentWhenActive="page"
+      >
+        <mat-icon matListItemIcon>account_circle</mat-icon>
+        <span matListItemTitle>{{ 'menu.profile.overview' | translate }}</span>
+      </a>
+      <a
+        mat-list-item
+        routerLink="settings"
+        routerLinkActive
+        #settings="routerLinkActive"
+        [activated]="settings.isActive"
+        ariaCurrentWhenActive="page"
+      >
+        <mat-icon matListItemIcon>edit</mat-icon>
+        <span matListItemTitle>{{ 'edit_profile' | translate }}</span>
+      </a>
+    </mat-nav-list>
+    <mat-action-list>
+      <button mat-list-item type="button" (click)="logout()">
+        <mat-icon matListItemIcon>exit_to_app</mat-icon>
+        <span matListItemTitle>{{ 'logout' | translate }}</span>
+      </button>
+    </mat-action-list>
+  </mat-card>
+
+  <div class="col-sm-8 col-lg-9">
+    <router-outlet />
+  </div>
+</div>

@@ -237,5 +237,13 @@
     "revenue_table": "收入表",
     "time": "時間",
     "day": "日期"
+  },
+  "save": "儲存",
+  "profile_page": {
+    "account": "帳號",
+    "roles": "角色",
+    "permissions": "權限",
+    "saved": "個人資訊已儲存。",
+    "name": "姓名"
   }
 }

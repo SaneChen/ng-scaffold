@@ -1,0 +1,17 @@
+h2[mat-card-title] {
+  margin: 0 0 1rem;
+}
+
+.row {
+  row-gap: 0;
+}
+
+.form-errors p {
+  margin: 0 0 1rem;
+  color: var(--mat-sys-error);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}

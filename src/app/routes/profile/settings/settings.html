@@ -1,0 +1,49 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'edit_profile' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formRoot]="form">
+      <div class="row">
+        <mat-form-field class="col-md-6">
+          <mat-label>{{ 'profile_page.name' | translate }}</mat-label>
+          <input matInput [formField]="form.name" autocomplete="name" />
+          @if (form.name().errors()[0]; as error) {
+            <mat-error>
+              @let message = error | validationMessage;
+              {{ message.key | translate: message.params }}
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+          <mat-label>{{ 'email' | translate }}</mat-label>
+          <input matInput type="email" [formField]="form.email" autocomplete="email" />
+          @if (form.email().errors()[0]; as error) {
+            <mat-error>
+              @let message = error | validationMessage;
+              {{ message.key | translate: message.params }}
+            </mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="form-errors" role="alert">
+        @for (failure of failures(); track $index) {
+          <p>{{ failure | translate }}</p>
+        }
+      </div>
+
+      <div class="actions">
+        <button
+          matButton="filled"
+          type="submit"
+          [disabled]="form().submitting()"
+          [disabledInteractive]="true"
+        >
+          {{ 'save' | translate }}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,17 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'profile_page.account' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <dl>
+      <dt>{{ 'profile_page.name' | translate }}</dt>
+      <dd>{{ user()?.name }}</dd>
+      <dt>{{ 'email' | translate }}</dt>
+      <dd>{{ user()?.email }}</dd>
+      <dt>{{ 'profile_page.roles' | translate }}</dt>
+      <dd>{{ roles().join(', ') || '—' }}</dd>
+      <dt>{{ 'profile_page.permissions' | translate }}</dt>
+      <dd>{{ permissions().join(', ') || '—' }}</dd>
+    </dl>
+  </mat-card-content>
+</mat-card>

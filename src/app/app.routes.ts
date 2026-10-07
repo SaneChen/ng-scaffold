@@ -37,6 +37,8 @@ export const routes: Routes = [
         title: 'menu.dashboard',
         loadComponent: () => import('./routes/dashboard/dashboard').then(m => m.Dashboard),
       },
+      // [ng-scaffold] Step 5: the profile pages linked from the user menu.
+      { path: 'profile', loadChildren: () => import('./routes/profile/profile.routes') },
       // [ng-scaffold] Step 2: error pages (also shown by `permissionGuard` and failed GETs).
       {
         path: '403',

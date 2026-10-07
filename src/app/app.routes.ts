@@ -18,6 +18,11 @@ export const routes: Routes = [
         title: 'login',
         loadComponent: () => import('./routes/sessions/login/login').then(m => m.Login),
       },
+      {
+        path: 'signup',
+        title: 'signup',
+        loadComponent: () => import('./routes/sessions/signup/signup').then(m => m.Signup),
+      },
     ],
   },
   {

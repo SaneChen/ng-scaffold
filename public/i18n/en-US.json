@@ -199,7 +199,9 @@
     "max": "Enter a value of at most {{number}}",
     "invalid_email": "Enter a valid email address",
     "pattern": "The format is not valid",
-    "invalid": "This value is not valid"
+    "invalid": "This value is not valid",
+    "password_mismatch": "The passwords do not match",
+    "agree_terms": "Accept the terms of service to continue"
   },
   "login": "Log in",
   "login_title": "Welcome back",
@@ -210,5 +212,11 @@
   "signup": "Sign up",
   "sessions": {
     "failed": "Something went wrong. Please try again."
-  }
+  },
+  "email": "Email",
+  "confirm_password": "Confirm password",
+  "signup_welcome": "Welcome",
+  "signup_title": "It only takes a few seconds to create your account",
+  "read_and_agree": "I have read and agree to the terms of service",
+  "have_an_account": "Already have an account?"
 }

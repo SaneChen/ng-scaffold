@@ -5,8 +5,12 @@
   inline-size: min(100%, 24rem);
 }
 
+mat-card-header {
+  margin-block-end: 1rem;
+}
+
 h1 {
-  margin: 0 0 1rem;
+  margin: 0;
 }
 
 form {
@@ -34,4 +38,11 @@ p {
 
 a {
   color: var(--mat-sys-primary);
+}
+
+.field-error {
+  min-block-size: 1rem;
+  padding-inline: 1rem;
+  font: var(--mat-sys-body-small);
+  color: var(--mat-sys-error);
 }

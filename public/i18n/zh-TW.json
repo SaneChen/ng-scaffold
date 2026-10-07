@@ -199,7 +199,9 @@
     "max": "值不能大於 {{number}}",
     "invalid_email": "請輸入有效的電子郵件地址",
     "pattern": "格式不正確",
-    "invalid": "此值無效"
+    "invalid": "此值無效",
+    "password_mismatch": "兩次輸入的密碼不一致",
+    "agree_terms": "請先同意服務條款"
   },
   "login": "登入",
   "login_title": "歡迎回來",
@@ -210,5 +212,11 @@
   "signup": "註冊",
   "sessions": {
     "failed": "發生錯誤，請重試。"
-  }
+  },
+  "email": "電子郵件",
+  "confirm_password": "確認密碼",
+  "signup_welcome": "歡迎",
+  "signup_title": "建立帳號只需幾秒鐘",
+  "read_and_agree": "我已閱讀並同意服務條款",
+  "have_an_account": "已經有帳號了？"
 }

@@ -1,0 +1,89 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h1 mat-card-title>{{ 'signup_welcome' | translate }}</h1>
+    <p mat-card-subtitle>{{ 'signup_title' | translate }}</p>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formRoot]="form">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'username' | translate }}</mat-label>
+        <input matInput [formField]="form.username" autocomplete="username" />
+        @if (form.username().errors()[0]; as error) {
+          <mat-error>
+            @let message = error | validationMessage;
+            {{ message.key | translate: message.params }}
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'email' | translate }}</mat-label>
+        <input matInput type="email" [formField]="form.email" autocomplete="email" />
+        @if (form.email().errors()[0]; as error) {
+          <mat-error>
+            @let message = error | validationMessage;
+            {{ message.key | translate: message.params }}
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'password' | translate }}</mat-label>
+        <input matInput type="password" [formField]="form.password" autocomplete="new-password" />
+        @if (form.password().errors()[0]; as error) {
+          <mat-error>
+            @let message = error | validationMessage;
+            {{ message.key | translate: message.params }}
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'confirm_password' | translate }}</mat-label>
+        <input
+          matInput
+          type="password"
+          [formField]="form.confirmPassword"
+          autocomplete="new-password"
+        />
+        @if (form.confirmPassword().errors()[0]; as error) {
+          <mat-error>
+            @let message = error | validationMessage;
+            {{ message.key | translate: message.params }}
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-checkbox [formField]="form.agree" required aria-describedby="signup-agree-error">
+        {{ 'read_and_agree' | translate }}
+      </mat-checkbox>
+      <p id="signup-agree-error" class="field-error">
+        @if (form.agree().touched() && form.agree().errors()[0]; as error) {
+          @let message = error | validationMessage;
+          {{ message.key | translate: message.params }}
+        }
+      </p>
+
+      <div class="form-errors" role="alert">
+        @for (failure of failures(); track $index) {
+          <p>{{ failure | translate }}</p>
+        }
+      </div>
+
+      <button
+        matButton="filled"
+        type="submit"
+        [disabled]="form().submitting()"
+        [disabledInteractive]="true"
+      >
+        {{ 'signup' | translate }}
+      </button>
+
+      <p>
+        {{ 'have_an_account' | translate }}
+        <a routerLink="/auth/login">{{ 'login' | translate }}</a>
+      </p>
+    </form>
+  </mat-card-content>
+</mat-card>

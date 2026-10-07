@@ -199,7 +199,9 @@
     "max": "值不能大于 {{number}}",
     "invalid_email": "请输入有效的邮箱地址",
     "pattern": "格式不正确",
-    "invalid": "该值无效"
+    "invalid": "该值无效",
+    "password_mismatch": "两次输入的密码不一致",
+    "agree_terms": "请先同意服务条款"
   },
   "login": "登录",
   "login_title": "欢迎回来",
@@ -210,5 +212,11 @@
   "signup": "注册",
   "sessions": {
     "failed": "出错了，请重试。"
-  }
+  },
+  "email": "邮箱",
+  "confirm_password": "确认密码",
+  "signup_welcome": "欢迎",
+  "signup_title": "创建账号只需几秒钟",
+  "read_and_agree": "我已阅读并同意服务条款",
+  "have_an_account": "已经有账号了？"
 }

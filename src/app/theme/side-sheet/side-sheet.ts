@@ -8,8 +8,11 @@
  *      (right in LTR, left in RTL), full height, 320px wide (at most the viewport), with the
  *      `matero-side-sheet` panel class that src/styles/_side-sheet.scss squares off.
  *   3. While a sheet is open, a direction change (e.g. from the customizer) moves it to the new
- *      end side. (Its content keeps the `dir` it was opened with until it is reopened: MatDialog
- *      offers no public way to change an open overlay's direction.)
+ *      end side and gives its overlay the new `dir` (first: CDK places `left`/`right` according
+ *      to the overlay's direction), through the CDK `DialogRef` that MatDialog
+ *      registers with the root `Dialog` under the same id (`MatDialogRef` keeps its own private).
+ *      The content already injects the application's live `Directionality`: the sheet does not
+ *      set `direction`, which would make CDK provide a fixed copy.
  *
  * Why: the notice panel and the customizer slide in from the side. ng-matero used a second
  * `mat-sidenav` and `MtxDrawer` (@ng-matero/extensions); a dialog gives both the focus trap,
@@ -17,6 +20,7 @@
  * layout's sidenav container to the navigation drawer only.
  */
 import { Direction, Directionality } from '@angular/cdk/bidi';
+import { Dialog } from '@angular/cdk/dialog';
 import { ComponentType } from '@angular/cdk/portal';
 import { inject, Service, TemplateRef } from '@angular/core';
 import { DialogPosition, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
@@ -27,6 +31,7 @@ export const SIDE_SHEET_CLASS = 'matero-side-sheet';
 @Service()
 export class SideSheet {
   readonly #dialog = inject(MatDialog);
+  readonly #cdkDialog = inject(Dialog);
   readonly #dir = inject(Directionality);
 
   /** Opens `content` at the inline end; `config` adds to or overrides the side-sheet defaults. */
@@ -43,9 +48,16 @@ export class SideSheet {
       panelClass: SIDE_SHEET_CLASS,
       ...config,
     });
-    const directionChanges = this.#dir.change.subscribe(dir =>
-      ref.updatePosition(config.position ?? endPosition(dir))
-    );
+    const directionChanges = this.#dir.change.subscribe(dir => {
+      // The overlay copied the direction when it opened. A fixed `direction` (from the caller or
+      // MAT_DIALOG_DEFAULT_OPTIONS, merged into the CDK config) stays, as CDK gave the content a
+      // fixed Directionality too. First: CDK places `left`/`right` by the overlay direction.
+      const cdkRef = this.#cdkDialog.getDialogById(ref.id);
+      if (cdkRef && !cdkRef.config.direction) {
+        cdkRef.overlayRef.setDirection(dir);
+      }
+      ref.updatePosition(config.position ?? endPosition(dir));
+    });
     ref.afterClosed().subscribe(() => directionChanges.unsubscribe());
     return ref;
   }

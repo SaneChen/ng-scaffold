@@ -6,6 +6,7 @@
  *   2. Replaced it with one test per endpoint, calling `handle()` directly with `HttpRequest`s
  *      and explicit times: login (username or email, wrong password), sign-up (new account,
  *      taken name), refresh (refresh token only, expiry), the current user and unknown routes.
+ *   3. Added the profile update (`PATCH /user`).
  */
 import { HttpHeaders, HttpRequest } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
@@ -87,5 +88,23 @@ describe('MockBackend', () => {
 
   it('should leave unknown routes to the network', () => {
     expect(backend.handle(new HttpRequest('GET', '/orders'), '/orders')).toBeUndefined();
+  });
+
+  it('should update the profile of the signed-in account and validate it', () => {
+    const token = login().access_token;
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    const patch = (body: unknown) =>
+      backend.handle(new HttpRequest('PATCH', '/user', body, { headers }), '/user', NOW);
+
+    expect(patch({ name: ' ', email: 'nope' })).toEqual({
+      status: 422,
+      body: expect.objectContaining({
+        errors: { name: [expect.any(String)], email: [expect.any(String)] },
+      }),
+    });
+    expect(patch({ name: 'Ada', email: 'ada@example.com' })?.body).toEqual(
+      expect.objectContaining({ name: 'Ada', email: 'ada@example.com' })
+    );
+    expect(getUser(token)?.body).toEqual(expect.objectContaining({ name: 'Ada' }));
   });
 });

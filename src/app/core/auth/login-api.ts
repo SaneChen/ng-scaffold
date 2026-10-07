@@ -9,6 +9,8 @@
  *      show their own errors, and logout is best effort. The refresh request is marked with
  *      `IS_TOKEN_REFRESH`, so `tokenInterceptor` does not hold it back waiting for itself.
  *   4. Added `menu()` (`GET /user/menu`) together with the menu model.
+ *   5. Added `updateUser()` (`PATCH /user`, errors shown by the profile form) for the profile
+ *      settings page.
  *
  * Why: the URLs and payloads of the backend live in one class, so connecting a real API means
  * changing this file (or replacing the service) only. Paths are relative to the API base URL
@@ -28,6 +30,9 @@ export interface LoginCredentials {
   password: string;
   rememberMe?: boolean;
 }
+
+/** The fields of the signed-in user that `PATCH /user` changes. */
+export type ProfileData = Pick<User, 'name' | 'email'>;
 
 export interface RegistrationData {
   username: string;
@@ -64,6 +69,11 @@ export class LoginApi {
 
   user(): Observable<User> {
     return this.#http.get<User>('/user');
+  }
+
+  /** Saves the signed-in user's profile and returns the updated user. */
+  updateUser(data: ProfileData): Observable<User> {
+    return this.#http.patch<User>('/user', data, { context: SELF_HANDLED() });
   }
 
   /** The navigation menu of the signed-in user (`{ menu: [...] }`, as in ng-matero). */

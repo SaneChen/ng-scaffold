@@ -9,6 +9,8 @@
  *      logout and the current user.
  *   3. Tokens are unsigned JWTs (`alg: none`) whose payload holds the user id, the token kind and
  *      `exp`, so the client exercises its real JWT, expiry and refresh code paths.
+ *   4. Added `PATCH /user` (name and email of the signed-in account, validated like a server
+ *      would) for the profile settings page.
  *
  * Why: the scaffold runs and can be demonstrated without a server. ng-matero used
  * `angular-in-memory-web-api`, whose module its published specs imported without installing it;
@@ -69,6 +71,8 @@ export class MockBackend {
           status: HttpStatusCode.Ok,
           body: toUser(account),
         }));
+      case 'PATCH /user':
+        return this.#withUser(req, now, account => this.#updateUser(account, req.body));
       default:
         return undefined;
     }
@@ -113,6 +117,23 @@ export class MockBackend {
     };
     this.#accounts.push(account);
     return { status: HttpStatusCode.Created, body: this.#issue(account, now) };
+  }
+
+  #updateUser(account: Account, body: unknown): MockResponse {
+    const { name, email } = fields(body, 'name', 'email');
+    const errors: Record<string, string[]> = {};
+    if (!name.trim()) {
+      errors['name'] = ['The name is required.'];
+    }
+    if (!/^[^\s@]+@[^\s@]+$/.test(email)) {
+      errors['email'] = ['The email must be a valid email address.'];
+    }
+    if (Object.keys(errors).length > 0) {
+      return invalid('The given data was invalid.', errors);
+    }
+    account.name = name.trim();
+    account.email = email;
+    return { status: HttpStatusCode.Ok, body: toUser(account) };
   }
 
   #refresh(body: unknown, now: number): MockResponse {

@@ -10,6 +10,8 @@
  *   3. Added the races found in review: logout while a refresh is in flight, a logout whose token
  *      is rejected meanwhile, a second login over an active session, and tokens so short-lived
  *      that the refresh time is always past.
+ *   4. Added `updateProfile()`: the loaded user is replaced by the server's answer, except after
+ *      a logout during the request.
  */
 import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
@@ -209,5 +211,34 @@ describe('AuthStore', () => {
     http.expectNone('/auth/refresh');
     vi.advanceTimersByTime(1_000);
     http.expectOne('/auth/refresh');
+  });
+
+  it('should replace the user with the saved profile without reloading it', async () => {
+    await setup();
+    await signIn();
+
+    const saved = store.updateProfile({ name: 'Ada L.', email: 'ada@example.org' });
+    http.expectOne({ method: 'PATCH', url: '/user' }).flush({ ...USER, name: 'Ada L.' });
+    await saved;
+    TestBed.tick();
+
+    expect(store.user()?.name).toBe('Ada L.');
+    http.expectNone('/user');
+  });
+
+  it('should ignore a saved profile that arrives after a logout', async () => {
+    await setup();
+    await signIn();
+
+    const saved = store.updateProfile({ name: 'Ada L.', email: 'ada@example.org' });
+    const patch = http.expectOne({ method: 'PATCH', url: '/user' });
+    const logout = store.logout();
+    http.expectOne('/auth/logout').flush({});
+    await logout;
+    patch.flush({ ...USER, name: 'Ada L.' });
+    await saved;
+    TestBed.tick();
+
+    expect(store.user()).toBeNull();
   });
 });

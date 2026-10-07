@@ -18,6 +18,8 @@
  *      is kept in `returnUrl`.
  *   5. A refresh only stores its result if the token it renewed is still the current one, so a
  *      logout or a new login during the request is never undone.
+ *   6. Added `updateProfile()`, which saves the profile and replaces the loaded user with the
+ *      server's answer (no reload), unless the session changed during the request.
  *
  * Why: ng-matero chained `TokenService.change()`, `refresh()` and a `BehaviorSubject` of the user
  * through `switchMap`s, and navigated from the token interceptor and the user menu. Here the token
@@ -28,7 +30,7 @@ import { computed, effect, inject, Service, untracked } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { LoginApi, RegistrationData } from './login-api';
+import { LoginApi, ProfileData, RegistrationData } from './login-api';
 import { scheduleAt } from './schedule-at';
 import { TokenStore } from './token-store';
 import { User } from './user';
@@ -97,6 +99,16 @@ export class AuthStore {
   /** Creates an account and signs it in for this browser session. */
   async register(data: RegistrationData): Promise<void> {
     this.#tokens.set(await firstValueFrom(this.#api.register(data)), false);
+  }
+
+  /** Saves the signed-in user's name and email; rejects with the `HttpErrorResponse` if refused. */
+  async updateProfile(data: ProfileData): Promise<void> {
+    const session = this.#tokens.session();
+    const user = await firstValueFrom(this.#api.updateUser(data));
+    // A logout or another sign-in during the request owns the user now.
+    if (this.#tokens.session() === session) {
+      this.#user.set(user);
+    }
   }
 
   /** Renews the token with its refresh token; a refused refresh signs the user out. */

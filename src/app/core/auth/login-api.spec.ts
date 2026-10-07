@@ -5,10 +5,12 @@
  *   1. `yarn ng g service core/auth/login-api` generated the "should be created" test.
  *   2. Replaced it with one test per endpoint (the menu one added with the menu model) that pins the HTTP contract (method, path, body) the
  *      mock API and a real backend must implement.
+ *   3. Added `PATCH /user` with the profile settings page.
  */
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HANDLE_HTTP_ERRORS } from '../http/api-url';
 import { LoginApi } from './login-api';
 
 describe('LoginApi', () => {
@@ -62,5 +64,13 @@ describe('LoginApi', () => {
     http.expectOne({ method: 'GET', url: '/user/menu' }).flush({ menu: [{ route: 'dashboard' }] });
 
     expect(menu).toEqual([{ route: 'dashboard' }]);
+  });
+
+  it('should patch /user with the profile and leave its errors to the form', () => {
+    api.updateUser({ name: 'Ada', email: 'ada@example.com' }).subscribe();
+
+    const req = http.expectOne({ method: 'PATCH', url: '/user' });
+    expect(req.request.body).toEqual({ name: 'Ada', email: 'ada@example.com' });
+    expect(req.request.context.get(HANDLE_HTTP_ERRORS)).toBe(false);
   });
 });

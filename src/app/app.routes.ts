@@ -10,7 +10,24 @@ export const routes: Routes = [
     loadComponent: () => import('@theme/admin-layout/admin-layout').then(m => m.AdminLayout),
     canMatch: [authGuard],
     canActivateChild: [authGuard],
-    children: [],
+    children: [
+      // [ng-scaffold] Step 2: error pages (also shown by `permissionGuard` and failed GETs).
+      {
+        path: '403',
+        title: 'error.403.title',
+        loadComponent: () => import('./routes/sessions/error-403').then(m => m.Error403),
+      },
+      {
+        path: '404',
+        title: 'error.404.title',
+        loadComponent: () => import('./routes/sessions/error-404').then(m => m.Error404),
+      },
+      {
+        path: '500',
+        title: 'error.500.title',
+        loadComponent: () => import('./routes/sessions/error-500').then(m => m.Error500),
+      },
+    ],
   },
   {
     path: 'auth',

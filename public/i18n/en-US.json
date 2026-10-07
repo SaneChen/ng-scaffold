@@ -177,6 +177,18 @@
     "home": "Home"
   },
   "error": {
-    "back_home": "Back to home"
+    "back_home": "Back to home",
+    "403": {
+      "title": "Permission denied",
+      "message": "You do not have permission to access the requested data."
+    },
+    "404": {
+      "title": "Page not found",
+      "message": "This is not the web page you are looking for."
+    },
+    "500": {
+      "title": "Server error",
+      "message": "Looks like we have an internal issue. Please try refreshing."
+    }
   }
 }

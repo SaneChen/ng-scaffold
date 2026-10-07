@@ -1,10 +1,10 @@
 /**
- * `serverErrors()`: turns a refused sign-in or sign-up request into Signal Forms errors.
+ * `serverErrors()`: turns a refused form request into Signal Forms errors.
  *
- * How this file was built: written by hand (a plain function shared by the login and sign-up
- * pages).
+ * How this file was built: written by hand (a plain function) for the login and sign-up pages,
+ * then moved from routes/sessions to shared for the profile settings form.
  *
- * Why: these requests opt out of the global error toasts (`HANDLE_HTTP_ERRORS`), so the form
+ * Why: such requests opt out of the global error toasts (`HANDLE_HTTP_ERRORS`), so the form
  * shows the errors itself. A 422 body `{ message, errors: { field: [text] } }` (Laravel style, as
  * in ng-matero and the mock API) puts each text on its field; anything else becomes a form-level
  * error with a translation key. Messages from the server are shown as is: the API receives the
@@ -39,9 +39,7 @@ export function serverErrors(
       return [{ kind: 'server', message }];
     }
   }
-  return [
-    { kind: 'server', message: error.status === 0 ? 'http.network_error' : 'sessions.failed' },
-  ];
+  return [{ kind: 'server', message: error.status === 0 ? 'http.network_error' : 'http.failed' }];
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

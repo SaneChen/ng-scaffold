@@ -35,9 +35,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 import { AuthStore } from '@core';
-import { ValidationMessagePipe } from '@shared';
+import { serverErrors, ValidationMessagePipe } from '@shared';
 import { TranslatePipe } from '@ngx-translate/core';
-import { serverErrors } from '../server-errors';
 
 /** Minimum password length accepted by the form. */
 export const MIN_PASSWORD_LENGTH = 6;

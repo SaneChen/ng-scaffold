@@ -29,9 +29,8 @@ import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthStore } from '@core';
 import { environment } from '@env/environment';
-import { ValidationMessagePipe } from '@shared';
+import { serverErrors, ValidationMessagePipe } from '@shared';
 import { TranslatePipe } from '@ngx-translate/core';
-import { serverErrors } from '../server-errors';
 
 /** Credentials of the mock API's demo account (core/mock). */
 const DEMO_ACCOUNT = environment.mockApi ? 'ng-scaffold' : '';

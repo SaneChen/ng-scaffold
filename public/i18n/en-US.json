@@ -18,7 +18,8 @@
   "http": {
     "error": "Request failed ({{status}})",
     "network_error": "Cannot reach the server. Check your connection.",
-    "unauthorized": "Your session has ended. Please sign in again."
+    "unauthorized": "Your session has ended. Please sign in again.",
+    "failed": "Something went wrong. Please try again."
   },
   "menu": {
     "dashboard": "Dashboard",
@@ -210,9 +211,6 @@
   "password": "Password",
   "remember_me": "Remember me",
   "signup": "Sign up",
-  "sessions": {
-    "failed": "Something went wrong. Please try again."
-  },
   "email": "Email",
   "confirm_password": "Confirm password",
   "signup_welcome": "Welcome",

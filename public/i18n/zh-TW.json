@@ -18,7 +18,8 @@
   "http": {
     "error": "請求失敗（{{status}}）",
     "network_error": "無法連線到伺服器，請檢查網路連線。",
-    "unauthorized": "登入已失效，請重新登入。"
+    "unauthorized": "登入已失效，請重新登入。",
+    "failed": "發生錯誤，請重試。"
   },
   "menu": {
     "dashboard": "數據大盤",
@@ -210,9 +211,6 @@
   "password": "密碼",
   "remember_me": "記住我",
   "signup": "註冊",
-  "sessions": {
-    "failed": "發生錯誤，請重試。"
-  },
   "email": "電子郵件",
   "confirm_password": "確認密碼",
   "signup_welcome": "歡迎",

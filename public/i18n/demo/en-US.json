@@ -104,6 +104,57 @@
     "menu_level": {
       "depth": "This page is {{depth}} levels deep in the menu. The side menu opens every group on the way, and the breadcrumb shows the same path.",
       "path": "The way here:"
+    },
+    "media": {
+      "gallery": {
+        "intro": "Photos from Pixabay. Select a photo to open it in the photo viewer of @ng-matero/extensions: zoom, rotate, go full screen or move to the next one with the keyboard.",
+        "open": "Enlarge: {{title}}",
+        "photos": {
+          "1": "Skyscrapers seen from below, an airplane crossing the cloudy sky between them",
+          "2": "Columns of an ancient Greek temple under a blue sky",
+          "3": "Aerial view of a forested coast with a white beach and turquoise sea",
+          "4": "Curved glass balconies of a round high-rise against a blue sky",
+          "5": "Mountain lake mirroring snowy peaks lit by the rising sun, with a pine forest",
+          "6": "Bar front at night with neon signs and a vintage car mounted on the wall",
+          "7": "Castle with round towers at the end of a gravel path between lawns",
+          "8": "Green vintage racing car with the number 25 on a track",
+          "9": "Glass facade of a skyscraper seen from below, reflecting the clouds",
+          "10": "Hillside village of white houses with terracotta roofs",
+          "11": "Empty road leading into hills under heavy clouds",
+          "12": "A school of small silver fish underwater",
+          "13": "Waterfall plunging into a forested canyon",
+          "14": "Person shining a flashlight into a starry purple night sky",
+          "15": "Paraglider seen through a gap in green trees",
+          "16": "Snow-covered mountain range seen from high above the clouds",
+          "17": "Smooth curved sandstone walls of a slot canyon",
+          "18": "Orange paraglider in front of dark storm clouds",
+          "19": "Rice terraces with wooden huts on green hills",
+          "20": "Sunset over the sea with golden clouds and a small boat",
+          "21": "Mountain lake mirroring golden larches and a hut in the Dolomites in autumn",
+          "22": "Thatched cottage behind grassy dunes by the sea",
+          "23": "Snow-capped mountain range above autumn hills with larch trees",
+          "24": "Lake at sunset with pink clouds and mountains on the horizon",
+          "25": "Turquoise mountain lake with rocks, a pine forest and misty cliffs",
+          "26": "Wooden veranda of a Japanese temple with a hanging lantern among green maples",
+          "27": "Forested mountainsides above a green lake under drifting clouds",
+          "28": "River winding between villages and vineyards on wooded hills",
+          "29": "Lake mirroring a hillside of red and orange autumn trees",
+          "30": "Snowy road lined with frosted trees"
+        },
+        "viewer": {
+          "minimize": "Minimize",
+          "maximize": "Maximize",
+          "close": "Close",
+          "zoomIn": "Zoom in",
+          "zoomOut": "Zoom out",
+          "prev": "Previous photo",
+          "next": "Next photo",
+          "fullscreen": "Full screen",
+          "actualSize": "Actual size",
+          "rotateLeft": "Rotate left",
+          "rotateRight": "Rotate right"
+        }
+      }
     }
   }
 }

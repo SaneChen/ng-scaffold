@@ -1,0 +1,26 @@
+<app-page-header />
+
+<p>{{ 'demo.media.gallery.intro' | translate }}</p>
+
+<ul class="photos">
+  @for (photo of photos; track photo.src) {
+    <li>
+      <button
+        type="button"
+        class="photo"
+        mtxPhotoviewer
+        [mtxPhotoviewerItems]="items()"
+        [mtxPhotoviewerOptions]="options()[$index]"
+        [attr.aria-label]="'demo.media.gallery.open' | translate: { title: items()[$index].title }"
+      >
+        <img
+          [ngSrc]="photo.src"
+          fill
+          sizes="(min-width: 960px) 25vw, (min-width: 600px) 33vw, 50vw"
+          alt=""
+        />
+        <span class="caption" aria-hidden="true">{{ items()[$index].title }}</span>
+      </button>
+    </li>
+  }
+</ul>

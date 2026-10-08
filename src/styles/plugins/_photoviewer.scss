@@ -1,0 +1,12 @@
+// Styles of the photo viewer of @ng-matero/extensions (the media gallery demo).
+
+// How this file was built:
+//   1. Created by hand: the viewer (photoviewer, a dependency of @ng-matero/extensions) appends
+//      its window to <body>, so its stylesheet must be global; loaded inside the `<demo>` fence of
+//      _index.scss, which `ng add` leaves out with the gallery.
+//   2. The library's own stylesheet, unchanged (by its path: a bare `@use 'photoviewer'` would
+//      resolve to this partial).
+
+// Why: as in ng-matero; the library styles its window itself.
+
+@use 'photoviewer/src/scss/photoviewer';

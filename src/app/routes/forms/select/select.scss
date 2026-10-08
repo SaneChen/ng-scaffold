@@ -1,0 +1,19 @@
+.row {
+  align-items: start;
+}
+
+h2[mat-card-title] {
+  margin: 0 0 1rem;
+}
+
+mat-form-field {
+  inline-size: 100%;
+}
+
+mat-divider {
+  margin-block: 1rem;
+}
+
+.toggle {
+  margin-block-end: 1rem;
+}

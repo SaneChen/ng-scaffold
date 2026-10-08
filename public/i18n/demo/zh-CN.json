@@ -210,6 +210,37 @@
           "guangzhou": "广州",
           "shenzhen": "深圳"
         }
+      },
+      "select": {
+        "intro": "@ng-matero/extensions 的 mtx-select：可搜索的选择框，选项可来自加载器或数组，也可内联书写，支持标签，面板在对话框中同样可以打开。",
+        "person": "人员",
+        "item": "项目",
+        "car": "汽车",
+        "companies": "公司",
+        "custom": "自定义",
+        "selected": "已选：",
+        "source": {
+          "title": "数据来源",
+          "loader": "异步加载（半秒）的选项，带加载状态",
+          "array": "来自对象数组的选项",
+          "simple": "来自简单值数组的选项",
+          "options": "内联选项",
+          "toggle": "切换 Saab 选项的禁用状态"
+        },
+        "tags": {
+          "title": "标签",
+          "default": "输入即可添加新项目",
+          "custom": "用函数添加标签并隐藏已选项目",
+          "server": "在服务器上创建标签（一秒），带加载状态",
+          "create": "创建“{{name}}”",
+          "free": "没有下拉面板的标签（按 Enter 或 Tab 添加）"
+        },
+        "dialog": {
+          "title": "对话框中的选择框",
+          "intro": "选择框的面板显示在对话框之上。",
+          "open": "打开对话框",
+          "city": "城市"
+        }
       }
     },
     "dates": {

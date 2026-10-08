@@ -210,6 +210,37 @@
           "guangzhou": "Guangzhou",
           "shenzhen": "Shenzhen"
         }
+      },
+      "select": {
+        "intro": "mtx-select of @ng-matero/extensions: a searchable select with items from a loader or an array, inline options, tags and a panel that also opens inside dialogs.",
+        "person": "Person",
+        "item": "Item",
+        "car": "Car",
+        "companies": "Companies",
+        "custom": "Custom",
+        "selected": "Selected:",
+        "source": {
+          "title": "Data sources",
+          "loader": "Items loaded asynchronously (half a second), with a loading state",
+          "array": "Items from an array of objects",
+          "simple": "Items from an array of simple values",
+          "options": "Inline options",
+          "toggle": "Toggle the Saab option"
+        },
+        "tags": {
+          "title": "Tags",
+          "default": "Add a new item by typing it",
+          "custom": "Add tags with a function and hide the selected items",
+          "server": "Create tags on the server (one second), with a loading state",
+          "create": "Create “{{name}}”",
+          "free": "Tags without a dropdown panel (Enter or Tab adds)"
+        },
+        "dialog": {
+          "title": "Select in a dialog",
+          "intro": "The select's panel opens above the dialog.",
+          "open": "Open the dialog",
+          "city": "City"
+        }
       }
     },
     "dates": {

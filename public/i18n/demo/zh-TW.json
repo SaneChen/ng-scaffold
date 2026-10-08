@@ -210,6 +210,37 @@
           "guangzhou": "廣州",
           "shenzhen": "深圳"
         }
+      },
+      "select": {
+        "intro": "@ng-matero/extensions 的 mtx-select：可搜尋的選擇框，選項可來自載入器或陣列，也可內嵌撰寫，支援標籤，面板在對話框中同樣可以開啟。",
+        "person": "人員",
+        "item": "項目",
+        "car": "汽車",
+        "companies": "公司",
+        "custom": "自訂",
+        "selected": "已選：",
+        "source": {
+          "title": "資料來源",
+          "loader": "非同步載入（半秒）的選項，帶載入狀態",
+          "array": "來自物件陣列的選項",
+          "simple": "來自簡單值陣列的選項",
+          "options": "內嵌選項",
+          "toggle": "切換 Saab 選項的停用狀態"
+        },
+        "tags": {
+          "title": "標籤",
+          "default": "輸入即可新增項目",
+          "custom": "用函式新增標籤並隱藏已選項目",
+          "server": "在伺服器上建立標籤（一秒），帶載入狀態",
+          "create": "建立「{{name}}」",
+          "free": "沒有下拉面板的標籤（按 Enter 或 Tab 新增）"
+        },
+        "dialog": {
+          "title": "對話框中的選擇框",
+          "intro": "選擇框的面板顯示在對話框之上。",
+          "open": "開啟對話框",
+          "city": "城市"
+        }
       }
     },
     "dates": {

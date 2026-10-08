@@ -1,0 +1,161 @@
+<app-page-header />
+
+<p>{{ 'demo.forms.select.intro' | translate }}</p>
+
+<div class="row">
+  <mat-card class="col-md-6" appearance="outlined">
+    <mat-card-header>
+      <h2 mat-card-title>{{ 'demo.forms.select.source.title' | translate }}</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ 'demo.forms.select.source.loader' | translate }}</p>
+      <mat-form-field>
+        <mat-label>{{ 'demo.forms.select.person' | translate }}</mat-label>
+        <mtx-select
+          [items]="people.value() ?? []"
+          [loading]="people.isLoading()"
+          bindLabel="name"
+          bindValue="id"
+          [formField]="form.person"
+        />
+      </mat-form-field>
+      <p>
+        {{ 'demo.forms.select.selected' | translate }}
+        <code>{{ values().person | json }}</code>
+      </p>
+      <mat-divider />
+
+      <p>{{ 'demo.forms.select.source.array' | translate }}</p>
+      <mat-form-field>
+        <mat-label>{{ 'demo.forms.select.person' | translate }}</mat-label>
+        <mtx-select
+          [items]="peopleArray"
+          bindLabel="name"
+          bindValue="id"
+          [formField]="form.person2"
+        />
+      </mat-form-field>
+      <p>
+        {{ 'demo.forms.select.selected' | translate }}
+        <code>{{ values().person2 | json }}</code>
+      </p>
+      <mat-divider />
+
+      <p>{{ 'demo.forms.select.source.simple' | translate }}</p>
+      <mat-form-field>
+        <mat-label>{{ 'demo.forms.select.item' | translate }}</mat-label>
+        <mtx-select [items]="simpleItems" [formField]="form.simple" />
+      </mat-form-field>
+      <p>
+        {{ 'demo.forms.select.selected' | translate }}
+        <code>{{ values().simple | json }}</code>
+      </p>
+      <mat-divider />
+
+      <p>{{ 'demo.forms.select.source.options' | translate }}</p>
+      <button class="toggle" matButton="tonal" type="button" (click)="toggleSaab()">
+        {{ 'demo.forms.select.source.toggle' | translate }}
+      </button>
+      <mat-form-field>
+        <mat-label>{{ 'demo.forms.select.car' | translate }}</mat-label>
+        <mtx-select [formField]="form.car">
+          @for (car of cars(); track car.id) {
+            <mtx-option [value]="car.id" [disabled]="car.disabled">{{ car.name }}</mtx-option>
+          }
+          <mtx-option value="custom">{{ 'demo.forms.select.custom' | translate }}</mtx-option>
+        </mtx-select>
+      </mat-form-field>
+      <p>
+        {{ 'demo.forms.select.selected' | translate }}
+        <code>{{ values().car | json }}</code>
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="col-md-6" appearance="outlined">
+    <mat-card-header>
+      <h2 mat-card-title>{{ 'demo.forms.select.tags.title' | translate }}</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ 'demo.forms.select.tags.default' | translate }}</p>
+      <mat-form-field>
+        <mat-label>{{ 'demo.forms.select.item' | translate }}</mat-label>
+        <mtx-select [items]="[]" [addTag]="true" [formField]="form.tag" />
+      </mat-form-field>
+      <p>
+        {{ 'demo.forms.select.selected' | translate }}
+        <code>{{ values().tag | json }}</code>
+      </p>
+      <mat-divider />
+
+      <p>{{ 'demo.forms.select.tags.custom' | translate }}</p>
+      <mat-form-field>
+        <mat-label>{{ 'demo.forms.select.companies' | translate }}</mat-label>
+        <mtx-select
+          [items]="companies"
+          [addTag]="addTag"
+          [hideSelected]="true"
+          [multiple]="true"
+          bindLabel="name"
+          [formField]="form.tags"
+        />
+      </mat-form-field>
+      <p>
+        {{ 'demo.forms.select.selected' | translate }}
+        <code>{{ values().tags | json }}</code>
+      </p>
+      <mat-divider />
+
+      <p>{{ 'demo.forms.select.tags.server' | translate }}</p>
+      <mat-form-field>
+        <mat-label>{{ 'demo.forms.select.companies' | translate }}</mat-label>
+        <mtx-select
+          [items]="companies"
+          [addTag]="addTagOnServer"
+          [multiple]="true"
+          [loading]="creating()"
+          bindLabel="name"
+          [formField]="form.serverTags"
+        >
+          <ng-template ngSelectTag let-search="searchTerm">
+            {{ 'demo.forms.select.tags.create' | translate: { name: search } }}
+          </ng-template>
+        </mtx-select>
+      </mat-form-field>
+      <p>
+        {{ 'demo.forms.select.selected' | translate }}
+        <code>{{ values().serverTags | json }}</code>
+      </p>
+      <mat-divider />
+
+      <p>{{ 'demo.forms.select.tags.free' | translate }}</p>
+      <mat-form-field>
+        <mat-label>{{ 'demo.forms.select.item' | translate }}</mat-label>
+        <mtx-select
+          [items]="[]"
+          [addTag]="true"
+          [multiple]="true"
+          [selectOnTab]="true"
+          [panelDisabled]="true"
+          [formField]="form.freeTags"
+        />
+      </mat-form-field>
+      <p>
+        {{ 'demo.forms.select.selected' | translate }}
+        <code>{{ values().freeTags | json }}</code>
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="col-md-6" appearance="outlined">
+    <mat-card-header>
+      <h2 mat-card-title>{{ 'demo.forms.select.dialog.title' | translate }}</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ 'demo.forms.select.dialog.intro' | translate }}</p>
+      <button matButton="filled" type="button" (click)="openDialog()">
+        {{ 'demo.forms.select.dialog.open' | translate }}
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>

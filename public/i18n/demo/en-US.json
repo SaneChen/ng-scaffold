@@ -28,6 +28,54 @@
         "copy": "Copy the name {{name}}",
         "copied": "Copied “{{name}}”"
       }
+    },
+    "utilities": {
+      "grid": {
+        "intro": "The grid has 12 columns. Classes without an infix apply at every width; an infix applies from its breakpoint up:",
+        "from": "from {{width}}px",
+        "formly": "The dynamic forms use the same classes for their layout:",
+        "formly_link": "see the dynamic form examples",
+        "examples": {
+          "all": {
+            "title": "All breakpoints",
+            "description": "Equal columns with .col, sized columns with .col-<n>, at every width."
+          },
+          "stacked": {
+            "title": "Stacked to horizontal",
+            "description": "Stacked on phones, side by side from the sm breakpoint."
+          },
+          "mixed": {
+            "title": "Mix and match",
+            "description": "Different spans per breakpoint on the same column."
+          },
+          "offset": {
+            "title": "Offsets",
+            "description": "offset-<n> leaves n columns free before a column."
+          },
+          "gutters": {
+            "title": "No gutters",
+            "description": "no-gutters removes the space between the columns of a row."
+          }
+        }
+      },
+      "helpers": {
+        "intro": "Every helper class of the stylesheet with what it applies. Most also exist per breakpoint with an infix (d-md-none, text-sm-center); spacing sides are logical: l and r follow the text direction.",
+        "search": "Search classes or CSS",
+        "class": "Class",
+        "css": "CSS",
+        "none": "No class matches the search.",
+        "groups": {
+          "spacing": "Spacing",
+          "display": "Display",
+          "flexbox": "Flexbox",
+          "sizing": "Sizing",
+          "rounded": "Rounded corners",
+          "border": "Borders",
+          "text": "Text",
+          "colors": "Colors",
+          "layout": "Layout"
+        }
+      }
     }
   }
 }

@@ -1,0 +1,47 @@
+<app-page-header />
+
+<p>{{ 'demo.utilities.helpers.intro' | translate }}</p>
+
+<mat-form-field class="search" appearance="outline">
+  <mat-label>{{ 'demo.utilities.helpers.search' | translate }}</mat-label>
+  <mat-icon matPrefix>search</mat-icon>
+  <input matInput type="search" [value]="query()" (input)="search($event)" />
+</mat-form-field>
+
+<mat-card appearance="outlined">
+  <mat-tab-group mat-stretch-tabs="false">
+    @for (group of groups(); track group.key) {
+      <mat-tab>
+        <ng-template mat-tab-label>
+          {{ 'demo.utilities.helpers.groups.' + group.key | translate }} ({{ group.rules.length }})
+        </ng-template>
+        <ng-template matTabContent>
+          @if (group.rules.length === 0) {
+            <p class="none">{{ 'demo.utilities.helpers.none' | translate }}</p>
+          } @else {
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">{{ 'demo.utilities.helpers.class' | translate }}</th>
+                  <th scope="col">{{ 'demo.utilities.helpers.css' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (rule of group.rules; track rule.name) {
+                  <tr>
+                    <th scope="row">
+                      <code>.{{ rule.name }}</code>
+                    </th>
+                    <td>
+                      <code>{{ rule.css }}</code>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          }
+        </ng-template>
+      </mat-tab>
+    }
+  </mat-tab-group>
+</mat-card>

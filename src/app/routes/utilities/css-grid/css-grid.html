@@ -1,0 +1,39 @@
+<app-page-header />
+
+<p>{{ 'demo.utilities.grid.intro' | translate }}</p>
+<ul class="breakpoints">
+  @for (breakpoint of breakpoints; track breakpoint.infix) {
+    <li>
+      <code>{{ breakpoint.infix }}</code>
+      {{ 'demo.utilities.grid.from' | translate: { width: breakpoint.width } }}
+    </li>
+  }
+</ul>
+<p>
+  {{ 'demo.utilities.grid.formly' | translate }}
+  <a routerLink="/forms/dynamic">{{ 'demo.utilities.grid.formly_link' | translate }}</a>
+</p>
+
+@for (example of examples; track example.key) {
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <h2 mat-card-title>
+        {{ 'demo.utilities.grid.examples.' + example.key + '.title' | translate }}
+      </h2>
+      <p mat-card-subtitle>
+        {{ 'demo.utilities.grid.examples.' + example.key + '.description' | translate }}
+      </p>
+    </mat-card-header>
+    <mat-card-content>
+      @for (row of example.rows; track $index) {
+        <div class="row {{ example.rowClass ?? '' }}">
+          @for (column of row; track $index) {
+            <div [class]="column">
+              <code>.{{ column.split(' ').join(' .') }}</code>
+            </div>
+          }
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+}

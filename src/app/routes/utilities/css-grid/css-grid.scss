@@ -1,0 +1,34 @@
+mat-card {
+  margin-block-end: 1rem;
+}
+
+h2[mat-card-title] {
+  margin: 0;
+}
+
+mat-card-header {
+  margin-block-end: 1rem;
+}
+
+.breakpoints {
+  margin-block: 0 1rem;
+}
+
+.row + .row {
+  margin-block-start: 1rem;
+}
+
+.row > div {
+  padding-block: 0.75rem;
+  text-align: center;
+  background-color: var(--mat-sys-primary-container);
+  border: 1px solid var(--mat-sys-primary);
+  border-radius: var(--mat-sys-corner-small);
+}
+
+.row code {
+  padding: 0;
+  color: var(--mat-sys-on-primary-container);
+  background: none;
+  border: 0;
+}

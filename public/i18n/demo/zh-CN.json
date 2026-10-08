@@ -28,6 +28,54 @@
         "copy": "复制名称 {{name}}",
         "copied": "已复制“{{name}}”"
       }
+    },
+    "utilities": {
+      "grid": {
+        "intro": "栅格共 12 列。不带断点的类在所有宽度下生效；带断点的类从该断点起生效：",
+        "from": "{{width}}px 起",
+        "formly": "动态表单也用这些类布局：",
+        "formly_link": "查看动态表单示例",
+        "examples": {
+          "all": {
+            "title": "所有断点",
+            "description": ".col 为等宽列，.col-<n> 为指定宽度的列，在所有宽度下生效。"
+          },
+          "stacked": {
+            "title": "由堆叠到水平",
+            "description": "手机上堆叠排列，从 sm 断点起并排。"
+          },
+          "mixed": {
+            "title": "混合搭配",
+            "description": "同一列在不同断点下占不同的列数。"
+          },
+          "offset": {
+            "title": "偏移",
+            "description": "offset-<n> 在列前留出 n 列空白。"
+          },
+          "gutters": {
+            "title": "无间距",
+            "description": "no-gutters 去掉一行中各列之间的间距。"
+          }
+        }
+      },
+      "helpers": {
+        "intro": "样式表中的全部辅助类及其作用。多数类还有带断点的版本（d-md-none、text-sm-center）；间距的 l 与 r 是逻辑方向，随文字方向变化。",
+        "search": "搜索类名或 CSS",
+        "class": "类名",
+        "css": "CSS",
+        "none": "没有符合搜索条件的类。",
+        "groups": {
+          "spacing": "间距",
+          "display": "显示",
+          "flexbox": "弹性布局",
+          "sizing": "尺寸",
+          "rounded": "圆角",
+          "border": "边框",
+          "text": "文本",
+          "colors": "颜色",
+          "layout": "布局"
+        }
+      }
     }
   }
 }

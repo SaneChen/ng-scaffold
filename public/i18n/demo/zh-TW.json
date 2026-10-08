@@ -28,6 +28,54 @@
         "copy": "複製名稱 {{name}}",
         "copied": "已複製「{{name}}」"
       }
+    },
+    "utilities": {
+      "grid": {
+        "intro": "格線共 12 欄。不帶斷點的類別在所有寬度下生效；帶斷點的類別從該斷點起生效：",
+        "from": "{{width}}px 起",
+        "formly": "動態表單也用這些類別排版：",
+        "formly_link": "查看動態表單範例",
+        "examples": {
+          "all": {
+            "title": "所有斷點",
+            "description": ".col 為等寬欄，.col-<n> 為指定寬度的欄，在所有寬度下生效。"
+          },
+          "stacked": {
+            "title": "由堆疊到水平",
+            "description": "手機上堆疊排列，從 sm 斷點起並排。"
+          },
+          "mixed": {
+            "title": "混合搭配",
+            "description": "同一欄在不同斷點下佔不同的欄數。"
+          },
+          "offset": {
+            "title": "位移",
+            "description": "offset-<n> 在欄前留出 n 欄空白。"
+          },
+          "gutters": {
+            "title": "無間距",
+            "description": "no-gutters 移除一列中各欄之間的間距。"
+          }
+        }
+      },
+      "helpers": {
+        "intro": "樣式表中的全部輔助類別及其作用。多數類別還有帶斷點的版本（d-md-none、text-sm-center）；間距的 l 與 r 是邏輯方向，隨文字方向變化。",
+        "search": "搜尋類別名稱或 CSS",
+        "class": "類別",
+        "css": "CSS",
+        "none": "沒有符合搜尋條件的類別。",
+        "groups": {
+          "spacing": "間距",
+          "display": "顯示",
+          "flexbox": "彈性排版",
+          "sizing": "尺寸",
+          "rounded": "圓角",
+          "border": "邊框",
+          "text": "文字",
+          "colors": "顏色",
+          "layout": "版面"
+        }
+      }
     }
   }
 }

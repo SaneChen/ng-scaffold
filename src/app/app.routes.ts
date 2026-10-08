@@ -50,6 +50,7 @@ export const routes: Routes = [
         loadChildren: () => import('./routes/permissions/permissions.routes'),
       },
       { path: 'utilities', loadChildren: () => import('./routes/utilities/utilities.routes') },
+      { path: 'menu-level', loadChildren: () => import('./routes/menu-level/menu-level.routes') },
       // </demo>
       // [ng-scaffold] Step 2: error pages (also shown by `permissionGuard` and failed GETs).
       {

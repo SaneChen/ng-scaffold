@@ -100,6 +100,10 @@
         "guest": "Visible to GUEST only.",
         "else": "Hidden: the else template is shown instead."
       }
+    },
+    "menu_level": {
+      "depth": "This page is {{depth}} levels deep in the menu. The side menu opens every group on the way, and the breadcrumb shows the same path.",
+      "path": "The way here:"
     }
   }
 }

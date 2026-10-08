@@ -28,8 +28,9 @@ import { TranslatePipe } from '@ngx-translate/core';
       type="button"
       [matMenuTriggerFor]="menu"
       [attr.aria-label]="'header.notifications' | translate: { count: messages.length }"
+      [matBadge]="messages.length"
     >
-      <mat-icon [matBadge]="messages.length" aria-hidden="true">notifications</mat-icon>
+      <mat-icon aria-hidden="true">notifications</mat-icon>
     </button>
 
     <mat-menu #menu="matMenu">

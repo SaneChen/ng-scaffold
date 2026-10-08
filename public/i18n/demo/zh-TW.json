@@ -155,6 +155,52 @@
           "rotateRight": "向右旋轉"
         }
       }
+    },
+    "forms": {
+      "saved": "表單已送出。",
+      "fields": {
+        "invalid_date": "請輸入有效日期。",
+        "username": "使用者名稱",
+        "gender": "性別",
+        "none": "無",
+        "male": "男",
+        "female": "女",
+        "mobile": "手機號碼",
+        "email": "電子郵件",
+        "city": "城市",
+        "address": "地址",
+        "company": "公司",
+        "tele": "市話",
+        "website": "網址",
+        "date": "日期"
+      },
+      "elements": {
+        "inline": "行內表單",
+        "values": "目前的值：",
+        "vertical": "垂直表單",
+        "horizontal": "水平表單"
+      }
+    },
+    "dates": {
+      "year_range": "{{start}} 至 {{end}}",
+      "calendarLabel": "日曆",
+      "openCalendarLabel": "開啟日曆",
+      "closeCalendarLabel": "關閉日曆",
+      "prevMonthLabel": "上個月",
+      "nextMonthLabel": "下個月",
+      "prevYearLabel": "上一年",
+      "nextYearLabel": "下一年",
+      "prevMultiYearLabel": "前 24 年",
+      "nextMultiYearLabel": "後 24 年",
+      "switchToMonthViewLabel": "選擇日期",
+      "switchToMultiYearViewLabel": "選擇年月",
+      "switchToYearViewLabel": "選擇月份",
+      "startDateLabel": "開始日期",
+      "endDateLabel": "結束日期",
+      "switchToClockHourViewLabel": "選擇小時",
+      "switchToClockMinuteViewLabel": "選擇分鐘",
+      "okLabel": "確定",
+      "cancelLabel": "取消"
     }
   }
 }

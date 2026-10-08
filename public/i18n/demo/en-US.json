@@ -155,6 +155,52 @@
           "rotateRight": "Rotate right"
         }
       }
+    },
+    "forms": {
+      "saved": "The form was submitted.",
+      "fields": {
+        "invalid_date": "Enter a valid date.",
+        "username": "Username",
+        "gender": "Gender",
+        "none": "None",
+        "male": "Male",
+        "female": "Female",
+        "mobile": "Mobile",
+        "email": "Email",
+        "city": "City",
+        "address": "Address",
+        "company": "Company",
+        "tele": "Telephone",
+        "website": "Website",
+        "date": "Date"
+      },
+      "elements": {
+        "inline": "Inline form",
+        "values": "Current values:",
+        "vertical": "Vertical form",
+        "horizontal": "Horizontal form"
+      }
+    },
+    "dates": {
+      "year_range": "{{start}} to {{end}}",
+      "calendarLabel": "Calendar",
+      "openCalendarLabel": "Open calendar",
+      "closeCalendarLabel": "Close calendar",
+      "prevMonthLabel": "Previous month",
+      "nextMonthLabel": "Next month",
+      "prevYearLabel": "Previous year",
+      "nextYearLabel": "Next year",
+      "prevMultiYearLabel": "Previous 24 years",
+      "nextMultiYearLabel": "Next 24 years",
+      "switchToMonthViewLabel": "Choose date",
+      "switchToMultiYearViewLabel": "Choose month and year",
+      "switchToYearViewLabel": "Choose month",
+      "startDateLabel": "Start date",
+      "endDateLabel": "End date",
+      "switchToClockHourViewLabel": "Choose hour",
+      "switchToClockMinuteViewLabel": "Choose minute",
+      "okLabel": "OK",
+      "cancelLabel": "Cancel"
     }
   }
 }

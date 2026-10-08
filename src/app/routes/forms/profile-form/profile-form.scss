@@ -1,0 +1,13 @@
+.row {
+  row-gap: 0;
+}
+
+mat-form-field {
+  inline-size: 100%;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}

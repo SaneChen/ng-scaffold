@@ -1,0 +1,92 @@
+<form [formRoot]="form">
+  <div class="row">
+    <mat-form-field [class]="column()">
+      <mat-label>{{ 'demo.forms.fields.username' | translate }}</mat-label>
+      <input matInput [formField]="form.username" autocomplete="username" />
+      @if (form.username().errors()[0]; as error) {
+        <mat-error>
+          @let message = error | validationMessage;
+          {{ message.key | translate: message.params }}
+        </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field [class]="column()">
+      <mat-label>{{ 'demo.forms.fields.gender' | translate }}</mat-label>
+      <mat-select [formField]="form.gender">
+        <mat-option value="male">{{ 'demo.forms.fields.male' | translate }}</mat-option>
+        <mat-option value="female">{{ 'demo.forms.fields.female' | translate }}</mat-option>
+      </mat-select>
+      @if (form.gender().errors()[0]; as error) {
+        <mat-error>
+          @let message = error | validationMessage;
+          {{ message.key | translate: message.params }}
+        </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field [class]="column()">
+      <mat-label>{{ 'demo.forms.fields.mobile' | translate }}</mat-label>
+      <input matInput type="tel" [formField]="form.mobile" autocomplete="tel" />
+      <mat-icon matSuffix aria-hidden="true">smartphone</mat-icon>
+      @if (form.mobile().errors()[0]; as error) {
+        <mat-error>
+          @let message = error | validationMessage;
+          {{ message.key | translate: message.params }}
+        </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field [class]="column()">
+      <mat-label>{{ 'demo.forms.fields.email' | translate }}</mat-label>
+      <input matInput type="email" [formField]="form.email" autocomplete="email" />
+      @if (form.email().errors()[0]; as error) {
+        <mat-error>
+          @let message = error | validationMessage;
+          {{ message.key | translate: message.params }}
+        </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field [class]="column()">
+      <mat-label>{{ 'demo.forms.fields.city' | translate }}</mat-label>
+      <input matInput [formField]="form.city" autocomplete="address-level2" />
+    </mat-form-field>
+
+    <mat-form-field [class]="column()">
+      <mat-label>{{ 'demo.forms.fields.address' | translate }}</mat-label>
+      <input matInput [formField]="form.address" autocomplete="street-address" />
+    </mat-form-field>
+
+    <mat-form-field [class]="column()">
+      <mat-label>{{ 'demo.forms.fields.company' | translate }}</mat-label>
+      <input matInput [formField]="form.company" autocomplete="organization" />
+    </mat-form-field>
+
+    <mat-form-field [class]="column()">
+      <mat-label>{{ 'demo.forms.fields.tele' | translate }}</mat-label>
+      <input matInput type="tel" [formField]="form.tele" autocomplete="tel" />
+      <mat-icon matSuffix aria-hidden="true">phone</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field [class]="column()">
+      <mat-label>{{ 'demo.forms.fields.website' | translate }}</mat-label>
+      <input matInput type="url" [formField]="form.website" autocomplete="url" />
+    </mat-form-field>
+
+    <mat-form-field [class]="column()">
+      <mat-label>{{ 'demo.forms.fields.date' | translate }}</mat-label>
+      <input matInput [matDatepicker]="picker" [formField]="form.date" />
+      @if (form.date().invalid()) {
+        <mat-error>{{ 'demo.forms.fields.invalid_date' | translate }}</mat-error>
+      }
+      <mat-datepicker-toggle matIconSuffix [for]="picker" />
+      <mat-datepicker #picker />
+    </mat-form-field>
+  </div>
+
+  <div class="actions">
+    <button matButton type="button" (click)="cancel()">{{ 'cancel' | translate }}</button>
+    <button matButton="filled" type="submit">{{ 'save' | translate }}</button>
+  </div>
+</form>

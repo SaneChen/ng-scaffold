@@ -155,6 +155,52 @@
           "rotateRight": "向右旋转"
         }
       }
+    },
+    "forms": {
+      "saved": "表单已提交。",
+      "fields": {
+        "invalid_date": "请输入有效日期。",
+        "username": "用户名",
+        "gender": "性别",
+        "none": "无",
+        "male": "男",
+        "female": "女",
+        "mobile": "手机号",
+        "email": "邮箱",
+        "city": "城市",
+        "address": "地址",
+        "company": "公司",
+        "tele": "固定电话",
+        "website": "网址",
+        "date": "日期"
+      },
+      "elements": {
+        "inline": "行内表单",
+        "values": "当前的值：",
+        "vertical": "垂直表单",
+        "horizontal": "水平表单"
+      }
+    },
+    "dates": {
+      "year_range": "{{start}} 至 {{end}}",
+      "calendarLabel": "日历",
+      "openCalendarLabel": "打开日历",
+      "closeCalendarLabel": "关闭日历",
+      "prevMonthLabel": "上个月",
+      "nextMonthLabel": "下个月",
+      "prevYearLabel": "上一年",
+      "nextYearLabel": "下一年",
+      "prevMultiYearLabel": "前 24 年",
+      "nextMultiYearLabel": "后 24 年",
+      "switchToMonthViewLabel": "选择日期",
+      "switchToMultiYearViewLabel": "选择年月",
+      "switchToYearViewLabel": "选择月份",
+      "startDateLabel": "开始日期",
+      "endDateLabel": "结束日期",
+      "switchToClockHourViewLabel": "选择小时",
+      "switchToClockMinuteViewLabel": "选择分钟",
+      "okLabel": "确定",
+      "cancelLabel": "取消"
     }
   }
 }

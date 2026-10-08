@@ -1,0 +1,17 @@
+.row {
+  align-items: start;
+}
+
+h2[mat-card-title] {
+  margin: 0 0 1rem;
+}
+
+.inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
+}
+
+p {
+  margin: 0;
+}

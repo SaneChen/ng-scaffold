@@ -216,6 +216,13 @@
     tslib "^2.3.0"
     zod "^4.0.10"
 
+"@angular/material-date-fns-adapter@22.2.1":
+  version "22.2.1"
+  resolved "https://registry.yarnpkg.com/@angular/material-date-fns-adapter/-/material-date-fns-adapter-22.2.1.tgz#cf7d6eb4a265f1516708bcf0ff6513074d4be787"
+  integrity sha512-CUfjAMnsnJtwKChympiM/MEJrPbYxlV+YUT2GNalCeAlAB/Fwog2g8zSO4YxQlLNPhOOy6QvbXrr7pV+3Z3EkQ==
+  dependencies:
+    tslib "^2.3.0"
+
 "@angular/material@^22.2.1":
   version "22.2.1"
   resolved "https://registry.yarnpkg.com/@angular/material/-/material-22.2.1.tgz#76d999431f59fa9ff0481915d77e405c6329e253"
@@ -1296,6 +1303,13 @@
     "@napi-rs/nice-win32-ia32-msvc" "1.1.1"
     "@napi-rs/nice-win32-x64-msvc" "1.1.1"
 
+"@ng-matero/extensions-date-fns-adapter@^22.0.0":
+  version "22.0.0"
+  resolved "https://registry.yarnpkg.com/@ng-matero/extensions-date-fns-adapter/-/extensions-date-fns-adapter-22.0.0.tgz#238450badafd5844759e0df2a77742caea3db91f"
+  integrity sha512-t4Vdxb64pB/5FzJDOCloFY+xbpisex01Wwc/Cyz7LLsbI4Ml93PWE9QxS98U2mYl4Be32q4A76oo8C0EEMo5xg==
+  dependencies:
+    tslib "^2.4.0"
+
 "@ng-matero/extensions@^22.1.1":
   version "22.1.1"
   resolved "https://registry.yarnpkg.com/@ng-matero/extensions/-/extensions-22.1.1.tgz#0ba3917e7ce2eba8c520ebc0f99c442407051f63"
@@ -2350,6 +2364,11 @@ data-urls@^8.0.0:
   dependencies:
     whatwg-mimetype "^5.0.0"
     whatwg-url "^17.1.2"
+
+date-fns@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-4.4.0.tgz#806539edf45c616b2b76b5f78b88c56ed3c7e036"
+  integrity sha512-+1UMbeh68lH1SegH83CGWwpb6OHHbpSgr3+s5Eww5M4CAgswBpoWS0AjTOfEJ33HiYKz1hdj/KTFprzXHmq/6w==
 
 debug@^4.3.1, debug@^4.3.2, debug@^4.3.4, debug@^4.4.3:
   version "4.4.3"

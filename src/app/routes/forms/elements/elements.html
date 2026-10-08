@@ -1,0 +1,51 @@
+<app-page-header />
+
+<div class="row">
+  <mat-card class="col-12" appearance="outlined">
+    <mat-card-header>
+      <h2 mat-card-title>{{ 'demo.forms.elements.inline' | translate }}</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="inline">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'demo.forms.fields.username' | translate }}</mat-label>
+          <input matInput [formField]="inline.username" autocomplete="username" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'demo.forms.fields.email' | translate }}</mat-label>
+          <input matInput type="email" [formField]="inline.email" autocomplete="email" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'demo.forms.fields.gender' | translate }}</mat-label>
+          <mat-select [formField]="inline.gender">
+            <mat-option value="">{{ 'demo.forms.fields.none' | translate }}</mat-option>
+            <mat-option value="male">{{ 'demo.forms.fields.male' | translate }}</mat-option>
+            <mat-option value="female">{{ 'demo.forms.fields.female' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <p>
+        {{ 'demo.forms.elements.values' | translate }}
+        <code>{{ filter() | json }}</code>
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="col-md-4" appearance="outlined">
+    <mat-card-header>
+      <h2 mat-card-title>{{ 'demo.forms.elements.vertical' | translate }}</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <app-profile-form />
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="col-md-8" appearance="outlined">
+    <mat-card-header>
+      <h2 mat-card-title>{{ 'demo.forms.elements.horizontal' | translate }}</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <app-profile-form [columns]="2" />
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -179,6 +179,37 @@
         "values": "当前的值：",
         "vertical": "垂直表单",
         "horizontal": "水平表单"
+      },
+      "submit": "提交",
+      "dynamic": {
+        "intro": "这些表单以数据描述，由 ngx-formly 使用其 Angular Material 字段类型、一个自定义的组合框类型（mtx-select）和 CSS 栅格类渲染。",
+        "simple": "简单表单",
+        "advanced": "高级布局",
+        "fields": {
+          "text": "文本",
+          "text2": "嘿！",
+          "email": "邮箱地址",
+          "first_name": "名",
+          "last_name": "姓",
+          "street": "街道",
+          "city": "城市",
+          "city_description": "一个自定义字段类型。",
+          "zip": "邮政编码",
+          "zip_pattern": "请输入五位数字",
+          "other_input": "其他输入",
+          "other_checkbox": "其他复选框"
+        },
+        "placeholders": {
+          "text": "在此输入以启用下一个字段",
+          "text2": "上面的字段为空时不可用",
+          "email": "请输入邮箱地址"
+        },
+        "cities": {
+          "beijing": "北京",
+          "shanghai": "上海",
+          "guangzhou": "广州",
+          "shenzhen": "深圳"
+        }
       }
     },
     "dates": {
@@ -201,6 +232,13 @@
       "switchToClockMinuteViewLabel": "选择分钟",
       "okLabel": "确定",
       "cancelLabel": "取消"
+    },
+    "select_intl": {
+      "not_found": "没有找到选项",
+      "type_to_search": "输入以搜索",
+      "add_tag": "添加选项",
+      "loading": "正在加载…",
+      "clear_all": "全部清除"
     }
   }
 }

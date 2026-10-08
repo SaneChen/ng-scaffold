@@ -179,6 +179,37 @@
         "values": "目前的值：",
         "vertical": "垂直表單",
         "horizontal": "水平表單"
+      },
+      "submit": "送出",
+      "dynamic": {
+        "intro": "這些表單以資料描述，由 ngx-formly 使用其 Angular Material 欄位類型、一個自訂的組合框類型（mtx-select）和 CSS 格線類別渲染。",
+        "simple": "簡單表單",
+        "advanced": "進階排版",
+        "fields": {
+          "text": "文字",
+          "text2": "嘿！",
+          "email": "電子郵件地址",
+          "first_name": "名",
+          "last_name": "姓",
+          "street": "街道",
+          "city": "城市",
+          "city_description": "一個自訂欄位類型。",
+          "zip": "郵遞區號",
+          "zip_pattern": "請輸入五位數字",
+          "other_input": "其他輸入",
+          "other_checkbox": "其他核取方塊"
+        },
+        "placeholders": {
+          "text": "在此輸入以啟用下一個欄位",
+          "text2": "上面的欄位為空時不可用",
+          "email": "請輸入電子郵件地址"
+        },
+        "cities": {
+          "beijing": "北京",
+          "shanghai": "上海",
+          "guangzhou": "廣州",
+          "shenzhen": "深圳"
+        }
       }
     },
     "dates": {
@@ -201,6 +232,13 @@
       "switchToClockMinuteViewLabel": "選擇分鐘",
       "okLabel": "確定",
       "cancelLabel": "取消"
+    },
+    "select_intl": {
+      "not_found": "沒有找到選項",
+      "type_to_search": "輸入以搜尋",
+      "add_tag": "新增選項",
+      "loading": "正在載入…",
+      "clear_all": "全部清除"
     }
   }
 }

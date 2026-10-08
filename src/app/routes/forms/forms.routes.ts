@@ -14,7 +14,10 @@ const routes: Routes = [
     path: '',
     providers: provideDemoTranslations(),
     canActivate: [demoTranslationsReady],
-    children: [{ path: 'elements', loadChildren: () => import('./elements/elements.routes') }],
+    children: [
+      { path: 'elements', loadChildren: () => import('./elements/elements.routes') },
+      { path: 'dynamic', loadChildren: () => import('./dynamic/dynamic.routes') },
+    ],
   },
 ];
 

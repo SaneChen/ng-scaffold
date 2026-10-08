@@ -1,0 +1,35 @@
+<app-page-header />
+
+<p>{{ 'demo.forms.dynamic.intro' | translate }}</p>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.forms.dynamic.simple' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="simple" (ngSubmit)="submit(simple, simpleModel)">
+      <formly-form [form]="simple" [fields]="simpleFields" [model]="simpleModel" />
+      <div class="actions">
+        <button matButton type="button" (click)="reset(simple)">{{ 'cancel' | translate }}</button>
+        <button matButton="filled" type="submit">{{ 'demo.forms.submit' | translate }}</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.forms.dynamic.advanced' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="advanced" (ngSubmit)="submit(advanced, advancedModel)">
+      <formly-form [form]="advanced" [fields]="advancedFields" [model]="advancedModel" />
+      <div class="actions">
+        <button matButton type="button" (click)="reset(advanced)">
+          {{ 'cancel' | translate }}
+        </button>
+        <button matButton="filled" type="submit">{{ 'demo.forms.submit' | translate }}</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

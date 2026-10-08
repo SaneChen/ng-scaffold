@@ -1334,6 +1334,20 @@
   dependencies:
     tslib "^2.0.0"
 
+"@ngx-formly/core@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@ngx-formly/core/-/core-9.0.0.tgz#9e8554fff909d6bdfe7604fb5a857b28f2342e84"
+  integrity sha512-YOeNysyi7wsO/syDYHAmnKlFWgq5JC/gJbInGK3hc5pUoeHeA5XW2fNZH31Onx6/+jCVq+1OHsLKqHOIEiXwnA==
+  dependencies:
+    tslib "^2.0.0"
+
+"@ngx-formly/material@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@ngx-formly/material/-/material-9.0.0.tgz#05ed8f872e43fb7b886a163bf03dd55f5d71255f"
+  integrity sha512-Hlk/l+SQkYwDNaQOwsBsfG80eaJstMpQJTgN3LL52Qc6YrOgpGlPGsN3Lf1IVjstZ/RAs7s1+axtuOqw48Bnaw==
+  dependencies:
+    tslib "^2.0.0"
+
 "@ngx-translate/core@^18.0.0":
   version "18.0.0"
   resolved "https://registry.yarnpkg.com/@ngx-translate/core/-/core-18.0.0.tgz#55b0bad702b110d5fcf8c50a6779e6102fdb523c"

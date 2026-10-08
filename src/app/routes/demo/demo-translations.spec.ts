@@ -5,6 +5,7 @@
  *   1. The demo files public/i18n/demo/*.json have the same keys in every language.
  *   2. Through a real route: the page waits for the demo file of the current language, shows its
  *      keys next to the application's, and follows a language change.
+ *   3. `textAt()` reads texts of a subtree and '' for missing or non-text paths.
  */
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
@@ -16,7 +17,7 @@ import { provideTranslateService, TranslatePipe, TranslateService } from '@ngx-t
 import enUS from '../../../../public/i18n/demo/en-US.json';
 import zhCN from '../../../../public/i18n/demo/zh-CN.json';
 import zhTW from '../../../../public/i18n/demo/zh-TW.json';
-import { demoTranslationsReady, provideDemoTranslations } from './demo-translations';
+import { demoTranslationsReady, provideDemoTranslations, textAt } from './demo-translations';
 
 @Component({
   imports: [TranslatePipe],
@@ -118,5 +119,20 @@ describe('demo translations', () => {
     await harness.fixture.whenStable();
     expect(harness.routeNativeElement?.textContent?.trim()).toBe('你好 / 后台');
     http.verify();
+  });
+});
+
+describe('textAt', () => {
+  const tree = { columns: { name: 'Name' }, count: 3 };
+
+  it('should read a text by its dotted path', () => {
+    expect(textAt(tree, 'columns.name')).toBe('Name');
+  });
+
+  it('should give an empty text for missing or non-text paths', () => {
+    expect(textAt(undefined, 'columns.name')).toBe('');
+    expect(textAt(tree, 'columns.size')).toBe('');
+    expect(textAt(tree, 'columns')).toBe('');
+    expect(textAt(tree, 'count')).toBe('');
   });
 });

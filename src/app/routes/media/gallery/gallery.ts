@@ -22,6 +22,7 @@ import { MtxPhotoviewer } from '@ng-matero/extensions/photoviewer';
 import { PageHeader } from '@shared';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import type PhotoViewer from 'photoviewer';
+import { textAt } from '../../demo/demo-translations';
 
 /** The photos and their intrinsic sizes (NgOptimizedImage reserves the space). */
 export const PHOTOS = [
@@ -138,11 +139,7 @@ export class MediaGallery {
   }
 
   #text(path: string): string {
-    let value: unknown = this.#translations();
-    for (const key of path.split('.')) {
-      value = (value as Record<string, unknown> | undefined)?.[key];
-    }
-    return typeof value === 'string' ? value : '';
+    return textAt(this.#translations(), path);
   }
 
   #focus(index: number): void {

@@ -9,6 +9,8 @@
  *      language, loading its own file for each new language.
  *   2. `demoTranslationsReady`: a `canActivate` guard that waits until the child has loaded the
  *      current language, so a demo page never shows raw keys on its first render.
+ *   3. `textAt()`: a text of a translation subtree (from `TranslateService.stream('demo.…')`),
+ *      for pages that build texts into plain objects (grid columns, viewer options).
  *
  * Why: the demo pages translate all their texts (several hundred keys). Keeping them out of
  * public/i18n/<lang>.json keeps the starter's start-up download small, and `ng add` simply does
@@ -53,3 +55,12 @@ export const demoTranslationsReady: CanActivateFn = async () => {
     return router.createUrlTree(['/500']);
   }
 };
+
+/** The text at a dotted `path` of a translation subtree, or '' while it is missing. */
+export function textAt(translations: unknown, path: string): string {
+  let value = translations;
+  for (const key of path.split('.')) {
+    value = (value as Record<string, unknown> | undefined)?.[key];
+  }
+  return typeof value === 'string' ? value : '';
+}

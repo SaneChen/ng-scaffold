@@ -45,6 +45,7 @@ export const routes: Routes = [
       // `ng add`, which drops the fenced lines).
       // <demo>
       { path: 'design', loadChildren: () => import('./routes/design/design.routes') },
+      { path: 'material', loadChildren: () => import('./routes/material/material.routes') },
       {
         path: 'permissions',
         loadChildren: () => import('./routes/permissions/permissions.routes'),

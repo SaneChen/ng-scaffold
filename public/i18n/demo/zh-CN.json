@@ -394,6 +394,263 @@
         "no": "否",
         "error": "无法加载仓库。"
       }
+    },
+    "material": {
+      "selected": "已选：{{value}}",
+      "none": "无",
+      "submit": "提交",
+      "variants": {
+        "title": "颜色变体",
+        "text": "Material 3 组件没有 color 输入：第三色和错误色变体在一个作用域内替换主色系统颜色。",
+        "primary": "主色",
+        "tertiary": "第三色",
+        "error": "错误色"
+      },
+      "autocomplete": {
+        "state": "州",
+        "filter": {
+          "title": "过滤与选择",
+          "text": "输入以过滤美国各州，然后选择一个。"
+        },
+        "groups": {
+          "title": "选项分组",
+          "text": "匹配的州按首字母分组。"
+        }
+      },
+      "checkbox": {
+        "unlabelled": {
+          "title": "没有可见标签的复选框",
+          "text": "它的无障碍名称来自 aria-label。",
+          "label": "一个没有可见标签的复选框"
+        },
+        "standalone": {
+          "title": "独立复选框",
+          "agree": "是的，我同意条款和条件",
+          "disagree": "不，我不同意条款和条件",
+          "partial": "部分完成的任务"
+        },
+        "nested": {
+          "title": "嵌套清单"
+        },
+        "lists": {
+          "reminders": "提醒事项",
+          "groceries": "购物清单"
+        },
+        "tasks": {
+          "cook_dinner": "做晚饭",
+          "read_spec": "阅读 Material Design 规范",
+          "upgrade_angular": "把应用升级到 Angular",
+          "eggs": "有机鸡蛋",
+          "protein_powder": "蛋白粉",
+          "almond_flour": "杏仁粉"
+        }
+      },
+      "datepicker": {
+        "birthday": {
+          "title": "选择日期（例如出生日期）",
+          "label": "出生日期"
+        },
+        "payment": {
+          "title": "触摸界面（例如在手机上选择付款日期）",
+          "text": "您想安排在哪天付款？",
+          "label": "付款日期"
+        },
+        "trip": {
+          "title": "起始日期、最小值与最大值（例如往返航班）",
+          "departure": "出发日期",
+          "return": "返回日期"
+        },
+        "appointment": {
+          "title": "日期过滤（例如预约医生）",
+          "label": "预约日期",
+          "hint": "未来一年内的工作日"
+        },
+        "errors": {
+          "choose": "请选择一个日期。",
+          "earlier": "请选择更早的日期。",
+          "later": "请选择更晚的日期。",
+          "after_departure": "请选择出发之后的日期。",
+          "unavailable": "这一天没有可预约的时间。",
+          "invalid": "请输入有效的日期。"
+        }
+      },
+      "form_field": {
+        "controls": {
+          "title": "表单字段中的控件",
+          "input": "输入框",
+          "textarea": "多行文本框",
+          "select": "选择框",
+          "option": "选项"
+        },
+        "options": {
+          "title": "必填标记与浮动标签",
+          "hide_required": "隐藏必填标记",
+          "float_label": "标签浮动：",
+          "auto": "自动",
+          "always": "总是",
+          "required": "必填字段",
+          "placeholder": "占位文字",
+          "fancy": "花式",
+          "label": "标签"
+        },
+        "appearance": {
+          "title": "外观",
+          "fill": "填充式表单字段",
+          "outline": "轮廓式表单字段",
+          "hint": "提示"
+        }
+      },
+      "input": {
+        "names": {
+          "title": "基本输入框（例如姓名）",
+          "first": "名",
+          "last": "姓"
+        },
+        "password": {
+          "title": "带提示的输入框（例如密码）",
+          "label": "密码",
+          "show": "显示密码",
+          "hide": "隐藏密码",
+          "hint": "提示：您最喜欢的颜色"
+        },
+        "email": {
+          "title": "带错误信息的输入框（例如邮箱）",
+          "label": "邮箱"
+        },
+        "currency": {
+          "title": "前缀（例如货币换算）",
+          "rate": "1 美元 = {{rate}} 日元（2017 年 7 月 31 日汇率）。"
+        },
+        "comment": {
+          "title": "自动增高的文本框（例如评论）",
+          "label": "评论",
+          "hint": "给我们留言吧！"
+        }
+      },
+      "radio": {
+        "group": {
+          "title": "带值的单选按钮组"
+        },
+        "seasons": {
+          "winter": "冬季",
+          "spring": "春季",
+          "summer": "夏季",
+          "autumn": "秋季"
+        },
+        "before": {
+          "title": "标签在按钮之前"
+        },
+        "breads": {
+          "toast": "吐司",
+          "biscuit": "饼干",
+          "bagel": "贝果"
+        },
+        "disabled": {
+          "title": "禁用的按钮",
+          "text": "三个按钮：是、否和也许；“也许”已禁用。"
+        },
+        "yes": "是",
+        "no": "否",
+        "maybe": "也许"
+      },
+      "select": {
+        "single": {
+          "title": "单选",
+          "text": "选择您最喜欢的颜色。",
+          "label": "颜色"
+        },
+        "colors": {
+          "red": "红色",
+          "green": "绿色",
+          "blue": "蓝色",
+          "cyan": "青色",
+          "magenta": "品红",
+          "yellow": "黄色",
+          "black": "黑色"
+        },
+        "multiple": {
+          "title": "多选",
+          "text": "为您的披萨选择配料。",
+          "label": "配料"
+        },
+        "toppings": {
+          "pepperoni": "意式辣香肠",
+          "mushrooms": "蘑菇",
+          "onions": "洋葱",
+          "sausage": "香肠",
+          "bacon": "培根",
+          "cheese": "加芝士",
+          "olives": "橄榄",
+          "peppers": "甜椒",
+          "pineapple": "菠萝",
+          "spinach": "菠菜"
+        },
+        "groups": {
+          "title": "选项分组",
+          "text": "选一样做菜的食材；香草已售罄。",
+          "label": "食材"
+        },
+        "produce": {
+          "fruits": "水果",
+          "vegetables": "蔬菜",
+          "herbs": "香草",
+          "grains": "谷物",
+          "apple": "苹果",
+          "banana": "香蕉",
+          "cherry": "樱桃",
+          "carrot": "胡萝卜",
+          "pepper": "甜椒",
+          "spinach": "菠菜",
+          "basil": "罗勒",
+          "mint": "薄荷",
+          "thyme": "百里香",
+          "rice": "大米",
+          "oats": "燕麦"
+        }
+      },
+      "slider": {
+        "color": {
+          "title": "连续滑块（例如颜色通道）",
+          "text": "移动红、绿、蓝滑块来调出一种颜色。",
+          "red": "红",
+          "green": "绿",
+          "blue": "蓝"
+        },
+        "rating": {
+          "title": "离散滑块（例如评分）",
+          "text": "请给我们的产品打分，从 1（不满意）到 5（非常满意）。"
+        },
+        "format": {
+          "title": "格式化的滑块标签",
+          "text": "以千为单位的预算。"
+        },
+        "range": {
+          "title": "范围滑块",
+          "text": "从 {{from}} 到 {{to}}。",
+          "from": "最小值",
+          "to": "最大值"
+        }
+      },
+      "slide_toggle": {
+        "email": {
+          "title": "邮件通知",
+          "text": "绑定到一个值的开关。",
+          "label": "接收邮件通知"
+        },
+        "music": {
+          "title": "音乐",
+          "text": "禁用的开关。",
+          "on": "音乐已开启",
+          "off": "音乐已关闭"
+        },
+        "terms": {
+          "title": "条款和条件",
+          "text": "必须打开才能提交表单的开关。",
+          "label": "我同意条款和条件",
+          "required": "请接受条款和条件。",
+          "accepted": "已接受条款和条件！"
+        }
+      }
     }
   }
 }

@@ -1,0 +1,77 @@
+<app-page-header />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.slider.color.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.slider.color.text' | translate }}</p>
+    <div class="color">
+      <div class="channels">
+        @for (channel of channels; track channel) {
+          <div class="channel">
+            <label [for]="'slider-' + channel">
+              {{ 'demo.material.slider.color.' + channel | translate }}
+            </label>
+            <mat-slider min="0" max="255" discrete>
+              <input matSliderThumb [id]="'slider-' + channel" [formField]="form[channel]" />
+            </mat-slider>
+          </div>
+        }
+      </div>
+      <div
+        class="swatch"
+        role="img"
+        [attr.aria-label]="swatch()"
+        [style.background]="swatch()"
+      ></div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.slider.rating.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p id="rating-text">{{ 'demo.material.slider.rating.text' | translate }}</p>
+    <mat-slider min="1" max="5" step="1" showTickMarks discrete>
+      <input matSliderThumb aria-labelledby="rating-text" [formField]="form.rating" />
+    </mat-slider>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title id="budget-title">{{ 'demo.material.slider.format.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.slider.format.text' | translate }}</p>
+    <mat-slider min="0" max="100000" step="1000" showTickMarks discrete [displayWith]="thousands">
+      <input matSliderThumb aria-labelledby="budget-title" [formField]="form.budget" />
+    </mat-slider>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.slider.range.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{ 'demo.material.slider.range.text' | translate: { from: values().from, to: values().to } }}
+    </p>
+    <mat-slider min="200" max="500" discrete>
+      <input
+        matSliderStartThumb
+        [attr.aria-label]="'demo.material.slider.range.from' | translate"
+        [formField]="form.from"
+      />
+      <input
+        matSliderEndThumb
+        [attr.aria-label]="'demo.material.slider.range.to' | translate"
+        [formField]="form.to"
+      />
+    </mat-slider>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,18 @@
+@use '../../demo/demo-page';
+
+@include demo-page.cards;
+
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1rem;
+  align-items: flex-start;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  align-items: center;
+  margin-block-end: 1rem;
+}

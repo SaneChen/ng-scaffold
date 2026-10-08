@@ -1,0 +1,88 @@
+<app-page-header />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.select.single.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.select.single.text' | translate }}</p>
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.select.single.label' | translate }}</mat-label>
+      <mat-select [formField]="form.color">
+        @for (color of colors; track color) {
+          <mat-option [value]="color">
+            {{ 'demo.material.select.colors.' + color | translate }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.select.multiple.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.select.multiple.text' | translate }}</p>
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.select.multiple.label' | translate }}</mat-label>
+      <mat-select multiple [formField]="form.toppings">
+        @for (topping of toppings; track topping) {
+          <mat-option [value]="topping">
+            {{ 'demo.material.select.toppings.' + topping | translate }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.select.groups.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.select.groups.text' | translate }}</p>
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.select.groups.label' | translate }}</mat-label>
+      <mat-select [formField]="form.produce">
+        @for (group of produce; track group.name) {
+          <mat-optgroup
+            [label]="'demo.material.select.produce.' + group.name | translate"
+            [disabled]="group.disabled"
+          >
+            @for (item of group.items; track item) {
+              <mat-option [value]="item">
+                {{ 'demo.material.select.produce.' + item | translate }}
+              </mat-option>
+            }
+          </mat-optgroup>
+        }
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.variants.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.variants.text' | translate }}</p>
+    <div class="fields">
+      @for (variant of variants; track variant) {
+        <mat-form-field [class]="variant">
+          <mat-label>{{ 'demo.material.variants.' + variant | translate }}</mat-label>
+          <mat-select multiple>
+            @for (color of primaryColors; track color) {
+              <mat-option [value]="color">
+                {{ 'demo.material.select.colors.' + color | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>

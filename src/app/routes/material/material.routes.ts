@@ -1,0 +1,64 @@
+/**
+ * Routes of the Material demo area (`/material/...`), below the demo translations.
+ *
+ * How this file was built: written by hand (no generator for route files); `export default`.
+ * Pages that need their own providers (the datepicker's date adapter) have a route file of their
+ * own, so the providers load with the page.
+ */
+import { Routes } from '@angular/router';
+import { demoTranslationsReady, provideDemoTranslations } from '../demo/demo-translations';
+
+const routes: Routes = [
+  {
+    path: '',
+    providers: provideDemoTranslations(),
+    canActivate: [demoTranslationsReady],
+    children: [
+      // Form controls
+      {
+        path: 'autocomplete',
+        title: 'menu.material.form-controls.autocomplete',
+        loadComponent: () =>
+          import('./autocomplete/autocomplete').then(m => m.MaterialAutocomplete),
+      },
+      {
+        path: 'checkbox',
+        title: 'menu.material.form-controls.checkbox',
+        loadComponent: () => import('./checkbox/checkbox').then(m => m.MaterialCheckbox),
+      },
+      { path: 'datepicker', loadChildren: () => import('./datepicker/datepicker.routes') },
+      {
+        path: 'form-field',
+        title: 'menu.material.form-controls.form-field',
+        loadComponent: () => import('./form-field/form-field').then(m => m.MaterialFormField),
+      },
+      {
+        path: 'input',
+        title: 'menu.material.form-controls.input',
+        loadComponent: () => import('./input/input').then(m => m.MaterialInput),
+      },
+      {
+        path: 'radio',
+        title: 'menu.material.form-controls.radio',
+        loadComponent: () => import('./radio/radio').then(m => m.MaterialRadio),
+      },
+      {
+        path: 'select',
+        title: 'menu.material.form-controls.select',
+        loadComponent: () => import('./select/select').then(m => m.MaterialSelect),
+      },
+      {
+        path: 'slider',
+        title: 'menu.material.form-controls.slider',
+        loadComponent: () => import('./slider/slider').then(m => m.MaterialSlider),
+      },
+      {
+        path: 'slide-toggle',
+        title: 'menu.material.form-controls.slide-toggle',
+        loadComponent: () => import('./slide-toggle/slide-toggle').then(m => m.MaterialSlideToggle),
+      },
+    ],
+  },
+];
+
+export default routes;

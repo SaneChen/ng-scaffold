@@ -1,0 +1,10 @@
+@use '../../demo/demo-page';
+
+@include demo-page.cards;
+@include demo-page.variants;
+
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1rem;
+}

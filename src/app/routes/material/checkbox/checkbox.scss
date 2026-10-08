@@ -1,0 +1,16 @@
+@use '../../demo/demo-page';
+
+@include demo-page.cards;
+@include demo-page.variants;
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+ul {
+  padding-inline-start: 2rem;
+  margin: 0;
+  list-style: none;
+}

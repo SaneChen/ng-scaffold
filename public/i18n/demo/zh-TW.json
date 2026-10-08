@@ -394,6 +394,263 @@
         "no": "否",
         "error": "無法載入儲存庫。"
       }
+    },
+    "material": {
+      "selected": "已選：{{value}}",
+      "none": "無",
+      "submit": "提交",
+      "variants": {
+        "title": "顏色變體",
+        "text": "Material 3 元件沒有 color 輸入：第三色和錯誤色變體在一個作用域內替換主色系統顏色。",
+        "primary": "主色",
+        "tertiary": "第三色",
+        "error": "錯誤色"
+      },
+      "autocomplete": {
+        "state": "州",
+        "filter": {
+          "title": "篩選與選取",
+          "text": "輸入以篩選美國各州，然後選取一個。"
+        },
+        "groups": {
+          "title": "選項分組",
+          "text": "符合的州依首字母分組。"
+        }
+      },
+      "checkbox": {
+        "unlabelled": {
+          "title": "沒有可見標籤的核取方塊",
+          "text": "它的無障礙名稱來自 aria-label。",
+          "label": "一個沒有可見標籤的核取方塊"
+        },
+        "standalone": {
+          "title": "獨立核取方塊",
+          "agree": "是的，我同意條款和條件",
+          "disagree": "不，我不同意條款和條件",
+          "partial": "部分完成的工作"
+        },
+        "nested": {
+          "title": "巢狀清單"
+        },
+        "lists": {
+          "reminders": "提醒事項",
+          "groceries": "購物清單"
+        },
+        "tasks": {
+          "cook_dinner": "做晚餐",
+          "read_spec": "閱讀 Material Design 規範",
+          "upgrade_angular": "把應用程式升級到 Angular",
+          "eggs": "有機雞蛋",
+          "protein_powder": "蛋白粉",
+          "almond_flour": "杏仁粉"
+        }
+      },
+      "datepicker": {
+        "birthday": {
+          "title": "選擇日期（例如出生日期）",
+          "label": "出生日期"
+        },
+        "payment": {
+          "title": "觸控介面（例如在手機上選擇付款日期）",
+          "text": "您想安排在哪天付款？",
+          "label": "付款日期"
+        },
+        "trip": {
+          "title": "起始日期、最小值與最大值（例如來回航班）",
+          "departure": "出發日期",
+          "return": "回程日期"
+        },
+        "appointment": {
+          "title": "日期篩選（例如預約醫生）",
+          "label": "預約日期",
+          "hint": "未來一年內的平日"
+        },
+        "errors": {
+          "choose": "請選擇一個日期。",
+          "earlier": "請選擇較早的日期。",
+          "later": "請選擇較晚的日期。",
+          "after_departure": "請選擇出發之後的日期。",
+          "unavailable": "這一天沒有可預約的時段。",
+          "invalid": "請輸入有效的日期。"
+        }
+      },
+      "form_field": {
+        "controls": {
+          "title": "表單欄位中的控制項",
+          "input": "輸入框",
+          "textarea": "多行文字框",
+          "select": "選擇框",
+          "option": "選項"
+        },
+        "options": {
+          "title": "必填標記與浮動標籤",
+          "hide_required": "隱藏必填標記",
+          "float_label": "標籤浮動：",
+          "auto": "自動",
+          "always": "總是",
+          "required": "必填欄位",
+          "placeholder": "預留位置文字",
+          "fancy": "花式",
+          "label": "標籤"
+        },
+        "appearance": {
+          "title": "外觀",
+          "fill": "填滿式表單欄位",
+          "outline": "外框式表單欄位",
+          "hint": "提示"
+        }
+      },
+      "input": {
+        "names": {
+          "title": "基本輸入框（例如姓名）",
+          "first": "名",
+          "last": "姓"
+        },
+        "password": {
+          "title": "帶提示的輸入框（例如密碼）",
+          "label": "密碼",
+          "show": "顯示密碼",
+          "hide": "隱藏密碼",
+          "hint": "提示：您最喜歡的顏色"
+        },
+        "email": {
+          "title": "帶錯誤訊息的輸入框（例如電子郵件）",
+          "label": "電子郵件"
+        },
+        "currency": {
+          "title": "前綴（例如貨幣換算）",
+          "rate": "1 美元 = {{rate}} 日圓（2017 年 7 月 31 日匯率）。"
+        },
+        "comment": {
+          "title": "自動增高的文字框（例如留言）",
+          "label": "留言",
+          "hint": "給我們留言吧！"
+        }
+      },
+      "radio": {
+        "group": {
+          "title": "帶值的選項按鈕群組"
+        },
+        "seasons": {
+          "winter": "冬季",
+          "spring": "春季",
+          "summer": "夏季",
+          "autumn": "秋季"
+        },
+        "before": {
+          "title": "標籤在按鈕之前"
+        },
+        "breads": {
+          "toast": "吐司",
+          "biscuit": "餅乾",
+          "bagel": "貝果"
+        },
+        "disabled": {
+          "title": "停用的按鈕",
+          "text": "三個按鈕：是、否和也許；「也許」已停用。"
+        },
+        "yes": "是",
+        "no": "否",
+        "maybe": "也許"
+      },
+      "select": {
+        "single": {
+          "title": "單選",
+          "text": "選擇您最喜歡的顏色。",
+          "label": "顏色"
+        },
+        "colors": {
+          "red": "紅色",
+          "green": "綠色",
+          "blue": "藍色",
+          "cyan": "青色",
+          "magenta": "洋紅",
+          "yellow": "黃色",
+          "black": "黑色"
+        },
+        "multiple": {
+          "title": "多選",
+          "text": "為您的披薩選擇配料。",
+          "label": "配料"
+        },
+        "toppings": {
+          "pepperoni": "義式辣香腸",
+          "mushrooms": "蘑菇",
+          "onions": "洋蔥",
+          "sausage": "香腸",
+          "bacon": "培根",
+          "cheese": "加起司",
+          "olives": "橄欖",
+          "peppers": "甜椒",
+          "pineapple": "鳳梨",
+          "spinach": "菠菜"
+        },
+        "groups": {
+          "title": "選項分組",
+          "text": "選一樣做菜的食材；香草已售完。",
+          "label": "食材"
+        },
+        "produce": {
+          "fruits": "水果",
+          "vegetables": "蔬菜",
+          "herbs": "香草",
+          "grains": "穀物",
+          "apple": "蘋果",
+          "banana": "香蕉",
+          "cherry": "櫻桃",
+          "carrot": "紅蘿蔔",
+          "pepper": "甜椒",
+          "spinach": "菠菜",
+          "basil": "羅勒",
+          "mint": "薄荷",
+          "thyme": "百里香",
+          "rice": "白米",
+          "oats": "燕麥"
+        }
+      },
+      "slider": {
+        "color": {
+          "title": "連續滑桿（例如顏色通道）",
+          "text": "移動紅、綠、藍滑桿來調出一種顏色。",
+          "red": "紅",
+          "green": "綠",
+          "blue": "藍"
+        },
+        "rating": {
+          "title": "離散滑桿（例如評分）",
+          "text": "請為我們的產品評分，從 1（不滿意）到 5（非常滿意）。"
+        },
+        "format": {
+          "title": "格式化的滑桿標籤",
+          "text": "以千為單位的預算。"
+        },
+        "range": {
+          "title": "範圍滑桿",
+          "text": "從 {{from}} 到 {{to}}。",
+          "from": "最小值",
+          "to": "最大值"
+        }
+      },
+      "slide_toggle": {
+        "email": {
+          "title": "電子郵件通知",
+          "text": "繫結到一個值的開關。",
+          "label": "接收電子郵件通知"
+        },
+        "music": {
+          "title": "音樂",
+          "text": "停用的開關。",
+          "on": "音樂已開啟",
+          "off": "音樂已關閉"
+        },
+        "terms": {
+          "title": "條款和條件",
+          "text": "必須開啟才能提交表單的開關。",
+          "label": "我同意條款和條件",
+          "required": "請接受條款和條件。",
+          "accepted": "已接受條款和條件！"
+        }
+      }
     }
   }
 }

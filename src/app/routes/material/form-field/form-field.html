@@ -1,0 +1,104 @@
+<app-page-header />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.form_field.controls.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content class="fields">
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.form_field.controls.input' | translate }}</mat-label>
+      <input matInput autocomplete="off" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.form_field.controls.textarea' | translate }}</mat-label>
+      <textarea matInput></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.form_field.controls.select' | translate }}</mat-label>
+      <mat-select>
+        <mat-option value="option">
+          {{ 'demo.material.form_field.controls.option' | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.form_field.options.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="options">
+      <mat-checkbox [formField]="optionsForm.hideRequired">
+        {{ 'demo.material.form_field.options.hide_required' | translate }}
+      </mat-checkbox>
+      <mat-radio-group
+        [formField]="optionsForm.floatLabel"
+        [attr.aria-label]="'demo.material.form_field.options.float_label' | translate"
+      >
+        <span aria-hidden="true">
+          {{ 'demo.material.form_field.options.float_label' | translate }}
+        </span>
+        @for (option of floatLabels; track option) {
+          <mat-radio-button [value]="option">
+            {{ 'demo.material.form_field.options.' + option | translate }}
+          </mat-radio-button>
+        }
+      </mat-radio-group>
+    </div>
+    @let settings = options();
+    <div class="fields">
+      <mat-form-field
+        [hideRequiredMarker]="settings.hideRequired"
+        [floatLabel]="settings.floatLabel"
+      >
+        <mat-label>{{ 'demo.material.form_field.options.required' | translate }}</mat-label>
+        <input
+          matInput
+          autocomplete="off"
+          required
+          [placeholder]="'demo.material.form_field.options.placeholder' | translate"
+        />
+      </mat-form-field>
+      <mat-form-field
+        [hideRequiredMarker]="settings.hideRequired"
+        [floatLabel]="settings.floatLabel"
+      >
+        <mat-label>
+          <mat-icon aria-hidden="true">favorite</mat-icon>
+          <b>{{ 'demo.material.form_field.options.fancy' | translate }}</b>
+          <i>{{ 'demo.material.form_field.options.label' | translate }}</i>
+        </mat-label>
+        <mat-select required>
+          <mat-option>{{ 'demo.material.none' | translate }}</mat-option>
+          <mat-option value="option">
+            {{ 'demo.material.form_field.controls.option' | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.form_field.appearance.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content class="fields">
+    @for (appearance of appearances; track appearance) {
+      <mat-form-field [appearance]="appearance">
+        <mat-label>
+          {{ 'demo.material.form_field.appearance.' + appearance | translate }}
+        </mat-label>
+        <input
+          matInput
+          autocomplete="off"
+          [placeholder]="'demo.material.form_field.options.placeholder' | translate"
+        />
+        <mat-icon matSuffix aria-hidden="true">sentiment_very_satisfied</mat-icon>
+        <mat-hint>{{ 'demo.material.form_field.appearance.hint' | translate }}</mat-hint>
+      </mat-form-field>
+    }
+  </mat-card-content>
+</mat-card>

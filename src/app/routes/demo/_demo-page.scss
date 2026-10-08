@@ -1,0 +1,51 @@
+// Styles shared by the demo pages.
+
+// How this file was built:
+//   1. Created by hand (Sass partial, used with `@use '../../demo/demo-page'` from a page's
+//      styles).
+//   2. `cards`: one outlined card per example, its `h2` as the card title.
+//   3. `variants`: `.tertiary` and `.error` show a component in the tertiary or error colour.
+
+// Why: the Material demos repeat this layout on every page, and M3 components have no `color`
+// input (the M2 `color="accent"`/`"warn"` examples of ng-matero have no effect): the variants
+// swap the primary system colours instead, which every component reads.
+
+@use '@angular/material' as mat;
+
+@mixin cards {
+  mat-card + mat-card {
+    margin-block-start: 1rem;
+  }
+
+  mat-card-header {
+    margin-block-end: 1rem;
+  }
+
+  h2[mat-card-title] {
+    margin: 0;
+  }
+}
+
+@mixin variants {
+  .tertiary {
+    @include mat.theme-overrides(
+      (
+        primary: var(--mat-sys-tertiary),
+        on-primary: var(--mat-sys-on-tertiary),
+        primary-container: var(--mat-sys-tertiary-container),
+        on-primary-container: var(--mat-sys-on-tertiary-container),
+      )
+    );
+  }
+
+  .error {
+    @include mat.theme-overrides(
+      (
+        primary: var(--mat-sys-error),
+        on-primary: var(--mat-sys-on-error),
+        primary-container: var(--mat-sys-error-container),
+        on-primary-container: var(--mat-sys-on-error-container),
+      )
+    );
+  }
+}

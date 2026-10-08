@@ -1,0 +1,71 @@
+<app-page-header />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title id="seasons-title">{{ 'demo.material.radio.group.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-radio-group aria-labelledby="seasons-title" [formField]="form.season">
+      @for (season of seasons; track season) {
+        <mat-radio-button [value]="season">
+          {{ 'demo.material.radio.seasons.' + season | translate }}
+        </mat-radio-button>
+      }
+    </mat-radio-group>
+    <p>
+      {{
+        'demo.material.selected'
+          | translate: { value: 'demo.material.radio.seasons.' + values().season | translate }
+      }}
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title id="breads-title">{{ 'demo.material.radio.before.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-radio-group aria-labelledby="breads-title" labelPosition="before">
+      @for (bread of breads; track bread) {
+        <mat-radio-button [value]="bread">
+          {{ 'demo.material.radio.breads.' + bread | translate }}
+        </mat-radio-button>
+      }
+    </mat-radio-group>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title id="disabled-title">
+      {{ 'demo.material.radio.disabled.title' | translate }}
+    </h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.radio.disabled.text' | translate }}</p>
+    <mat-radio-group aria-labelledby="disabled-title">
+      <mat-radio-button value="yes">{{ 'demo.material.radio.yes' | translate }}</mat-radio-button>
+      <mat-radio-button value="no">{{ 'demo.material.radio.no' | translate }}</mat-radio-button>
+      <mat-radio-button value="maybe" disabled>
+        {{ 'demo.material.radio.maybe' | translate }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title id="variants-title">{{ 'demo.material.variants.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.variants.text' | translate }}</p>
+    <mat-radio-group aria-labelledby="variants-title" value="primary">
+      @for (variant of variants; track variant) {
+        <mat-radio-button [class]="variant" [value]="variant">
+          {{ 'demo.material.variants.' + variant | translate }}
+        </mat-radio-button>
+      }
+    </mat-radio-group>
+  </mat-card-content>
+</mat-card>

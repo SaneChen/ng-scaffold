@@ -1,0 +1,13 @@
+@use '../../demo/demo-page';
+
+@include demo-page.cards;
+
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1rem;
+}
+
+.comment {
+  inline-size: min(100%, 32rem);
+}

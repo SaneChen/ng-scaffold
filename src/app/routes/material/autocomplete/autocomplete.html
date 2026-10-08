@@ -1,0 +1,48 @@
+<app-page-header />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.autocomplete.filter.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.autocomplete.filter.text' | translate }}</p>
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.autocomplete.state' | translate }}</mat-label>
+      <input matInput autocomplete="off" [matAutocomplete]="filtered" [formField]="form.state" />
+      <mat-autocomplete #filtered>
+        @for (state of states(); track state) {
+          <mat-option [value]="state">{{ state }}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+    <p>{{ 'demo.material.selected' | translate: { value: values().state } }}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.autocomplete.groups.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.autocomplete.groups.text' | translate }}</p>
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.autocomplete.state' | translate }}</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        [matAutocomplete]="grouped"
+        [formField]="form.groupedState"
+      />
+      <mat-autocomplete #grouped>
+        @for (group of groups(); track group.letter) {
+          <mat-optgroup [label]="group.letter">
+            @for (state of group.names; track state) {
+              <mat-option [value]="state">{{ state }}</mat-option>
+            }
+          </mat-optgroup>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+    <p>{{ 'demo.material.selected' | translate: { value: values().groupedState } }}</p>
+  </mat-card-content>
+</mat-card>

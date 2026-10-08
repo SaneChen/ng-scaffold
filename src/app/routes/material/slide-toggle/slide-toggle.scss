@@ -1,0 +1,15 @@
+@use '../../demo/demo-page';
+
+@include demo-page.cards;
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.error {
+  margin: 0;
+  color: var(--mat-sys-error);
+}

@@ -1,0 +1,125 @@
+<app-page-header />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.input.names.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content class="fields">
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.input.names.first' | translate }}</mat-label>
+      <input matInput autocomplete="given-name" [formField]="form.firstName" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.input.names.last' | translate }}</mat-label>
+      <input matInput autocomplete="family-name" [formField]="form.lastName" />
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.input.password.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field hideRequiredMarker>
+      <mat-label>{{ 'demo.material.input.password.label' | translate }}</mat-label>
+      <input
+        matInput
+        autocomplete="new-password"
+        [type]="showPassword() ? 'text' : 'password'"
+        [formField]="form.password"
+      />
+      <button
+        matIconButton
+        matSuffix
+        type="button"
+        [attr.aria-label]="
+          (showPassword()
+            ? 'demo.material.input.password.hide'
+            : 'demo.material.input.password.show'
+          ) | translate
+        "
+        [attr.aria-pressed]="showPassword()"
+        (click)="showPassword.set(!showPassword())"
+      >
+        <mat-icon aria-hidden="true">
+          {{ showPassword() ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+      </button>
+      <mat-hint>{{ 'demo.material.input.password.hint' | translate }}</mat-hint>
+      @if (form.password().errors()[0]; as error) {
+        <mat-error>
+          @let message = error | validationMessage;
+          {{ message.key | translate: message.params }}
+        </mat-error>
+      }
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.input.email.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.input.email.label' | translate }}</mat-label>
+      <input matInput type="email" autocomplete="email" [formField]="form.email" />
+      @if (form.email().errors()[0]; as error) {
+        <mat-error>
+          @let message = error | validationMessage;
+          {{ message.key | translate: message.params }}
+        </mat-error>
+      }
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.input.currency.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="fields">
+      <mat-form-field floatLabel="always">
+        <mat-label>USD</mat-label>
+        <span matTextPrefix>$&nbsp;</span>
+        <input
+          #usd
+          matInput
+          type="number"
+          autocomplete="off"
+          [formField]="form.usd"
+          (input)="convert('usd', usd.valueAsNumber)"
+        />
+      </mat-form-field>
+      <mat-form-field floatLabel="always">
+        <mat-label>JPY</mat-label>
+        <span matTextPrefix>¥&nbsp;</span>
+        <input
+          #jpy
+          matInput
+          type="number"
+          autocomplete="off"
+          [formField]="form.jpy"
+          (input)="convert('jpy', jpy.valueAsNumber)"
+        />
+      </mat-form-field>
+    </div>
+    <p>{{ 'demo.material.input.currency.rate' | translate: { rate } }}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.input.comment.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field class="comment">
+      <mat-label>{{ 'demo.material.input.comment.label' | translate }}</mat-label>
+      <textarea matInput cdkTextareaAutosize [formField]="form.comment"></textarea>
+      <mat-hint>{{ 'demo.material.input.comment.hint' | translate }}</mat-hint>
+      <mat-hint align="end">{{ values().comment.length }} / {{ commentMax }}</mat-hint>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>

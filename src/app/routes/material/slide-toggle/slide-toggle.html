@@ -1,0 +1,49 @@
+<app-page-header />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.slide_toggle.email.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.slide_toggle.email.text' | translate }}</p>
+    <mat-slide-toggle [formField]="form.email">
+      {{ 'demo.material.slide_toggle.email.label' | translate }}
+    </mat-slide-toggle>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.slide_toggle.music.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.slide_toggle.music.text' | translate }}</p>
+    <mat-slide-toggle disabled [checked]="values().music">
+      {{ 'demo.material.slide_toggle.music.' + (values().music ? 'on' : 'off') | translate }}
+    </mat-slide-toggle>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.slide_toggle.terms.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.slide_toggle.terms.text' | translate }}</p>
+    <form [formRoot]="form">
+      <mat-slide-toggle
+        #terms
+        [formField]="form.terms"
+        [aria-describedby]="form.terms().touched() && form.terms().invalid() ? 'terms-error' : ''"
+      >
+        {{ 'demo.material.slide_toggle.terms.label' | translate }}
+      </mat-slide-toggle>
+      @if (form.terms().touched() && form.terms().errors()[0]; as error) {
+        <p class="error" id="terms-error">{{ error.message ?? '' | translate }}</p>
+      }
+      <button matButton="filled" type="submit">
+        {{ 'demo.material.submit' | translate }}
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

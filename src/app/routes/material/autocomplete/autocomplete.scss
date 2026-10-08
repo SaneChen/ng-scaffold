@@ -1,0 +1,7 @@
+@use '../../demo/demo-page';
+
+@include demo-page.cards;
+
+mat-form-field {
+  inline-size: min(100%, 20rem);
+}

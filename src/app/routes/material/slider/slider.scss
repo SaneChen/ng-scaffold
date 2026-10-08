@@ -1,0 +1,31 @@
+@use '../../demo/demo-page';
+
+@include demo-page.cards;
+
+mat-slider {
+  inline-size: min(100%, 20rem);
+}
+
+.color {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: center;
+}
+
+.channel {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  label {
+    min-inline-size: 4rem;
+  }
+}
+
+.swatch {
+  inline-size: 8rem;
+  block-size: 8rem;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: var(--mat-sys-corner-medium);
+}

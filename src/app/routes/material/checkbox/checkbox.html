@@ -1,0 +1,70 @@
+<app-page-header />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.checkbox.unlabelled.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.checkbox.unlabelled.text' | translate }}</p>
+    <mat-checkbox [aria-label]="'demo.material.checkbox.unlabelled.label' | translate" />
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.checkbox.standalone.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content class="stack">
+    <mat-checkbox>{{ 'demo.material.checkbox.standalone.agree' | translate }}</mat-checkbox>
+    <mat-checkbox disabled>
+      {{ 'demo.material.checkbox.standalone.disagree' | translate }}
+    </mat-checkbox>
+    <mat-checkbox indeterminate>
+      {{ 'demo.material.checkbox.standalone.partial' | translate }}
+    </mat-checkbox>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.checkbox.nested.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    @for (list of lists(); track list.name; let i = $index) {
+      <div class="list">
+        <mat-checkbox
+          [checked]="allDone(list)"
+          [indeterminate]="someDone(list)"
+          (change)="setAll(i, $event.checked)"
+        >
+          {{ 'demo.material.checkbox.lists.' + list.name | translate }}
+        </mat-checkbox>
+        <ul>
+          @for (task of list.tasks; track task.name; let t = $index) {
+            <li>
+              <mat-checkbox [checked]="task.done" (change)="setTask(i, t, $event.checked)">
+                {{ 'demo.material.checkbox.tasks.' + task.name | translate }}
+              </mat-checkbox>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.variants.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.variants.text' | translate }}</p>
+    <mat-checkbox checked>{{ 'demo.material.variants.primary' | translate }}</mat-checkbox>
+    <mat-checkbox class="tertiary" checked>
+      {{ 'demo.material.variants.tertiary' | translate }}
+    </mat-checkbox>
+    <mat-checkbox class="error" checked>
+      {{ 'demo.material.variants.error' | translate }}
+    </mat-checkbox>
+  </mat-card-content>
+</mat-card>

@@ -394,6 +394,263 @@
         "no": "No",
         "error": "The repositories could not be loaded."
       }
+    },
+    "material": {
+      "selected": "Selected: {{value}}",
+      "none": "None",
+      "submit": "Submit",
+      "variants": {
+        "title": "Colour variants",
+        "text": "Material 3 components have no color input: the tertiary and error variants swap the primary system colours in a scope.",
+        "primary": "Primary",
+        "tertiary": "Tertiary",
+        "error": "Error"
+      },
+      "autocomplete": {
+        "state": "State",
+        "filter": {
+          "title": "Filtering and selection",
+          "text": "Type to filter the states, then pick one."
+        },
+        "groups": {
+          "title": "Option groups",
+          "text": "The matching states, grouped by their first letter."
+        }
+      },
+      "checkbox": {
+        "unlabelled": {
+          "title": "Checkbox without a visible label",
+          "text": "Its accessible name comes from aria-label.",
+          "label": "A single checkbox without a visible label"
+        },
+        "standalone": {
+          "title": "Standalone checkboxes",
+          "agree": "Yes, I agree to the terms and conditions",
+          "disagree": "No, I do not agree to the terms and conditions",
+          "partial": "A partly done task"
+        },
+        "nested": {
+          "title": "Nested checklist"
+        },
+        "lists": {
+          "reminders": "Reminders",
+          "groceries": "Groceries"
+        },
+        "tasks": {
+          "cook_dinner": "Cook dinner",
+          "read_spec": "Read the Material Design specification",
+          "upgrade_angular": "Upgrade the application to Angular",
+          "eggs": "Organic eggs",
+          "protein_powder": "Protein powder",
+          "almond_flour": "Almond flour"
+        }
+      },
+      "datepicker": {
+        "birthday": {
+          "title": "Choose a date (e.g. your date of birth)",
+          "label": "Date of birth"
+        },
+        "payment": {
+          "title": "Touch UI (e.g. a payment date on a phone)",
+          "text": "When would you like to schedule your payment?",
+          "label": "Payment date"
+        },
+        "trip": {
+          "title": "Start date, minimum and maximum (e.g. a return flight)",
+          "departure": "Departure date",
+          "return": "Return date"
+        },
+        "appointment": {
+          "title": "Date filter (e.g. a doctor's appointment)",
+          "label": "Appointment date",
+          "hint": "Weekdays within the next year"
+        },
+        "errors": {
+          "choose": "Please choose a date.",
+          "earlier": "Please choose an earlier date.",
+          "later": "Please choose a later date.",
+          "after_departure": "Please choose a date after your departure.",
+          "unavailable": "No appointments are available on this date.",
+          "invalid": "Please enter a valid date."
+        }
+      },
+      "form_field": {
+        "controls": {
+          "title": "Controls in a form field",
+          "input": "Input",
+          "textarea": "Textarea",
+          "select": "Select",
+          "option": "Option"
+        },
+        "options": {
+          "title": "Required marker and floating label",
+          "hide_required": "Hide the required marker",
+          "float_label": "Float the label:",
+          "auto": "Automatically",
+          "always": "Always",
+          "required": "Required field",
+          "placeholder": "A placeholder",
+          "fancy": "Fancy",
+          "label": "label"
+        },
+        "appearance": {
+          "title": "Appearances",
+          "fill": "Filled form field",
+          "outline": "Outlined form field",
+          "hint": "A hint"
+        }
+      },
+      "input": {
+        "names": {
+          "title": "Basic inputs (e.g. a name)",
+          "first": "First name",
+          "last": "Last name"
+        },
+        "password": {
+          "title": "Input with a hint (e.g. a password)",
+          "label": "Password",
+          "show": "Show the password",
+          "hide": "Hide the password",
+          "hint": "Hint: your favourite colour"
+        },
+        "email": {
+          "title": "Input with error messages (e.g. an email)",
+          "label": "Email"
+        },
+        "currency": {
+          "title": "Prefixes (e.g. a currency converter)",
+          "rate": "1 USD = {{rate}} JPY (rate of 31 July 2017)."
+        },
+        "comment": {
+          "title": "Growing textarea (e.g. a comment)",
+          "label": "Comment",
+          "hint": "Leave us a comment!"
+        }
+      },
+      "radio": {
+        "group": {
+          "title": "Radio group with a value"
+        },
+        "seasons": {
+          "winter": "Winter",
+          "spring": "Spring",
+          "summer": "Summer",
+          "autumn": "Autumn"
+        },
+        "before": {
+          "title": "Labels before the buttons"
+        },
+        "breads": {
+          "toast": "Toast",
+          "biscuit": "Biscuit",
+          "bagel": "Bagel"
+        },
+        "disabled": {
+          "title": "Disabled button",
+          "text": "Three buttons, Yes, No and Maybe; Maybe is disabled."
+        },
+        "yes": "Yes",
+        "no": "No",
+        "maybe": "Maybe"
+      },
+      "select": {
+        "single": {
+          "title": "Single selection",
+          "text": "Choose your favourite colour.",
+          "label": "Colour"
+        },
+        "colors": {
+          "red": "Red",
+          "green": "Green",
+          "blue": "Blue",
+          "cyan": "Cyan",
+          "magenta": "Magenta",
+          "yellow": "Yellow",
+          "black": "Black"
+        },
+        "multiple": {
+          "title": "Multiple selection",
+          "text": "Pick the toppings of your pizza.",
+          "label": "Toppings"
+        },
+        "toppings": {
+          "pepperoni": "Pepperoni",
+          "mushrooms": "Mushrooms",
+          "onions": "Onions",
+          "sausage": "Sausage",
+          "bacon": "Bacon",
+          "cheese": "Extra cheese",
+          "olives": "Olives",
+          "peppers": "Peppers",
+          "pineapple": "Pineapple",
+          "spinach": "Spinach"
+        },
+        "groups": {
+          "title": "Option groups",
+          "text": "Pick something to cook with; herbs are out of stock.",
+          "label": "Ingredient"
+        },
+        "produce": {
+          "fruits": "Fruits",
+          "vegetables": "Vegetables",
+          "herbs": "Herbs",
+          "grains": "Grains",
+          "apple": "Apple",
+          "banana": "Banana",
+          "cherry": "Cherry",
+          "carrot": "Carrot",
+          "pepper": "Pepper",
+          "spinach": "Spinach",
+          "basil": "Basil",
+          "mint": "Mint",
+          "thyme": "Thyme",
+          "rice": "Rice",
+          "oats": "Oats"
+        }
+      },
+      "slider": {
+        "color": {
+          "title": "Continuous sliders (e.g. colour channels)",
+          "text": "Move the red, green and blue sliders to mix a colour.",
+          "red": "Red",
+          "green": "Green",
+          "blue": "Blue"
+        },
+        "rating": {
+          "title": "Discrete slider (e.g. a rating)",
+          "text": "Rate our product from 1 (not satisfied) to 5 (extremely satisfied)."
+        },
+        "format": {
+          "title": "Formatted thumb label",
+          "text": "A budget in thousands."
+        },
+        "range": {
+          "title": "Range slider",
+          "text": "From {{from}} to {{to}}.",
+          "from": "Minimum",
+          "to": "Maximum"
+        }
+      },
+      "slide_toggle": {
+        "email": {
+          "title": "Email updates",
+          "text": "A toggle bound to a value.",
+          "label": "Receive email updates"
+        },
+        "music": {
+          "title": "Music",
+          "text": "A disabled toggle.",
+          "on": "Music on",
+          "off": "Music off"
+        },
+        "terms": {
+          "title": "Terms and conditions",
+          "text": "A toggle that must be on before the form can be submitted.",
+          "label": "I agree to the terms and conditions",
+          "required": "Please accept the terms and conditions.",
+          "accepted": "Terms and conditions accepted!"
+        }
+      }
     }
   }
 }

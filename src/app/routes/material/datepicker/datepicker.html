@@ -1,0 +1,101 @@
+<app-page-header />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.datepicker.birthday.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.datepicker.birthday.label' | translate }}</mat-label>
+      <input
+        matInput
+        autocomplete="bday"
+        [matDatepicker]="birthdayPicker"
+        [formField]="form.birthday"
+      />
+      <mat-datepicker-toggle matIconSuffix [for]="birthdayPicker" />
+      <mat-datepicker #birthdayPicker startView="multi-year" />
+      @if (form.birthday().errors()[0]; as error) {
+        <mat-error>{{ message('birthday', error.kind) | translate }}</mat-error>
+      }
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.datepicker.payment.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ 'demo.material.datepicker.payment.text' | translate }}</p>
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.datepicker.payment.label' | translate }}</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        [matDatepicker]="paymentPicker"
+        [formField]="form.payment"
+      />
+      <mat-datepicker-toggle matIconSuffix [for]="paymentPicker" />
+      <mat-datepicker #paymentPicker touchUi />
+      @if (form.payment().errors()[0]; as error) {
+        <mat-error>{{ message('payment', error.kind) | translate }}</mat-error>
+      }
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.datepicker.trip.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content class="fields">
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.datepicker.trip.departure' | translate }}</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        [matDatepicker]="departurePicker"
+        [formField]="form.departure"
+      />
+      <mat-datepicker-toggle matIconSuffix [for]="departurePicker" />
+      <mat-datepicker #departurePicker [startAt]="inAMonth" />
+      @if (form.departure().errors()[0]; as error) {
+        <mat-error>{{ message('departure', error.kind) | translate }}</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.datepicker.trip.return' | translate }}</mat-label>
+      <input matInput autocomplete="off" [matDatepicker]="returnPicker" [formField]="form.return" />
+      <mat-datepicker-toggle matIconSuffix [for]="returnPicker" />
+      <mat-datepicker #returnPicker [startAt]="form.departure().value() ?? inAMonth" />
+      @if (form.return().errors()[0]; as error) {
+        <mat-error>{{ message('return', error.kind) | translate }}</mat-error>
+      }
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.datepicker.appointment.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>{{ 'demo.material.datepicker.appointment.label' | translate }}</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        [matDatepicker]="appointmentPicker"
+        [matDatepickerFilter]="weekdaysOnly"
+        [formField]="form.appointment"
+      />
+      <mat-datepicker-toggle matIconSuffix [for]="appointmentPicker" />
+      <mat-datepicker #appointmentPicker />
+      <mat-hint>{{ 'demo.material.datepicker.appointment.hint' | translate }}</mat-hint>
+      @if (form.appointment().errors()[0]; as error) {
+        <mat-error>{{ message('appointment', error.kind) | translate }}</mat-error>
+      }
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>

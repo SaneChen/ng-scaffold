@@ -1,0 +1,47 @@
+<app-page-header />
+
+<mat-form-field class="search" appearance="outline">
+  <mat-label>{{ 'demo.design.icons.search' | translate }}</mat-label>
+  <mat-icon matPrefix>search</mat-icon>
+  <input matInput type="search" [value]="query()" (input)="search($event)" />
+</mat-form-field>
+
+<p class="count" [attr.role]="failed() ? 'alert' : 'status'">
+  @if (failed()) {
+    {{ 'demo.design.icons.failed' | translate }}
+    <button matButton type="button" (click)="retry()">
+      {{ 'demo.design.icons.retry' | translate }}
+    </button>
+  } @else if (loading()) {
+    {{ 'demo.design.icons.loading' | translate }}
+  } @else if (matches().length === 0) {
+    {{ 'demo.design.icons.none' | translate: { query: query() } }}
+  } @else {
+    {{ 'demo.design.icons.count' | translate: { count: matches().length } }}
+  }
+</p>
+
+<ul class="icons">
+  @for (name of page(); track name) {
+    <li>
+      <button
+        type="button"
+        [attr.aria-label]="'demo.design.icons.copy' | translate: { name }"
+        (click)="copy(name)"
+      >
+        <mat-icon aria-hidden="true">{{ name }}</mat-icon>
+        <span>{{ name }}</span>
+      </button>
+    </li>
+  }
+</ul>
+
+@if (matches().length > pageSize) {
+  <mat-paginator
+    [length]="matches().length"
+    [pageIndex]="pageIndex()"
+    [pageSize]="pageSize"
+    [hidePageSize]="true"
+    (page)="changePage($event)"
+  />
+}

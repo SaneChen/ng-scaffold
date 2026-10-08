@@ -1,0 +1,33 @@
+{
+  "demo": {
+    "design": {
+      "colors": {
+        "intro": "Material 3 调色板的各个色调，对应 bg-<调色板>-<色调> 与 text-<调色板>-<色调> 样式类。",
+        "palettes": {
+          "red": "红",
+          "green": "绿",
+          "blue": "蓝",
+          "yellow": "黄",
+          "cyan": "青",
+          "magenta": "品红",
+          "orange": "橙",
+          "chartreuse": "黄绿",
+          "spring-green": "春绿",
+          "azure": "天蓝",
+          "violet": "紫罗兰",
+          "rose": "玫瑰"
+        }
+      },
+      "icons": {
+        "failed": "无法加载图标列表。",
+        "retry": "重试",
+        "search": "搜索图标",
+        "loading": "正在加载图标…",
+        "count": "共 {{count}} 个图标",
+        "none": "没有与“{{query}}”匹配的图标。",
+        "copy": "复制名称 {{name}}",
+        "copied": "已复制“{{name}}”"
+      }
+    }
+  }
+}

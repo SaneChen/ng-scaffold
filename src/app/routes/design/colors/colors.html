@@ -1,0 +1,27 @@
+<app-page-header />
+
+<p class="intro">{{ 'demo.design.colors.intro' | translate }}</p>
+
+<div class="row">
+  @for (palette of palettes; track palette) {
+    <section
+      class="palette col-sm-6 col-md-4 col-xl-3"
+      [attr.aria-labelledby]="'palette-' + palette"
+    >
+      <h2 [id]="'palette-' + palette" class="name bg-{{ palette }}-10 text-{{ palette }}-95">
+        {{ 'demo.design.colors.palettes.' + palette | translate }}
+      </h2>
+      <ul>
+        @for (tone of tones; track tone) {
+          <li
+            class="bg-{{ palette }}-{{ tone }} {{ textClass(tone) }}"
+            [attr.data-color]="palette + '-' + tone"
+          >
+            <span>{{ tone }}</span>
+            <code>{{ hex()[palette + '-' + tone] }}</code>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+</div>

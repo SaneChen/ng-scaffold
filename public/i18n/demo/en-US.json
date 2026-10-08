@@ -1,0 +1,33 @@
+{
+  "demo": {
+    "design": {
+      "colors": {
+        "intro": "The tones of the Material 3 palettes, as used by the bg-<palette>-<tone> and text-<palette>-<tone> classes.",
+        "palettes": {
+          "red": "Red",
+          "green": "Green",
+          "blue": "Blue",
+          "yellow": "Yellow",
+          "cyan": "Cyan",
+          "magenta": "Magenta",
+          "orange": "Orange",
+          "chartreuse": "Chartreuse",
+          "spring-green": "Spring green",
+          "azure": "Azure",
+          "violet": "Violet",
+          "rose": "Rose"
+        }
+      },
+      "icons": {
+        "failed": "The icon list could not be loaded.",
+        "retry": "Retry",
+        "search": "Search icons",
+        "loading": "Loading the icons…",
+        "count": "{{count}} icons",
+        "none": "No icon matches “{{query}}”.",
+        "copy": "Copy the name {{name}}",
+        "copied": "Copied “{{name}}”"
+      }
+    }
+  }
+}

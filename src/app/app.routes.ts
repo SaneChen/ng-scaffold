@@ -41,6 +41,11 @@ export const routes: Routes = [
       },
       // [ng-scaffold] Step 5: the profile pages linked from the user menu.
       { path: 'profile', loadChildren: () => import('./routes/profile/profile.routes') },
+      // [ng-scaffold] Step 7: demo areas of the live demo, one per menu group (not shipped by
+      // `ng add`, which drops the fenced lines).
+      // <demo>
+      { path: 'design', loadChildren: () => import('./routes/design/design.routes') },
+      // </demo>
       // [ng-scaffold] Step 2: error pages (also shown by `permissionGuard` and failed GETs).
       {
         path: '403',

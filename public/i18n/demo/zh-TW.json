@@ -1,0 +1,33 @@
+{
+  "demo": {
+    "design": {
+      "colors": {
+        "intro": "Material 3 調色盤的各個色調，對應 bg-<調色盤>-<色調> 與 text-<調色盤>-<色調> 樣式類別。",
+        "palettes": {
+          "red": "紅",
+          "green": "綠",
+          "blue": "藍",
+          "yellow": "黃",
+          "cyan": "青",
+          "magenta": "洋紅",
+          "orange": "橙",
+          "chartreuse": "黃綠",
+          "spring-green": "春綠",
+          "azure": "天藍",
+          "violet": "紫羅蘭",
+          "rose": "玫瑰"
+        }
+      },
+      "icons": {
+        "failed": "無法載入圖示清單。",
+        "retry": "重試",
+        "search": "搜尋圖示",
+        "loading": "正在載入圖示…",
+        "count": "共 {{count}} 個圖示",
+        "none": "沒有與「{{query}}」相符的圖示。",
+        "copy": "複製名稱 {{name}}",
+        "copied": "已複製「{{name}}」"
+      }
+    }
+  }
+}

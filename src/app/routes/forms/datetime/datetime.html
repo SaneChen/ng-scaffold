@@ -1,0 +1,49 @@
+<app-page-header />
+
+<p>{{ 'demo.forms.datetime.intro' | translate }}</p>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.forms.datetime.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row">
+      @for (example of examples; track example.name) {
+        @let field = form[example.name];
+        <mat-form-field class="col-sm-6 col-lg-4" subscriptSizing="dynamic">
+          <mat-label>{{ 'demo.forms.datetime.fields.' + example.name | translate }}</mat-label>
+          <input
+            matInput
+            autocomplete="off"
+            [mtxDatetimepicker]="picker"
+            [mtxDatetimepickerFilter]="example.filter"
+            [formField]="field"
+          />
+          <mtx-datetimepicker-toggle matSuffix [for]="picker" />
+          <mtx-datetimepicker
+            #picker
+            [type]="example.type"
+            [mode]="example.mode"
+            startView="month"
+            [timeInterval]="5"
+            [timeInput]="example.timeInput"
+            [twelvehour]="example.twelvehour"
+            [multiYearSelector]="example.multiYearSelector"
+            [touchUi]="example.touchUi"
+          />
+          @if (example.hint; as hint) {
+            <mat-hint>
+              {{ 'demo.forms.datetime.hints.' + hint | translate: hints()[hint] }}
+            </mat-hint>
+          }
+          @if (field().errors()[0]; as error) {
+            <mat-error>
+              @let message = error | validationMessage;
+              {{ pickerErrors[error.kind] ?? message.key | translate: message.params }}
+            </mat-error>
+          }
+        </mat-form-field>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>

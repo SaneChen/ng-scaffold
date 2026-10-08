@@ -241,6 +241,35 @@
           "open": "Open the dialog",
           "city": "City"
         }
+      },
+      "datetime": {
+        "intro": "mtx-datetimepicker of @ng-matero/extensions picks dates with times, times alone, months and years, here through its date-fns adapter in the locale of the language.",
+        "title": "Pickers",
+        "fields": {
+          "datetime": "Date and time",
+          "datetimeTyped": "Date and time, typed time",
+          "datetimeYears": "Date and time, year selector",
+          "time": "Time",
+          "time12h": "Time, 12-hour clock",
+          "datetime12hTyped": "Date and time, 12-hour clock, typed time",
+          "date": "Date",
+          "month": "Month",
+          "year": "Year",
+          "limits": "Date and time with limits",
+          "filter": "Date and time with a filter",
+          "touch": "Date and time for touch screens"
+        },
+        "hints": {
+          "soon": "From {{min}} to {{max}}",
+          "limits": "From {{min}} to {{max}}",
+          "filter": "Even years, months, days, hours and minutes only"
+        },
+        "errors": {
+          "min": "This is earlier than the first allowed time",
+          "max": "This is later than the last allowed time",
+          "filter": "This date or time is not allowed",
+          "parse": "Enter a valid date"
+        }
       }
     },
     "dates": {

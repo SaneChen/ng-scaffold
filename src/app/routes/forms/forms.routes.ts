@@ -18,6 +18,7 @@ const routes: Routes = [
       { path: 'elements', loadChildren: () => import('./elements/elements.routes') },
       { path: 'dynamic', loadChildren: () => import('./dynamic/dynamic.routes') },
       { path: 'select', loadChildren: () => import('./select/select.routes') },
+      { path: 'datetime', loadChildren: () => import('./datetime/datetime.routes') },
     ],
   },
 ];

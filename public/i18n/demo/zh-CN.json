@@ -241,6 +241,35 @@
           "open": "打开对话框",
           "city": "城市"
         }
+      },
+      "datetime": {
+        "intro": "@ng-matero/extensions 的 mtx-datetimepicker 可以选择日期和时间、单独的时间、月份和年份；这里通过 date-fns 适配器使用当前语言的区域设置。",
+        "title": "选择器",
+        "fields": {
+          "datetime": "日期和时间",
+          "datetimeTyped": "日期和时间（可输入时间）",
+          "datetimeYears": "日期和时间（年份选择器）",
+          "time": "时间",
+          "time12h": "时间（12 小时制）",
+          "datetime12hTyped": "日期和时间（12 小时制，可输入时间）",
+          "date": "日期",
+          "month": "月份",
+          "year": "年份",
+          "limits": "有范围限制的日期和时间",
+          "filter": "带过滤器的日期和时间",
+          "touch": "适用于触摸屏的日期和时间"
+        },
+        "hints": {
+          "soon": "从 {{min}} 到 {{max}}",
+          "limits": "从 {{min}} 到 {{max}}",
+          "filter": "只能选择偶数的年、月、日、时和分"
+        },
+        "errors": {
+          "min": "早于允许的最早时间",
+          "max": "晚于允许的最晚时间",
+          "filter": "不允许选择这个日期或时间",
+          "parse": "请输入有效的日期"
+        }
       }
     },
     "dates": {

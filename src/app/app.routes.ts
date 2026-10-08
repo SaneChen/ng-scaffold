@@ -45,6 +45,10 @@ export const routes: Routes = [
       // `ng add`, which drops the fenced lines).
       // <demo>
       { path: 'design', loadChildren: () => import('./routes/design/design.routes') },
+      {
+        path: 'permissions',
+        loadChildren: () => import('./routes/permissions/permissions.routes'),
+      },
       { path: 'utilities', loadChildren: () => import('./routes/utilities/utilities.routes') },
       // </demo>
       // [ng-scaffold] Step 2: error pages (also shown by `permissionGuard` and failed GETs).

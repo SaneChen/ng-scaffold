@@ -1,0 +1,75 @@
+<app-page-header />
+
+<p>{{ 'demo.permissions.test.intro' | translate }}</p>
+
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <div class="actions">
+      <button
+        matButton="filled"
+        type="button"
+        [disabled]="granted()"
+        [disabledInteractive]="true"
+        (click)="grant()"
+      >
+        {{ 'demo.permissions.test.grant' | translate: { permission } }}
+      </button>
+      <button
+        matButton="outlined"
+        type="button"
+        [disabled]="!granted()"
+        [disabledInteractive]="true"
+        (click)="revoke()"
+      >
+        {{ 'demo.permissions.test.revoke' | translate: { permission } }}
+      </button>
+    </div>
+
+    <p>
+      {{ 'demo.permissions.current_roles' | translate }}
+      @for (role of roles(); track role) {
+        <code>{{ role }}</code>
+      }
+      ·
+      {{ 'demo.permissions.current_permissions' | translate }}
+      @for (name of permissions(); track name) {
+        <code>{{ name }}</code>
+      }
+    </p>
+
+    <ul class="examples" aria-live="polite">
+      <li>
+        <code>*appCan="'canPublish'"</code>
+        <p *appCan="'canPublish'" class="shown">{{ 'demo.permissions.test.only' | translate }}</p>
+      </li>
+      <li>
+        <code>*appCan="'canPublish'; else denied"</code>
+        <p *appCan="'canPublish'; else denied" class="shown">
+          {{ 'demo.permissions.test.then' | translate }}
+        </p>
+      </li>
+      <li>
+        <code>*appCan="{{ '{' }} except: 'canPublish' {{ '}' }}"</code>
+        <p *appCan="{ except: 'canPublish' }" class="shown">
+          {{ 'demo.permissions.test.except' | translate }}
+        </p>
+      </li>
+      <li>
+        <code>*appCan="['ADMIN', 'MANAGER']; except: 'canPublish'; else denied"</code>
+        <p *appCan="['ADMIN', 'MANAGER']; except: 'canPublish'; else: denied" class="shown">
+          {{ 'demo.permissions.test.both' | translate }}
+        </p>
+      </li>
+      <li>
+        <code>*appCan="'GUEST'; else denied"</code>
+        <p *appCan="'GUEST'; else denied" class="shown">
+          {{ 'demo.permissions.test.guest' | translate }}
+        </p>
+      </li>
+    </ul>
+
+    <ng-template #denied>
+      <p class="denied">{{ 'demo.permissions.test.else' | translate }}</p>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

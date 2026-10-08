@@ -1,0 +1,29 @@
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.examples {
+  display: grid;
+  gap: 1rem;
+  padding: 0;
+  margin: 1rem 0 0;
+  list-style: none;
+}
+
+.examples p {
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem 0 0;
+  border-radius: var(--mat-sys-corner-small);
+}
+
+.shown {
+  color: var(--mat-sys-on-primary-container);
+  background-color: var(--mat-sys-primary-container);
+}
+
+.denied {
+  color: var(--mat-sys-on-error-container);
+  background-color: var(--mat-sys-error-container);
+}

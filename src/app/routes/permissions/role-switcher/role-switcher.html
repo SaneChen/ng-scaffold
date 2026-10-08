@@ -1,0 +1,28 @@
+<mat-button-toggle-group
+  [attr.aria-label]="'demo.permissions.role' | translate"
+  [value]="current()"
+  (change)="switch($event)"
+>
+  @for (role of roleNames; track role) {
+    <mat-button-toggle [value]="role">{{ role }}</mat-button-toggle>
+  }
+</mat-button-toggle-group>
+
+<dl>
+  <dt>{{ 'demo.permissions.current_roles' | translate }}</dt>
+  <dd>
+    @for (role of roles(); track role) {
+      <code>{{ role }}</code>
+    } @empty {
+      {{ 'demo.permissions.none' | translate }}
+    }
+  </dd>
+  <dt>{{ 'demo.permissions.current_permissions' | translate }}</dt>
+  <dd>
+    @for (permission of permissions(); track permission) {
+      <code>{{ permission }}</code>
+    } @empty {
+      {{ 'demo.permissions.none' | translate }}
+    }
+  </dd>
+</dl>

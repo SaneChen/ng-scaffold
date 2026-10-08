@@ -76,6 +76,30 @@
           "layout": "布局"
         }
       }
+    },
+    "permissions": {
+      "role": "角色",
+      "current_roles": "当前角色：",
+      "current_permissions": "当前权限：",
+      "none": "无",
+      "switching": {
+        "intro": "角色和权限以 signal 的形式保存在 PermissionStore 中。切换角色后，侧边菜单、*appCan 指令和所有权限检查都会立即更新。",
+        "hint": "试试 GUEST：菜单会隐藏访客不能打开的页面。"
+      },
+      "guard": {
+        "intro": "本页受 permissionGuard 保护：GUEST 用户会被送回数据大盘。切换为 GUEST 后，守卫会重新检查本页。"
+      },
+      "test": {
+        "intro": "*appCan 指令只为符合规则的用户渲染模板，否则渲染 else 模板。授予或撤销权限，看看下面的示例如何变化。",
+        "grant": "授予 {{permission}}",
+        "revoke": "撤销 {{permission}}",
+        "only": "拥有 canPublish 权限时可见。",
+        "then": "你拥有 canPublish。",
+        "except": "没有 canPublish 权限的所有人可见。",
+        "both": "ADMIN 和 MANAGER 可见，但拥有 canPublish 时不可见。",
+        "guest": "仅 GUEST 可见。",
+        "else": "已隐藏：改为显示 else 模板。"
+      }
     }
   }
 }

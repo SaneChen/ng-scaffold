@@ -76,6 +76,30 @@
           "layout": "Layout"
         }
       }
+    },
+    "permissions": {
+      "role": "Role",
+      "current_roles": "Current roles:",
+      "current_permissions": "Current permissions:",
+      "none": "none",
+      "switching": {
+        "intro": "Roles and permissions live in PermissionStore as signals. Switch the role: the side menu, the *appCan directive and every permission check update at once.",
+        "hint": "Try GUEST: the menu hides the pages a guest may not open."
+      },
+      "guard": {
+        "intro": "This page is protected by permissionGuard: GUEST users are sent to the dashboard. Switch to GUEST and the guard checks the page again."
+      },
+      "test": {
+        "intro": "The *appCan directive renders its template only for users who pass the rule, or its else template. Grant or revoke a permission and watch the examples change.",
+        "grant": "Grant {{permission}}",
+        "revoke": "Revoke {{permission}}",
+        "only": "Visible with the canPublish permission.",
+        "then": "You have canPublish.",
+        "except": "Visible to everyone without canPublish.",
+        "both": "Visible to ADMIN and MANAGER, unless they have canPublish.",
+        "guest": "Visible to GUEST only.",
+        "else": "Hidden: the else template is shown instead."
+      }
     }
   }
 }

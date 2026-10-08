@@ -1,0 +1,9 @@
+<app-page-header />
+
+<p>{{ 'demo.permissions.guard.intro' | translate }}</p>
+
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <app-role-switcher (switched)="recheck()" />
+  </mat-card-content>
+</mat-card>

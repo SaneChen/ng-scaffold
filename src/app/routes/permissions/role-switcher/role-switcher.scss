@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1rem;
+  margin: 1rem 0 0;
+}
+
+dt {
+  font: var(--mat-sys-title-small);
+}
+
+dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0;
+}

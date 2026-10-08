@@ -10,7 +10,7 @@
 - 基线：`0d99dd2`（未改动的 `ng new ng-scaffold`，Angular CLI 22.2.1）。
 - 已完成：ROADMAP 中阶段 0–5（含 §4 B 全局样式、C 认证/HTTP/Mock/菜单/权限/启动、D 布局外壳、
   E 共享组件与基础页面），具体提交见 ROADMAP 中 `[x]` 条目后的哈希。
-- 质量状态（HEAD）：`tools/verify.sh` 通过——lint、stylelint、63 个测试文件 / 272 个用例、生产构建
+- 质量状态（HEAD）：`tools/verify.sh` 通过——lint、stylelint、64 个测试文件 / 279 个用例、生产构建
   （initial 约 457 kB / 传输约 109 kB，距 500 kB 警告 budget 约 43 kB；布局、页面、Chart.js 与
   hot-toast 都是懒加载 chunk）。
 - 下一步：§4 的 **F · 演示功能区**，然后依次 G → H。

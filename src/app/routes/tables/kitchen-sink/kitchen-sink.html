@@ -1,0 +1,74 @@
+<app-page-header />
+
+<p>{{ 'demo.tables.kitchen_sink.intro' | translate }}</p>
+
+<fieldset class="options">
+  <legend>{{ 'demo.tables.kitchen_sink.options' | translate }}</legend>
+  @for (name of checkboxes; track name) {
+    <mat-checkbox [formField]="optionsForm[name]">
+      {{ 'demo.tables.kitchen_sink.option.' + name | translate }}
+    </mat-checkbox>
+  }
+  <mat-radio-group
+    [formField]="optionsForm.multiSelectable"
+    [attr.aria-label]="'demo.tables.kitchen_sink.selection' | translate"
+  >
+    <mat-radio-button [value]="false">
+      {{ 'demo.tables.kitchen_sink.option.singleSelectable' | translate }}
+    </mat-radio-button>
+    <mat-radio-button [value]="true">
+      {{ 'demo.tables.kitchen_sink.option.multiSelectable' | translate }}
+    </mat-radio-button>
+  </mat-radio-group>
+</fieldset>
+
+<div class="actions">
+  <button matButton="tonal" type="button" (click)="updateCells()">
+    {{ 'demo.tables.kitchen_sink.update_cells' | translate }}
+  </button>
+  <button matButton="tonal" type="button" (click)="rotateRows()">
+    {{ 'demo.tables.kitchen_sink.rotate_rows' | translate }}
+  </button>
+</div>
+
+@let settings = options();
+<mtx-grid
+  #grid
+  tabindex="-1"
+  [data]="elements()"
+  [trackBy]="trackByPosition"
+  [columns]="columns()"
+  [loading]="settings.loading"
+  [columnResizable]="settings.columnResizable"
+  [multiSelectable]="settings.multiSelectable"
+  [rowSelectable]="settings.rowSelectable"
+  [hideRowSelectionCheckbox]="settings.hideRowSelectionCheckbox"
+  [rowHover]="settings.rowHover"
+  [rowStriped]="settings.rowStriped"
+  [showToolbar]="settings.showToolbar"
+  [toolbarTitle]="'demo.tables.kitchen_sink.toolbar_title' | translate"
+  [columnHideable]="settings.columnHideable"
+  [columnSortable]="settings.columnSortable"
+  [columnPinnable]="settings.columnPinnable"
+  [columnPinOptions]="pinOptions()"
+  [columnMenuButtonText]="'demo.tables.kitchen_sink.columns' | translate"
+  [noResultText]="'demo.tables.no_result' | translate"
+  [expandable]="settings.expandable"
+  [expansionTemplate]="expansion"
+  [pageOnFront]="settings.showPaginator"
+  [showPaginator]="settings.showPaginator"
+  [pageSizeOptions]="[5, 10, 50, 100]"
+  [pageIndex]="0"
+  [pageSize]="5"
+  (rowSelectedChange)="selected.set($event)"
+  [rowSelected]="selected()"
+  (columnChange)="updateColumns($event)"
+/>
+<ng-template #expansion let-row>
+  {{ row.name }} ({{ row.symbol }}) · {{ row.address }}, {{ row.city }}
+</ng-template>
+
+<p class="selection" aria-live="polite">
+  {{ 'demo.tables.kitchen_sink.selected' | translate: { count: selected().length } }}
+  {{ selectedNames() }}
+</p>

@@ -1,0 +1,26 @@
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1rem;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  margin: 0 0 1rem;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: var(--mat-sys-corner-medium);
+}
+
+legend {
+  padding-inline: 0.25rem;
+  font: var(--mat-sys-title-small);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block-end: 1rem;
+}
+
+.selection {
+  margin-block-start: 1rem;
+}

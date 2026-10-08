@@ -299,6 +299,101 @@
       "add_tag": "新增選項",
       "loading": "正在載入…",
       "clear_all": "全部清除"
+    },
+    "tables": {
+      "no_result": "沒有找到記錄",
+      "genders": {
+        "male": "男",
+        "female": "女"
+      },
+      "columns": {
+        "position": "序號",
+        "name": "名稱",
+        "weight": "原子量",
+        "symbol": "符號",
+        "gender": "性別",
+        "mobile": "手機",
+        "tele": "電話",
+        "birthday": "生日",
+        "city": "城市",
+        "address": "地址",
+        "company": "公司",
+        "website": "網站",
+        "email": "電子郵件",
+        "operation": "操作",
+        "repo": "儲存庫",
+        "owner": "擁有者",
+        "avatar": "頭像",
+        "description": "描述",
+        "stars": "星號",
+        "forks": "分支",
+        "issues": "未關閉的議題",
+        "language": "語言",
+        "license": "授權",
+        "homepage": "首頁",
+        "forked": "分支儲存庫",
+        "archived": "已封存",
+        "created": "建立時間",
+        "updated": "更新時間"
+      },
+      "kitchen_sink": {
+        "intro": "@ng-matero/extensions 的 mtx-grid：具備選取、排序、分頁、欄選單、固定欄、調整欄寬和可展開列的 Material 表格。可在下方切換各項選項。",
+        "options": "表格選項",
+        "selection": "列選取",
+        "option": {
+          "rowSelectable": "可選取列",
+          "hideRowSelectionCheckbox": "隱藏選取框",
+          "showToolbar": "工具列",
+          "columnHideable": "隱藏欄",
+          "columnSortable": "調整欄順序",
+          "columnPinnable": "固定欄",
+          "rowHover": "列懸停",
+          "rowStriped": "斑馬紋",
+          "expandable": "可展開列",
+          "showPaginator": "分頁器",
+          "loading": "載入狀態",
+          "columnResizable": "可調整欄寬",
+          "singleSelectable": "單選",
+          "multiSelectable": "多選"
+        },
+        "update_cells": "更新原子量",
+        "rotate_rows": "把最後一列移到頂端",
+        "toolbar_title": "元素",
+        "columns": "欄",
+        "pin": {
+          "left": "固定至左側",
+          "right": "固定至右側",
+          "none": "取消固定"
+        },
+        "edit": "編輯",
+        "delete": "刪除",
+        "cancel": "取消",
+        "confirm_delete": "刪除這個元素？",
+        "deleted": "已刪除 {{name}}。",
+        "edit_title": "編輯元素 {{position}}",
+        "selected": "已選取 {{count}} 列。"
+      },
+      "remote_data": {
+        "intro": "表格在伺服器端分頁、排序和搜尋：每次變更都會送出帶有查詢、排序和頁碼的請求，這裡由模擬伺服器以範例資料回應。",
+        "query": "搜尋",
+        "sort": "排序依據",
+        "order": "順序",
+        "none": "無",
+        "sort_by": {
+          "stars": "星號",
+          "forks": "分支",
+          "updated": "最近更新"
+        },
+        "order_by": {
+          "desc": "遞減",
+          "asc": "遞增"
+        },
+        "search": "搜尋",
+        "reset": "重設",
+        "yes": "是",
+        "no": "否",
+        "error": "無法載入儲存庫。"
+      }
     }
   }
 }

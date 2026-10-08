@@ -50,6 +50,7 @@ export const routes: Routes = [
         loadChildren: () => import('./routes/permissions/permissions.routes'),
       },
       { path: 'forms', loadChildren: () => import('./routes/forms/forms.routes') },
+      { path: 'tables', loadChildren: () => import('./routes/tables/tables.routes') },
       { path: 'media', loadChildren: () => import('./routes/media/media.routes') },
       { path: 'utilities', loadChildren: () => import('./routes/utilities/utilities.routes') },
       { path: 'menu-level', loadChildren: () => import('./routes/menu-level/menu-level.routes') },

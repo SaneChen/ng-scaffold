@@ -299,6 +299,101 @@
       "add_tag": "添加选项",
       "loading": "正在加载…",
       "clear_all": "全部清除"
+    },
+    "tables": {
+      "no_result": "没有找到记录",
+      "genders": {
+        "male": "男",
+        "female": "女"
+      },
+      "columns": {
+        "position": "序号",
+        "name": "名称",
+        "weight": "原子量",
+        "symbol": "符号",
+        "gender": "性别",
+        "mobile": "手机",
+        "tele": "电话",
+        "birthday": "生日",
+        "city": "城市",
+        "address": "地址",
+        "company": "公司",
+        "website": "网站",
+        "email": "邮箱",
+        "operation": "操作",
+        "repo": "仓库",
+        "owner": "所有者",
+        "avatar": "头像",
+        "description": "描述",
+        "stars": "星标",
+        "forks": "派生",
+        "issues": "未关闭的议题",
+        "language": "语言",
+        "license": "许可证",
+        "homepage": "主页",
+        "forked": "派生仓库",
+        "archived": "已归档",
+        "created": "创建时间",
+        "updated": "更新时间"
+      },
+      "kitchen_sink": {
+        "intro": "@ng-matero/extensions 的 mtx-grid：带选择、排序、分页、列菜单、固定列、调整列宽和可展开行的 Material 表格。可在下方切换各项选项。",
+        "options": "表格选项",
+        "selection": "行选择",
+        "option": {
+          "rowSelectable": "可选择行",
+          "hideRowSelectionCheckbox": "隐藏选择框",
+          "showToolbar": "工具栏",
+          "columnHideable": "隐藏列",
+          "columnSortable": "调整列顺序",
+          "columnPinnable": "固定列",
+          "rowHover": "行悬停",
+          "rowStriped": "斑马纹",
+          "expandable": "可展开行",
+          "showPaginator": "分页器",
+          "loading": "加载状态",
+          "columnResizable": "可调整列宽",
+          "singleSelectable": "单选",
+          "multiSelectable": "多选"
+        },
+        "update_cells": "更新原子量",
+        "rotate_rows": "把最后一行移到顶部",
+        "toolbar_title": "元素",
+        "columns": "列",
+        "pin": {
+          "left": "固定到左侧",
+          "right": "固定到右侧",
+          "none": "取消固定"
+        },
+        "edit": "编辑",
+        "delete": "删除",
+        "cancel": "取消",
+        "confirm_delete": "删除这个元素？",
+        "deleted": "已删除 {{name}}。",
+        "edit_title": "编辑元素 {{position}}",
+        "selected": "已选择 {{count}} 行。"
+      },
+      "remote_data": {
+        "intro": "表格在服务器端分页、排序和搜索：每次变化都会发送带有查询、排序和页码的请求，这里由模拟服务器用示例数据应答。",
+        "query": "搜索",
+        "sort": "排序依据",
+        "order": "顺序",
+        "none": "无",
+        "sort_by": {
+          "stars": "星标",
+          "forks": "派生",
+          "updated": "最近更新"
+        },
+        "order_by": {
+          "desc": "降序",
+          "asc": "升序"
+        },
+        "search": "搜索",
+        "reset": "重置",
+        "yes": "是",
+        "no": "否",
+        "error": "无法加载仓库。"
+      }
     }
   }
 }

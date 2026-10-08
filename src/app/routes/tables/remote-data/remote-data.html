@@ -1,0 +1,59 @@
+<app-page-header />
+
+<p>{{ 'demo.tables.remote_data.intro' | translate }}</p>
+
+<form class="query" [formRoot]="queryForm">
+  <mat-form-field>
+    <mat-label>{{ 'demo.tables.remote_data.query' | translate }}</mat-label>
+    <input matInput type="search" autocomplete="off" [formField]="queryForm.q" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'demo.tables.remote_data.sort' | translate }}</mat-label>
+    <mat-select [formField]="queryForm.sort">
+      <mat-option value="">{{ 'demo.tables.remote_data.none' | translate }}</mat-option>
+      @for (sort of sorts; track sort) {
+        <mat-option [value]="sort">
+          {{ 'demo.tables.remote_data.sort_by.' + sort | translate }}
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'demo.tables.remote_data.order' | translate }}</mat-label>
+    <mat-select [formField]="queryForm.order">
+      @for (order of orders; track order) {
+        <mat-option [value]="order">
+          {{ 'demo.tables.remote_data.order_by.' + order | translate }}
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <div class="buttons">
+    <button matButton="filled" type="submit">
+      {{ 'demo.tables.remote_data.search' | translate }}
+    </button>
+    <button matButton type="button" (click)="reset()">
+      {{ 'demo.tables.remote_data.reset' | translate }}
+    </button>
+  </div>
+</form>
+
+@if (repos.error()) {
+  <p class="error" role="alert">{{ 'demo.tables.remote_data.error' | translate }}</p>
+}
+
+<mtx-grid
+  [data]="result().items"
+  [columns]="columns()"
+  [length]="result().total_count"
+  [loading]="repos.isLoading()"
+  [noResultText]="'demo.tables.no_result' | translate"
+  [pageOnFront]="false"
+  [pageIndex]="page().index"
+  [pageSize]="page().size"
+  [pageSizeOptions]="[5, 10, 20]"
+  (page)="changePage($event)"
+/>

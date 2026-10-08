@@ -1,0 +1,19 @@
+.query {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1rem;
+  align-items: baseline;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.error {
+  color: var(--mat-sys-error);
+}
+
+mtx-grid {
+  block-size: 480px;
+}

@@ -299,6 +299,101 @@
       "add_tag": "Add item",
       "loading": "Loading…",
       "clear_all": "Clear all"
+    },
+    "tables": {
+      "no_result": "No records found",
+      "genders": {
+        "male": "Male",
+        "female": "Female"
+      },
+      "columns": {
+        "position": "Position",
+        "name": "Name",
+        "weight": "Weight",
+        "symbol": "Symbol",
+        "gender": "Gender",
+        "mobile": "Mobile",
+        "tele": "Telephone",
+        "birthday": "Birthday",
+        "city": "City",
+        "address": "Address",
+        "company": "Company",
+        "website": "Website",
+        "email": "Email",
+        "operation": "Actions",
+        "repo": "Repository",
+        "owner": "Owner",
+        "avatar": "Avatar",
+        "description": "Description",
+        "stars": "Stars",
+        "forks": "Forks",
+        "issues": "Open issues",
+        "language": "Language",
+        "license": "License",
+        "homepage": "Home page",
+        "forked": "Fork",
+        "archived": "Archived",
+        "created": "Created",
+        "updated": "Updated"
+      },
+      "kitchen_sink": {
+        "intro": "mtx-grid of @ng-matero/extensions: a Material table with selection, sorting, paging, column menus, pinning, resizing and expandable rows. Switch its options below.",
+        "options": "Grid options",
+        "selection": "Row selection",
+        "option": {
+          "rowSelectable": "Selectable rows",
+          "hideRowSelectionCheckbox": "Hide the selection checkboxes",
+          "showToolbar": "Toolbar",
+          "columnHideable": "Column hiding",
+          "columnSortable": "Column reordering",
+          "columnPinnable": "Column pinning",
+          "rowHover": "Row hover",
+          "rowStriped": "Striped rows",
+          "expandable": "Expandable rows",
+          "showPaginator": "Paginator",
+          "loading": "Loading state",
+          "columnResizable": "Resizable columns",
+          "singleSelectable": "Single selection",
+          "multiSelectable": "Multiple selection"
+        },
+        "update_cells": "Update the weights",
+        "rotate_rows": "Move the last row to the top",
+        "toolbar_title": "Elements",
+        "columns": "Columns",
+        "pin": {
+          "left": "Pin left",
+          "right": "Pin right",
+          "none": "Unpin"
+        },
+        "edit": "Edit",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "confirm_delete": "Delete this element?",
+        "deleted": "{{name}} was deleted.",
+        "edit_title": "Edit element {{position}}",
+        "selected": "Selected rows: {{count}}."
+      },
+      "remote_data": {
+        "intro": "The grid pages, sorts and searches on the server: each change sends a request with the query, the sort and the page, answered here by a simulated server from sample data.",
+        "query": "Search",
+        "sort": "Sort by",
+        "order": "Order",
+        "none": "None",
+        "sort_by": {
+          "stars": "Stars",
+          "forks": "Forks",
+          "updated": "Last update"
+        },
+        "order_by": {
+          "desc": "Descending",
+          "asc": "Ascending"
+        },
+        "search": "Search",
+        "reset": "Reset",
+        "yes": "Yes",
+        "no": "No",
+        "error": "The repositories could not be loaded."
+      }
     }
   }
 }

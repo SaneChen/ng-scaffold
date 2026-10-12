@@ -1,0 +1,61 @@
+<app-page-header />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.toolbar.basic.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-toolbar>
+      <span>{{ 'demo.material.toolbar.app' | translate }}</span>
+    </mat-toolbar>
+    <p>{{ 'demo.material.toolbar.hello' | translate }}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.toolbar.rows.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-toolbar>
+      <mat-toolbar-row>{{ 'demo.material.toolbar.rows.settings' | translate }}</mat-toolbar-row>
+      <mat-toolbar-row>{{ 'demo.material.toolbar.rows.profile' | translate }}</mat-toolbar-row>
+    </mat-toolbar>
+    <p>{{ 'demo.material.toolbar.rows.text' | translate }}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.toolbar.actions.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-toolbar>
+      <span>{{ 'demo.material.toolbar.app' | translate }}</span>
+      <span class="spacer"></span>
+      <button
+        matIconButton
+        type="button"
+        [attr.aria-label]="'demo.material.toolbar.actions.favorite' | translate"
+        [attr.aria-pressed]="favorite()"
+        (click)="favorite.set(!favorite())"
+      >
+        <mat-icon aria-hidden="true" [class.active]="favorite()">favorite</mat-icon>
+      </button>
+    </mat-toolbar>
+    <p>{{ 'demo.material.toolbar.hello' | translate }}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.toolbar.colors.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    @for (color of colors; track color) {
+      <mat-toolbar [class]="color">
+        <span>{{ 'demo.material.variants.' + color | translate }}</span>
+      </mat-toolbar>
+    }
+  </mat-card-content>
+</mat-card>

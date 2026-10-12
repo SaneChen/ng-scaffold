@@ -1,0 +1,141 @@
+<app-page-header />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.menu.icon.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <button
+      matIconButton
+      type="button"
+      [matMenuTriggerFor]="simple"
+      [attr.aria-label]="'demo.material.menu.open' | translate"
+    >
+      <mat-icon aria-hidden="true">more_vert</mat-icon>
+    </button>
+    <mat-menu #simple>
+      <button mat-menu-item type="button">
+        {{ 'demo.material.menu.icon.settings' | translate }}
+      </button>
+      <button mat-menu-item type="button">{{ 'demo.material.menu.icon.help' | translate }}</button>
+    </mat-menu>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.menu.icons.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <button
+      matIconButton
+      type="button"
+      [matMenuTriggerFor]="withIcons"
+      [attr.aria-label]="'demo.material.menu.open' | translate"
+    >
+      <mat-icon aria-hidden="true">more_vert</mat-icon>
+    </button>
+    <mat-menu #withIcons>
+      @for (call of calls; track call.name) {
+        <button mat-menu-item type="button">
+          <mat-icon aria-hidden="true">{{ call.icon }}</mat-icon>
+          <span>{{ 'demo.material.menu.icons.' + call.name | translate }}</span>
+        </button>
+      }
+    </mat-menu>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.menu.links.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <button
+      matIconButton
+      type="button"
+      [matMenuTriggerFor]="withLinks"
+      [attr.aria-label]="'demo.material.menu.links.open' | translate"
+    >
+      <mat-icon aria-hidden="true">more_vert</mat-icon>
+    </button>
+    <mat-menu #withLinks>
+      @for (link of links; track link.href) {
+        <a mat-menu-item [href]="link.href">{{ link.name }}</a>
+      }
+    </mat-menu>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.menu.nested.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <button matButton="tonal" type="button" [matMenuTriggerFor]="animals">
+      {{ 'demo.material.menu.nested.index' | translate }}
+    </button>
+
+    <mat-menu #animals>
+      <button mat-menu-item type="button" [matMenuTriggerFor]="vertebrates">
+        {{ 'demo.material.menu.animals.vertebrates' | translate }}
+      </button>
+      <button mat-menu-item type="button" [matMenuTriggerFor]="invertebrateMenu">
+        {{ 'demo.material.menu.animals.invertebrates' | translate }}
+      </button>
+    </mat-menu>
+
+    <mat-menu #vertebrates>
+      <button mat-menu-item type="button" [matMenuTriggerFor]="fishMenu">
+        {{ 'demo.material.menu.animals.fishes' | translate }}
+      </button>
+      <button mat-menu-item type="button" [matMenuTriggerFor]="amphibianMenu">
+        {{ 'demo.material.menu.animals.amphibians' | translate }}
+      </button>
+      <button mat-menu-item type="button" [matMenuTriggerFor]="reptileMenu">
+        {{ 'demo.material.menu.animals.reptiles' | translate }}
+      </button>
+      <button mat-menu-item type="button">
+        {{ 'demo.material.menu.animals.birds' | translate }}
+      </button>
+      <button mat-menu-item type="button">
+        {{ 'demo.material.menu.animals.mammals' | translate }}
+      </button>
+    </mat-menu>
+
+    <mat-menu #invertebrateMenu>
+      @for (animal of invertebrates; track animal) {
+        <button mat-menu-item type="button">
+          {{ 'demo.material.menu.animals.' + animal | translate }}
+        </button>
+      }
+    </mat-menu>
+
+    <mat-menu #fishMenu>
+      @for (animal of fishes; track animal) {
+        <button mat-menu-item type="button">
+          {{ 'demo.material.menu.animals.' + animal | translate }}
+        </button>
+      }
+    </mat-menu>
+
+    <mat-menu #amphibianMenu>
+      @for (animal of amphibians; track animal) {
+        <button mat-menu-item type="button">
+          {{ 'demo.material.menu.animals.' + animal | translate }}
+        </button>
+      }
+    </mat-menu>
+
+    <mat-menu #reptileMenu>
+      @for (animal of reptiles; track animal) {
+        <button mat-menu-item type="button">
+          {{ 'demo.material.menu.animals.' + animal | translate }}
+        </button>
+      }
+      <button mat-menu-item type="button" disabled>
+        {{ 'demo.material.menu.animals.velociraptor' | translate }}
+      </button>
+    </mat-menu>
+  </mat-card-content>
+</mat-card>

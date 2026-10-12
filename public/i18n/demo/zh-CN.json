@@ -650,6 +650,115 @@
           "required": "请接受条款和条件。",
           "accepted": "已接受条款和条件！"
         }
+      },
+      "menu": {
+        "open": "打开菜单",
+        "icon": {
+          "title": "图标触发器",
+          "settings": "设置",
+          "help": "帮助"
+        },
+        "icons": {
+          "title": "带图标的菜单项",
+          "redial": "重拨",
+          "voicemail": "查看语音信箱",
+          "mute": "关闭提醒"
+        },
+        "links": {
+          "title": "链接菜单项",
+          "open": "进一步了解 Angular"
+        },
+        "nested": {
+          "title": "嵌套菜单",
+          "index": "动物索引"
+        },
+        "animals": {
+          "vertebrates": "脊椎动物",
+          "invertebrates": "无脊椎动物",
+          "fishes": "鱼类",
+          "amphibians": "两栖动物",
+          "reptiles": "爬行动物",
+          "birds": "鸟类",
+          "mammals": "哺乳动物",
+          "insects": "昆虫",
+          "molluscs": "软体动物",
+          "crustaceans": "甲壳动物",
+          "corals": "珊瑚",
+          "arachnids": "蛛形纲动物",
+          "velvet_worms": "有爪动物",
+          "horseshoe_crabs": "鲎",
+          "baikal_oilfish": "贝加尔油鱼",
+          "bala_shark": "银鲨",
+          "ballan_wrasse": "巴兰隆头鱼",
+          "bamboo_shark": "竹鲨",
+          "banded_killifish": "条纹底鳉",
+          "sonoran_toad": "索诺兰沙漠蟾蜍",
+          "western_toad": "西部蟾蜍",
+          "arroyo_toad": "阿罗约蟾蜍",
+          "yosemite_toad": "优胜美地蟾蜍",
+          "day_gecko": "带纹日守宫",
+          "gila_monster": "带纹吉拉毒蜥",
+          "tree_monitor": "黑树巨蜥",
+          "spiny_lizard": "蓝刺蜥",
+          "velociraptor": "伶盗龙"
+        }
+      },
+      "sidenav": {
+        "examples": "侧边栏示例",
+        "index": "全部示例",
+        "menu": "导航菜单",
+        "close": "关闭示例",
+        "filler": "填充内容",
+        "basic": {
+          "name": "基本侧边栏",
+          "title": "基本侧边栏（例如带菜单按钮的桌面应用）",
+          "text": "菜单按钮在内容旁显示或隐藏侧边栏。",
+          "open": "打开基本侧边栏示例",
+          "app": "基本侧边栏应用",
+          "content": "侧边栏打开时会把这里的内容推到一旁。"
+        },
+        "mobile": {
+          "name": "响应式侧边栏",
+          "title": "响应式侧边栏（例如在手机上覆盖内容的菜单）",
+          "text": "窄屏上侧边栏覆盖在内容之上；宽屏上它位于内容旁边。",
+          "open": "打开响应式侧边栏示例",
+          "app": "响应式侧边栏应用"
+        },
+        "dual": {
+          "name": "双侧边栏",
+          "title": "双侧边栏（例如带菜单和播放列表的音乐应用）",
+          "text": "开头是导航侧边栏，结尾是播放列表侧边栏。",
+          "open": "打开双侧边栏示例",
+          "app": "双侧边栏应用",
+          "playlists": "播放列表",
+          "open_playlists": "播放列表",
+          "playing": "正在播放“{{name}}”",
+          "lists": {
+            "thumbs_up": "点赞的歌曲",
+            "last_added": "最近添加",
+            "free_purchased": "免费与已购"
+          }
+        }
+      },
+      "toolbar": {
+        "app": "我的应用",
+        "hello": "你好，世界！",
+        "basic": {
+          "title": "带标题的工具栏（例如应用名称）"
+        },
+        "rows": {
+          "title": "多行工具栏",
+          "settings": "设置",
+          "profile": "个人资料",
+          "text": "我的个人资料"
+        },
+        "actions": {
+          "title": "带操作的工具栏",
+          "favorite": "收藏"
+        },
+        "colors": {
+          "title": "工具栏颜色"
+        }
       }
     }
   }

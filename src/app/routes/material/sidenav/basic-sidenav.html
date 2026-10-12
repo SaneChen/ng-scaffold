@@ -1,0 +1,44 @@
+<app-page-header heading="demo.material.sidenav.basic.name" [nav]="trail" />
+
+<div class="frame">
+  <mat-toolbar>
+    <button
+      matIconButton
+      type="button"
+      aria-controls="basic-sidenav"
+      [attr.aria-expanded]="sidenav.opened"
+      [attr.aria-label]="'demo.material.sidenav.menu' | translate"
+      (click)="sidenav.toggle()"
+    >
+      <mat-icon aria-hidden="true">menu</mat-icon>
+    </button>
+    <span>{{ 'demo.material.sidenav.basic.app' | translate }}</span>
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav id="basic-sidenav" mode="side" autoFocus="first-tabbable">
+      <nav [attr.aria-label]="'demo.material.sidenav.examples' | translate">
+        <mat-nav-list>
+          <a mat-list-item routerLink="..">{{ 'demo.material.sidenav.index' | translate }}</a>
+          @for (example of examples; track example) {
+            <a
+              mat-list-item
+              routerLinkActive
+              #active="routerLinkActive"
+              [routerLink]="['..', example]"
+              [activated]="active.isActive"
+              [attr.aria-current]="active.isActive ? 'page' : null"
+            >
+              {{ 'demo.material.sidenav.' + example + '.name' | translate }}
+            </a>
+          }
+        </mat-nav-list>
+      </nav>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+      <p>{{ 'demo.material.sidenav.basic.content' | translate }}</p>
+      <a matButton="filled" routerLink="..">{{ 'demo.material.sidenav.close' | translate }}</a>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

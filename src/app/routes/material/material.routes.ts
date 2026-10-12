@@ -57,6 +57,41 @@ const routes: Routes = [
         title: 'menu.material.form-controls.slide-toggle',
         loadComponent: () => import('./slide-toggle/slide-toggle').then(m => m.MaterialSlideToggle),
       },
+      // Navigation
+      {
+        path: 'menu',
+        title: 'menu.material.navigation.menu',
+        loadComponent: () => import('./menu/menu').then(m => m.MaterialMenu),
+      },
+      {
+        path: 'sidenav',
+        title: 'menu.material.navigation.sidenav',
+        children: [
+          {
+            path: '',
+            loadComponent: () => import('./sidenav/sidenav').then(m => m.MaterialSidenav),
+          },
+          {
+            path: 'basic',
+            loadComponent: () =>
+              import('./sidenav/basic-sidenav').then(m => m.MaterialBasicSidenav),
+          },
+          {
+            path: 'mobile',
+            loadComponent: () =>
+              import('./sidenav/mobile-sidenav').then(m => m.MaterialMobileSidenav),
+          },
+          {
+            path: 'dual',
+            loadComponent: () => import('./sidenav/dual-sidenav').then(m => m.MaterialDualSidenav),
+          },
+        ],
+      },
+      {
+        path: 'toolbar',
+        title: 'menu.material.navigation.toolbar',
+        loadComponent: () => import('./toolbar/toolbar').then(m => m.MaterialToolbar),
+      },
     ],
   },
 ];

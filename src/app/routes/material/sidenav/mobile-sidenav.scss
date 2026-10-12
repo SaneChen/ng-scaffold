@@ -1,0 +1,7 @@
+@use 'example';
+
+@include example.frame;
+
+.filler {
+  padding-inline: 1rem;
+}

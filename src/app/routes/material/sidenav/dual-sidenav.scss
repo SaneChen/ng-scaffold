@@ -1,0 +1,19 @@
+@use 'example';
+
+@include example.frame;
+
+.spacer {
+  flex: 1;
+}
+
+.playlists section {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+h2 {
+  margin: 0.5rem 0;
+  font: var(--mat-sys-title-medium);
+  text-align: center;
+}

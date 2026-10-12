@@ -650,6 +650,115 @@
           "required": "Please accept the terms and conditions.",
           "accepted": "Terms and conditions accepted!"
         }
+      },
+      "menu": {
+        "open": "Open the menu",
+        "icon": {
+          "title": "Icon trigger",
+          "settings": "Settings",
+          "help": "Help"
+        },
+        "icons": {
+          "title": "Items with icons",
+          "redial": "Redial",
+          "voicemail": "Check voicemail",
+          "mute": "Disable alerts"
+        },
+        "links": {
+          "title": "Items that are links",
+          "open": "Learn more about Angular"
+        },
+        "nested": {
+          "title": "Nested menus",
+          "index": "Animal index"
+        },
+        "animals": {
+          "vertebrates": "Vertebrates",
+          "invertebrates": "Invertebrates",
+          "fishes": "Fishes",
+          "amphibians": "Amphibians",
+          "reptiles": "Reptiles",
+          "birds": "Birds",
+          "mammals": "Mammals",
+          "insects": "Insects",
+          "molluscs": "Molluscs",
+          "crustaceans": "Crustaceans",
+          "corals": "Corals",
+          "arachnids": "Arachnids",
+          "velvet_worms": "Velvet worms",
+          "horseshoe_crabs": "Horseshoe crabs",
+          "baikal_oilfish": "Baikal oilfish",
+          "bala_shark": "Bala shark",
+          "ballan_wrasse": "Ballan wrasse",
+          "bamboo_shark": "Bamboo shark",
+          "banded_killifish": "Banded killifish",
+          "sonoran_toad": "Sonoran Desert toad",
+          "western_toad": "Western toad",
+          "arroyo_toad": "Arroyo toad",
+          "yosemite_toad": "Yosemite toad",
+          "day_gecko": "Banded day gecko",
+          "gila_monster": "Banded Gila monster",
+          "tree_monitor": "Black tree monitor",
+          "spiny_lizard": "Blue spiny lizard",
+          "velociraptor": "Velociraptor"
+        }
+      },
+      "sidenav": {
+        "examples": "Sidenav examples",
+        "index": "All examples",
+        "menu": "Navigation menu",
+        "close": "Close the example",
+        "filler": "Filler content",
+        "basic": {
+          "name": "Basic sidenav",
+          "title": "Basic sidenav (e.g. a desktop application with a menu button)",
+          "text": "The menu button shows and hides a sidenav beside the content.",
+          "open": "Open the basic sidenav example",
+          "app": "Basic sidenav app",
+          "content": "The sidenav pushes this content aside while it is open."
+        },
+        "mobile": {
+          "name": "Responsive sidenav",
+          "title": "Responsive sidenav (e.g. a menu that covers the content on phones)",
+          "text": "On narrow screens the sidenav opens over the content; on wide screens it sits beside it.",
+          "open": "Open the responsive sidenav example",
+          "app": "Responsive sidenav app"
+        },
+        "dual": {
+          "name": "Dual sidenavs",
+          "title": "Dual sidenavs (e.g. a music application with a menu and playlists)",
+          "text": "A navigation sidenav at the start and a playlist sidenav at the end.",
+          "open": "Open the dual sidenavs example",
+          "app": "Dual sidenav app",
+          "playlists": "Playlists",
+          "open_playlists": "Playlists",
+          "playing": "Playing “{{name}}”",
+          "lists": {
+            "thumbs_up": "Thumbs up",
+            "last_added": "Last added",
+            "free_purchased": "Free and purchased"
+          }
+        }
+      },
+      "toolbar": {
+        "app": "My application",
+        "hello": "Hello, world!",
+        "basic": {
+          "title": "Toolbar with a title (e.g. the application's name)"
+        },
+        "rows": {
+          "title": "Toolbar with several rows",
+          "settings": "Settings",
+          "profile": "Profile",
+          "text": "My profile"
+        },
+        "actions": {
+          "title": "Toolbar with an action",
+          "favorite": "Favourite"
+        },
+        "colors": {
+          "title": "Toolbar colours"
+        }
       }
     }
   }

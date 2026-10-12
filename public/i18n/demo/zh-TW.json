@@ -650,6 +650,115 @@
           "required": "請接受條款和條件。",
           "accepted": "已接受條款和條件！"
         }
+      },
+      "menu": {
+        "open": "開啟選單",
+        "icon": {
+          "title": "圖示觸發器",
+          "settings": "設定",
+          "help": "說明"
+        },
+        "icons": {
+          "title": "帶圖示的選單項目",
+          "redial": "重撥",
+          "voicemail": "查看語音信箱",
+          "mute": "關閉提醒"
+        },
+        "links": {
+          "title": "連結選單項目",
+          "open": "進一步了解 Angular"
+        },
+        "nested": {
+          "title": "巢狀選單",
+          "index": "動物索引"
+        },
+        "animals": {
+          "vertebrates": "脊椎動物",
+          "invertebrates": "無脊椎動物",
+          "fishes": "魚類",
+          "amphibians": "兩棲動物",
+          "reptiles": "爬行動物",
+          "birds": "鳥類",
+          "mammals": "哺乳動物",
+          "insects": "昆蟲",
+          "molluscs": "軟體動物",
+          "crustaceans": "甲殼動物",
+          "corals": "珊瑚",
+          "arachnids": "蛛形綱動物",
+          "velvet_worms": "有爪動物",
+          "horseshoe_crabs": "鱟",
+          "baikal_oilfish": "貝加爾油魚",
+          "bala_shark": "銀鯊",
+          "ballan_wrasse": "巴蘭隆頭魚",
+          "bamboo_shark": "竹鯊",
+          "banded_killifish": "條紋底鱂",
+          "sonoran_toad": "索諾蘭沙漠蟾蜍",
+          "western_toad": "西部蟾蜍",
+          "arroyo_toad": "阿羅約蟾蜍",
+          "yosemite_toad": "優勝美地蟾蜍",
+          "day_gecko": "帶紋日守宮",
+          "gila_monster": "帶紋吉拉毒蜥",
+          "tree_monitor": "黑樹巨蜥",
+          "spiny_lizard": "藍刺蜥",
+          "velociraptor": "伶盜龍"
+        }
+      },
+      "sidenav": {
+        "examples": "側邊欄範例",
+        "index": "全部範例",
+        "menu": "導覽選單",
+        "close": "關閉範例",
+        "filler": "填充內容",
+        "basic": {
+          "name": "基本側邊欄",
+          "title": "基本側邊欄（例如帶選單按鈕的桌面應用程式）",
+          "text": "選單按鈕在內容旁顯示或隱藏側邊欄。",
+          "open": "開啟基本側邊欄範例",
+          "app": "基本側邊欄應用程式",
+          "content": "側邊欄開啟時會把這裡的內容推到一旁。"
+        },
+        "mobile": {
+          "name": "響應式側邊欄",
+          "title": "響應式側邊欄（例如在手機上覆蓋內容的選單）",
+          "text": "窄螢幕上側邊欄覆蓋在內容之上；寬螢幕上它位於內容旁邊。",
+          "open": "開啟響應式側邊欄範例",
+          "app": "響應式側邊欄應用程式"
+        },
+        "dual": {
+          "name": "雙側邊欄",
+          "title": "雙側邊欄（例如帶選單和播放清單的音樂應用程式）",
+          "text": "開頭是導覽側邊欄，結尾是播放清單側邊欄。",
+          "open": "開啟雙側邊欄範例",
+          "app": "雙側邊欄應用程式",
+          "playlists": "播放清單",
+          "open_playlists": "播放清單",
+          "playing": "正在播放「{{name}}」",
+          "lists": {
+            "thumbs_up": "按讚的歌曲",
+            "last_added": "最近新增",
+            "free_purchased": "免費與已購"
+          }
+        }
+      },
+      "toolbar": {
+        "app": "我的應用程式",
+        "hello": "你好，世界！",
+        "basic": {
+          "title": "帶標題的工具列（例如應用程式名稱）"
+        },
+        "rows": {
+          "title": "多列工具列",
+          "settings": "設定",
+          "profile": "個人資料",
+          "text": "我的個人資料"
+        },
+        "actions": {
+          "title": "帶操作的工具列",
+          "favorite": "收藏"
+        },
+        "colors": {
+          "title": "工具列顏色"
+        }
       }
     }
   }

@@ -1,0 +1,34 @@
+@use '@angular/material' as mat;
+@use '../../demo/demo-page';
+
+@include demo-page.cards;
+
+mat-toolbar + mat-toolbar {
+  margin-block-start: 0.5rem;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.active {
+  color: var(--mat-sys-error);
+}
+
+.primary {
+  @include mat.toolbar-overrides(
+    (
+      container-background-color: var(--mat-sys-primary),
+      container-text-color: var(--mat-sys-on-primary),
+    )
+  );
+}
+
+.tertiary {
+  @include mat.toolbar-overrides(
+    (
+      container-background-color: var(--mat-sys-tertiary),
+      container-text-color: var(--mat-sys-on-tertiary),
+    )
+  );
+}

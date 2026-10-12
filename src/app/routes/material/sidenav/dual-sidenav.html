@@ -1,0 +1,72 @@
+<app-page-header heading="demo.material.sidenav.dual.name" [nav]="trail" />
+
+<div class="frame">
+  <mat-toolbar>
+    <button
+      matIconButton
+      type="button"
+      aria-controls="dual-start"
+      [attr.aria-expanded]="start.opened"
+      [attr.aria-label]="'demo.material.sidenav.menu' | translate"
+      (click)="start.toggle()"
+    >
+      <mat-icon aria-hidden="true">menu</mat-icon>
+    </button>
+    <span>{{ 'demo.material.sidenav.dual.app' | translate }}</span>
+    <span class="spacer"></span>
+    <button
+      matIconButton
+      type="button"
+      aria-controls="dual-end"
+      [attr.aria-expanded]="end.opened"
+      [attr.aria-label]="'demo.material.sidenav.dual.open_playlists' | translate"
+      (click)="end.toggle()"
+    >
+      <mat-icon aria-hidden="true">playlist_play</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav #start id="dual-start" mode="side" autoFocus="first-tabbable">
+      <nav [attr.aria-label]="'demo.material.sidenav.examples' | translate">
+        <mat-nav-list>
+          <a mat-list-item routerLink="..">{{ 'demo.material.sidenav.index' | translate }}</a>
+          @for (example of examples; track example) {
+            <a
+              mat-list-item
+              routerLinkActive
+              #active="routerLinkActive"
+              [routerLink]="['..', example]"
+              [activated]="active.isActive"
+              [attr.aria-current]="active.isActive ? 'page' : null"
+            >
+              {{ 'demo.material.sidenav.' + example + '.name' | translate }}
+            </a>
+          }
+        </mat-nav-list>
+      </nav>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+      <a matButton="filled" routerLink="..">{{ 'demo.material.sidenav.close' | translate }}</a>
+    </mat-sidenav-content>
+
+    <mat-sidenav
+      #end
+      id="dual-end"
+      mode="side"
+      position="end"
+      class="playlists"
+      autoFocus="first-tabbable"
+    >
+      <section aria-labelledby="dual-playlists-title">
+        <h2 id="dual-playlists-title">{{ 'demo.material.sidenav.dual.playlists' | translate }}</h2>
+        @for (list of playlists; track list) {
+          <button matButton type="button" (click)="play(list)">
+            {{ 'demo.material.sidenav.dual.lists.' + list | translate }}
+          </button>
+        }
+      </section>
+    </mat-sidenav>
+  </mat-sidenav-container>
+</div>

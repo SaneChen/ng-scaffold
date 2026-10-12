@@ -1,0 +1,31 @@
+// Styles of the sidenav example pages.
+
+// How this file was built:
+//   1. Created by hand (Sass partial, used by the three example pages).
+//   2. `frame`: the example application, in a bordered box of fixed height below the page header.
+
+// Why: ng-matero stretched each example over the whole content area with absolute positioning
+// and heights computed from the header; a framed example keeps the page header and breadcrumb.
+
+@mixin frame {
+  .frame {
+    display: flex;
+    flex-direction: column;
+    block-size: 30rem;
+    overflow: hidden;
+    border: 1px solid var(--mat-sys-outline-variant);
+    border-radius: var(--mat-sys-corner-medium);
+  }
+
+  mat-sidenav-container {
+    flex: 1;
+  }
+
+  mat-sidenav {
+    inline-size: 15rem;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+}

@@ -102,6 +102,24 @@ export class SettingsStore {
 | `/profile/overview`, `/profile/settings`                                                           | yes     | fixes ng-matero's user menu links to unshipped pages                        |
 | `/design`, `/material`, `/forms`, `/tables`, `/media`, `/permissions`, `/utilities`, `/menu-level` | demo    | same menu tree as ng-matero                                                 |
 
+### Demo isolation and providers
+
+- Each demo area owns a child ngx-translate service that loads `public/i18n/demo/<code>.json`.
+  Its entry guard waits for a usable dictionary, redirects failures to `/500`, and clears the
+  failed cache so re-entry can retry. The root dictionaries retain navigation titles.
+- Page-specific route files load date, datetime, select and Formly providers with their pages,
+  rather than pulling all adapters into the forms area's entry chunk. Dates react to the
+  language setting; datepicker, datetimepicker, select and stepper assistive labels are translated.
+- Static images use `NgOptimizedImage`. Gallery photos (30), sample avatars and Neptune artwork
+  are local demo assets; external image/iframe dependencies are replaced with local equivalents.
+- Remote-data demonstrates cancellable paged HTTP requests through a route-level interceptor
+  backed by `data/demo/repos.json`, not a third-party API. The grid binds selected rows and saves
+  column preferences separately from the option form, preserving them across data/language changes.
+- Formly 9 uses Reactive Forms through its public API, including an explicit email validator;
+  other new forms use Signal Forms. Material/CDK 22 stepper accepts the Field as `stepControl`.
+- G excludes demo routes/providers, translation/data/image assets, plugin skins and their
+  dependencies. The extensions/photoviewer Vitest inlining configuration is also demo-specific.
+
 ## 6. Styling
 
 - Material M3 via `mat.theme()` (written by `ng add @angular/material`). Dark mode switches the
@@ -130,6 +148,11 @@ export class SettingsStore {
 | Fonts                                                                                 | `@fontsource/roboto`, `@fontsource/material-symbols-outlined` | self-hosted, offline builds                    |
 | Dates                                                                                 | `date-fns`, `@angular/material-date-fns-adapter`              | date adapters                                  |
 | Charts                                                                                | `chart.js`                                                    | dashboard charts, loaded lazily; MIT           |
+
+Phase F uses extensions 22.1.1, its date-fns datetime adapter 22.0.0, Material date-fns adapter
+22.2.1, date-fns 4.4 and Formly 9.0 (see `yarn.lock` for resolved versions). These date/form/grid/
+viewer dependencies belong to the demo, not the starter. Chart.js 4.5 remains a lazy starter
+dependency for the dashboard.
 
 Dropped compared with ng-matero: `apexcharts` (5+ is dual licensed — free only below US$2M
 revenue and not for redistribution in toolkits — which a scaffold installed with `ng add` cannot

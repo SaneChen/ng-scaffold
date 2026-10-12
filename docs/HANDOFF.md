@@ -8,15 +8,20 @@
 ## 1. 当前状态
 
 - 基线：`0d99dd2`（未改动的 `ng new ng-scaffold`，Angular CLI 22.2.1）。
-- 已完成：ROADMAP 中阶段 0–5（含 §4 B 全局样式、C 认证/HTTP/Mock/菜单/权限/启动、D 布局外壳、
-  E 共享组件与基础页面），具体提交见 ROADMAP 中 `[x]` 条目后的哈希。
-- 质量状态（HEAD）：`tools/verify.sh` 通过——lint、stylelint、64 个测试文件 / 279 个用例、生产构建
-  （initial 约 457 kB / 传输约 109 kB，距 500 kB 警告 budget 约 43 kB；布局、页面、Chart.js 与
-  hot-toast 都是懒加载 chunk）。
-- 下一步：§4 的 **F · 演示功能区**，然后依次 G → H。
+- 已完成：ROADMAP 中阶段 0–6（含 §4 B 全局样式、C 认证/HTTP/Mock/菜单/权限/启动、D 布局外壳、
+  E 共享组件与基础页面、F 演示功能区），具体提交见 ROADMAP 中 `[x]` 条目后的哈希。
+- 质量状态（2026-10-12）：`NG_CLI_ANALYTICS=false tools/verify.sh` 通过——lint、stylelint、
+  122 个测试文件 / 427 个用例、生产构建（initial 498.12 kB / 传输约 124.90 kB，距 500 kB 警告
+  budget 仅 1.88 kB）。F 的评审修复已 autosquash，19 个功能提交均逐树通过 verify；只改写了
+  `209d65c` 之后当时尚未推送的提交。
+- 下一步：用户确认后进入 §4 的 **G · `ng add ng-scaffold`**，再进入 H；尚未启动 G。
 - 页面现状：`/auth/login`、`/auth/signup`（mock 演示账号 `ng-scaffold` / `ng-scaffold`，开启
   `environment.mockApi` 时自动填入）、`/dashboard`（`/` 默认跳转）、`/profile/overview|settings`、
-  `/403|404|500`；未知 URL 在原地址显示 404 页。菜单中的演示区（design、material…）由 F 添加。
+  `/403|404|500`；未知 URL 在原地址显示 404 页。演示菜单均已有懒加载页面：design、material（35 个）、
+  permissions、media（30 张照片）、forms、tables、utilities、menu-level。
+- 验证边界：本阶段做了安装源码核对与单元/键盘/焦点回归测试，没有完成浏览器端全量 AXE。
+  `mtx-grid` 上游内建行选择、展开及固定列图标按钮的可访问名称仍需在 H 的真实浏览器验收中处理；
+  不能把当前 verify 通过当成 WCAG/AXE 全部通过。
 
 ## 2. 环境与工作方式
 
@@ -72,8 +77,46 @@
 - **`src/index.html` 的内联启动脚本复制了应用代码**：存储键、默认设置、语言列表与匹配规则、加载文字
   （`layout.starting`）。新增语言或修改默认值时一起改，`src/index.spec.ts` 会在不一致时失败。
 - 开发服务器的文件监听偶尔会停止（日志里不再出现 "Changes detected"），重启 `ng serve` 即可。
+- **CLI analytics 的退出等待**：本环境曾出现 lint 已完成但进程不退出；使用
+  `NG_CLI_ANALYTICS=false tools/verify.sh` 临时关闭该次执行的 analytics，不修改全局配置。
+- **lint-staged 与部分暂存文件**：一次修复提交曾意外带入未暂存的字典修改。提交前后检查
+  `git diff --cached --stat` / `git show --stat`；只暂存当前功能的翻译键，必要时先安全保存其余修改。
+- **演示翻译是子服务**：`routes/demo/demo-translations.ts` 为每个演示区提供独立的 child loader，
+  请求 `i18n/demo/<language>.json`。守卫等待加载，失败或空字典转到 `/500`，清理缓存后再次进入可重试；
+  不吞错放行到原始翻译键。`textAt()` 只读取已加载子树，不代替异步加载。
+- **日期 provider 必须按页懒加载**：普通 datepicker 用 `provideDemoDates()`，datetime 页才加载
+  `provideDemoDatetimes()`；dynamic 页单独提供 Formly，select 页单独提供 MtxSelectIntl。
+  不把这些 provider 聚集在 forms 顶层路由。`MatDatepickerModule` 会重新提供默认 Intl，
+  因此使用独立 datepicker directives；多年视图的 `formatYearRangeLabel()` 也要翻译。
+- **Signal Forms 与库的边界**：CDK 22 stepper 的 `stepControl` 支持直接绑定 Field；Formly 9
+  仍使用 Reactive Forms，`type: 'email'` 不会自动安装邮箱验证器，须显式添加 `Validators.email`。
+- **grid 会重建内部模型**：通过 `rowSelected` 输入和 `rowSelectedChange` 输出双向同步；数据替换时
+  按稳定标识重新映射选择，切到单选时裁剪。列隐藏/顺序/固定状态通过 `columnChange` 保存，
+  `columnPinOptions` 显式翻译，避免无关选项或语言切换重置配置。
+- **Vitest 的扩展库 ESM**：`runnerConfig: true` 和 `vitest-base.config.mts` 将
+  `@ng-matero/extensions`、`photoviewer` inline，解决后者 extensionless imports 在 Node 中失败的问题。
+  这是 demo 测试需求，G 打包 starter 时应同步剔除 demo 专用配置与依赖。
+- **方向与浮层**：drawer 显式 `autoFocus="first-tabbable"`，Escape 后恢复开关按钮焦点；
+  snack-bar config 必须传当前方向，否则 RTL 的 start/end 会反向。测试使用自己的 Directionality
+  环境（tree 使用 `DIR_DOCUMENT`），不能依赖前一个测试残留的 `<html dir>`。
 
-### 2.2 推荐的推进方式（与之前一致）
+### 2.2 F 的离线素材与演示边界
+
+- 图标目录 `public/data/demo/icon-names.json` 从已安装的自托管字体生成（`tools/icon-names.py`），
+  不请求外部图标服务；列表分页并有加载失败/重试入口。
+- gallery 的 `public/images/pixabay/1–20.jpg` 来自只读参考仓库，21–30 是用户逐项批准下载的额外
+  Pixabay 素材：dolomites-2897602、house-4028391、altai-6943982、sunset-8516639、water-8100724、
+  japan-1805865、konigssee-7276585、river-4336788、autumn-7493439、snow-7646952（来源 cdn.pixabay.com）。
+  页面和查看器只读取本地图片；查看器补齐 Escape、焦点恢复及随照片变化的对话框名称。
+  素材只用于 live demo，不随 starter 发布；对外发布前仍须复核来源与适用使用条款。
+- select 的延迟数据与 tables 的分页/排序/搜索都使用本地样本；remote-data 的路由级 interceptor
+  从 `public/data/demo/repos.json` 模拟服务响应，保留加载、错误、取消旧请求的行为，不调用 GitHub API。
+- Material 的头像、卡片/网格照片及 Neptune SVG 均为本地素材；外部 iframe 改为本地文章对话框。
+  用户主动点击的参考链接仍保留，但构建和页面渲染不依赖这些站点。
+- G 除 `<demo>` 路由/样式围栏外，还需排除 `routes/demo`、各演示区域、`i18n/demo`、`data/demo`、
+  Pixabay/演示图片与对应依赖，避免把 Formly、grid、datetime、photoviewer 带进 starter。
+
+### 2.3 推荐的推进方式（与之前一致）
 
 每个阶段：**实现**（逐个小提交，每次 verify）→ **对抗式评审**（逐个 `git show`，按 CLAUDE.md、CONVENTIONS、
 已安装的 d.ts 核对，找 bug、违规、无意义测试、无障碍与 i18n 缺口）→ **修复**（用

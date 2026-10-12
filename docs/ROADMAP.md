@@ -22,13 +22,14 @@
 
 ### 1.1 允许的删除/改写（例外清单）
 
-| 内容                                                                                       | 处理                                  | 理由                                                                  |
-| ------------------------------------------------------------------------------------------ | ------------------------------------- | --------------------------------------------------------------------- |
-| `package-lock.json`                                                                        | 删除，由 `yarn.lock` 取代             | 需求明确使用 yarn，两种锁文件不能并存                                 |
-| `angular.json` 中 `cli.packageManager: "npm"`、`package.json` 中 `packageManager: "npm@…"` | 各改 1 行为 yarn                      | 同上，由 `ng config` 完成                                             |
-| `src/app/app.html` 中欢迎页占位内容                                                        | 删除占位块，保留 `<router-outlet />`  | 该文件注释本身写明 _"Delete the template below to get started"_       |
-| `src/app/app.spec.ts` 中 `should render title` 的断言                                      | 改为验证新行为                        | 被断言的 `<h1>Hello, …</h1>` 属于上面的占位内容                       |
-| 被 `ng add`/`ng generate` 修改过的文件的格式                                               | 接受 Angular CLI 自动 prettier 格式化 | CLI 22 会对 schematic 写入的文件执行 `prettier --write`，这是官方行为 |
+| 内容                                                                                       | 处理                                    | 理由                                                                  |
+| ------------------------------------------------------------------------------------------ | --------------------------------------- | --------------------------------------------------------------------- |
+| `package-lock.json`                                                                        | 删除，由 `yarn.lock` 取代               | 需求明确使用 yarn，两种锁文件不能并存                                 |
+| `angular.json` 中 `cli.packageManager: "npm"`、`package.json` 中 `packageManager: "npm@…"` | 各改 1 行为 yarn                        | 同上，由 `ng config` 完成                                             |
+| `src/app/app.html` 中欢迎页占位内容                                                        | 删除占位块，保留 `<router-outlet />`    | 该文件注释本身写明 _"Delete the template below to get started"_       |
+| `src/app/app.spec.ts` 中 `should render title` 的断言                                      | 改为验证新行为                          | 被断言的 `<h1>Hello, …</h1>` 属于上面的占位内容                       |
+| 被 `ng add`/`ng generate` 修改过的文件的格式                                               | 接受 Angular CLI 自动 prettier 格式化   | CLI 22 会对 schematic 写入的文件执行 `prettier --write`，这是官方行为 |
+| `angular.json` 的 test builder 行末分隔符                                                  | 保留 builder 原值，只追加逗号和 options | `runnerConfig` 支持 Vitest inline demo 库；JSON 追加兄弟属性需要逗号  |
 
 ## 2. 关键设计决策（对照 ng-matero 审计问题）
 
@@ -113,15 +114,20 @@
 
 ### 阶段 6 · 演示功能区（与 ng-matero 菜单一一对应，均懒加载，不随 ng add 发布）
 
-- [ ] design：colors、icons
-- [ ] material：表单控件 9、导航 3、布局 8、按钮与指示器 8、弹出层 4、数据表 3（共 35 个演示）
-- [ ] permissions：role-switching、route-guard、test
-- [ ] media：gallery
-- [ ] forms：elements、dynamic（formly）、select、datetime
-- [ ] tables：kitchen-sink、remote-data
-- [ ] profile：overview、settings
-- [ ] utilities：css-grid、css-helpers
-- [ ] menu-level：多级菜单演示
+- [x] design：colors、icons（加载失败可重试；懒加载子翻译服务） — `b665993`
+- [x] material：表单控件 9、导航 3、布局 8、按钮与指示器 8、弹出层 4、数据表 3（共 35 个演示） — `b6c9d8e`、`4049d11`、`f307292`、`216725b`、`9107e1e`、`4f88abb`、`b86942b`
+- [x] permissions：role-switching、route-guard、test — `3f5c25d`
+- [x] media：gallery（30 张本地 Pixabay 照片，查看器名称/键盘/焦点） — `c6940f6`
+- [x] forms：elements、dynamic（Formly）、select、datetime — `df7b597`、`c2c3420`、`704826b`、`44dc459`
+- [x] tables：kitchen-sink、remote-data（本地模拟服务；同步选择和列偏好） — `8a1a000`
+- [x] profile：overview、settings（阶段 5 已完成，保留 starter） — `fe397fb`、`faf4991`
+- [x] utilities：css-grid、css-helpers（排除扩展库内部类） — `6c2f07c`
+- [x] menu-level：多级菜单演示 — `673e567`
+- [x] 演示集成：共享 `textAt()` — `a8322ec`；通知徽标移到可访问按钮 — `7e865a9`
+
+阶段 F 的评审修复已合并，19 个功能提交逐树运行 verify 均为 `== OK`。最终为 122 个测试文件 /
+427 个用例，initial 498.12 kB（预算 500 kB）；全量浏览器 AXE 验收仍属于阶段 8，已知上游
+grid 控件名称缺口见 HANDOFF §1，不以单元测试代替该验收。
 
 ### 阶段 7 · `ng add ng-scaffold`
 

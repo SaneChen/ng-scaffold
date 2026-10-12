@@ -57,3 +57,48 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Use the `providedIn: 'root'` option for singleton services
 - Prefer the `@Service` decorator over `@Injectable({providedIn: 'root'})` for new singleton services (Angular v22+)
 - Use the `inject()` function instead of constructor injection
+
+## Continuing the `ng-matero` branch
+
+The guidance above is the Angular CLI-generated baseline; keep it unchanged. Project-specific
+instructions belong in this section. Keep current progress and detailed task specs in the docs,
+not duplicated here.
+
+### Before editing
+
+Read these documents in order:
+
+1. `docs/HANDOFF.md` — current status, environment, pitfalls and next task specs.
+2. `docs/CONVENTIONS.md` — generation, incremental edits, naming and commit conventions.
+3. `docs/ARCHITECTURE.md` — component boundaries, providers and starter/demo separation.
+4. `docs/ROADMAP.md` — phase scope and acceptance checklist.
+
+- Inspect `git status` and preserve unrelated user changes.
+- Treat `~/Projects/ng-matero` as read-only reference material; reimplement its behavior using
+  this project's Angular v22 conventions instead of copying its code.
+
+### Implementation
+
+- Use Yarn and the workspace CLI (`yarn ng ...`). Generate new artifacts with official schematics
+  where supported, then edit the result. Preserve the `ng new` baseline and add
+  `[ng-scaffold] Step N` markers as defined in CONVENTIONS.
+- Keep demo-only routes, providers, assets and dependencies out of the starter; preserve the
+  `<demo>` fences used by the packaging workflow.
+- Keep user-facing text translated in en-US, zh-CN and zh-TW, including assistive labels and errors.
+- Do not introduce build-time or runtime dependencies on external CDN assets (fonts, icons,
+  scripts or images). Before downloading external assets, obtain approval with filename, source
+  and size; never bypass CAPTCHA or bot checks.
+
+### Verification, commits and phase handoff
+
+- Before every commit, run `NG_CLI_ANALYTICS=false tools/verify.sh` and require `== OK`. Fix failures
+  before committing; never bypass hooks with `--no-verify`.
+- Stage only intended changes and inspect the staged diff. Use the commit format in CONVENTIONS.
+- Preserve signed commits and existing GPG configuration. If signing times out, ask the user to
+  unlock the configured key; do not disable signing or change its configuration.
+- For each phase, follow HANDOFF's implementation → adversarial review → fixup/autosquash →
+  documentation workflow. Rewrite only unpushed commits; verify the resulting commit trees.
+- Update HANDOFF and ROADMAP with verified results and final commit hashes. Report actual test
+  coverage and remaining issues; passing unit tests does not establish full browser AXE compliance.
+- Push only when requested or authorized by the agreed phase workflow. Wait for user confirmation
+  before starting the next phase.

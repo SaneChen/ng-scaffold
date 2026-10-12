@@ -1,0 +1,51 @@
+<app-page-header />
+@for (mode of modes; track mode) {
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <h2 mat-card-title>{{ 'demo.material.grid_list.' + mode | translate }}</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-grid-list
+        role="list"
+        [cols]="mode === 'fixed' ? 3 : 2"
+        gutterSize="4px"
+        [rowHeight]="mode === 'fixed' ? '100px' : mode === 'ratio' ? '2:1' : 'fit'"
+        [class.fit]="mode === 'fit'"
+      >
+        @for (tile of tiles; track tile.name) {
+          <mat-grid-tile
+            role="listitem"
+            [colspan]="mode === 'fixed' ? tile.cols : 1"
+            [rowspan]="mode === 'fixed' ? tile.rows : 1"
+          >
+            {{ 'demo.material.grid_list.coffee.' + tile.name | translate }}
+          </mat-grid-tile>
+        }
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+}
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.grid_list.photos' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-grid-list role="list" cols="1" rowHeight="200px" gutterSize="8px">
+      @for (photo of photos; track photo) {
+        <mat-grid-tile role="listitem">
+          <mat-grid-tile-header>
+            {{ 'demo.media.gallery.photos.' + photo | translate }}
+          </mat-grid-tile-header>
+          <img
+            [ngSrc]="'images/pixabay/' + photo + '.jpg'"
+            fill
+            [alt]="'demo.media.gallery.photos.' + photo | translate"
+          />
+          <mat-grid-tile-footer>
+            {{ 'demo.material.grid_list.credit' | translate }}
+          </mat-grid-tile-footer>
+        </mat-grid-tile>
+      }
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>

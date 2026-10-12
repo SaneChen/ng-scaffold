@@ -1,0 +1,20 @@
+<app-page-header />
+@for (example of examples; track example) {
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <h2 mat-card-title>{{ 'demo.material.divider.' + example | translate }}</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list role="list" [class.vertical]="example === 'vertical'">
+        @for (item of items; track item) {
+          <mat-list-item role="listitem">
+            {{ 'demo.material.divider.item' | translate: { number: item } }}
+          </mat-list-item>
+          @if (!$last) {
+            <mat-divider [inset]="example === 'inset'" [vertical]="example === 'vertical'" />
+          }
+        }
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+}

@@ -1,0 +1,7 @@
+@use '../../demo/demo-page';
+
+@include demo-page.cards;
+
+.vertical {
+  display: flex;
+}

@@ -1,0 +1,20 @@
+section + section {
+  margin-block-start: 1.5rem;
+}
+
+mat-card {
+  max-inline-size: 32rem;
+}
+
+img[mat-card-image] {
+  inline-size: 100%;
+  block-size: auto;
+}
+
+img[mat-card-avatar] {
+  object-fit: cover;
+}
+
+.footer {
+  padding: 1rem;
+}

@@ -1,0 +1,16 @@
+@use '../../demo/demo-page';
+
+@include demo-page.cards;
+
+mat-grid-tile {
+  color: var(--mat-sys-on-secondary-container);
+  background: var(--mat-sys-secondary-container);
+}
+
+.fit {
+  block-size: 16rem;
+}
+
+img {
+  object-fit: cover;
+}

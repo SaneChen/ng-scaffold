@@ -1,0 +1,101 @@
+<app-page-header />
+
+<section>
+  <h2>{{ 'demo.material.card.group' | translate }}</h2>
+  <mat-card
+    appearance="outlined"
+    role="group"
+    [attr.aria-label]="'demo.material.card.group' | translate"
+  >
+    <mat-card-content>
+      @for (group of groups; track group) {
+        <p>{{ 'demo.material.card.groups.' + group | translate }}</p>
+      }
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<section>
+  <h2>{{ 'demo.material.card.title_only' | translate }}</h2>
+  <mat-card appearance="outlined">
+    <mat-card-content>{{ 'demo.material.card.mountains' | translate }}</mat-card-content>
+  </mat-card>
+</section>
+
+<section>
+  <h2>{{ 'demo.material.card.header' | translate }}</h2>
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>{{ 'demo.material.card.mountains' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ 'demo.material.card.subtitle' | translate }}</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+</section>
+
+<section>
+  <h2>{{ 'demo.material.card.content' | translate }}</h2>
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>{{ 'demo.material.card.mountains' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ 'demo.material.card.subtitle' | translate }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ 'demo.material.card.description' | translate }}</p>
+    </mat-card-content>
+    <mat-card-footer class="footer">{{ 'demo.material.card.footer' | translate }}</mat-card-footer>
+  </mat-card>
+</section>
+
+<section>
+  <h2>{{ 'demo.material.card.image' | translate }}</h2>
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <img mat-card-avatar ngSrc="images/pixabay/21.jpg" width="40" height="40" alt="" />
+      <mat-card-title>{{ 'demo.material.card.mountains' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ 'demo.material.card.subtitle' | translate }}</mat-card-subtitle>
+    </mat-card-header>
+    <img
+      mat-card-image
+      ngSrc="images/pixabay/21.jpg"
+      width="1280"
+      height="851"
+      [alt]="'demo.material.card.alt' | translate"
+    />
+    <mat-card-content>
+      <p>{{ 'demo.material.card.description' | translate }}</p>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<section>
+  <h2>{{ 'demo.material.card.actions' | translate }}</h2>
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>{{ 'demo.material.card.mountains' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ 'demo.material.card.subtitle' | translate }}</mat-card-subtitle>
+    </mat-card-header>
+    <img
+      mat-card-image
+      ngSrc="images/pixabay/21.jpg"
+      width="1280"
+      height="851"
+      [alt]="'demo.material.card.alt' | translate"
+    />
+    <mat-card-content>
+      <p>{{ 'demo.material.card.description' | translate }}</p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button matButton type="button" [attr.aria-pressed]="liked()" (click)="liked.set(!liked())">
+        {{ 'demo.material.card.like' | translate }}
+      </button>
+      <button matButton type="button" (click)="shared.set(true)">
+        {{ 'demo.material.card.share' | translate }}
+      </button>
+    </mat-card-actions>
+    <mat-card-footer class="footer" role="status">
+      @if (shared()) {
+        {{ 'demo.material.card.shared' | translate }}
+      }
+    </mat-card-footer>
+  </mat-card>
+</section>

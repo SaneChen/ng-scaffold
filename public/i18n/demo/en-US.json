@@ -740,6 +740,70 @@
           }
         }
       },
+      "card": {
+        "group": "Grouped content",
+        "title_only": "Title only",
+        "header": "Title and subtitle",
+        "content": "Header, content and footer",
+        "image": "Avatar and image",
+        "actions": "Image and actions",
+        "mountains": "Dolomites",
+        "subtitle": "Alpine landscape",
+        "description": "Golden larches surround a quiet mountain lake below the peaks of the Dolomites.",
+        "footer": "Explore more mountain landscapes in the gallery.",
+        "alt": "A hut beside a mountain lake and golden larches in the Dolomites",
+        "like": "Like",
+        "share": "Share",
+        "shared": "Share action selected.",
+        "groups": {
+          "mountains": "Mountains",
+          "lakes": "Lakes",
+          "forests": "Forests",
+          "coast": "Coast"
+        }
+      },
+      "divider": {
+        "full": "Full-width dividers",
+        "inset": "Inset dividers",
+        "vertical": "Vertical dividers",
+        "item": "Item {{number}}"
+      },
+      "grid_list": {
+        "fixed": "Coffee: fixed-height tiles with spans",
+        "ratio": "Coffee: ratio-height tiles",
+        "fit": "Coffee: fit-height tiles",
+        "photos": "Photos with headers and footers",
+        "credit": "Photo from Pixabay",
+        "coffee": {
+          "espresso": "Espresso",
+          "latte": "Latte",
+          "cappuccino": "Cappuccino",
+          "mocha": "Mocha"
+        }
+      },
+      "expansion": {
+        "single": "Single expansion panel",
+        "multiple": "Dog breeds: accordion",
+        "breed": "Dog breed",
+        "close": "Close",
+        "wikipedia": "Wikipedia (opens in a new tab)",
+        "husky": {
+          "name": "Siberian Husky",
+          "text": "The Siberian Husky is a medium-sized working dog from northeastern Siberia, with a thick coat suited to cold climates."
+        },
+        "retriever": {
+          "name": "Golden Retriever",
+          "text": "Golden Retrievers are friendly working dogs originally bred to retrieve game. They enjoy water and learn readily."
+        },
+        "beagle": {
+          "name": "Beagle (disabled)",
+          "text": "The Beagle is a small scent hound with a keen sense of smell."
+        },
+        "dachshund": {
+          "name": "Dachshund",
+          "text": "The Dachshund is a short-legged, long-bodied hound originally bred to track burrowing animals."
+        }
+      },
       "toolbar": {
         "app": "My application",
         "hello": "Hello, world!",

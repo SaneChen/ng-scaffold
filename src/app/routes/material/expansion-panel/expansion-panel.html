@@ -1,0 +1,46 @@
+<app-page-header />
+<section>
+  <h2>{{ 'demo.material.expansion.single' | translate }}</h2>
+  <mat-expansion-panel #single>
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ 'demo.material.expansion.husky.name' | translate }}</mat-panel-title>
+      <mat-panel-description>
+        {{ 'demo.material.expansion.breed' | translate }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>{{ 'demo.material.expansion.husky.text' | translate }}</p>
+    <mat-action-row>
+      <button matButton type="button" (click)="single.close()">
+        {{ 'demo.material.expansion.close' | translate }}
+      </button>
+      <a
+        matButton
+        href="https://en.wikipedia.org/wiki/Siberian_Husky"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ 'demo.material.expansion.wikipedia' | translate }}
+      </a>
+    </mat-action-row>
+  </mat-expansion-panel>
+</section>
+<section>
+  <h2>{{ 'demo.material.expansion.multiple' | translate }}</h2>
+  <mat-accordion>
+    @for (breed of breeds; track breed) {
+      <mat-expansion-panel #panel [disabled]="breed === 'beagle'">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ 'demo.material.expansion.' + breed + '.name' | translate }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>{{ 'demo.material.expansion.' + breed + '.text' | translate }}</p>
+        <mat-action-row>
+          <button matButton type="button" (click)="panel.close()">
+            {{ 'demo.material.expansion.close' | translate }}
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    }
+  </mat-accordion>
+</section>

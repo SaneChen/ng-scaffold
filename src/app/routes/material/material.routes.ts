@@ -57,6 +57,28 @@ const routes: Routes = [
         title: 'menu.material.form-controls.slide-toggle',
         loadComponent: () => import('./slide-toggle/slide-toggle').then(m => m.MaterialSlideToggle),
       },
+      // Layout
+      {
+        path: 'card',
+        title: 'menu.material.layout.card',
+        loadComponent: () => import('./card/card').then(m => m.MaterialCard),
+      },
+      {
+        path: 'divider',
+        title: 'menu.material.layout.divider',
+        loadComponent: () => import('./divider/divider').then(m => m.MaterialDivider),
+      },
+      {
+        path: 'grid-list',
+        title: 'menu.material.layout.grid-list',
+        loadComponent: () => import('./grid-list/grid-list').then(m => m.MaterialGridList),
+      },
+      {
+        path: 'expansion',
+        title: 'menu.material.layout.expansion',
+        loadComponent: () =>
+          import('./expansion-panel/expansion-panel').then(m => m.MaterialExpansionPanel),
+      },
       // Navigation
       {
         path: 'menu',

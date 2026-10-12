@@ -740,6 +740,70 @@
           }
         }
       },
+      "card": {
+        "group": "分组内容",
+        "title_only": "仅标题",
+        "header": "标题与副标题",
+        "content": "标题、内容与页脚",
+        "image": "头像与图片",
+        "actions": "图片与操作",
+        "mountains": "多洛米蒂山",
+        "subtitle": "阿尔卑斯山风景",
+        "description": "多洛米蒂山峰下，金色落叶松环绕着宁静的高山湖泊。",
+        "footer": "前往图库探索更多山地风景。",
+        "alt": "多洛米蒂山的高山湖泊、湖畔小屋与金色落叶松",
+        "like": "喜欢",
+        "share": "分享",
+        "shared": "已选择分享操作。",
+        "groups": {
+          "mountains": "山地",
+          "lakes": "湖泊",
+          "forests": "森林",
+          "coast": "海岸"
+        }
+      },
+      "divider": {
+        "full": "全宽分隔线",
+        "inset": "内缩分隔线",
+        "vertical": "垂直分隔线",
+        "item": "条目 {{number}}"
+      },
+      "grid_list": {
+        "fixed": "咖啡：固定高度与跨行跨列",
+        "ratio": "咖啡：按比例设置高度",
+        "fit": "咖啡：适应容器高度",
+        "photos": "带标题与页脚的图片",
+        "credit": "图片来自 Pixabay",
+        "coffee": {
+          "espresso": "意式浓缩",
+          "latte": "拿铁",
+          "cappuccino": "卡布奇诺",
+          "mocha": "摩卡"
+        }
+      },
+      "expansion": {
+        "single": "单个展开面板",
+        "multiple": "犬种：手风琴面板",
+        "breed": "犬种",
+        "close": "关闭",
+        "wikipedia": "维基百科（在新标签页中打开）",
+        "husky": {
+          "name": "西伯利亚哈士奇",
+          "text": "西伯利亚哈士奇是源于西伯利亚东北部的中型工作犬，厚实的被毛使其适应寒冷气候。"
+        },
+        "retriever": {
+          "name": "金毛寻回犬",
+          "text": "金毛寻回犬是友好的工作犬，最初用于寻回猎物。它们喜爱水，也容易训练。"
+        },
+        "beagle": {
+          "name": "比格犬（已禁用）",
+          "text": "比格犬是一种嗅觉敏锐的小型猎犬。"
+        },
+        "dachshund": {
+          "name": "腊肠犬",
+          "text": "腊肠犬是一种短腿、长身的猎犬，最初用于追踪穴居动物。"
+        }
+      },
       "toolbar": {
         "app": "我的应用",
         "hello": "你好，世界！",

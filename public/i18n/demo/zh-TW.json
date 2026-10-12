@@ -740,6 +740,70 @@
           }
         }
       },
+      "card": {
+        "group": "分組內容",
+        "title_only": "僅標題",
+        "header": "標題與副標題",
+        "content": "標題、內容與頁尾",
+        "image": "頭像與圖片",
+        "actions": "圖片與操作",
+        "mountains": "多洛米蒂山",
+        "subtitle": "阿爾卑斯山風景",
+        "description": "多洛米蒂山峰下，金色落葉松環繞著寧靜的高山湖泊。",
+        "footer": "前往圖庫探索更多山地風景。",
+        "alt": "多洛米蒂山的高山湖泊、湖畔小屋與金色落葉松",
+        "like": "喜歡",
+        "share": "分享",
+        "shared": "已選擇分享操作。",
+        "groups": {
+          "mountains": "山地",
+          "lakes": "湖泊",
+          "forests": "森林",
+          "coast": "海岸"
+        }
+      },
+      "divider": {
+        "full": "全寬分隔線",
+        "inset": "內縮分隔線",
+        "vertical": "垂直分隔線",
+        "item": "項目 {{number}}"
+      },
+      "grid_list": {
+        "fixed": "咖啡：固定高度與跨列跨欄",
+        "ratio": "咖啡：依比例設定高度",
+        "fit": "咖啡：配合容器高度",
+        "photos": "附標題與頁尾的圖片",
+        "credit": "圖片來自 Pixabay",
+        "coffee": {
+          "espresso": "義式濃縮",
+          "latte": "拿鐵",
+          "cappuccino": "卡布奇諾",
+          "mocha": "摩卡"
+        }
+      },
+      "expansion": {
+        "single": "單一展開面板",
+        "multiple": "犬種：手風琴面板",
+        "breed": "犬種",
+        "close": "關閉",
+        "wikipedia": "維基百科（在新分頁中開啟）",
+        "husky": {
+          "name": "西伯利亞哈士奇",
+          "text": "西伯利亞哈士奇是源於西伯利亞東北部的中型工作犬，厚實的被毛使其適應寒冷氣候。"
+        },
+        "retriever": {
+          "name": "黃金獵犬",
+          "text": "黃金獵犬是友善的工作犬，最初用於尋回獵物。牠們喜愛水，也容易訓練。"
+        },
+        "beagle": {
+          "name": "米格魯（已停用）",
+          "text": "米格魯是一種嗅覺敏銳的小型獵犬。"
+        },
+        "dachshund": {
+          "name": "臘腸犬",
+          "text": "臘腸犬是一種短腿、長身的獵犬，最初用於追蹤穴居動物。"
+        }
+      },
       "toolbar": {
         "app": "我的應用程式",
         "hello": "你好，世界！",

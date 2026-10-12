@@ -187,3 +187,31 @@ impose on its users; replaced by Chart.js), `ngx-permissions` (own signal implem
 - The initial `ng-update` migration collection is empty because this is the first package release.
   Future versioned migrations need their own idempotency tests. Publishing is separate from packing
   and golden verification; usage and release instructions live in `schematics/README.md`.
+
+## 9. Browser quality and static deployment
+
+- `e2e/` is repository-only: Playwright 1.64.0, axe-core 4.13.0 and its Playwright adapter use
+  existing Google Chrome. The starter packer's explicit dependency/source allowlists exclude
+  these tests and libraries. Desktop Chrome and Pixel 7 viewport emulation share the same engine.
+- A TypeScript AST inventory follows lazy route files, nested children and literal route maps.
+  It enumerates leaf pages, omits redirect/layout-only/wildcard entries, and rejects unsupported
+  expressions instead of silently skipping coverage. Browser tests assert the resulting URL.
+- Default enabled AXE rules have no exclusions. Fixtures reject external render-time requests
+  and uncaught browser errors, wait for fonts and finite animations, and retain violations and
+  incomplete findings in HTML diagnostics. Route scans supplement auth/navigation/settings,
+  keyboard focus, grid controls and overlay interactions; they do not establish full WCAG.
+- Grid controls use the library's public header/cell/toolbar templates and MatSort/dataSource
+  APIs. Row selection is synchronized by stable positions; expansion state resets with inputs;
+  sort signals survive replacement of the resizable table. Pinning updates existing column
+  preferences instead of replacing unrelated visibility/order settings.
+- The layout drawer is a complementary landmark. Portaled menus live in the named region set
+  through public `OverlayContainer.getContainerElement()`; the container is never relocated,
+  preserving CDK Dialog's hiding/restoration of background siblings. Menu names and active
+  button colors use public Material inputs and M3 overrides, not private DOM selectors.
+- The production preview serves assets beneath `/ng-scaffold/` and real HTTP 404 fallback HTML
+  for deep links; missing assets stay 404. Output preparation and preview boundary tests reject
+  symlink escapes. Pages gets its deployment base path from configure-pages, then prepares
+  `404.html` and `.nojekyll`. The deployment job requires successful CI and a branch push,
+  with Pages/OIDC write permissions scoped to that job, never to pull request verification.
+- Manual accessibility review, GitHub Pages settings/live deployment and npm publication remain
+  external release steps; do not infer that they completed from local verification alone.

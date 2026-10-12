@@ -8,24 +8,35 @@
 ## 1. 当前状态
 
 - 基线：`0d99dd2`（未改动的 `ng new ng-scaffold`，Angular CLI 22.2.1）。
-- 已完成：ROADMAP 中阶段 0–7（含 §4 B 全局样式、C 认证/HTTP/Mock/菜单/权限/启动、D 布局外壳、
-  E 共享组件与基础页面、F 演示功能区、G 安装 schematics），具体提交见 ROADMAP 中 `[x]` 条目后的哈希。
+- 已完成：ROADMAP 中阶段 0–8（含 §4 B 全局样式、C 认证/HTTP/Mock/菜单/权限/启动、D 布局外壳、
+  E 共享组件与基础页面、F 演示功能区、G 安装 schematics、H 浏览器质量与 Pages 发布），
+  具体提交见 ROADMAP 中 `[x]` 条目后的哈希。
 - 质量状态（2026-10-12）：`NG_CLI_ANALYTICS=false tools/verify.sh` 通过——lint、stylelint、
-  122 个测试文件 / 434 个用例、生产构建（initial 498.12 kB / 传输约 124.95 kB，距 500 kB 警告
+  122 个测试文件 / 436 个用例、生产构建（initial 498.12 kB / 传输约 124.95 kB，距 500 kB 警告
   budget 仅 1.88 kB）。F 的评审修复已 autosquash，19 个功能提交均逐树通过 verify；只改写了
   `209d65c` 之后当时尚未推送的提交。
 - 当前：**G 已实现并验收**（起点 `68dbdf5`）：源码收集 `3b76620`、AST 插入工具 `1bd2eba`、
   安装/生成器/真实 tarball `b7df0c0`。额外质量门含 8 个打包、5 个插入、2 个输出清理、10 个安装/生成
   回归用例，以及默认、top/dark/rtl/zh-TW、多项目 custom sourceRoot 三组真实 CLI golden；每组生成
   页面前后均通过 lint/test/build（63 文件 / 278 用例 → 65 文件 / 280 用例），安装后 stylelint 也通过。
-  H 已获用户确认并开始；尚未发布 npm 包。
+  H 已完成下述自动验收与公开演示部署；尚未发布 npm 包。
 - H 本地验收与修复 `9781a53`：已安装用户批准的 5 个 Playwright/AXE 测试包，只使用已安装的
   Chrome；65 个 lazy route 叶页面在桌面/Pixel 7 仿真中进行无规则排除的默认 AXE 扫描，并检查真实
   导航、认证重试、三语言/主题/RTL 持久化、grid 交互及浮层焦点，共 144 个浏览器用例通过。
   所有渲染期外部请求及未捕获浏览器错误均使测试失败，报告位于 `playwright-report/`。
 - H 发布工作流与 README/迁移指南 `2121e05`：部署 job 仅在 ng-matero push 且质量 job 成功后运行。
   用户已单独授权公开发布；GitHub Pages 来源已改为 GitHub Actions，github-pages 环境新增精确的
-  ng-matero 分支规则（原 main 与其他保护设置未改）。首次线上部署仍需实际 Actions/网站验收。
+  ng-matero 分支规则（原 main 与其他保护设置未改）。CI #13 的 verify 与 pages 均成功：
+  [实际运行](https://github.com/SaneChen/ng-scaffold/actions/runs/38245744567)。
+  [公开演示站](https://sanechen.github.io/ng-scaffold/) 已验收模拟登录、图库深链接刷新、30 张本站
+  照片的路径及未知 URL 的应用 404；静态服务器深链接返回 HTTP 404 是 Pages 的预期回退行为。
+- H 云端焦点回归修复 `16fe644`：首次 CI #12 在 dialog 连续交互的焦点断言失败并阻止 Pages；
+  本机 UTC/CI 环境未复现。拆分各弹窗用例，明确聚焦各自触发器，等待公开的 afterOpened/
+  afterClosed 与实际初始焦点；不把 fixture.whenStable 当作所有焦点生命周期完成的保证。
+  未修改生产焦点恢复、未添加固定 sleep 或重试；新增地址错误提交/有效提交的双视口浏览器
+  AXE 与焦点回归。完整 verify 已通过：436 个单测、146 个浏览器用例。
+- 部署非阻断警告：GitHub 提示现有官方 Actions 的 Node 20 声明已弃用，并强制使用 Node 24。
+  当前运行成功；后续可独立升级 Actions 主版本，不应为消除警告削弱验证或扩大部署权限。
 - 页面现状：`/auth/login`、`/auth/signup`（mock 演示账号 `ng-scaffold` / `ng-scaffold`，开启
   `environment.mockApi` 时自动填入）、`/dashboard`（`/` 默认跳转）、`/profile/overview|settings`、
   `/403|404|500`；未知 URL 在原地址显示 404 页。演示菜单均已有懒加载页面：design、material（35 个）、

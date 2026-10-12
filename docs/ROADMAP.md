@@ -146,6 +146,16 @@ grid 控件名称缺口见 HANDOFF §1，不以单元测试代替该验收。
 
 ### 阶段 8 · 质量与发布
 
-- [ ] Playwright e2e + axe 无障碍检查
-- [ ] GitHub Pages 部署
-- [ ] README 与迁移指南（从 ng-matero 迁移）
+- [x] Playwright e2e + axe 无障碍检查 — `9781a53`、`16fe644`（65 个路由、桌面/移动仿真，共 146 用例；
+      默认 AXE 无规则排除；公开 API 修复 grid/菜单/表单等缺口，人工验收边界见 HANDOFF）
+- [x] GitHub Pages 部署 — 工作流 `2121e05`、真实 404 预览 `9781a53`、云端焦点回归 `16fe644`；
+      用户已授权公开发布，平台来源/分支规则已启用，
+      [CI #13](https://github.com/SaneChen/ng-scaffold/actions/runs/38245744567) 的 verify/pages 均成功；
+      [线上演示](https://sanechen.github.io/ng-scaffold/) 已验收模拟登录、图库深链接刷新与未知路径 404
+- [x] README 与迁移指南（从 ng-matero 迁移）— `2121e05`（保留 CLI README，补安装/验证/发布说明；
+      `docs/MIGRATION.md` 明确手动迁移、真实后端与人工无障碍边界，不宣称 npm 已发布）
+
+H 本地完整质量门输出 `== OK`：三组真实 CLI golden、122 文件 / 436 用例、146 浏览器用例，
+initial 498.12 kB / 传输约 124.95 kB。修复经只读对抗评审，未屏蔽 AXE 规则，未下载浏览器，
+未修改任何已推送提交。首次 CI #12 的 dialog 焦点失败由 `16fe644` 补齐测试同步；
+未删减质量门。公开演示部署已完成；npm 发布与完整人工 WCAG 验收不在本次自动通过结论中。

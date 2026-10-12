@@ -1,0 +1,57 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <section>
+      <h2>{{ key + '.focus' | translate }}</h2>
+      <button matButton="outlined" type="button" [matTooltip]="key + '.text' | translate">
+        {{ key + '.trigger' | translate }}
+      </button>
+    </section>
+    <section>
+      <h2>{{ key + '.click' | translate }}</h2>
+      <button
+        matButton="outlined"
+        type="button"
+        (click)="tooltip.toggle(); $event.stopPropagation()"
+      >
+        {{ key + '.toggle' | translate }}
+      </button>
+      <button
+        matButton="outlined"
+        type="button"
+        #tooltip="matTooltip"
+        [matTooltip]="key + '.click_text' | translate"
+      >
+        {{ key + '.trigger' | translate }}
+      </button>
+    </section>
+    <section>
+      <h2>{{ key + '.positions' | translate }}</h2>
+      <div class="controls">
+        @for (position of positions; track position) {
+          <button
+            matButton="outlined"
+            type="button"
+            [matTooltip]="
+              key + '.position_text' | translate: { position: (key + '.' + position | translate) }
+            "
+            [matTooltipPosition]="position"
+          >
+            {{ key + '.' + position | translate }}
+          </button>
+        }
+      </div>
+    </section>
+    <section>
+      <h2>{{ key + '.delayed' | translate }}</h2>
+      <button
+        matButton="outlined"
+        type="button"
+        [matTooltip]="key + '.delay_text' | translate"
+        [matTooltipShowDelay]="2000"
+      >
+        {{ key + '.trigger' | translate }}
+      </button>
+    </section>
+  </mat-card-content>
+</mat-card>

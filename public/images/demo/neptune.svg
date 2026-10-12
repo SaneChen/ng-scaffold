@@ -1,0 +1,13 @@
+<!-- A local vector illustration, drawn for the dialog demo; not a planetary photograph. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
+  <defs>
+    <radialGradient id="ocean" cx="32%" cy="25%" r="80%">
+      <stop offset="0" stop-color="#7dc7ff"/><stop offset="0.55" stop-color="#2369ba"/><stop offset="1" stop-color="#0e234c"/>
+    </radialGradient>
+    <clipPath id="sphere"><circle cx="160" cy="160" r="146"/></clipPath>
+  </defs>
+  <circle cx="160" cy="160" r="146" fill="url(#ocean)"/>
+  <g clip-path="url(#sphere)" fill="none" stroke="#b0dbff" stroke-opacity=".25" stroke-width="10">
+    <path d="M0 105Q160 145 320 105M0 185Q160 225 320 185M0 240Q160 280 320 240"/>
+  </g>
+</svg>

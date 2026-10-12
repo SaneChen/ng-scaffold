@@ -1,0 +1,39 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <section>
+      <h2>{{ key + '.welcome' | translate }}</h2>
+      <button matButton="outlined" type="button" (click)="openWelcome()">
+        {{ key + '.open_welcome' | translate }}
+      </button>
+    </section>
+    <section>
+      <h2>{{ key + '.fruit' | translate }}</h2>
+      <button matButton="outlined" type="button" (click)="openFruit()">
+        {{ key + '.open_fruit' | translate }}
+      </button>
+      <p role="status">
+        @if (fruit()) {
+          {{ key + '.chosen' | translate: { fruit: (key + '.' + fruit() | translate) } }}
+        }
+      </p>
+    </section>
+    <section>
+      <h2>{{ key + '.neptune' | translate }}</h2>
+      <button matButton="outlined" type="button" (click)="openNeptune()">
+        {{ key + '.open_neptune' | translate }}
+      </button>
+    </section>
+    <section>
+      <h2>{{ key + '.address' | translate }}</h2>
+      <button matButton="outlined" type="button" (click)="openAddress()">
+        {{ key + '.open_address' | translate }}
+      </button>
+      <p role="status">
+        @if (submitted()) {
+          {{ key + '.submitted' | translate }}
+        }
+      </p>
+    </section>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,10 @@
+section + section {
+  margin-block-start: 2rem;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}

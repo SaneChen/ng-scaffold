@@ -1,0 +1,63 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <h2>{{ key + '.title' | translate }}</h2>
+    <div class="controls">
+      <mat-form-field>
+        <mat-label>{{ key + '.message' | translate }}</mat-label>
+        <input
+          matInput
+          [formField]="form.message"
+          [placeholder]="key + '.default_message' | translate"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ key + '.horizontal' | translate }}</mat-label>
+        <mat-select [formField]="form.horizontal">
+          @for (position of horizontal; track position) {
+            <mat-option [value]="position">{{ key + '.' + position | translate }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ key + '.vertical' | translate }}</mat-label>
+        <mat-select [formField]="form.vertical">
+          @for (position of vertical; track position) {
+            <mat-option [value]="position">{{ key + '.' + position | translate }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-checkbox [formField]="form.action">{{ key + '.action' | translate }}</mat-checkbox>
+      @if (values().action) {
+        <mat-form-field>
+          <mat-label>{{ key + '.action_label' | translate }}</mat-label>
+          <input matInput [formField]="form.actionLabel" />
+        </mat-form-field>
+      }
+      <mat-checkbox [formField]="form.autoHide">{{ key + '.auto_hide' | translate }}</mat-checkbox>
+      @if (values().autoHide) {
+        <mat-form-field>
+          <mat-label>{{ key + '.duration' | translate }}</mat-label>
+          <input matInput type="number" [formField]="form.duration" />
+          <mat-error>{{ key + '.duration_error' | translate }}</mat-error>
+        </mat-form-field>
+      }
+      <mat-checkbox [formField]="form.custom">{{ key + '.custom' | translate }}</mat-checkbox>
+    </div>
+    <div class="controls">
+      <button matButton="outlined" type="button" (click)="open()">
+        {{ key + '.open' | translate }}
+      </button>
+      <button matButton="outlined" type="button" (click)="openTemplate()">
+        {{ key + '.template' | translate }}
+      </button>
+      <button matButton type="button" (click)="dismiss()">
+        {{ key + '.dismiss' | translate }}
+      </button>
+    </div>
+    <ng-template #snack>
+      <span>{{ message() }}</span>
+      <button matButton type="button" (click)="dismiss()">{{ key + '.close' | translate }}</button>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

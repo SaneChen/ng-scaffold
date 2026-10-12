@@ -81,6 +81,26 @@ const routes: Routes = [
       },
       // Navigation
       {
+        path: 'dialog',
+        title: 'menu.material.popups-modals.dialog',
+        loadComponent: () => import('./dialog/dialog').then(m => m.MaterialDialog),
+      },
+      {
+        path: 'bottom-sheet',
+        title: 'menu.material.popups-modals.bottom-sheet',
+        loadComponent: () => import('./bottom-sheet/bottom-sheet').then(m => m.MaterialBottomSheet),
+      },
+      {
+        path: 'snack-bar',
+        title: 'menu.material.popups-modals.snackbar',
+        loadComponent: () => import('./snack-bar/snack-bar').then(m => m.MaterialSnackBar),
+      },
+      {
+        path: 'tooltip',
+        title: 'menu.material.popups-modals.tooltip',
+        loadComponent: () => import('./tooltip/tooltip').then(m => m.MaterialTooltip),
+      },
+      {
         path: 'paginator',
         title: 'menu.material.data-table.paginator',
         loadComponent: () => import('./paginator/paginator').then(m => m.MaterialPaginator),

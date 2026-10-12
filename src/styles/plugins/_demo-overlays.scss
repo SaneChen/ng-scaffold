@@ -1,0 +1,17 @@
+// Public overlay classes for demo config options; excluded from the starter by demo fences.
+// Written by hand (no generator for Sass partials), using only public Material overrides.
+@use '@angular/material' as mat;
+
+.demo-sheet-backdrop {
+  background: color-mix(in srgb, var(--mat-sys-tertiary) 35%, transparent);
+}
+
+.demo-snack {
+  @include mat.snack-bar-overrides(
+    (
+      container-color: var(--mat-sys-tertiary-container),
+      supporting-text-color: var(--mat-sys-on-tertiary-container),
+      button-color: var(--mat-sys-on-tertiary-container),
+    )
+  );
+}

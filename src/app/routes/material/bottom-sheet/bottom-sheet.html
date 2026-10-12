@@ -1,0 +1,42 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <h2>{{ key + '.title' | translate }}</h2>
+    <div class="controls">
+      <button matButton="outlined" type="button" (click)="openComponent()">
+        {{ key + '.component' | translate }}
+      </button>
+      <button matButton="outlined" type="button" (click)="openTemplate()">
+        {{ key + '.template' | translate }}
+      </button>
+    </div>
+    <h2>{{ key + '.options' | translate }}</h2>
+    <div class="controls">
+      <mat-checkbox [formField]="form.backdrop">{{ key + '.backdrop' | translate }}</mat-checkbox>
+      <mat-checkbox [formField]="form.disableClose">
+        {{ key + '.disable_close' | translate }}
+      </mat-checkbox>
+      <mat-checkbox [formField]="form.tinted">{{ key + '.tinted' | translate }}</mat-checkbox>
+      <mat-form-field>
+        <mat-label>{{ key + '.direction' | translate }}</mat-label>
+        <mat-select [formField]="form.direction">
+          <mat-option value="ltr">{{ key + '.ltr' | translate }}</mat-option>
+          <mat-option value="rtl">{{ key + '.rtl' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <ng-template #sheet let-ref="bottomSheetRef">
+      <h2>{{ key + '.title' | translate }}</h2>
+      @for (action of actions; track action) {
+        <p>
+          <button matButton type="button" (click)="ref.dismiss(action)">
+            {{ key + '.action' | translate: { number: action } }}
+          </button>
+        </p>
+      }
+      <button matButton type="button" (click)="ref.dismiss()">
+        {{ key + '.close' | translate }}
+      </button>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

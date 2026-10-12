@@ -1,0 +1,44 @@
+@use '../../demo/demo-page';
+@use '@angular/material' as mat;
+
+@include demo-page.variants;
+
+@each $variant in primary, tertiary, error {
+  .#{$variant} {
+    @include mat.chips-overrides(
+      (
+        elevated-selected-container-color: var(--mat-sys-#{$variant}-container),
+        selected-label-text-color: var(--mat-sys-on-#{$variant}-container),
+        selected-focus-state-layer-color: var(--mat-sys-on-#{$variant}-container),
+        selected-hover-state-layer-color: var(--mat-sys-on-#{$variant}-container),
+        selected-trailing-action-state-layer-color: var(--mat-sys-on-#{$variant}-container),
+        selected-trailing-icon-color: var(--mat-sys-on-#{$variant}-container),
+        with-icon-selected-icon-color: var(--mat-sys-on-#{$variant}-container),
+      )
+    );
+  }
+}
+
+section + section {
+  margin-block-start: 1.5rem;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+mat-form-field {
+  inline-size: 100%;
+}
+
+.stacked {
+  display: block;
+  max-inline-size: 20rem;
+}
+
+.stacked mat-chip-option {
+  inline-size: 100%;
+}

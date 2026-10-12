@@ -1,0 +1,16 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    @for (mode of modes; track mode) {
+      <section>
+        <h2>{{ key + '.' + mode | translate }}</h2>
+        <mat-progress-bar
+          [mode]="mode"
+          [value]="40"
+          [bufferValue]="70"
+          [attr.aria-label]="key + '.' + mode | translate"
+        />
+      </section>
+    }
+  </mat-card-content>
+</mat-card>

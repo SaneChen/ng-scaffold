@@ -1,0 +1,32 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <section>
+      <h2>{{ key + '.determinate' | translate }}</h2>
+      <mat-slider min="0" max="100">
+        <input
+          matSliderThumb
+          [formField]="form.progress"
+          [attr.aria-label]="key + '.value' | translate"
+        />
+      </mat-slider>
+      <mat-progress-spinner
+        mode="determinate"
+        [value]="values().progress"
+        [attr.aria-label]="key + '.determinate' | translate"
+      />
+    </section>
+    <section>
+      <h2>{{ key + '.indeterminate' | translate }}</h2>
+      <div class="controls">
+        @for (variant of variants; track variant) {
+          <mat-progress-spinner
+            mode="indeterminate"
+            [class]="variant"
+            [attr.aria-label]="key + '.indeterminate' | translate"
+          />
+        }
+      </div>
+    </section>
+  </mat-card-content>
+</mat-card>

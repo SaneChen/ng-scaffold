@@ -1,0 +1,93 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <section>
+      <h2>{{ key + '.basic' | translate }}</h2>
+      <mat-chip-listbox [attr.aria-label]="key + '.flowers' | translate">
+        @for (flower of flowers; track flower) {
+          <mat-chip-option>{{ key + '.' + flower | translate }}</mat-chip-option>
+        }
+      </mat-chip-listbox>
+    </section>
+    <section>
+      <h2>{{ key + '.avatar' | translate }}</h2>
+      <mat-chip-set [attr.aria-label]="key + '.contributors' | translate">
+        <mat-chip>
+          <img
+            matChipAvatar
+            ngSrc="images/demo/avatars/aurora-labs.svg"
+            width="24"
+            height="24"
+            alt=""
+          />
+          John
+        </mat-chip>
+        <mat-chip>
+          <img
+            matChipAvatar
+            ngSrc="images/demo/avatars/ember-works.svg"
+            width="24"
+            height="24"
+            alt=""
+          />
+          Mary
+        </mat-chip>
+      </mat-chip-set>
+    </section>
+    <section>
+      <h2>{{ key + '.editable' | translate }}</h2>
+      <mat-form-field>
+        <mat-label>{{ key + '.contributors' | translate }}</mat-label>
+        <mat-chip-grid #grid [attr.aria-label]="key + '.contributors' | translate">
+          @for (person of people(); track person.id) {
+            <mat-chip-row
+              [editable]="true"
+              (removed)="remove(person.id)"
+              (edited)="edit(person.id, $event)"
+            >
+              {{ person.name }}
+              <span
+                matChipEditInput
+                [attr.aria-label]="key + '.edit' | translate: { name: person.name }"
+              ></span>
+              <button
+                matChipRemove
+                type="button"
+                [attr.aria-label]="key + '.remove' | translate: { name: person.name }"
+              >
+                <mat-icon aria-hidden="true">cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+          }
+        </mat-chip-grid>
+        <input
+          [formField]="form.contributor"
+          [matChipInputFor]="grid"
+          [matChipInputAddOnBlur]="true"
+          [attr.aria-label]="key + '.new' | translate"
+          [placeholder]="key + '.new' | translate"
+          (matChipInputTokenEnd)="add($event)"
+        />
+        <mat-hint>{{ key + '.hint' | translate }}</mat-hint>
+      </mat-form-field>
+    </section>
+    <section>
+      <h2>{{ key + '.colors' | translate }}</h2>
+      <mat-chip-listbox multiple [attr.aria-label]="key + '.colors' | translate">
+        @for (variant of variants; track variant) {
+          <mat-chip-option [class]="variant">
+            {{ 'demo.material.variants.' + variant | translate }}
+          </mat-chip-option>
+        }
+      </mat-chip-listbox>
+    </section>
+    <section>
+      <h2>{{ key + '.stacked' | translate }}</h2>
+      <mat-chip-listbox class="stacked" multiple [attr.aria-label]="key + '.flowers' | translate">
+        @for (flower of flowers; track flower) {
+          <mat-chip-option selected>{{ key + '.' + flower | translate }}</mat-chip-option>
+        }
+      </mat-chip-listbox>
+    </section>
+  </mat-card-content>
+</mat-card>

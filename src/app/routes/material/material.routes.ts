@@ -81,6 +81,48 @@ const routes: Routes = [
       },
       // Navigation
       {
+        path: 'button',
+        title: 'menu.material.buttons-indicators.button',
+        loadComponent: () => import('./button/button').then(m => m.MaterialButton),
+      },
+      {
+        path: 'button-toggle',
+        title: 'menu.material.buttons-indicators.button-toggle',
+        loadComponent: () =>
+          import('./button-toggle/button-toggle').then(m => m.MaterialButtonToggle),
+      },
+      {
+        path: 'badge',
+        title: 'menu.material.buttons-indicators.badge',
+        loadComponent: () => import('./badge/badge').then(m => m.MaterialBadge),
+      },
+      {
+        path: 'icon',
+        title: 'menu.material.buttons-indicators.icon',
+        loadComponent: () => import('./icon/icon').then(m => m.MaterialIcon),
+      },
+      {
+        path: 'progress-bar',
+        title: 'menu.material.buttons-indicators.progress-bar',
+        loadComponent: () => import('./progress-bar/progress-bar').then(m => m.MaterialProgressBar),
+      },
+      {
+        path: 'progress-spinner',
+        title: 'menu.material.buttons-indicators.progress-spinner',
+        loadComponent: () =>
+          import('./progress-spinner/progress-spinner').then(m => m.MaterialProgressSpinner),
+      },
+      {
+        path: 'ripple',
+        title: 'menu.material.buttons-indicators.ripple',
+        loadComponent: () => import('./ripple/ripple').then(m => m.MaterialRipple),
+      },
+      {
+        path: 'chips',
+        title: 'menu.material.buttons-indicators.chips',
+        loadComponent: () => import('./chips/chips').then(m => m.MaterialChips),
+      },
+      {
         path: 'list',
         title: 'menu.material.layout.list',
         loadComponent: () => import('./list/list').then(m => m.MaterialList),

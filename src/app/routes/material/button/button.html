@@ -1,0 +1,62 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <section>
+      <h2>{{ key + '.buttons' | translate }}</h2>
+      <p role="status">{{ key + '.count' | translate: { count: count() } }}</p>
+      <div class="controls">
+        @for (appearance of appearances; track appearance) {
+          <button [matButton]="appearance" type="button" (click)="increase()">
+            {{ key + '.' + appearance | translate }}
+          </button>
+        }
+        <button
+          matFab
+          type="button"
+          [attr.aria-label]="key + '.fab' | translate"
+          (click)="increase()"
+        >
+          <mat-icon aria-hidden="true">plus_one</mat-icon>
+        </button>
+        <button
+          matMiniFab
+          type="button"
+          [attr.aria-label]="key + '.mini' | translate"
+          (click)="increase()"
+        >
+          <mat-icon aria-hidden="true">plus_one</mat-icon>
+        </button>
+        <button
+          matIconButton
+          type="button"
+          [attr.aria-label]="key + '.icon' | translate"
+          (click)="increase()"
+        >
+          <mat-icon aria-hidden="true">plus_one</mat-icon>
+        </button>
+      </div>
+    </section>
+    <section>
+      <h2>{{ key + '.links' | translate }}</h2>
+      <div class="controls">
+        <a matButton routerLink="/dashboard">{{ key + '.home' | translate }}</a>
+        <a matButton="elevated" routerLink="/dashboard">{{ key + '.home' | translate }}</a>
+        <a matIconButton routerLink="/dashboard" [attr.aria-label]="key + '.home' | translate">
+          <mat-icon aria-hidden="true">home</mat-icon>
+        </a>
+      </div>
+    </section>
+    <section>
+      <h2>{{ key + '.colors' | translate }}</h2>
+      @for (variant of variants; track variant) {
+        <button matButton="filled" [class]="variant" type="button" (click)="increase()">
+          {{ 'demo.material.variants.' + variant | translate }}
+        </button>
+      }
+    </section>
+    <section>
+      <h2>{{ key + '.disabled' | translate }}</h2>
+      <button matButton type="button" disabled>{{ key + '.cancel' | translate }}</button>
+    </section>
+  </mat-card-content>
+</mat-card>

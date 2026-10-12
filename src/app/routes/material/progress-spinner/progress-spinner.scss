@@ -1,0 +1,14 @@
+@use '../../demo/demo-page';
+
+@include demo-page.variants;
+
+section + section {
+  margin-block-start: 1.5rem;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}

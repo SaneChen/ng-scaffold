@@ -1,0 +1,42 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <section>
+      <h2>{{ key + '.fingerprint' | translate }}</h2>
+      <p>
+        <mat-icon aria-hidden="true">fingerprint</mat-icon>
+        {{ key + '.recorded' | translate }}
+      </p>
+    </section>
+    <section>
+      <h2>{{ key + '.delete' | translate }}</h2>
+      <button
+        matIconButton
+        type="button"
+        [attr.aria-label]="key + '.delete' | translate"
+        [disabled]="deleted()"
+        (click)="deleted.set(true)"
+      >
+        <mat-icon aria-hidden="true">delete</mat-icon>
+      </button>
+      <p role="status">
+        @if (deleted()) {
+          {{ key + '.deleted' | translate }}
+        }
+      </p>
+    </section>
+    <section>
+      <h2>{{ key + '.home' | translate }}</h2>
+      <a matIconButton routerLink="/dashboard" [attr.aria-label]="key + '.home' | translate">
+        <mat-icon aria-hidden="true">home</mat-icon>
+      </a>
+    </section>
+    <section>
+      <h2>{{ key + '.tasks' | translate }}</h2>
+      <p>
+        <mat-icon aria-hidden="true">done</mat-icon>
+        {{ key + '.done' | translate }}
+      </p>
+    </section>
+  </mat-card-content>
+</mat-card>

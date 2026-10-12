@@ -1,0 +1,42 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <section>
+      <h2>{{ key + '.options' | translate }}</h2>
+      <div class="controls">
+        <mat-checkbox [formField]="form.centered">{{ key + '.centered' | translate }}</mat-checkbox>
+        <mat-checkbox [formField]="form.disabled">{{ key + '.disabled' | translate }}</mat-checkbox>
+        <mat-checkbox [formField]="form.unbounded">
+          {{ key + '.unbounded' | translate }}
+        </mat-checkbox>
+        <mat-form-field>
+          <mat-label>{{ key + '.radius' | translate }}</mat-label>
+          <input matInput type="number" [formField]="form.radius" />
+          <mat-error>{{ key + '.range' | translate }}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ key + '.color' | translate }}</mat-label>
+          <input
+            matInput
+            [formField]="form.color"
+            [placeholder]="key + '.color_hint' | translate"
+          />
+        </mat-form-field>
+      </div>
+      <button
+        type="button"
+        class="target"
+        matRipple
+        #ripple="matRipple"
+        [matRippleCentered]="values().centered"
+        [matRippleDisabled]="values().disabled"
+        [matRippleUnbounded]="values().unbounded"
+        [matRippleRadius]="values().radius"
+        [matRippleColor]="values().color || 'var(--mat-sys-secondary-container)'"
+        (click)="launch($event, ripple)"
+      >
+        {{ key + '.activate' | translate }}
+      </button>
+    </section>
+  </mat-card-content>
+</mat-card>

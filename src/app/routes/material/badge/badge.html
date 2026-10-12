@@ -1,0 +1,62 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <section>
+      <h2>{{ key + '.text' | translate }}</h2>
+      <span
+        matBadge="4"
+        [matBadgeOverlap]="false"
+        [matBadgeDescription]="key + '.count' | translate: { count: 4 }"
+      >
+        {{ key + '.text' | translate }}
+      </span>
+    </section>
+    <section>
+      <h2>{{ key + '.large' | translate }}</h2>
+      <span
+        matBadge="1"
+        matBadgeSize="large"
+        [matBadgeOverlap]="false"
+        [matBadgeDescription]="key + '.count' | translate: { count: 1 }"
+      >
+        {{ key + '.large' | translate }}
+      </span>
+    </section>
+    <section>
+      <h2>{{ key + '.before' | translate }}</h2>
+      <button
+        matButton="elevated"
+        type="button"
+        matBadge="8"
+        matBadgePosition="before"
+        [matBadgeDescription]="key + '.count' | translate: { count: 8 }"
+      >
+        {{ key + '.action' | translate }}
+      </button>
+    </section>
+    <section>
+      <h2>{{ key + '.visibility' | translate }}</h2>
+      <button
+        matButton="elevated"
+        type="button"
+        matBadge="7"
+        [matBadgeHidden]="hidden()"
+        (click)="hidden.set(!hidden())"
+        [matBadgeDescription]="hidden() ? '' : (key + '.count' | translate: { count: 7 })"
+      >
+        {{ key + (hidden() ? '.show' : '.hide') | translate }}
+      </button>
+    </section>
+    <section>
+      <h2>{{ key + '.icon' | translate }}</h2>
+      <span
+        matBadge="15"
+        [matBadgeDescription]="key + '.count' | translate: { count: 15 }"
+        [attr.aria-label]="key + '.home' | translate"
+        role="img"
+      >
+        <mat-icon aria-hidden="true">home</mat-icon>
+      </span>
+    </section>
+  </mat-card-content>
+</mat-card>

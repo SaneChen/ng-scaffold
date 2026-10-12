@@ -1,0 +1,58 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <section>
+      <h2>{{ key + '.single' | translate }}</h2>
+      <mat-button-toggle>{{ key + '.yes' | translate }}</mat-button-toggle>
+    </section>
+    <section>
+      <h2>{{ key + '.alignment' | translate }}</h2>
+      <mat-button-toggle-group [attr.aria-label]="key + '.alignment' | translate">
+        @for (alignment of alignments; track alignment) {
+          <mat-button-toggle [value]="alignment" [aria-label]="key + '.' + alignment | translate">
+            <mat-icon aria-hidden="true">{{ 'format_align_' + alignment }}</mat-icon>
+          </mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+    </section>
+    <section>
+      <h2>{{ key + '.multiple' | translate }}</h2>
+      <mat-button-toggle-group multiple [attr.aria-label]="key + '.groceries' | translate">
+        @for (item of groceries; track item) {
+          <mat-button-toggle [value]="item">{{ key + '.' + item | translate }}</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+    </section>
+    <section>
+      <h2>{{ key + '.exclusive' | translate }}</h2>
+      <mat-button-toggle-group
+        [value]="pie()"
+        (change)="pie.set($event.value)"
+        [attr.aria-label]="key + '.pies' | translate"
+      >
+        @for (item of pies; track item) {
+          <mat-button-toggle [value]="item">{{ key + '.' + item | translate }}</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+      <p role="status">
+        {{ key + '.favorite' | translate: { pie: (key + '.' + pie() | translate) } }}
+      </p>
+    </section>
+    <section>
+      <h2>{{ key + '.disabled' | translate }}</h2>
+      <mat-button-toggle-group disabled [attr.aria-label]="key + '.groceries' | translate">
+        @for (item of groceries; track item) {
+          <mat-button-toggle [value]="item">{{ key + '.' + item | translate }}</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+    </section>
+    <section>
+      <h2>{{ key + '.vertical' | translate }}</h2>
+      <mat-button-toggle-group multiple vertical [attr.aria-label]="key + '.groceries' | translate">
+        @for (item of groceries; track item) {
+          <mat-button-toggle [value]="item">{{ key + '.' + item | translate }}</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+    </section>
+  </mat-card-content>
+</mat-card>

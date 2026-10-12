@@ -34,5 +34,8 @@ jobs:
       - name: Unit tests
         run: yarn test --watch=false
 
+      - name: Starter packaging tests
+        run: node --test tools/pack-starter.spec.mjs
+
       - name: Production build
         run: yarn build

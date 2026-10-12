@@ -11,6 +11,7 @@ run() {
   shift
   "$@" >"$log" 2>&1 || { tail -60 "$log"; exit 1; }
 }
+run starter:test node --test tools/pack-starter.spec.mjs
 run lint yarn -s lint
 run lint:scss yarn -s lint:scss
 run test yarn -s ng test --watch=false

@@ -9,7 +9,9 @@
  */
 export * from './widgets/branding/branding';
 export * from './widgets/fullscreen-button/fullscreen-button';
+// <demo>
 export * from './widgets/github-button/github-button';
+// </demo>
 export * from './widgets/notification-button/notification-button';
 export * from './widgets/translate-button/translate-button';
 export * from './widgets/user-button/user-button';

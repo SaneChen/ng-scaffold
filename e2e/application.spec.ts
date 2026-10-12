@@ -35,6 +35,26 @@ test('responsive side navigation and desktop top navigation follow menu links', 
     await accessible(page, info);
     await page.getByRole('menuitem', { name: 'Material Icons', exact: true }).click();
     await expect(page).toHaveURL(/design\/icons$/);
+    await expect(page.locator('app-design-icons')).toBeVisible();
+    await page.locator('mat-sidenav-content').evaluate(element => element.scrollTo(0, 80));
+    await expect
+      .poll(() =>
+        top.evaluate(element => {
+          const menu = element.getBoundingClientRect();
+          const heading = document.querySelector('app-page-header')!.getBoundingClientRect();
+          return menu.bottom > heading.top && menu.top < heading.bottom;
+        })
+      )
+      .toBe(true);
+    const sessions = top.getByRole('button', { name: 'Sessions', exact: true });
+    await sessions.hover();
+    await accessible(page, info);
+    await page.mouse.move(0, 0);
+    await sessions.focus();
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Shift+Tab');
+    await expect(sessions).toBeFocused();
+    await accessible(page, info);
   }
 });
 

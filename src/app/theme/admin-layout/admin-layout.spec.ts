@@ -18,6 +18,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSidenav } from '@angular/material/sidenav';
 import { By } from '@angular/platform-browser';
 import { provideRouter, Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { SettingsStore } from '@core';
 import { PaginatorIntl } from '@core/i18n/paginator-intl';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
@@ -152,12 +153,16 @@ describe('AdminLayout', () => {
 
   it('should report a drawer closed by Escape at once', async () => {
     await create(true);
+    const opened = firstValueFrom(sidenav().openedChange);
     menuButton()?.click();
+    await opened;
     await fixture.whenStable();
 
+    const closed = firstValueFrom(sidenav().openedChange);
     fixture.nativeElement
       .querySelector('mat-sidenav')
       .dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27, bubbles: true }));
+    await closed;
     await fixture.whenStable();
 
     expect(menuButton()?.getAttribute('aria-expanded')).toBe('false');

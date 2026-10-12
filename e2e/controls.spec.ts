@@ -10,6 +10,19 @@ test('grid selection, sorting, expansion and pinning remain accessible', async (
 }, info) => {
   await login(page, 'tables/kitchen-sink');
   const grid = page.locator('mtx-grid');
+  const edit = grid.getByRole('button', { name: 'Edit', exact: true }).first();
+  await edit.click();
+  const dialog = page.getByRole('dialog');
+  const name = dialog.getByRole('textbox', { name: 'Name', exact: true });
+  await expect(name).toBeFocused();
+  await name.fill('');
+  await dialog.getByRole('button', { name: 'Save', exact: true }).click();
+  await expect(name).toBeFocused();
+  await accessible(page, info);
+  await name.fill('Hydrogen');
+  await dialog.getByRole('button', { name: 'Save', exact: true }).click();
+  await expect(dialog).toHaveCount(0);
+  await expect(edit).toBeFocused();
   await grid.getByRole('checkbox', { name: 'Select all elements', exact: true }).check();
   await expect(page.locator('.selection')).toContainText('Selected rows: 20.');
   await grid.getByRole('checkbox', { name: 'Select all elements', exact: true }).uncheck();

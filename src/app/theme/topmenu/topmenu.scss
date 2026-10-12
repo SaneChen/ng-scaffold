@@ -5,8 +5,7 @@
   z-index: 1;
   display: block;
   padding: 0.5rem;
-  background-color: color-mix(in srgb, var(--mat-sys-surface-container) 80%, transparent);
-  backdrop-filter: blur(8px);
+  background-color: var(--mat-sys-surface-container);
 }
 
 // One row that scrolls sideways when the menu is wider than the screen.

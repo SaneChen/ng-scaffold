@@ -37,6 +37,12 @@
   AXE 与焦点回归。完整 verify 已通过：436 个单测、146 个浏览器用例。
 - 部署非阻断警告：GitHub 提示现有官方 Actions 的 Node 20 声明已弃用，并强制使用 Node 24。
   当前运行成功；后续可独立升级 Actions 主版本，不应为消除警告削弱验证或扩大部署权限。
+- 后续 CI #14 在桌面顶栏的 AXE 对比度检查失败（145 个浏览器用例通过，1 个失败）：
+  半透明 surface-container 与底下的 primary 页头混色，Sessions 文本对比度为 4.11，低于 4.5。
+  顶栏改为不透明主题 surface-container；回归明确断言滚动后的顶栏/页头重叠，并扫描悬停与
+  键盘聚焦状态，不排除 AXE 规则。历史 #10/#11 的元素编辑焦点、#11 的抽屉 Escape 断言也补齐
+  公开的弹窗/抽屉生命周期等待；元素编辑错误提交与焦点恢复增加真实浏览器验收。
+  用户要求先修复再重建工作流编号，且已确认永久清理旧运行记录；新工作流及清理尚未执行。
 - 页面现状：`/auth/login`、`/auth/signup`（mock 演示账号 `ng-scaffold` / `ng-scaffold`，开启
   `environment.mockApi` 时自动填入）、`/dashboard`（`/` 默认跳转）、`/profile/overview|settings`、
   `/403|404|500`；未知 URL 在原地址显示 404 页。演示菜单均已有懒加载页面：design、material（35 个）、

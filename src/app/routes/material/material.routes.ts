@@ -81,6 +81,22 @@ const routes: Routes = [
       },
       // Navigation
       {
+        path: 'list',
+        title: 'menu.material.layout.list',
+        loadComponent: () => import('./list/list').then(m => m.MaterialList),
+      },
+      {
+        path: 'stepper',
+        title: 'menu.material.layout.stepper',
+        loadComponent: () => import('./stepper/stepper').then(m => m.MaterialStepper),
+      },
+      { path: 'tab', loadChildren: () => import('./tab/tab.routes') },
+      {
+        path: 'tree',
+        title: 'menu.material.layout.tree',
+        loadComponent: () => import('./tree/tree').then(m => m.MaterialTree),
+      },
+      {
         path: 'menu',
         title: 'menu.material.navigation.menu',
         loadComponent: () => import('./menu/menu').then(m => m.MaterialMenu),

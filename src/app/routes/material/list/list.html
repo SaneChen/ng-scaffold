@@ -1,0 +1,88 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.list.seasonings' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list role="list">
+      @for (seasoning of seasonings; track seasoning) {
+        <mat-list-item role="listitem">
+          {{ 'demo.material.list.' + seasoning | translate }}
+        </mat-list-item>
+      }
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.list.mailbox' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-nav-list [attr.aria-label]="'demo.material.list.mailbox' | translate">
+      @for (item of folders; track item) {
+        <a
+          mat-list-item
+          [routerLink]="[]"
+          [queryParams]="{ folder: item }"
+          [activated]="folder() === item"
+          [attr.aria-current]="folder() === item ? 'page' : null"
+        >
+          {{ 'demo.material.list.' + item | translate }}
+        </a>
+      }
+    </mat-nav-list>
+  </mat-card-content>
+</mat-card>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.list.messages' | translate }}</h2>
+    <mat-card-subtitle>{{ 'demo.material.list.' + folder() | translate }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    @if (folder() === 'inbox') {
+      <mat-list role="list">
+        @for (message of messages; track message.id) {
+          <mat-list-item role="listitem" lines="3">
+            <img
+              matListItemAvatar
+              [ngSrc]="'images/demo/avatars/' + message.avatar + '.svg'"
+              width="40"
+              height="40"
+              alt=""
+            />
+            <h3 matListItemTitle>{{ message.sender }}</h3>
+            <p matListItemLine>
+              {{ 'demo.material.list.mail.' + message.id + '.subject' | translate }}
+            </p>
+            <p matListItemLine>
+              {{ 'demo.material.list.mail.' + message.id + '.text' | translate }}
+            </p>
+          </mat-list-item>
+        }
+      </mat-list>
+    } @else {
+      <p role="status">{{ 'demo.material.list.empty' | translate }}</p>
+    }
+  </mat-card-content>
+</mat-card>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.list.grouped' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    @for (group of groups; track group.name) {
+      <h3>{{ 'demo.material.list.' + group.name | translate }}</h3>
+      <mat-list role="list" [attr.aria-label]="'demo.material.list.' + group.name | translate">
+        @for (item of group.items; track item) {
+          <mat-list-item role="listitem">
+            <mat-icon matListItemIcon aria-hidden="true">{{ group.icon }}</mat-icon>
+            <span matListItemTitle>{{ 'demo.material.list.' + item | translate }}</span>
+          </mat-list-item>
+        }
+      </mat-list>
+      @if (!$last) {
+        <mat-divider />
+      }
+    }
+  </mat-card-content>
+</mat-card>

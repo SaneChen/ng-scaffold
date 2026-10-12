@@ -1,0 +1,41 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.tree.title' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-tree
+      #tree
+      [dataSource]="data"
+      [childrenAccessor]="childrenAccessor"
+      [attr.aria-label]="'demo.material.tree.title' | translate"
+    >
+      <mat-tree-node
+        *matTreeNodeDef="let node"
+        matTreeNodePadding
+        [isExpandable]="!!node.children?.length"
+        [cdkTreeNodeTypeaheadLabel]="'demo.material.tree.' + node.name | translate"
+      >
+        @if (node.children?.length) {
+          <button
+            matIconButton
+            matTreeNodeToggle
+            type="button"
+            tabindex="-1"
+            [attr.aria-label]="
+              'demo.material.tree.toggle'
+                | translate: { name: ('demo.material.tree.' + node.name | translate) }
+            "
+          >
+            <mat-icon aria-hidden="true" class="mat-icon-rtl-mirror">
+              {{ tree.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+            </mat-icon>
+          </button>
+        } @else {
+          <span class="spacer" aria-hidden="true"></span>
+        }
+        {{ 'demo.material.tree.' + node.name | translate }}
+      </mat-tree-node>
+    </mat-tree>
+  </mat-card-content>
+</mat-card>

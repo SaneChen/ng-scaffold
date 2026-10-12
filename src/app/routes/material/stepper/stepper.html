@@ -1,0 +1,60 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <button
+      matButton="outlined"
+      type="button"
+      [attr.aria-pressed]="linear()"
+      (click)="linear.set(!linear())"
+    >
+      {{ 'demo.material.stepper.linear' | translate }}
+    </button>
+    <mat-stepper #stepper [linear]="linear()" [orientation]="narrow() ? 'vertical' : 'horizontal'">
+      <mat-step [stepControl]="form.name">
+        <ng-template matStepLabel>{{ 'demo.material.stepper.name_step' | translate }}</ng-template>
+        <mat-form-field>
+          <mat-label>{{ 'demo.material.stepper.name' | translate }}</mat-label>
+          <input matInput [formField]="form.name" autocomplete="name" />
+          @if (form.name().invalid()) {
+            <mat-error>{{ 'demo.material.stepper.required' | translate }}</mat-error>
+          }
+        </mat-form-field>
+        <div>
+          <button matButton matStepperNext type="button">
+            {{ 'demo.material.stepper.next' | translate }}
+          </button>
+        </div>
+      </mat-step>
+      <mat-step [stepControl]="form.address">
+        <ng-template matStepLabel>
+          {{ 'demo.material.stepper.address_step' | translate }}
+        </ng-template>
+        <mat-form-field>
+          <mat-label>{{ 'demo.material.stepper.address' | translate }}</mat-label>
+          <input matInput [formField]="form.address" autocomplete="street-address" />
+          @if (form.address().invalid()) {
+            <mat-error>{{ 'demo.material.stepper.required' | translate }}</mat-error>
+          }
+        </mat-form-field>
+        <div>
+          <button matButton matStepperPrevious type="button">
+            {{ 'demo.material.stepper.back' | translate }}
+          </button>
+          <button matButton matStepperNext type="button">
+            {{ 'demo.material.stepper.next' | translate }}
+          </button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>{{ 'demo.material.stepper.done' | translate }}</ng-template>
+        <p>{{ 'demo.material.stepper.finished' | translate }}</p>
+        <button matButton matStepperPrevious type="button">
+          {{ 'demo.material.stepper.back' | translate }}
+        </button>
+        <button matButton type="button" (click)="reset(stepper)">
+          {{ 'demo.material.stepper.reset' | translate }}
+        </button>
+      </mat-step>
+    </mat-stepper>
+  </mat-card-content>
+</mat-card>

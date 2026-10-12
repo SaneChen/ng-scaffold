@@ -804,6 +804,101 @@
           "text": "The Dachshund is a short-legged, long-bodied hound originally bred to track burrowing animals."
         }
       },
+      "list": {
+        "seasonings": "Seasonings",
+        "pepper": "Pepper",
+        "salt": "Salt",
+        "paprika": "Paprika",
+        "mailbox": "Mailbox navigation",
+        "inbox": "Inbox",
+        "outbox": "Outbox",
+        "spam": "Spam",
+        "trash": "Trash",
+        "messages": "Messages",
+        "empty": "No messages in this demo folder.",
+        "grouped": "Folders and notes",
+        "folders": "Folders",
+        "notes": "Notes",
+        "imported": "Imported",
+        "important": "Important",
+        "unread": "Unread",
+        "screenshots": "Update screenshots",
+        "application": "Install a new application",
+        "mail": {
+          "john": {
+            "subject": "Brunch?",
+            "text": "Would Sunday work for brunch?"
+          },
+          "mary": {
+            "subject": "Summer barbecue",
+            "text": "I wish I could come, but I already have plans."
+          },
+          "bobby": {
+            "subject": "Paris reservations",
+            "text": "Have you booked your stay for the 15th? I have!"
+          }
+        }
+      },
+      "stepper": {
+        "editable": "Editable",
+        "optional": "Optional",
+        "completed": "Completed",
+        "linear": "Linear mode",
+        "name_step": "Enter your name",
+        "address_step": "Enter your address",
+        "name": "Full name",
+        "address": "Street address",
+        "required": "This field is required.",
+        "next": "Next",
+        "back": "Back",
+        "done": "Done",
+        "finished": "You have completed the steps.",
+        "reset": "Reset"
+      },
+      "tab": {
+        "weather": "Weather navigation",
+        "breeds": "Dog breeds: dynamic-height tabs",
+        "sunny": {
+          "label": "Sunny",
+          "text": "Clear skies and sunshine today."
+        },
+        "rainy": {
+          "label": "Rainy",
+          "text": "Rain is expected today. Bring an umbrella."
+        },
+        "foggy": {
+          "label": "Foggy",
+          "text": "Fog may reduce visibility today."
+        },
+        "husky": {
+          "label": "Siberian Husky",
+          "text": "A medium-sized working dog with a thick coat."
+        },
+        "beagle": {
+          "label": "Beagle (disabled)",
+          "text": "A small scent hound."
+        },
+        "labrador": {
+          "label": "Labrador Retriever",
+          "text": "A friendly and active retriever originally bred as a working dog.",
+          "extra": "Labradors enjoy swimming and retrieving. They are often trained as guide dogs, assistance dogs and therapy dogs. This longer paragraph demonstrates a tab panel adjusting its height to its content."
+        }
+      },
+      "tree": {
+        "title": "Food tree with flat nodes",
+        "toggle": "Toggle {{name}}",
+        "fruit": "Fruit",
+        "apple": "Apple",
+        "banana": "Banana",
+        "fruit_loops": "Fruit loops",
+        "vegetables": "Vegetables",
+        "green": "Green",
+        "orange": "Orange",
+        "broccoli": "Broccoli",
+        "sprouts": "Brussels sprouts",
+        "pumpkin": "Pumpkin",
+        "carrot": "Carrot"
+      },
       "toolbar": {
         "app": "My application",
         "hello": "Hello, world!",

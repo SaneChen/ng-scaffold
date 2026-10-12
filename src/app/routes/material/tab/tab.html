@@ -1,0 +1,46 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.tab.weather' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <nav
+      mat-tab-nav-bar
+      [tabPanel]="panel"
+      [attr.aria-label]="'demo.material.tab.weather' | translate"
+    >
+      @for (weather of weather; track weather) {
+        <a
+          mat-tab-link
+          [routerLink]="weather + '-tab'"
+          routerLinkActive
+          #active="routerLinkActive"
+          [active]="active.isActive"
+        >
+          {{ 'demo.material.tab.' + weather + '.label' | translate }}
+        </a>
+      }
+    </nav>
+    <mat-tab-nav-panel #panel><router-outlet /></mat-tab-nav-panel>
+  </mat-card-content>
+</mat-card>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2 mat-card-title>{{ 'demo.material.tab.breeds' | translate }}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-tab-group dynamicHeight>
+      @for (breed of breeds; track breed) {
+        <mat-tab
+          [disabled]="breed === 'beagle'"
+          [label]="'demo.material.tab.' + breed + '.label' | translate"
+        >
+          <p>{{ 'demo.material.tab.' + breed + '.text' | translate }}</p>
+          @if (breed === 'labrador') {
+            <p>{{ 'demo.material.tab.labrador.extra' | translate }}</p>
+          }
+        </mat-tab>
+      }
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>

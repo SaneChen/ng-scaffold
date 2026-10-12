@@ -804,6 +804,101 @@
           "text": "腊肠犬是一种短腿、长身的猎犬，最初用于追踪穴居动物。"
         }
       },
+      "list": {
+        "seasonings": "调味料",
+        "pepper": "胡椒",
+        "salt": "盐",
+        "paprika": "红椒粉",
+        "mailbox": "邮箱导航",
+        "inbox": "收件箱",
+        "outbox": "发件箱",
+        "spam": "垃圾邮件",
+        "trash": "废纸篓",
+        "messages": "邮件",
+        "empty": "此演示文件夹中没有邮件。",
+        "grouped": "文件夹与笔记",
+        "folders": "文件夹",
+        "notes": "笔记",
+        "imported": "已导入",
+        "important": "重要",
+        "unread": "未读",
+        "screenshots": "更新截图",
+        "application": "安装新应用",
+        "mail": {
+          "john": {
+            "subject": "一起吃早午餐？",
+            "text": "周日一起吃早午餐怎么样？"
+          },
+          "mary": {
+            "subject": "夏日烧烤",
+            "text": "很想参加，可惜我已经有其他安排了。"
+          },
+          "bobby": {
+            "subject": "巴黎预订",
+            "text": "你预订好 15 日的住宿了吗？我已经订好了！"
+          }
+        }
+      },
+      "stepper": {
+        "editable": "可编辑",
+        "optional": "可选",
+        "completed": "已完成",
+        "linear": "线性模式",
+        "name_step": "填写姓名",
+        "address_step": "填写地址",
+        "name": "姓名",
+        "address": "街道地址",
+        "required": "此项为必填项。",
+        "next": "下一步",
+        "back": "上一步",
+        "done": "完成",
+        "finished": "你已完成所有步骤。",
+        "reset": "重置"
+      },
+      "tab": {
+        "weather": "天气导航",
+        "breeds": "犬种：动态高度标签页",
+        "sunny": {
+          "label": "晴天",
+          "text": "今天晴空万里，阳光明媚。"
+        },
+        "rainy": {
+          "label": "雨天",
+          "text": "今天预计有雨，请带好雨伞。"
+        },
+        "foggy": {
+          "label": "雾天",
+          "text": "今天的雾可能影响能见度。"
+        },
+        "husky": {
+          "label": "西伯利亚哈士奇",
+          "text": "一种被毛厚实的中型工作犬。"
+        },
+        "beagle": {
+          "label": "比格犬（已禁用）",
+          "text": "一种小型嗅觉猎犬。"
+        },
+        "labrador": {
+          "label": "拉布拉多寻回犬",
+          "text": "一种友好活泼的寻回犬，最初作为工作犬培育。",
+          "extra": "拉布拉多犬喜爱游泳和寻回物品。它们经常接受训练，成为导盲犬、辅助犬和治疗犬。这段较长的文字演示了标签页如何根据内容调整高度。"
+        }
+      },
+      "tree": {
+        "title": "平面节点食物树",
+        "toggle": "展开或折叠{{name}}",
+        "fruit": "水果",
+        "apple": "苹果",
+        "banana": "香蕉",
+        "fruit_loops": "水果谷物圈",
+        "vegetables": "蔬菜",
+        "green": "绿色蔬菜",
+        "orange": "橙色蔬菜",
+        "broccoli": "西兰花",
+        "sprouts": "抱子甘蓝",
+        "pumpkin": "南瓜",
+        "carrot": "胡萝卜"
+      },
       "toolbar": {
         "app": "我的应用",
         "hello": "你好，世界！",

@@ -173,3 +173,17 @@ impose on its users; replaced by Chart.js), `ngx-permissions` (own signal implem
   `--project` works in multi-project workspaces.
 - CI "golden" test: `ng new ng-scaffold` → `ng add <local tarball>` → the result must equal this
   repository's starter files → `ng lint`, `ng test`, `ng build` must pass.
+- `module` creates a lazy standalone route group; `page` wraps Angular's official component
+  generator and inserts a route before the wildcard, a menu item and flat three-language keys.
+  Generated tests supply the page header's router/translation providers and isolate menu HTTP state.
+- All rules use a branched Tree so failed validation does not mutate the input workspace. Existing
+  aliases/lint conflicts are refused; unrelated asset entries and file replacements are preserved.
+- Multi-project typed ESLint uses explicit local tsconfigs; stylelint ignores are relative to its
+  config directory. No shared root aliases are rewritten. Runtime peers such as `@ngneat/overview`
+  are direct application dependencies, not supplied accidentally by the schematic's own installation.
+- Three cache-only golden scenarios cover default settings, top/dark/rtl/zh-TW settings and a
+  selected application with custom sourceRoot. Unique test tarball versions and filenames avoid
+  Yarn cache collisions; copied CLI dependencies are unlinked before validating installed apps.
+- The initial `ng-update` migration collection is empty because this is the first package release.
+  Future versioned migrations need their own idempotency tests. Publishing is separate from packing
+  and golden verification; usage and release instructions live in `schematics/README.md`.

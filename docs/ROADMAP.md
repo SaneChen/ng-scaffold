@@ -131,16 +131,18 @@ grid 控件名称缺口见 HANDOFF §1，不以单元测试代替该验收。
 
 ### 阶段 7 · `ng add ng-scaffold`
 
-- [ ] `schematics/`：`ng-add`（只做插入式修改）、`ng g ng-scaffold:module|page`、`ng-update`
-- [ ] 非默认主题、方向、语言：`ng-add` 插入 `provideAppSettings({ theme, dir, language })` 时，同步改写
+- [x] `schematics/`：`ng-add`（只做插入式修改）、`ng g ng-scaffold:module|page`、`ng-update` — `b7df0c0`
+      （初版迁移元数据与空集合，无既有版本需迁移；module 为 standalone 路由组，不生成 NgModule）
+- [x] 非默认主题、方向、语言：`ng-add` 插入 `provideAppSettings({ theme, dir, language })` 时，同步改写
       `src/index.html` 内联启动脚本中的 `const defaults = { theme: 'auto', dir: 'ltr', language: 'auto' }`
       （该脚本在应用启动前应用主题、方向与语言；`SettingsStore` 只持久化与默认值不同的设置，新默认值不会出现在
       `localStorage` 中，脚本只能从这一行得知）；golden 测试覆盖非默认回答（`src/index.spec.ts` 只比对
-      `defaultAppSettings`，被 `provideAppSettings` 覆盖的默认值要由 schematic 保证）
-- [ ] 打包脚本：直接从仓库源码收集文件（演示区域用标记排除），无手工模板
-- [ ] golden 测试：临时目录 `ng new ng-scaffold` → `ng add <本地 tarball>` → 与仓库比对 → `ng build/test/lint`
-- [ ] 多项目工作区测试（`--project`）
-- [ ] 发布配置与文档
+      `defaultAppSettings`，被 `provideAppSettings` 覆盖的默认值要由 schematic 保证）— `b7df0c0`
+- [x] 打包脚本：直接从仓库源码收集文件（演示区域用标记排除），无手工模板 — `3b76620`、`b7df0c0`
+- [x] golden 测试：临时目录 `ng new ng-scaffold` → `ng add <本地 tarball>` → 与仓库比对 → `ng build/test/lint`
+      — `1bd2eba`（AST/语义验证）、`b7df0c0`（3 组真实 CLI，每组生成前后 278 → 280 用例）
+- [x] 多项目工作区测试（`--project`）— `b7df0c0`（custom sourceRoot、项目级别名、其他应用未变）
+- [x] 发布配置与文档 — `b7df0c0`（包 README 与发布元数据；尚未发布 npm）
 
 ### 阶段 8 · 质量与发布
 

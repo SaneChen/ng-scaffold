@@ -8,15 +8,17 @@
 ## 1. 当前状态
 
 - 基线：`0d99dd2`（未改动的 `ng new ng-scaffold`，Angular CLI 22.2.1）。
-- 已完成：ROADMAP 中阶段 0–6（含 §4 B 全局样式、C 认证/HTTP/Mock/菜单/权限/启动、D 布局外壳、
-  E 共享组件与基础页面、F 演示功能区），具体提交见 ROADMAP 中 `[x]` 条目后的哈希。
+- 已完成：ROADMAP 中阶段 0–7（含 §4 B 全局样式、C 认证/HTTP/Mock/菜单/权限/启动、D 布局外壳、
+  E 共享组件与基础页面、F 演示功能区、G 安装 schematics），具体提交见 ROADMAP 中 `[x]` 条目后的哈希。
 - 质量状态（2026-10-12）：`NG_CLI_ANALYTICS=false tools/verify.sh` 通过——lint、stylelint、
   122 个测试文件 / 427 个用例、生产构建（initial 498.12 kB / 传输约 124.90 kB，距 500 kB 警告
   budget 仅 1.88 kB）。F 的评审修复已 autosquash，19 个功能提交均逐树通过 verify；只改写了
   `209d65c` 之后当时尚未推送的提交。
-- 当前：用户已确认并开始 §4 的 **G · `ng add ng-scaffold`**（起点 `68dbdf5`）。源码收集与 demo
-  排除已实现为 `3b76620`，AST 插入工具正在验证；安装工厂、生成器、迁移及 tarball/golden 验收仍未完成。
-  G 完成并获用户确认后才进入 H。
+- 当前：**G 已实现并验收**（起点 `68dbdf5`）：源码收集 `3b76620`、AST 插入工具 `1bd2eba`、
+  安装/生成器/真实 tarball `b7df0c0`。额外质量门含 8 个打包、5 个插入、2 个输出清理、10 个安装/生成
+  回归用例，以及默认、top/dark/rtl/zh-TW、多项目 custom sourceRoot 三组真实 CLI golden；每组生成
+  页面前后均通过 lint/test/build（63 文件 / 278 用例 → 65 文件 / 280 用例），安装后 stylelint 也通过。
+  用户确认后才进入 H；尚未发布 npm 包。
 - 页面现状：`/auth/login`、`/auth/signup`（mock 演示账号 `ng-scaffold` / `ng-scaffold`，开启
   `environment.mockApi` 时自动填入）、`/dashboard`（`/` 默认跳转）、`/profile/overview|settings`、
   `/403|404|500`；未知 URL 在原地址显示 404 页。演示菜单均已有懒加载页面：design、material（35 个）、
@@ -242,22 +244,35 @@ tables（kitchen-sink、remote-data，`@ng-matero/extensions` grid）、utilitie
 
 ### G · `ng add ng-scaffold`
 
-执行进展：`yarn starter:pack` 从源码收集 207 个 starter 文件并生成哈希 manifest（`dist/starter`），
-排除演示区域、素材、插件样式及 GitHub 小部件；8 个 Node 回归测试覆盖边界、符号链接与重复打包，
-已加入本地 verify 和 CI。`yarn schematics:test` 严格编译插入工具，并从安装的 CLI 生成虚拟 `ng new`
-应用做语义编译验证。此时没有可安装的 tarball；不能把源码收集通过当成 `ng add` 安装验收完成。
+已完成：`3b76620`、`1bd2eba`、`b7df0c0`。`yarn schematics:package` 严格编译规则并直接从源码收集
+207 个 starter 文件，输出 `dist/schematics`；删除 demo 围栏、演示路由/素材/插件及 GitHub 小部件，
+过滤菜单，不维护重复组件模板。仅清理自己的产物目录，拒绝输出路径符号链接，避免残留文件进入 tarball。
 
-接下来实现 collection/schema、ng-add 工厂与项目级配置，再完成生成器/迁移、真实 tarball、
-非默认选项及多项目 golden 测试；仍以以下规格和 ROADMAP 的未勾选项为准。
+安装规则按目标 `root`/`sourceRoot` 插入 imports/providers/routes、项目级别名、资源与 lint 配置。
+模板和原始 root spec 经格式归一化校验后才使用 ROADMAP §1.1 的欢迎页例外；修改过的代码、别名或
+lint 配置冲突直接拒绝。所有 Rule 在 branch Tree 中完成，失败不污染传入工作区；资源保留二进制字节。
+非默认导航/主题/方向/语言同时配置 `provideAppSettings()` 与 index 的启动默认值。
 
-按 ARCHITECTURE.md §8：`schematics/`（`package.json` 声明 `"ng-add": { "save": "devDependencies" }` 与运行时依赖、
-`collection.json`、`ng-add`、`ng-generate/module|page`、`migration.json`）；打包脚本从仓库源码收集 starter 文件并去掉
-`<demo>` 围栏、过滤 `menu.json` 中的演示条目；ng-add 对 `ng new` 文件**只做插入**（新 import 行、provider、
-路由、JSON 键、`tsconfig` 别名写入目标项目），提示项（导航位置、主题、方向、语言）非默认时插入
-`provideAppSettings({...})`，并同步改写 `src/index.html` 启动脚本中的 `const defaults = {...}` 一行；
-所有路径基于目标项目的 `root`/`sourceRoot`。
-golden 测试脚本与 CI 任务：临时目录 `ng new ng-scaffold` → `ng add <本地 tarball>` → 与仓库 starter 文件比对 →
-`ng lint`、`ng test`、`ng build`；另测 `--project` 多项目工作区。
+`module` 是 standalone lazy 路由组，不是 NgModule；`page` 包装官方 component generator，添加
+PageHeader、路由、菜单、三语标签及隔离 HTTP 状态的 spec providers。路由插在 wildcard 前，重复项拒绝。
+`ng-update` 元数据与 migration collection 已就绪；初版没有既有安装格式，集合刻意为空，未来迁移须
+按版本增添幂等规则和回归测试。安装、支持范围、生成与发布操作见 `schematics/README.md`。
+
+`tools/verify.sh` 和 CI 均包含三组离线 golden（真实 `ng new` → `ng add <本地 tarball>` → 源码/资源比对
+→ lint/stylelint/test/build → module/page → lint/test/build）。保留 CLI 生成的 favicon；项目名等目标差异
+及非默认 settings 由相应断言和复制的启动脚本 spec 验证。未做浏览器 AXE，不进入 H 或自动发布。
+
+G 中补充的环境注意事项：
+
+- CLI 会从自身安装目录回查工作区；golden 临时复制 CLI 进行 `ng new`，随后删除临时依赖链接，防止
+  目标应用误用仓库依赖。不是通过模板模拟 `ng new`。
+- Yarn 离线 tarball 缓存可能复用同 basename 的旧包；golden 使用唯一版本和文件名，并核对已安装版本。
+  仅使用缓存且忽略安装脚本；缺缓存直接失败，不下载。成功清理临时目录，失败保留日志中的目录以便排查。
+- 子项目的 typed ESLint 显式指定两个项目 tsconfig；stylelint 的 ignore 路径相对其配置目录，不能使用
+  workspace 绝对前缀。不修改共享根 tsconfig 的 aliases。
+- 启动测试的无效存储回退必须基于安装默认值，不能硬编码 auto/ltr；非默认 golden 已覆盖这一点。
+- 包构建从 `0d99dd2` 读取官方欢迎页基线，需要 Git 历史；CI checkout 设置 `fetch-depth: 0`。
+- 发布前设置真实版本并确认 npm 名称权限；golden 的临时 prerelease 不可发布，发布前重新运行 package。
 
 ### H · 质量与发布
 

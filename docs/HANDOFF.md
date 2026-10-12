@@ -11,21 +11,29 @@
 - 已完成：ROADMAP 中阶段 0–7（含 §4 B 全局样式、C 认证/HTTP/Mock/菜单/权限/启动、D 布局外壳、
   E 共享组件与基础页面、F 演示功能区、G 安装 schematics），具体提交见 ROADMAP 中 `[x]` 条目后的哈希。
 - 质量状态（2026-10-12）：`NG_CLI_ANALYTICS=false tools/verify.sh` 通过——lint、stylelint、
-  122 个测试文件 / 427 个用例、生产构建（initial 498.12 kB / 传输约 124.90 kB，距 500 kB 警告
+  122 个测试文件 / 434 个用例、生产构建（initial 498.12 kB / 传输约 124.95 kB，距 500 kB 警告
   budget 仅 1.88 kB）。F 的评审修复已 autosquash，19 个功能提交均逐树通过 verify；只改写了
   `209d65c` 之后当时尚未推送的提交。
 - 当前：**G 已实现并验收**（起点 `68dbdf5`）：源码收集 `3b76620`、AST 插入工具 `1bd2eba`、
   安装/生成器/真实 tarball `b7df0c0`。额外质量门含 8 个打包、5 个插入、2 个输出清理、10 个安装/生成
   回归用例，以及默认、top/dark/rtl/zh-TW、多项目 custom sourceRoot 三组真实 CLI golden；每组生成
   页面前后均通过 lint/test/build（63 文件 / 278 用例 → 65 文件 / 280 用例），安装后 stylelint 也通过。
-  用户确认后才进入 H；尚未发布 npm 包。
+  H 已获用户确认并开始；尚未发布 npm 包。
+- H 本地验收与修复 `9781a53`：已安装用户批准的 5 个 Playwright/AXE 测试包，只使用已安装的
+  Chrome；65 个 lazy route 叶页面在桌面/Pixel 7 仿真中进行无规则排除的默认 AXE 扫描，并检查真实
+  导航、认证重试、三语言/主题/RTL 持久化、grid 交互及浮层焦点，共 144 个浏览器用例通过。
+  所有渲染期外部请求及未捕获浏览器错误均使测试失败，报告位于 `playwright-report/`。
+- H 发布工作流与 README/迁移指南 `2121e05`：部署 job 仅在 ng-matero push 且质量 job 成功后运行。
+  用户已单独授权公开发布；GitHub Pages 来源已改为 GitHub Actions，github-pages 环境新增精确的
+  ng-matero 分支规则（原 main 与其他保护设置未改）。首次线上部署仍需实际 Actions/网站验收。
 - 页面现状：`/auth/login`、`/auth/signup`（mock 演示账号 `ng-scaffold` / `ng-scaffold`，开启
   `environment.mockApi` 时自动填入）、`/dashboard`（`/` 默认跳转）、`/profile/overview|settings`、
   `/403|404|500`；未知 URL 在原地址显示 404 页。演示菜单均已有懒加载页面：design、material（35 个）、
   permissions、media（30 张照片）、forms、tables、utilities、menu-level。
-- 验证边界：本阶段做了安装源码核对与单元/键盘/焦点回归测试，没有完成浏览器端全量 AXE。
-  `mtx-grid` 上游内建行选择、展开及固定列图标按钮的可访问名称仍需在 H 的真实浏览器验收中处理；
-  不能把当前 verify 通过当成 WCAG/AXE 全部通过。
+- 验证边界：H 已用公开模板/API 修复此前 grid 名称与排序 ARIA 缺口，并完成上述实际浏览器扫描。
+  路由初始状态扫描主要使用 en-US；语言/深色/RTL 与菜单、grid、dialog、photoviewer 另有交互验收，
+  不代表所有页面的所有语言、主题和交互组合。AXE incomplete、屏幕阅读器、缩放、真实设备和素材
+  许可的人工复核仍未全部完成；不能把自动测试通过当成完整 WCAG 证明。
 
 ## 2. 环境与工作方式
 
@@ -104,7 +112,22 @@
   snack-bar config 必须传当前方向，否则 RTL 的 start/end 会反向。测试使用自己的 Directionality
   环境（tree 使用 `DIR_DOCUMENT`），不能依赖前一个测试残留的 `<html dir>`。
 
-### 2.2 F 的离线素材与演示边界
+### 2.2 演示素材、浏览器与部署边界（F/H）
+
+H 的浏览器/部署补充：
+
+- `yarn e2e:lint` / `yarn e2e:types` 与 `yarn e2e` 已加入 verify；测试 config 在 e2e 内，HTML
+  reporter 的路径必须是 `../playwright-report`（相对 config），否则 CI 上传不到且可能意外暂存。
+- CDK portaled menu 的 `role=menu` 即使命名也不是 landmark；布局通过公开 OverlayContainer API
+  给原容器加具名 region，不能移动容器或改其 aria-hidden，否则会破坏 dialog 的背景隐藏/恢复。
+- grid 每次 ngOnChanges 重建展开和选择状态；切换 columnResizable 还会创建新 MatSort，需在
+  afterRenderEffect 后重新连接公开 dataSource.sort。自定义具名控件通过 signals 同步，不能操作
+  内部 MDC DOM，不能为通过 AXE 排除规则。
+- 浏览器扫描等待字体与有限动画完成（不等待无限 progress 动画）；启动 loader 必须移除后再扫描。
+  新路由语法如果无法静态枚举，inventory 会直接失败，应扩展解析器及用例，不静默跳过。
+- Pages 预览真实返回 404.html/HTTP 404；缺失资源不回退到 HTML。准备输出和服务器边界已有
+  symlink/越界回归。CI 固定 ubuntu-24.04 并复用其 Chrome，不执行 Playwright 浏览器安装。
+- 根 README 保留 CLI 生成内容；实际 browser runner 使用 yarn e2e，不是尚未配置的 ng e2e target。
 
 - 图标目录 `public/data/demo/icon-names.json` 从已安装的自托管字体生成（`tools/icon-names.py`），
   不请求外部图标服务；列表分页并有加载失败/重试入口。

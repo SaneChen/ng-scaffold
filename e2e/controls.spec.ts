@@ -45,6 +45,31 @@ test('select in a dialog keeps a named control and restores trigger focus', asyn
   await expect(trigger).toBeFocused();
 });
 
+test('address dialog validates, submits and restores its own trigger focus', async ({
+  checkedPage: page,
+}, info) => {
+  await login(page, 'material/dialog');
+  const trigger = page.getByRole('button', { name: 'Open address form', exact: true });
+  await trigger.click();
+  const dialog = page.getByRole('dialog');
+  const firstName = dialog.getByRole('textbox', { name: 'First name', exact: true });
+  await expect(firstName).toBeFocused();
+  await dialog.getByRole('button', { name: 'Submit', exact: true }).click();
+  await expect(firstName).toBeFocused();
+  await accessible(page, info);
+  await firstName.fill('Pat');
+  await dialog.getByRole('textbox', { name: 'Last name', exact: true }).fill('Doe');
+  await dialog
+    .getByRole('textbox', { name: 'Shipping address', exact: true })
+    .fill('42 Demo Street');
+  await dialog.getByRole('textbox', { name: 'City', exact: true }).fill('Demo City');
+  await dialog.getByRole('textbox', { name: 'Postal code', exact: true }).fill('12345');
+  await dialog.getByRole('button', { name: 'Submit', exact: true }).click();
+  await expect(dialog).toHaveCount(0);
+  await expect(trigger).toBeFocused();
+  await expect(page.getByText('Address submitted for this demo.', { exact: true })).toBeVisible();
+});
+
 test('photo viewer has a named dialog and Escape restores photo focus', async ({
   checkedPage: page,
 }, info) => {

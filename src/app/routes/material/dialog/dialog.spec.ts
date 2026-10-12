@@ -63,31 +63,58 @@ describe('MaterialDialog', () => {
     await harness.fixture.whenStable();
   });
 
-  it('should use route translations, restore focus, select fruit and validate the address', async () => {
+  it('should use route translations and restore welcome trigger focus after closing', async () => {
     const trigger = button(host, 'Open welcome dialog');
     trigger.focus();
     trigger.click();
+    const reference = TestBed.inject(MatDialog).openDialogs[0];
+    await firstValueFrom(reference.afterOpened());
     await harness.fixture.whenStable();
     expect(document.querySelector('app-dialog-welcome h2')?.textContent).toContain('Welcome');
     const close = button(document.querySelector('app-dialog-welcome')!, 'Close');
+    await expect.poll(() => document.activeElement).toBe(close);
+    const closed = firstValueFrom(reference.afterClosed());
     close.click();
+    await closed;
     await harness.fixture.whenStable();
     expect(document.activeElement).toBe(trigger);
-    button(host, 'Open fruit dialog').click();
+  });
+
+  it('should select fruit and restore its own trigger focus', async () => {
+    const trigger = button(host, 'Open fruit dialog');
+    trigger.focus();
+    trigger.click();
+    const reference = TestBed.inject(MatDialog).openDialogs[0];
+    await firstValueFrom(reference.afterOpened());
     await harness.fixture.whenStable();
-    button(document.querySelector('app-dialog-fruit')!, 'Apple').click();
+    const apple = button(document.querySelector('app-dialog-fruit')!, 'Apple');
+    await expect
+      .poll(() => document.activeElement)
+      .toBe(button(document.querySelector('app-dialog-fruit')!, 'Peach'));
+    const closed = firstValueFrom(reference.afterClosed());
+    apple.click();
+    await closed;
     await harness.fixture.whenStable();
     expect(host.textContent).toContain('You chose: Apple');
-    button(host, 'Open address form').click();
+    expect(document.activeElement).toBe(trigger);
+  });
+
+  it('should focus the first invalid address field and submit a valid address', async () => {
+    const trigger = button(host, 'Open address form');
+    trigger.focus();
+    trigger.click();
+    const reference = TestBed.inject(MatDialog).openDialogs[0];
+    await firstValueFrom(reference.afterOpened());
     await harness.fixture.whenStable();
     const address = document.querySelector('app-dialog-address')!;
     const form = address.querySelector('form')!;
-    button(address, 'Submit').focus();
-    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-    await harness.fixture.whenStable();
     const inputs = Array.from(address.querySelectorAll<HTMLInputElement>('input')).filter(
       input => !input.disabled
     );
+    await expect.poll(() => document.activeElement).toBe(inputs[0]);
+    button(address, 'Submit').focus();
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    await harness.fixture.whenStable();
     expect(document.activeElement).toBe(inputs[0]);
     const values = ['Pat', 'Doe', '42 Demo Street', '', 'Demo City', 'Demo Region', '12345'];
     inputs.forEach((input, index) => {
@@ -95,10 +122,13 @@ describe('MaterialDialog', () => {
       input.dispatchEvent(new Event('input', { bubbles: true }));
     });
     await harness.fixture.whenStable();
+    const closed = firstValueFrom(reference.afterClosed());
     form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    await closed;
     await harness.fixture.whenStable();
     expect(document.querySelector('app-dialog-address')).toBeNull();
     expect(host.textContent).toContain('Address submitted for this demo.');
+    expect(document.activeElement).toBe(trigger);
   });
 
   it('should stack local article content and close both dialogs when leaving the page', async () => {

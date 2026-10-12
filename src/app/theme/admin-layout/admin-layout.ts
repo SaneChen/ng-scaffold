@@ -23,6 +23,9 @@
  *   5. Provides the translated `MatPaginatorIntl` (`PaginatorIntl`) for every page: providing it
  *      in app.config.ts made the main bundle reach `@angular/material/paginator` and absorb the
  *      Material modules it shares with the lazy layout.
+ *   6. The drawer is a complementary landmark. CDK's publicly exposed overlay container is a
+ *      named region for portaled menus, with its translated label kept current after rendering;
+ *      its location is unchanged so dialog background hiding and focus management still work.
  *
  * Why: ng-matero mutated `options` in place, saved them after a 400 ms timeout, kept `isOver` in
  * a plain field (stale under default OnPush), needed `ngx-progressbar` and overrode Material's
@@ -30,6 +33,8 @@
  * app's `Directionality`), so the layout needs no `[dir]` binding.
  */
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { afterRenderEffect, Renderer2 } from '@angular/core';
 import { Component, computed, ElementRef, inject, linkedSignal, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { MatPaginatorIntl } from '@angular/material/paginator';
@@ -38,7 +43,7 @@ import { MatSidenavContent, MatSidenavModule } from '@angular/material/sidenav';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { SettingsStore } from '@core';
 import { PaginatorIntl } from '@core/i18n/paginator-intl';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { filter, map } from 'rxjs';
 import { Customizer } from '../customizer/customizer';
 import { Header } from '../header/header';
@@ -80,6 +85,7 @@ export class AdminLayout {
   readonly #settings = inject(SettingsStore);
   readonly #sideSheet = inject(SideSheet);
   readonly #router = inject(Router);
+  readonly #overlayLabel = toSignal(inject(TranslateService).stream('layout.overlays'));
 
   protected readonly navId = NAV_ID;
   protected readonly options = this.#settings.options;
@@ -129,6 +135,15 @@ export class AdminLayout {
   private readonly main = viewChild.required<ElementRef<HTMLElement>>('main');
 
   constructor() {
+    const overlays = inject(OverlayContainer);
+    const renderer = inject(Renderer2);
+    afterRenderEffect(() => {
+      const label = this.#overlayLabel();
+      if (typeof label !== 'string') return;
+      const container = overlays.getContainerElement();
+      renderer.setAttribute(container, 'role', 'region');
+      renderer.setAttribute(container, 'aria-label', label);
+    });
     this.#router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),

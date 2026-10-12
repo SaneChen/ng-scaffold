@@ -11,6 +11,7 @@
  *      drawer closed by Escape and the scroll to the top.
  */
 import { MediaMatcher } from '@angular/cdk/layout';
+import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatPaginatorIntl } from '@angular/material/paginator';
@@ -19,7 +20,7 @@ import { By } from '@angular/platform-browser';
 import { provideRouter, Router } from '@angular/router';
 import { SettingsStore } from '@core';
 import { PaginatorIntl } from '@core/i18n/paginator-intl';
-import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { SideSheet } from '../side-sheet/side-sheet';
 import { NOTICE_TITLE_ID, SidebarNotice } from '../sidebar-notice/sidebar-notice';
 import { AdminLayout, MOBILE_QUERY } from './admin-layout';
@@ -59,7 +60,7 @@ describe('AdminLayout', () => {
   }
 
   function menuButton(): HTMLButtonElement | null {
-    return fixture.nativeElement.querySelector('[aria-label="header.toggle_menu"]');
+    return fixture.nativeElement.querySelector('button[aria-label="header.toggle_menu"]');
   }
 
   beforeAll(() => {
@@ -69,10 +70,29 @@ describe('AdminLayout', () => {
 
   afterEach(() => localStorage.clear());
 
+  it('should label the unchanged public overlay container in the current language', async () => {
+    await create();
+    const translate = TestBed.inject(TranslateService);
+    translate.setTranslation('en-US', { layout: { overlays: 'Application overlays' } });
+    translate.use('en-US');
+    await fixture.whenStable();
+    const container = TestBed.inject(OverlayContainer).getContainerElement();
+    expect(container.getAttribute('role')).toBe('region');
+    expect(container.getAttribute('aria-label')).toBe('Application overlays');
+    expect(container.parentElement).toBe(document.body);
+    translate.setTranslation('zh-CN', { layout: { overlays: '应用浮层' } });
+    translate.use('zh-CN');
+    await fixture.whenStable();
+    expect(container.getAttribute('aria-label')).toBe('应用浮层');
+  });
+
   it('should show the side menu beside the content and toggle it from the header', async () => {
     await create();
     expect(sidenav().mode).toBe('side');
     expect(sidenav().opened).toBe(true);
+    expect(fixture.nativeElement.querySelector('mat-sidenav').getAttribute('role')).toBe(
+      'complementary'
+    );
     expect(menuButton()?.getAttribute('aria-controls')).toBe(
       fixture.nativeElement.querySelector('mat-sidenav').id
     );

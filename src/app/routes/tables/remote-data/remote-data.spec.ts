@@ -99,6 +99,11 @@ describe('TablesRemoteData', () => {
     expect(grid().pageIndex).toBe(0);
   });
 
+  it('should not render unnamed links for repositories without homepages', () => {
+    expect(host.querySelectorAll('tbody a')).toHaveLength(0);
+    expect(host.querySelectorAll('thead [aria-sort]')).toHaveLength(0);
+  });
+
   it('should keep the rows while the next page loads', async () => {
     grid().page.emit({ pageIndex: 1, pageSize: 10, length: 12 });
     TestBed.tick();

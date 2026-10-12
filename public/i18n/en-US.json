@@ -172,6 +172,7 @@
     "rtl": "Right to left"
   },
   "layout": {
+    "overlays": "Application overlays",
     "skip_to_content": "Skip to main content",
     "loading": "Loading the page",
     "starting": "Loading…"

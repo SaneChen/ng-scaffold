@@ -28,6 +28,7 @@ import { FieldType } from '@ngx-formly/material/form-field';
       [bindLabel]="labelProp()"
       [bindValue]="valueProp()"
       [required]="props.required ?? false"
+      [ariaLabel]="props.label ?? null"
       [placeholder]="props.placeholder ?? ''"
     />
   `,

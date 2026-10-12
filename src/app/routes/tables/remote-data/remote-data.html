@@ -46,6 +46,8 @@
 }
 
 <mtx-grid
+  [headerTemplate]="header"
+  [cellTemplate]="{ homepage: homepage }"
   [data]="result().items"
   [columns]="columns()"
   [length]="result().total_count"
@@ -57,3 +59,11 @@
   [pageSizeOptions]="[5, 10, 20]"
   (page)="changePage($event)"
 />
+<ng-template #header let-column>{{ column.header }}</ng-template>
+<ng-template #homepage let-row>
+  @if (row.homepage) {
+    <a [href]="row.homepage" target="_blank" rel="noopener noreferrer">{{ row.homepage }}</a>
+  } @else {
+    <span>{{ 'demo.tables.remote_data.none' | translate }}</span>
+  }
+</ng-template>

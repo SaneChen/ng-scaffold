@@ -24,6 +24,8 @@
 <mat-sidenav-container class="container" [hasBackdrop]="mobile()">
   <mat-sidenav
     class="sidenav"
+    role="complementary"
+    [attr.aria-label]="'header.toggle_menu' | translate"
     [id]="navId"
     [mode]="navMode()"
     [opened]="navOpened()"

@@ -12,14 +12,19 @@ run() {
   "$@" >"$log" 2>&1 || { tail -60 "$log"; exit 1; }
 }
 run starter:test node --test tools/pack-starter.spec.mjs
+run browser-tools:test node --test tools/pages.spec.mjs tools/e2e-routes.spec.mjs
 run schematics:test yarn -s schematics:test
 run schematics:integration yarn -s schematics:integration
 run schematics:golden yarn -s schematics:golden
 grep '^== GOLDEN' "$log" || true
 run lint yarn -s lint
+run e2e:lint yarn -s e2e:lint
+run e2e:types yarn -s e2e:types
 run lint:scss yarn -s lint:scss
 run test yarn -s ng test --watch=false
 grep -E "Test Files|Tests " "$log" | sed 's/\x1b\[[0-9;]*m//g' || true
 run build yarn -s build
 grep -E "Initial total|WARNING|▲" "$log" | sed 's/\x1b\[[0-9;]*m//g' || true
+run e2e yarn -s e2e
+grep -E 'Browser inventory:|[0-9]+ passed' "$log" || true
 echo "== OK"

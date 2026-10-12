@@ -54,11 +54,17 @@ describe('TablesKitchenSink', () => {
       save: 'Save',
       demo: {
         tables: {
-          columns: { name: 'Name', gender: 'Gender' },
+          columns: { position: 'Position', name: 'Name', gender: 'Gender' },
           genders: { male: 'Male', female: 'Female' },
           kitchen_sink: {
             pin: { left: 'Pin left', right: 'Pin right', none: 'Unpin' },
-            option: { rowStriped: 'Striped rows', expandable: 'Expandable rows' },
+            option: {
+              rowStriped: 'Striped rows',
+              expandable: 'Expandable rows',
+              columnResizable: 'Resizable columns',
+            },
+            expand_row: 'Toggle details for {{position}} {{name}}',
+            sort: { asc: 'Ascending', desc: 'Descending', none: 'Not sorted' },
             edit: 'Edit',
             delete: 'Delete',
             rotate_rows: 'Rotate',
@@ -91,16 +97,11 @@ describe('TablesKitchenSink', () => {
       },
     });
     await fixture.whenStable();
-    button(host, 'demo.tables.kitchen_sink.columns').click();
-    await fixture.whenStable();
-    document.querySelector<HTMLButtonElement>('.mtx-grid-column-pin-button')!.click();
-    await fixture.whenStable();
-    expect(document.querySelector('.mtx-grid-column-pin-list')?.textContent).toContain('Pin left');
+    const options = () => host.querySelector('details select')?.textContent;
+    expect(options()).toContain('Pin left');
     translate.use('zh-CN');
     await fixture.whenStable();
-    expect(document.querySelector('.mtx-grid-column-pin-list')?.textContent).toContain(
-      '固定到左侧'
-    );
+    expect(options()).toContain('固定到左侧');
     expect(grid().columnPinOptions.map(option => option.label)).toEqual([
       '固定到左侧',
       '固定到右侧',
@@ -121,7 +122,7 @@ describe('TablesKitchenSink', () => {
 
     expect(grid().rowStriped).toBe(true);
     expect(grid().expandable).toBe(true);
-    expect(grid().columns[0].showExpand).toBe(true);
+    expect(grid().columns.find(column => column.field === 'position')?.showExpand).toBe(true);
   });
 
   it('should preserve selection when options or row objects change, and trim it for single selection', async () => {
@@ -210,5 +211,70 @@ describe('TablesKitchenSink', () => {
 
     expect(rows()[0]).toBe(ELEMENTS.at(-1));
     expect(rows()[1]).toBe(ELEMENTS[0]);
+  });
+
+  it('should cycle real sorting through public header buttons', async () => {
+    const sort = host.querySelector<HTMLButtonElement>('thead button');
+    if (!sort) throw new Error('No sort button');
+    sort.click();
+    await fixture.whenStable();
+    expect(grid().sort.direction).toBe('asc');
+    sort.click();
+    await fixture.whenStable();
+    expect(grid().sort.direction).toBe('desc');
+    expect(host.querySelector('tbody tr')?.textContent).toContain(ELEMENTS.at(-1)!.name);
+    sort.click();
+    await fixture.whenStable();
+    expect(grid().sort.direction).toBe('');
+  });
+
+  it('should select all data rather than only the current page', async () => {
+    host.querySelector<HTMLInputElement>('thead input[type="checkbox"]')!.click();
+    await fixture.whenStable();
+    expect(grid().rowSelected).toHaveLength(ELEMENTS.length);
+    host.querySelector<HTMLInputElement>('thead input[type="checkbox"]')!.click();
+    await fixture.whenStable();
+    expect(grid().rowSelected).toEqual([]);
+  });
+
+  it('should update pinning through labeled selectors without losing hidden preferences', async () => {
+    const select = host.querySelector<HTMLSelectElement>('details select')!;
+    select.value = 'left';
+    select.dispatchEvent(new Event('change'));
+    await fixture.whenStable();
+    expect(grid().columns.find(column => column.field === 'selection')?.pinned).toBe('left');
+    expect(grid().columns.find(column => column.field === 'mobile')?.hide).toBe(true);
+  });
+
+  it('should keep expansion ARIA state aligned after row replacement', async () => {
+    const expandable = Array.from(host.querySelectorAll('mat-checkbox')).find(
+      box => box.textContent?.trim() === 'Expandable rows'
+    )!;
+    expandable.querySelector<HTMLInputElement>('input')!.click();
+    await fixture.whenStable();
+    const expand = () =>
+      host.querySelector<HTMLButtonElement>('button[aria-label="Toggle details for 1 Hydrogen"]')!;
+    expand().click();
+    await fixture.whenStable();
+    expect(expand().getAttribute('aria-expanded')).toBe('true');
+    expect(grid().expansionRowStates[0].expanded).toBe(true);
+    button(host, 'demo.tables.kitchen_sink.update_cells').click();
+    await fixture.whenStable();
+    expect(expand().getAttribute('aria-expanded')).toBe('false');
+    expect(grid().expansionRowStates[0].expanded).toBe(false);
+  });
+
+  it('should rebind the new sort instance after switching resizable tables', async () => {
+    button(host, 'Position Not sorted').click();
+    await fixture.whenStable();
+    const resize = Array.from(host.querySelectorAll('mat-checkbox')).find(
+      box => box.textContent?.trim() === 'Resizable columns'
+    )!;
+    resize.querySelector<HTMLInputElement>('input')!.click();
+    await fixture.whenStable();
+    expect(grid().dataSource.sort).toBe(grid().sort);
+    button(host, 'Position Ascending').click();
+    await fixture.whenStable();
+    expect(host.querySelector('tbody tr')?.textContent).toContain(ELEMENTS.at(-1)!.name);
   });
 });

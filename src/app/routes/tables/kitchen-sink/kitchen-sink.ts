@@ -15,13 +15,18 @@
  *      confirmation, removes the row, says so in a toast and moves the focus to the grid; the two
  *      update buttons replace the list. Rows are tracked by position, so an edited row keeps its
  *      DOM and the focus returns to its Edit button.
- *   5. The rows are selected and sorted by the grid itself; the page echoes the selection.
+ *   5. Public header/cell/toolbar templates provide named selection, expansion, sorting and
+ *      pinning controls; selection is synchronized with the grid and all-data selection is explicit.
+ *      Expansion ARIA state resets alongside the grid's input-driven row model.
+ *   6. Sorting uses the public MatSort and dataSource APIs. Switching resizable tables creates
+ *      a new MatSort after ngOnChanges; afterRenderEffect reconnects it after the view updates.
  *
  * Why: ng-matero bound plain fields with `ngModel` (stale under OnPush), mutated the columns,
  * logged events to the console, "deleted" nothing and left the texts in English.
  */
 import {
   afterNextRender,
+  afterRenderEffect,
   Component,
   computed,
   linkedSignal,
@@ -37,6 +42,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
+import { Sort } from '@angular/material/sort';
 import { Toaster } from '@core';
 import { MtxGrid, MtxGridColumn, MtxGridColumnPinOption } from '@ng-matero/extensions/grid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -99,7 +105,18 @@ export class TablesKitchenSink {
 
   readonly #translations = toSignal(this.#translate.stream('demo.tables'));
 
+  constructor() {
+    afterRenderEffect(() => {
+      const grid = this.gridComponent();
+      if (this.options().columnResizable === grid.columnResizable) {
+        grid.dataSource.sort = grid.sort;
+      }
+    });
+  }
+
   private readonly grid = viewChild.required('grid', { read: ElementRef<HTMLElement> });
+  private readonly gridComponent = viewChild.required(MtxGrid);
+  protected readonly sortState = signal<Sort>({ active: '', direction: '' });
 
   protected readonly checkboxes = CHECKBOXES;
 
@@ -162,6 +179,12 @@ export class TablesKitchenSink {
       ...extra,
     });
     const columns: MtxGridColumn<PeriodicElement>[] = [
+      {
+        header: this.#text('kitchen_sink.selection'),
+        field: 'selection',
+        width: '80px',
+        disabled: true,
+      },
       text('position', 100, {
         sortable: true,
         width: '100px',
@@ -209,13 +232,81 @@ export class TablesKitchenSink {
     return columns
       .map(column => {
         const saved = preferences.find(preference => preference.field === column.field);
-        return saved ? { ...column, ...saved } : column;
+        const result = saved ? { ...column, ...saved } : column;
+        return column.field === 'selection'
+          ? {
+              ...result,
+              hide: !this.options().rowSelectable || this.options().hideRowSelectionCheckbox,
+            }
+          : result;
       })
       .sort(
         (first, second) =>
           (ranks.get(first.field) ?? columns.length) - (ranks.get(second.field) ?? columns.length)
       );
   });
+
+  protected readonly expanded = linkedSignal({
+    source: () => [this.options(), this.elements(), this.columns(), this.selected()],
+    computation: () => new Set<number>(),
+  });
+  protected readonly allSelected = computed(
+    () => this.elements().length > 0 && this.selected().length === this.elements().length
+  );
+
+  protected isSelected(row: PeriodicElement): boolean {
+    return this.selected().some(selected => selected.position === row.position);
+  }
+
+  protected selectRow(row: PeriodicElement, checked: boolean): void {
+    this.selected.update(rows =>
+      checked
+        ? this.options().multiSelectable
+          ? [...rows.filter(selected => selected.position !== row.position), row]
+          : [row]
+        : rows.filter(selected => selected.position !== row.position)
+    );
+  }
+
+  protected selectAll(checked: boolean): void {
+    this.selected.set(checked ? [...this.elements()] : []);
+  }
+
+  protected toggleExpansion(index: number): void {
+    const expanded = this.gridComponent().toggleExpansion(index) as boolean;
+    this.expanded.update(indices => {
+      const next = new Set(indices);
+      if (expanded) next.add(index);
+      else next.delete(index);
+      return next;
+    });
+  }
+
+  protected collapseRows(): void {
+    for (const index of this.expanded()) this.gridComponent().toggleExpansion(index);
+    this.expanded.set(new Set());
+  }
+
+  protected sortColumn(column: MtxGridColumn<PeriodicElement>): void {
+    const grid = this.gridComponent();
+    if (!column.sortable || grid.sortDisabled) return;
+    this.collapseRows();
+    grid.sort.sort({
+      id: column.sortProp?.id || column.field,
+      start: column.sortProp?.start ?? grid.sortStart,
+      disableClear: column.sortProp?.disableClear ?? grid.sortDisableClear,
+    });
+  }
+
+  protected pinColumn(column: MtxGridColumn<PeriodicElement>, event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    if (value !== 'left' && value !== 'right' && value !== '') return;
+    this.updateColumns(
+      this.columns().map(current =>
+        current.field === column.field ? { ...current, pinned: value || null } : current
+      )
+    );
+  }
 
   protected updateColumns(columns: MtxGridColumn<PeriodicElement>[]): void {
     this.#columnPreferences.set(

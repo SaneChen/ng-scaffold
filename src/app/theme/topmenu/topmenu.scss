@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 :host {
   position: sticky;
   z-index: 1;
@@ -21,6 +23,12 @@ button {
 }
 
 .active {
+  @include mat.button-overrides(
+    (
+      text-label-text-color: var(--mat-sys-on-primary-container),
+    )
+  );
+
   background-color: var(--mat-sys-primary-container);
 }
 

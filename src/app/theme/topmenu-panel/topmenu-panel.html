@@ -1,4 +1,4 @@
-<mat-menu>
+<mat-menu [aria-label]="label()">
   @for (item of items(); track item.name) {
     @switch (item.type) {
       @case ('link') {
@@ -22,6 +22,7 @@
         </button>
         <app-topmenu-panel
           #child
+          [label]="item.name | translate"
           [items]="item.children ?? []"
           [parents]="parents().concat(item.route)"
           [trail]="trail()"

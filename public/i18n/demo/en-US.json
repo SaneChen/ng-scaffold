@@ -340,6 +340,10 @@
         "intro": "mtx-grid of @ng-matero/extensions: a Material table with selection, sorting, paging, column menus, pinning, resizing and expandable rows. Switch its options below.",
         "options": "Grid options",
         "selection": "Row selection",
+        "select_all": "Select all elements",
+        "select_row": "Select {{name}}",
+        "expand_row": "Toggle details for {{position}} {{name}}",
+        "sort": { "asc": "Ascending", "desc": "Descending", "none": "Not sorted" },
         "option": {
           "rowSelectable": "Selectable rows",
           "hideRowSelectionCheckbox": "Hide the selection checkboxes",

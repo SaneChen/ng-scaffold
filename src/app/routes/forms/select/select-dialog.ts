@@ -35,7 +35,13 @@ import { TranslatePipe } from '@ngx-translate/core';
     <mat-dialog-content>
       <mat-form-field>
         <mat-label>{{ 'demo.forms.select.dialog.city' | translate }}</mat-label>
-        <mtx-select [items]="cities" bindLabel="label" bindValue="value" [formField]="form.city" />
+        <mtx-select
+          [items]="cities"
+          bindLabel="label"
+          bindValue="value"
+          [formField]="form.city"
+          [ariaLabel]="'demo.forms.select.dialog.city' | translate"
+        />
       </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions>

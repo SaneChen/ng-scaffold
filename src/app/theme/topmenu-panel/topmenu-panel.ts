@@ -27,6 +27,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   templateUrl: './topmenu-panel.html',
 })
 export class TopmenuPanel {
+  readonly label = input.required<string>();
   readonly items = input<readonly MenuItem[]>([]);
   readonly parents = input<readonly string[]>([]);
   readonly trail = input<ReadonlySet<string>>(new Set());

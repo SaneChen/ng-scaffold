@@ -17,6 +17,7 @@
           bindLabel="name"
           bindValue="id"
           [formField]="form.person"
+          [ariaLabel]="'demo.forms.select.person' | translate"
         />
       </mat-form-field>
       <p>
@@ -33,6 +34,7 @@
           bindLabel="name"
           bindValue="id"
           [formField]="form.person2"
+          [ariaLabel]="'demo.forms.select.person' | translate"
         />
       </mat-form-field>
       <p>
@@ -44,7 +46,11 @@
       <p>{{ 'demo.forms.select.source.simple' | translate }}</p>
       <mat-form-field>
         <mat-label>{{ 'demo.forms.select.item' | translate }}</mat-label>
-        <mtx-select [items]="simpleItems" [formField]="form.simple" />
+        <mtx-select
+          [items]="simpleItems"
+          [formField]="form.simple"
+          [ariaLabel]="'demo.forms.select.item' | translate"
+        />
       </mat-form-field>
       <p>
         {{ 'demo.forms.select.selected' | translate }}
@@ -58,7 +64,7 @@
       </button>
       <mat-form-field>
         <mat-label>{{ 'demo.forms.select.car' | translate }}</mat-label>
-        <mtx-select [formField]="form.car">
+        <mtx-select [formField]="form.car" [ariaLabel]="'demo.forms.select.car' | translate">
           @for (car of cars(); track car.id) {
             <mtx-option [value]="car.id" [disabled]="car.disabled">{{ car.name }}</mtx-option>
           }
@@ -80,7 +86,12 @@
       <p>{{ 'demo.forms.select.tags.default' | translate }}</p>
       <mat-form-field>
         <mat-label>{{ 'demo.forms.select.item' | translate }}</mat-label>
-        <mtx-select [items]="[]" [addTag]="true" [formField]="form.tag" />
+        <mtx-select
+          [items]="[]"
+          [addTag]="true"
+          [formField]="form.tag"
+          [ariaLabel]="'demo.forms.select.item' | translate"
+        />
       </mat-form-field>
       <p>
         {{ 'demo.forms.select.selected' | translate }}
@@ -98,6 +109,7 @@
           [multiple]="true"
           bindLabel="name"
           [formField]="form.tags"
+          [ariaLabel]="'demo.forms.select.companies' | translate"
         />
       </mat-form-field>
       <p>
@@ -116,6 +128,7 @@
           [loading]="creating()"
           bindLabel="name"
           [formField]="form.serverTags"
+          [ariaLabel]="'demo.forms.select.companies' | translate"
         >
           <ng-template ngSelectTag let-search="searchTerm">
             {{ 'demo.forms.select.tags.create' | translate: { name: search } }}
@@ -138,6 +151,7 @@
           [selectOnTab]="true"
           [panelDisabled]="true"
           [formField]="form.freeTags"
+          [ariaLabel]="'demo.forms.select.item' | translate"
         />
       </mat-form-field>
       <p>

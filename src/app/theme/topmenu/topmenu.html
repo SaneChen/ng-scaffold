@@ -31,6 +31,7 @@
         </button>
         <app-topmenu-panel
           #panel
+          [label]="item.name | translate"
           [items]="item.children ?? []"
           [parents]="[item.route]"
           [trail]="trail()"

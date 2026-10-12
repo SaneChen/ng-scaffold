@@ -340,6 +340,10 @@
         "intro": "@ng-matero/extensions 的 mtx-grid：带选择、排序、分页、列菜单、固定列、调整列宽和可展开行的 Material 表格。可在下方切换各项选项。",
         "options": "表格选项",
         "selection": "行选择",
+        "select_all": "选择所有元素",
+        "select_row": "选择 {{name}}",
+        "expand_row": "切换 {{position}} {{name}} 的详情",
+        "sort": { "asc": "升序", "desc": "降序", "none": "未排序" },
         "option": {
           "rowSelectable": "可选择行",
           "hideRowSelectionCheckbox": "隐藏选择框",

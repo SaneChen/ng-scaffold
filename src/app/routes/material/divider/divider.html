@@ -11,7 +11,11 @@
             {{ 'demo.material.divider.item' | translate: { number: item } }}
           </mat-list-item>
           @if (!$last) {
-            <mat-divider [inset]="example === 'inset'" [vertical]="example === 'vertical'" />
+            <mat-divider
+              aria-hidden="true"
+              [inset]="example === 'inset'"
+              [vertical]="example === 'vertical'"
+            />
           }
         }
       </mat-list>

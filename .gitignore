@@ -2,6 +2,10 @@
 
 # Angular specific
 /e2e/test-output/
+# [ng-scaffold] Step 2: browser failure artifacts are diagnostics, not source assets.
+/test-results/
+/playwright-report/
+/e2e/route-inventory.json
 /.angular/
 .angular/
 

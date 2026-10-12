@@ -42,14 +42,19 @@
   [columnResizable]="settings.columnResizable"
   [multiSelectable]="settings.multiSelectable"
   [rowSelectable]="settings.rowSelectable"
-  [hideRowSelectionCheckbox]="settings.hideRowSelectionCheckbox"
+  [hideRowSelectionCheckbox]="true"
+  [headerTemplate]="header"
+  [sortActive]="sortState().active"
+  [sortDirection]="sortState().direction"
+  [cellTemplate]="{ selection: selectionCell, position: positionCell }"
+  [toolbarTemplate]="toolbar"
   [rowHover]="settings.rowHover"
   [rowStriped]="settings.rowStriped"
   [showToolbar]="settings.showToolbar"
   [toolbarTitle]="'demo.tables.kitchen_sink.toolbar_title' | translate"
   [columnHideable]="settings.columnHideable"
   [columnSortable]="settings.columnSortable"
-  [columnPinnable]="settings.columnPinnable"
+  [columnPinnable]="false"
   [columnPinOptions]="pinOptions()"
   [columnMenuButtonText]="'demo.tables.kitchen_sink.columns' | translate"
   [noResultText]="'demo.tables.no_result' | translate"
@@ -63,9 +68,80 @@
   (rowSelectedChange)="selected.set($event)"
   [rowSelected]="selected()"
   (columnChange)="updateColumns($event)"
+  (sortChange)="sortState.set($event)"
+  (page)="collapseRows()"
 />
+<ng-template #header let-column>
+  @if (column.field === 'selection' && settings.multiSelectable) {
+    <mat-checkbox
+      [aria-label]="'demo.tables.kitchen_sink.select_all' | translate"
+      [checked]="allSelected()"
+      [indeterminate]="selected().length > 0 && !allSelected()"
+      (change)="selectAll($event.checked)"
+    />
+  } @else if (column.sortable) {
+    <button matButton type="button" (click)="sortColumn(column)">
+      {{ column.header }}
+      {{
+        'demo.tables.kitchen_sink.sort.' +
+          (sortState().active === column.field ? sortState().direction || 'none' : 'none')
+          | translate
+      }}
+    </button>
+  } @else {
+    {{ column.header }}
+  }
+</ng-template>
+<ng-template #selectionCell let-row>
+  <mat-checkbox
+    [aria-label]="'demo.tables.kitchen_sink.select_row' | translate: { name: row.name }"
+    [checked]="isSelected(row)"
+    (click)="$event.stopPropagation()"
+    (change)="selectRow(row, $event.checked)"
+  />
+</ng-template>
+<ng-template #positionCell let-row let-index="index">
+  @if (settings.expandable) {
+    <button
+      matButton
+      type="button"
+      [attr.aria-label]="
+        'demo.tables.kitchen_sink.expand_row'
+          | translate: { position: row.position, name: row.name }
+      "
+      [attr.aria-expanded]="expanded().has(index)"
+      [attr.aria-controls]="expanded().has(index) ? 'element-details-' + row.position : null"
+      (click)="$event.stopPropagation(); toggleExpansion(index)"
+    >
+      {{ row.position }}
+      <span aria-hidden="true">{{ expanded().has(index) ? '−' : '+' }}</span>
+    </button>
+  } @else {
+    {{ row.position }}
+  }
+</ng-template>
+<ng-template #toolbar>
+  <span>{{ 'demo.tables.kitchen_sink.toolbar_title' | translate }}</span>
+  @if (settings.columnPinnable) {
+    <details>
+      <summary>{{ 'demo.tables.kitchen_sink.option.columnPinnable' | translate }}</summary>
+      @for (column of columns(); track column.field) {
+        <label>
+          {{ column.header }}
+          <select [value]="column.pinned ?? ''" (change)="pinColumn(column, $event)">
+            @for (option of pinOptions(); track option.value) {
+              <option [value]="option.value ?? ''">{{ option.label }}</option>
+            }
+          </select>
+        </label>
+      }
+    </details>
+  }
+</ng-template>
 <ng-template #expansion let-row>
-  {{ row.name }} ({{ row.symbol }}) · {{ row.address }}, {{ row.city }}
+  <div [id]="'element-details-' + row.position">
+    {{ row.name }} ({{ row.symbol }}) · {{ row.address }}, {{ row.city }}
+  </div>
 </ng-template>
 
 <p class="selection" aria-live="polite">

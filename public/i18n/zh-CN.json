@@ -172,6 +172,7 @@
     "rtl": "从右到左"
   },
   "layout": {
+    "overlays": "应用浮层",
     "skip_to_content": "跳到主要内容",
     "loading": "正在加载页面",
     "starting": "加载中…"

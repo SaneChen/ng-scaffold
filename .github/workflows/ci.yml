@@ -37,5 +37,8 @@ jobs:
       - name: Starter packaging tests
         run: node --test tools/pack-starter.spec.mjs
 
+      - name: Schematic insertion tests
+        run: yarn schematics:test
+
       - name: Production build
         run: yarn build

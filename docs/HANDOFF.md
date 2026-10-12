@@ -14,7 +14,9 @@
   122 个测试文件 / 427 个用例、生产构建（initial 498.12 kB / 传输约 124.90 kB，距 500 kB 警告
   budget 仅 1.88 kB）。F 的评审修复已 autosquash，19 个功能提交均逐树通过 verify；只改写了
   `209d65c` 之后当时尚未推送的提交。
-- 下一步：用户确认后进入 §4 的 **G · `ng add ng-scaffold`**，再进入 H；尚未启动 G。
+- 当前：用户已确认并开始 §4 的 **G · `ng add ng-scaffold`**（起点 `68dbdf5`）。源码收集与 demo
+  排除已实现为 `3b76620`，AST 插入工具正在验证；安装工厂、生成器、迁移及 tarball/golden 验收仍未完成。
+  G 完成并获用户确认后才进入 H。
 - 页面现状：`/auth/login`、`/auth/signup`（mock 演示账号 `ng-scaffold` / `ng-scaffold`，开启
   `environment.mockApi` 时自动填入）、`/dashboard`（`/` 默认跳转）、`/profile/overview|settings`、
   `/403|404|500`；未知 URL 在原地址显示 404 页。演示菜单均已有懒加载页面：design、material（35 个）、
@@ -239,6 +241,14 @@ tables（kitchen-sink、remote-data，`@ng-matero/extensions` grid）、utilitie
 `menu.json`、i18n）由集成步骤统一修改。
 
 ### G · `ng add ng-scaffold`
+
+执行进展：`yarn starter:pack` 从源码收集 207 个 starter 文件并生成哈希 manifest（`dist/starter`），
+排除演示区域、素材、插件样式及 GitHub 小部件；8 个 Node 回归测试覆盖边界、符号链接与重复打包，
+已加入本地 verify 和 CI。`yarn schematics:test` 严格编译插入工具，并从安装的 CLI 生成虚拟 `ng new`
+应用做语义编译验证。此时没有可安装的 tarball；不能把源码收集通过当成 `ng add` 安装验收完成。
+
+接下来实现 collection/schema、ng-add 工厂与项目级配置，再完成生成器/迁移、真实 tarball、
+非默认选项及多项目 golden 测试；仍以以下规格和 ROADMAP 的未勾选项为准。
 
 按 ARCHITECTURE.md §8：`schematics/`（`package.json` 声明 `"ng-add": { "save": "devDependencies" }` 与运行时依赖、
 `collection.json`、`ng-add`、`ng-generate/module|page`、`migration.json`）；打包脚本从仓库源码收集 starter 文件并去掉

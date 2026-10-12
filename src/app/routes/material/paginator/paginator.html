@@ -1,0 +1,40 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <h2>{{ key + '.title' | translate }}</h2>
+    <div class="controls">
+      <mat-form-field>
+        <mat-label>{{ key + '.length' | translate }}</mat-label>
+        <input matInput type="number" [formField]="form.length" />
+        <mat-error>{{ key + '.invalid' | translate }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ key + '.size' | translate }}</mat-label>
+        <input matInput type="number" [formField]="form.pageSize" />
+        <mat-error>{{ key + '.invalid' | translate }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ key + '.options' | translate }}</mat-label>
+        <input matInput [formField]="form.options" />
+        <mat-hint>{{ key + '.hint' | translate }}</mat-hint>
+      </mat-form-field>
+    </div>
+    <mat-paginator
+      [length]="length()"
+      [pageSize]="pageSize()"
+      [pageIndex]="pageIndex()"
+      [pageSizeOptions]="options()"
+      showFirstLastButtons
+      (page)="changePage($event)"
+      [attr.aria-label]="key + '.title' | translate"
+    />
+    @if (lastEvent(); as event) {
+      <p role="status">
+        {{
+          key + '.event'
+            | translate: { length: event.length, size: event.pageSize, index: event.pageIndex }
+        }}
+      </p>
+    }
+  </mat-card-content>
+</mat-card>

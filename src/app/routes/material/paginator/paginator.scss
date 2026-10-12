@@ -1,0 +1,23 @@
+section + section {
+  margin-block-start: 2rem;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+table {
+  inline-size: 100%;
+}
+
+th,
+td {
+  padding: 1rem;
+  text-align: start;
+}

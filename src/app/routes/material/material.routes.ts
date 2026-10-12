@@ -81,6 +81,21 @@ const routes: Routes = [
       },
       // Navigation
       {
+        path: 'paginator',
+        title: 'menu.material.data-table.paginator',
+        loadComponent: () => import('./paginator/paginator').then(m => m.MaterialPaginator),
+      },
+      {
+        path: 'sort',
+        title: 'menu.material.data-table.sort',
+        loadComponent: () => import('./sort/sort').then(m => m.MaterialSort),
+      },
+      {
+        path: 'table',
+        title: 'menu.material.data-table.table',
+        loadComponent: () => import('./table/table').then(m => m.MaterialTable),
+      },
+      {
         path: 'button',
         title: 'menu.material.buttons-indicators.button',
         loadComponent: () => import('./button/button').then(m => m.MaterialButton),

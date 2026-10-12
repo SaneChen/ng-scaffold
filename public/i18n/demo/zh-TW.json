@@ -998,6 +998,53 @@
         "colors": "色彩變體",
         "stacked": "堆疊標籤"
       },
+      "data": {
+        "action": "變更排序順序",
+        "sorted": "依{{column}}{{direction}}排序。",
+        "asc": "遞增",
+        "desc": "遞減",
+        "cleared": "已恢復原始順序。"
+      },
+      "paginator": {
+        "title": "分頁器控制",
+        "length": "清單長度",
+        "size": "每頁筆數",
+        "options": "每頁筆數選項",
+        "hint": "使用逗號分隔的正整數，最大為 1000。",
+        "invalid": "請輸入允許範圍內的整數。",
+        "event": "分頁事件——清單長度：{{length}}，每頁筆數：{{size}}，頁面索引：{{index}}"
+      },
+      "sort": {
+        "title": "甜點每 100 公克的營養成分",
+        "name": "甜點",
+        "calories": "熱量",
+        "fat": "脂肪（公克）",
+        "carbs": "碳水化合物（公克）",
+        "protein": "蛋白質（公克）",
+        "desserts": {
+          "yogurt": "冷凍優格",
+          "sandwich": "冰淇淋三明治",
+          "eclair": "閃電泡芙",
+          "cupcake": "杯子蛋糕",
+          "gingerbread": "薑餅"
+        }
+      },
+      "table": {
+        "basic": "基本表格",
+        "sorted": "依年齡排序的表格",
+        "paged": "分頁表格",
+        "name": "姓名",
+        "color": "喜歡的顏色",
+        "age": "年齡",
+        "colors": {
+          "blue": "藍色",
+          "green": "綠色",
+          "purple": "紫色",
+          "yellow": "黃色",
+          "pink": "粉紅色",
+          "red": "紅色"
+        }
+      },
       "toolbar": {
         "app": "我的應用程式",
         "hello": "你好，世界！",

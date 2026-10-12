@@ -1,0 +1,52 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <h2>{{ key + '.title' | translate }}</h2>
+    <div class="table-scroll">
+      <table
+        matSort
+        (matSortChange)="sort.set($event)"
+        [attr.aria-label]="key + '.title' | translate"
+      >
+        <thead>
+          <tr>
+            @for (column of columns; track column) {
+              <th
+                scope="col"
+                [mat-sort-header]="column"
+                [sortActionDescription]="'demo.material.data.action' | translate"
+              >
+                {{ key + '.' + column | translate }}
+              </th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (dessert of rows(); track dessert.name) {
+            <tr>
+              <th scope="row">{{ key + '.desserts.' + dessert.name | translate }}</th>
+              <td>{{ dessert.calories }}</td>
+              <td>{{ dessert.fat }}</td>
+              <td>{{ dessert.carbs }}</td>
+              <td>{{ dessert.protein }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <p role="status">
+      @if (sort().direction) {
+        {{
+          'demo.material.data.sorted'
+            | translate
+              : {
+                  column: (key + '.' + sort().active | translate),
+                  direction: ('demo.material.data.' + sort().direction | translate),
+                }
+        }}
+      } @else {
+        {{ 'demo.material.data.cleared' | translate }}
+      }
+    </p>
+  </mat-card-content>
+</mat-card>

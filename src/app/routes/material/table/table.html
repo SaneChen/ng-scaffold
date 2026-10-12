@@ -1,0 +1,75 @@
+<app-page-header />
+<mat-card appearance="outlined">
+  <mat-card-content>
+    @for (example of examples; track example) {
+      <section>
+        <h2>{{ key + '.' + example | translate }}</h2>
+        <div class="table-scroll">
+          <table
+            mat-table
+            [dataSource]="example === 'basic' ? users : example === 'sorted' ? sorted() : paged()"
+            matSort
+            [matSortActive]="example === 'sorted' ? 'age' : ''"
+            [matSortDirection]="example === 'sorted' ? 'asc' : ''"
+            [matSortDisabled]="example !== 'sorted'"
+            (matSortChange)="sort.set($event)"
+            [attr.aria-label]="key + '.' + example | translate"
+          >
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef scope="col">{{ key + '.name' | translate }}</th>
+              <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+            </ng-container>
+            <ng-container matColumnDef="color">
+              <th mat-header-cell *matHeaderCellDef scope="col">
+                {{ key + '.color' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let user">
+                {{ key + '.colors.' + user.color | translate }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="age">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                scope="col"
+                mat-sort-header
+                [sortActionDescription]="'demo.material.data.action' | translate"
+              >
+                {{ key + '.age' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let user">{{ user.age }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns"></tr>
+          </table>
+        </div>
+        @if (example === 'sorted') {
+          <p role="status">
+            @if (sort().direction) {
+              {{
+                'demo.material.data.sorted'
+                  | translate
+                    : {
+                        column: (key + '.age' | translate),
+                        direction: ('demo.material.data.' + sort().direction | translate),
+                      }
+              }}
+            } @else {
+              {{ 'demo.material.data.cleared' | translate }}
+            }
+          </p>
+        }
+        @if (example === 'paged') {
+          <mat-paginator
+            [length]="users.length"
+            [pageIndex]="page().pageIndex"
+            [pageSize]="page().pageSize"
+            [pageSizeOptions]="[1, 3, 5]"
+            (page)="changePage($event)"
+            [attr.aria-label]="key + '.paged' | translate"
+          />
+        }
+      </section>
+    }
+  </mat-card-content>
+</mat-card>

@@ -998,6 +998,53 @@
         "colors": "Colour variants",
         "stacked": "Stacked chips"
       },
+      "data": {
+        "action": "Change sort order",
+        "sorted": "Sorted by {{column}}, {{direction}}.",
+        "asc": "ascending",
+        "desc": "descending",
+        "cleared": "Original order restored."
+      },
+      "paginator": {
+        "title": "Paginator controls",
+        "length": "List length",
+        "size": "Page size",
+        "options": "Page size options",
+        "hint": "Comma-separated positive integers, up to 1000.",
+        "invalid": "Enter an integer within the allowed range.",
+        "event": "Page event — length: {{length}}, size: {{size}}, index: {{index}}"
+      },
+      "sort": {
+        "title": "Dessert nutrition per 100 g",
+        "name": "Dessert",
+        "calories": "Calories",
+        "fat": "Fat (g)",
+        "carbs": "Carbohydrates (g)",
+        "protein": "Protein (g)",
+        "desserts": {
+          "yogurt": "Frozen yogurt",
+          "sandwich": "Ice cream sandwich",
+          "eclair": "Éclair",
+          "cupcake": "Cupcake",
+          "gingerbread": "Gingerbread"
+        }
+      },
+      "table": {
+        "basic": "Basic table",
+        "sorted": "Table sorted by age",
+        "paged": "Paginated table",
+        "name": "Name",
+        "color": "Favourite colour",
+        "age": "Age",
+        "colors": {
+          "blue": "Blue",
+          "green": "Green",
+          "purple": "Purple",
+          "yellow": "Yellow",
+          "pink": "Pink",
+          "red": "Red"
+        }
+      },
       "toolbar": {
         "app": "My application",
         "hello": "Hello, world!",

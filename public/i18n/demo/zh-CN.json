@@ -998,6 +998,53 @@
         "colors": "颜色变体",
         "stacked": "堆叠标签"
       },
+      "data": {
+        "action": "更改排序顺序",
+        "sorted": "按{{column}}{{direction}}排序。",
+        "asc": "升序",
+        "desc": "降序",
+        "cleared": "已恢复原始顺序。"
+      },
+      "paginator": {
+        "title": "分页器控制",
+        "length": "列表长度",
+        "size": "每页条数",
+        "options": "每页条数选项",
+        "hint": "使用逗号分隔的正整数，最大为 1000。",
+        "invalid": "请输入允许范围内的整数。",
+        "event": "分页事件——列表长度：{{length}}，每页条数：{{size}}，页索引：{{index}}"
+      },
+      "sort": {
+        "title": "甜点每 100 克的营养成分",
+        "name": "甜点",
+        "calories": "热量",
+        "fat": "脂肪（克）",
+        "carbs": "碳水化合物（克）",
+        "protein": "蛋白质（克）",
+        "desserts": {
+          "yogurt": "冷冻酸奶",
+          "sandwich": "冰淇淋三明治",
+          "eclair": "闪电泡芙",
+          "cupcake": "纸杯蛋糕",
+          "gingerbread": "姜饼"
+        }
+      },
+      "table": {
+        "basic": "基础表格",
+        "sorted": "按年龄排序的表格",
+        "paged": "分页表格",
+        "name": "姓名",
+        "color": "喜欢的颜色",
+        "age": "年龄",
+        "colors": {
+          "blue": "蓝色",
+          "green": "绿色",
+          "purple": "紫色",
+          "yellow": "黄色",
+          "pink": "粉色",
+          "red": "红色"
+        }
+      },
       "toolbar": {
         "app": "我的应用",
         "hello": "你好，世界！",

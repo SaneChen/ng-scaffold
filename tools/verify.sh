@@ -13,6 +13,9 @@ run() {
 }
 run starter:test node --test tools/pack-starter.spec.mjs
 run schematics:test yarn -s schematics:test
+run schematics:integration yarn -s schematics:integration
+run schematics:golden yarn -s schematics:golden
+grep '^== GOLDEN' "$log" || true
 run lint yarn -s lint
 run lint:scss yarn -s lint:scss
 run test yarn -s ng test --watch=false

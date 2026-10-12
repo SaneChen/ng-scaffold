@@ -18,8 +18,24 @@ export const runtimeDependencies = [
   '@ngx-translate/core',
   '@ngx-translate/http-loader',
   '@ngxpert/hot-toast',
+  '@ngneat/overview',
   'chart.js',
 ];
+
+export const developmentDependencies = [
+  '@angular-eslint/builder',
+  'angular-eslint',
+  '@eslint/js',
+  'eslint',
+  'typescript-eslint',
+  'stylelint',
+  'stylelint-config-recess-order',
+  'stylelint-config-recommended-scss',
+  'stylelint-config-standard',
+  'stylelint-order',
+  'prettier',
+];
+export const configurationFiles = ['eslint.config.js', '.stylelintrc', '.prettierrc'];
 
 export function isStarterPath(path) {
   if (path.startsWith('src/app/routes/')) {
@@ -117,6 +133,11 @@ export async function collectStarter(root = repositoryRoot) {
     manifest: {
       version: 1,
       dependencies,
+      developmentDependencies: Object.fromEntries(
+        developmentDependencies
+          .map(name => [name, packageJson.devDependencies?.[name]])
+          .filter(([, version]) => typeof version === 'string')
+      ),
       files: Array.from(files, ([path, content]) => ({
         path,
         sha256: createHash('sha256').update(content).digest('hex'),

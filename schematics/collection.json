@@ -1,0 +1,20 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "module": {
+      "description": "Create a lazy standalone route group (not an NgModule)",
+      "factory": "./ng-generate/index#generateModule",
+      "schema": "./ng-generate/schema.json"
+    },
+    "page": {
+      "description": "Generate a standalone page, lazy route and translated menu entry",
+      "factory": "./ng-generate/index#generatePage",
+      "schema": "./ng-generate/schema.json"
+    },
+    "ng-add": {
+      "description": "Install the standalone admin starter into an Angular 22 application",
+      "factory": "./ng-add/index#ngAdd",
+      "schema": "./ng-add/schema.json"
+    }
+  }
+}

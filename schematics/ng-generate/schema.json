@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "NgScaffoldGenerate",
+  "title": "Generate a standalone route group or page",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+      "$default": { "$source": "argv", "index": 0 }
+    },
+    "project": { "type": "string", "$default": { "$source": "projectName" } },
+    "module": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+      "description": "Existing generated route group for a page"
+    }
+  }
+}

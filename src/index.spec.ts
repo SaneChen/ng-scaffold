@@ -67,7 +67,10 @@ describe('src/index.html', () => {
     expect([stored.classes, stored.dir]).toEqual([['theme-dark'], 'rtl']);
 
     for (const value of ['{"theme":"blue","dir":"up"}', 'not json', '5', 'null', '"text"']) {
-      expect(start(value, [])).toMatchObject({ classes: ['theme-auto'], dir: 'ltr' });
+      expect(start(value, [])).toMatchObject({
+        classes: defaultAppSettings.theme === 'light' ? [] : [`theme-${defaultAppSettings.theme}`],
+        dir: defaultAppSettings.dir,
+      });
     }
     expect(start('{"dir":"rtl"}', [], false)).toMatchObject({ dir: defaultAppSettings.dir });
   });

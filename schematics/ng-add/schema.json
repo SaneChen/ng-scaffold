@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "NgScaffoldNgAdd",
+  "title": "ng-scaffold starter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "project": {
+      "type": "string",
+      "$default": { "$source": "projectName" },
+      "description": "Application to configure; required in a multi-application workspace"
+    },
+    "nav": {
+      "type": "string",
+      "enum": ["side", "top"],
+      "default": "side",
+      "x-prompt": "Navigation position"
+    },
+    "theme": {
+      "type": "string",
+      "enum": ["auto", "light", "dark"],
+      "default": "auto",
+      "x-prompt": "Default color theme"
+    },
+    "dir": {
+      "type": "string",
+      "enum": ["ltr", "rtl"],
+      "default": "ltr",
+      "x-prompt": "Layout direction"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["auto", "en-US", "zh-CN", "zh-TW"],
+      "default": "auto",
+      "x-prompt": "Default language"
+    },
+    "skipInstall": {
+      "type": "boolean",
+      "default": false,
+      "description": "Do not schedule dependency installation"
+    }
+  }
+}

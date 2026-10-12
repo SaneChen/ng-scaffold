@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -39,6 +41,14 @@ jobs:
 
       - name: Schematic insertion tests
         run: yarn schematics:test
+
+      - name: Packaged schematic integration tests
+        run: yarn schematics:integration
+
+      - name: Offline local tarball golden tests
+        env:
+          NG_CLI_ANALYTICS: 'false'
+        run: yarn schematics:golden
 
       - name: Production build
         run: yarn build
